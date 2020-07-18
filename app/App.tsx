@@ -6,6 +6,7 @@ import * as Font from 'expo-font';
 import { Asset } from 'expo-asset';
 import { Entypo } from '@expo/vector-icons';
 import StackNavigation from './navigations/StackNavigation';
+import useSetToken from './hooks/useSetToken';
 
 const cacheImages = (images: any[]) =>
   images.map(image => {
@@ -20,6 +21,7 @@ const cacheFonts = (fonts: any[]) => fonts.map(font => Font.loadAsync(font));
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
+  const { checkLogin } = useSetToken();
 
   const loadAssets = async () => {
     const images = cacheImages([
@@ -27,7 +29,8 @@ export default function App() {
       require('./assets/splash.png'),
     ]);
     const fonts = cacheFonts([Entypo.font]);
-    await Promise.all([...images, ...fonts]);
+    const token = checkLogin();
+    await Promise.all([...images, ...fonts, token]);
   };
   const onFinish = () => setIsReady(true);
   return isReady ? (
