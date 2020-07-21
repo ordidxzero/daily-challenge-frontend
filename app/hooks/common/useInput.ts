@@ -1,11 +1,11 @@
 import { useState, useCallback } from 'react';
-import { useInputState } from './types';
+import { UseInputState } from './types';
 
 /**
  * Hook that manage value of input component for using at react
  */
 function useInput() {
-  const [form, setForm] = useState<useInputState>({
+  const [form, setForm] = useState<UseInputState>({
     auth: {
       username: '',
       password: '',
@@ -20,7 +20,7 @@ function useInput() {
     },
   });
   const onChangeText = useCallback(
-    <T extends keyof useInputState, K extends keyof useInputState[T]>(
+    <T extends keyof UseInputState, K extends keyof UseInputState[T]>(
       field: T,
       key: K,
     ) => (value: string) =>

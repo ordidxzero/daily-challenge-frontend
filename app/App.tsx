@@ -6,7 +6,7 @@ import * as Font from 'expo-font';
 import { Asset } from 'expo-asset';
 import { Entypo } from '@expo/vector-icons';
 import StackNavigation from './navigations/StackNavigation';
-import useSetToken from './hooks/useSetToken';
+import useSetToken from './hooks/common/useSetToken';
 
 const cacheImages = (images: any[]) =>
   images.map(image => {

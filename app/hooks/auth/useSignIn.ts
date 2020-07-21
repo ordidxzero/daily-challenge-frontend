@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { useLazyQuery } from '@apollo/client';
 import { SIGN_IN } from './graphql';
-import useSetToken from './useSetToken';
+import useSetToken from '../common/useSetToken';
 
 /**
  * Hook that create signIn Query function

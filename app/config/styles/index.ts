@@ -16,7 +16,6 @@ export const circleDefaultColor = DARK_BLUE_COLOR;
 export const rectDefaultColor = LIGHT_BLUE_COLOR;
 
 // Variable for main components in BottomTabsNavigation folder
-export const todoCircleBackgroundColor = BACKGROUND_COLOR;
 export const todoTimezoneColor = DARK_GRAY_COLOR;
 
 export const todoCreateButtonBackgroundColor = DARK_BLUE_COLOR;

@@ -19,7 +19,7 @@ export type TodoInputState = {
   amountDifference: string;
 };
 
-export type useInputState = {
+export type UseInputState = {
   auth: AuthInputState;
   todo: TodoInputState;
 };

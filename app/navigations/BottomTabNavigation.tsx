@@ -1,8 +1,13 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  createBottomTabNavigator,
+  BottomTabBar,
+} from '@react-navigation/bottom-tabs';
 import { Entypo } from '@expo/vector-icons';
 import MainScreen from '../screens/MainScreen';
 import GridScreen from '../screens/GridScreen';
+import TodoManager from '../components/main/TodoManager';
+import { View } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,6 +17,17 @@ function BottomTabNavigation() {
       initialRouteName="Calendar"
       tabBarOptions={{
         showLabel: false,
+      }}
+      tabBar={props => {
+        return (
+          <View>
+            <TodoManager
+              onPress={() => console.log('Add Todo')}
+              type="create"
+            />
+            <BottomTabBar {...props} />
+          </View>
+        );
       }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) => {

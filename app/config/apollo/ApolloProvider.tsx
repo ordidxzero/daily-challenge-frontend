@@ -4,13 +4,12 @@ import {
   ApolloProvider as Provider,
   InMemoryCache,
 } from '@apollo/client';
-import useReduxState from '../../hooks/useReduxState';
+import useReduxState from '../../hooks/common/useReduxState';
 
 const ApolloProvider = ({ children }: { children: React.ReactNode }) => {
   const {
     login: { token },
   } = useReduxState();
-
   const client = new ApolloClient({
     uri: 'http://localhost:8000/graphql',
     cache: new InMemoryCache(),

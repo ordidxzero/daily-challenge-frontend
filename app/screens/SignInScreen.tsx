@@ -7,8 +7,8 @@ import styles from './styles';
 // Components
 import Input from '../components/common/Input';
 // Hooks
-import useInput from '../hooks/useInput';
-import useSignIn from '../hooks/useSignIn';
+import useInput from '../hooks/common/useInput';
+import useSignIn from '../hooks/auth/useSignIn';
 
 function SignInScreen({ navigation }: CustomStackScreenProp<'SignIn'>) {
   const { form, onChangeText } = useInput();

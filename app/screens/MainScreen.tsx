@@ -3,6 +3,7 @@ import React from 'react';
 import { Platform, StatusBar, SafeAreaView, Text } from 'react-native';
 //Utils
 import styles from './styles';
+import Calendar from '../components/main/Calendar';
 // Components
 
 function MainScreen() {
@@ -15,7 +16,7 @@ function MainScreen() {
           paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
         },
       ]}>
-      <Text>123</Text>
+      <Calendar />
     </SafeAreaView>
   );
 }
