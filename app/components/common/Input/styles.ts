@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 7,
     borderRadius: 5,
+    marginBottom: 20,
   },
   inputTitle: {
     marginBottom: 6,

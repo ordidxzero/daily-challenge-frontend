@@ -1,6 +1,6 @@
-import moment from "moment";
-import { createReducer } from "typesafe-actions";
-import { MainState, MainAction } from "./types";
+import moment from 'moment';
+import { createReducer } from 'typesafe-actions';
+import { MainState, MainAction } from './types';
 import {
   SELECT_DAY,
   GET_AROUND_TODOS,
@@ -12,10 +12,12 @@ import {
   GET_AFTER_TODOS,
   GET_AROUND_TODOS_SUCCESS,
   GET_AFTER_TODOS_FAILURE,
-} from "./actions";
+  TOGGLE_SWIPEABLE_PANEL,
+} from './actions';
 
 const initialState: MainState = {
-  selectedDay: moment().format("YYYY-MM-DD"),
+  selectedDay: moment().format('YYYY-MM-DD'),
+  isPanelActive: false,
   agenda: {
     data: [],
     error: null,
@@ -29,15 +31,15 @@ const initialState: MainState = {
 
 const reducer = createReducer<MainState, MainAction>(initialState, {
   [SELECT_DAY]: (state, { payload }) => ({ ...state, selectedDay: payload }),
-  [GET_AROUND_TODOS]: (state) => ({
+  [GET_AROUND_TODOS]: state => ({
     ...state,
     loading: { ...state.loading, around: true },
   }),
-  [GET_BEFORE_TODOS]: (state) => ({
+  [GET_BEFORE_TODOS]: state => ({
     ...state,
     loading: { ...state.loading, before: true },
   }),
-  [GET_AFTER_TODOS]: (state) => ({
+  [GET_AFTER_TODOS]: state => ({
     ...state,
     loading: { ...state.loading, after: true },
   }),
@@ -70,6 +72,10 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
     ...state,
     agenda: { error: payload, ...state.agenda },
     loading: { ...state.loading, after: false },
+  }),
+  [TOGGLE_SWIPEABLE_PANEL]: (state, { payload }) => ({
+    ...state,
+    isPanelActive: payload,
   }),
 });
 

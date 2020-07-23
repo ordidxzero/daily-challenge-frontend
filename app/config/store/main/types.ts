@@ -1,5 +1,5 @@
-import * as actions from "./actions";
-import { ActionType } from "typesafe-actions";
+import * as actions from './actions';
+import { ActionType } from 'typesafe-actions';
 
 export type TodoType = {
   title: string;
@@ -16,6 +16,7 @@ export type AgendaDataType = {
 
 export type MainState = {
   selectedDay: string;
+  isPanelActive: boolean;
   agenda: {
     data: AgendaDataType[];
     error: string | null;

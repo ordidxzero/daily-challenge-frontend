@@ -1,9 +1,10 @@
 // Modules
 import React from 'react';
-import { Platform, StatusBar, SafeAreaView, Text } from 'react-native';
+import { Platform, StatusBar, SafeAreaView } from 'react-native';
 //Utils
 import styles from './styles';
 import Calendar from '../components/main/Calendar';
+import SwipeablePanel from '../components/main/SwipeablePanel';
 // Components
 
 function MainScreen() {
@@ -17,6 +18,7 @@ function MainScreen() {
         },
       ]}>
       <Calendar />
+      <SwipeablePanel />
     </SafeAreaView>
   );
 }

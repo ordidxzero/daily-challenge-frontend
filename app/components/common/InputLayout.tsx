@@ -16,4 +16,4 @@ function InputLayout({
   );
 }
 
-export default InputLayout;
+export default React.memo(InputLayout);

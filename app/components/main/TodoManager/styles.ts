@@ -1,9 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import {
-  todoCreateButtonBackgroundColor,
-  todoConfirmButtonBackgroundColor,
-  todoCancelButtonBackgroundColor,
-} from '../../../config/styles';
+import { todoCreateButtonBackgroundColor } from '../../../config/styles';
 
 const { width } = Dimensions.get('window');
 
@@ -27,8 +23,6 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     zIndex: 1000,
   },
-  todoConfirmButton: { backgroundColor: todoConfirmButtonBackgroundColor },
-  todoCancelButton: { backgroundColor: todoCancelButtonBackgroundColor },
 });
 
 export default styles;

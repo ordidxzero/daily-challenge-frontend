@@ -19,8 +19,8 @@ export const rectDefaultColor = LIGHT_BLUE_COLOR;
 export const todoTimezoneColor = DARK_GRAY_COLOR;
 
 export const todoCreateButtonBackgroundColor = DARK_BLUE_COLOR;
-export const todoConfirmButtonBackgroundColor = LIGHT_GREEN_COLOR;
-export const todoCancelButtonBackgroundColor = LIGHT_RED_COLOR;
+export const yesRadioButtonColor = LIGHT_GREEN_COLOR;
+export const noRadioButtonColor = LIGHT_RED_COLOR;
 
 // Variable for addTodo components in StackNavigation folder
 export const inputSectionTitleBorderColor = LIGHT_GRAY_COLOR;
