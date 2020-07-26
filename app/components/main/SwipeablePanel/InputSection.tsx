@@ -1,7 +1,7 @@
-import React from "react";
-import { View, Text } from "react-native";
-import { InputSectionProps } from "./types";
-import styles from "./styles";
+import React from 'react';
+import { View, Text } from 'react-native';
+import { InputSectionProps } from './types';
+import styles from './styles';
 
 function InputSection({ title, children }: InputSectionProps) {
   return (

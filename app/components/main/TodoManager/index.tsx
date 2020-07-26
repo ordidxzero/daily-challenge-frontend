@@ -2,36 +2,14 @@ import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { ToDoManagerProps } from './types';
 import styles from './styles';
-import { Entypo } from '@expo/vector-icons';
 
-const typeProperty = {
-  create: {
-    style: styles.todoCreateButton,
-    textStyle: {},
-    text: '+',
-  },
-  confirm: {
-    style: styles.todoConfirmButton,
-    textStyle: { marginTop: 4 },
-    text: <Entypo name="check" size={30} />,
-  },
-  cancel: {
-    style: styles.todoCancelButton,
-    textStyle: {},
-    text: '×',
-  },
-};
-
-function ToDoManager({ onPress, type }: ToDoManagerProps) {
-  const property = typeProperty[type];
+function ToDoManager({ onPress }: ToDoManagerProps) {
   return (
     <TouchableOpacity
-      style={[styles.touchableOpacity, property.style]}
+      style={[styles.touchableOpacity, styles.todoCreateButton]}
       onPress={onPress}>
       <View>
-        <Text style={[styles.touchableOpacityText, property.textStyle]}>
-          {property.text}
-        </Text>
+        <Text style={[styles.touchableOpacityText]}>+</Text>
       </View>
     </TouchableOpacity>
   );

@@ -3,7 +3,6 @@ import { View, Animated } from 'react-native';
 import Input from '../../common/Input';
 import InputSection from './InputSection';
 import useInput from '../../../hooks/common/useInput';
-import useSelectDay from '../../../hooks/common/useSelectDay';
 import Radio from '../../common/Radio';
 import useFoldAnimation from '../../../hooks/swipeablePanel/useFoldAnimation';
 import useRadioState from '../../../hooks/swipeablePanel/useRadioState';
@@ -21,65 +20,58 @@ function PanelContent() {
   });
   const animation = useFoldAnimation(isRepeat.current === 'yes');
   const resetReduxState = useResetState();
-  const { selectedDay } = useSelectDay();
   const { form, onChangeText } = useInput();
-  const {
-    todo: {
-      title,
-      amount,
-      unit,
-      startTime,
-      endTime,
-      endDate,
-      amountChangeInterval,
-      amountDifference,
-      weekDifference,
-      dateDifference,
-    },
-  } = form;
+  const { todo } = form;
 
   useEffect(() => {
     return () => {
       resetReduxState();
     };
   }, []);
+
+  useEffect(() => {
+    onChangeText('todo', 'dateDifference')('');
+    onChangeText('todo', 'weekDifference')('');
+    resetReduxState();
+  }, [selectMethod.current]);
+
   return (
     <View style={{ alignItems: 'center', marginTop: 15 }}>
       <InputSection title="BASIC INFOMATION">
         <Input
           title="Start Date"
           disabled={true}
-          value={selectedDay}
+          value={todo.startDate}
           onChangeText={onChangeText('todo', 'startDate')}
         />
         <Input
           title="Title"
           placeholder="푸쉬업"
-          value={title}
+          value={todo.title}
           onChangeText={onChangeText('todo', 'title')}
         />
         <Input
           title="Amount"
           placeholder="5"
-          value={amount}
+          value={todo.amount}
           onChangeText={onChangeText('todo', 'amount')}
         />
         <Input
           title="Unit"
           placeholder="개"
-          value={unit}
+          value={todo.unit}
           onChangeText={onChangeText('todo', 'unit')}
         />
         <Input
           title="Start Time"
           placeholder="09:00"
-          value={startTime}
+          value={todo.startTime}
           onChangeText={onChangeText('todo', 'startTime')}
         />
         <Input
           title="End Time"
           placeholder="10:00"
-          value={endTime}
+          value={todo.endTime}
           onChangeText={onChangeText('todo', 'endTime')}
         />
       </InputSection>
@@ -96,8 +88,8 @@ function PanelContent() {
         <InputSection title="ADVANCED INFOMATION">
           <Input
             title="언제까지 반복하시겠습니까?"
-            placeholder={selectedDay}
-            value={endDate}
+            placeholder={todo.startDate}
+            value={todo.endDate}
             onChangeText={onChangeText('todo', 'endDate')}
           />
           <Radio {...selectMethod} onPress={setMethod} title="생성방식" />
@@ -107,7 +99,7 @@ function PanelContent() {
               <Input
                 title="몇 주 마다 반복할 지?"
                 placeholder="1"
-                value={weekDifference}
+                value={todo.weekDifference}
                 onChangeText={onChangeText('todo', 'weekDifference')}
               />
             </>
@@ -116,20 +108,20 @@ function PanelContent() {
             <Input
               title="며칠마다 반복할 지?"
               placeholder="1"
-              value={dateDifference}
+              value={todo.dateDifference}
               onChangeText={onChangeText('todo', 'dateDifference')}
             />
           )}
           <Input
             title="amount를 며칠마다 증가시킬 지?"
             placeholder="1"
-            value={amountChangeInterval}
+            value={todo.amountChangeInterval}
             onChangeText={onChangeText('todo', 'amountChangeInterval')}
           />
           <Input
             title="amount를 몇 개씩 증가시킬 지?"
             placeholder="5"
-            value={amountDifference}
+            value={todo.amountDifference}
             onChangeText={onChangeText('todo', 'amountDifference')}
           />
         </InputSection>

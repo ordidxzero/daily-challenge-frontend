@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { View } from 'react-native';
 import TodoManager from '../TodoManager';
 import {
@@ -7,19 +7,20 @@ import {
   BottomTabBarOptions,
 } from '@react-navigation/bottom-tabs';
 import useTogglePanel from '../../../hooks/swipeablePanel/useTogglePanel';
+import useCreateTodoMold from '../../../hooks/swipeablePanel/useCreateTodoMold';
 
 function CustomBottomTabBar(props: BottomTabBarProps<BottomTabBarOptions>) {
   const { setIsPanelActive, isPanelActive } = useTogglePanel();
-  const logging = (message: string) => () => {
-    setIsPanelActive(!isPanelActive);
-    console.log(message);
-  };
+  const createTodoMold = useCreateTodoMold();
+  const openPanel = useCallback(() => setIsPanelActive(true), []);
+  const closePanel = useCallback(() => {
+    createTodoMold()
+      .then(() => setIsPanelActive(false))
+      .catch(error => console.log(error));
+  }, [createTodoMold]);
   return (
     <View>
-      <TodoManager
-        onPress={isPanelActive ? logging('Close Panel') : logging('Open Panel')}
-        type="create"
-      />
+      <TodoManager onPress={isPanelActive ? closePanel : openPanel} />
       <BottomTabBar {...props} />
     </View>
   );

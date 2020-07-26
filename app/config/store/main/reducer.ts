@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { createReducer } from 'typesafe-actions';
 import { MainState, MainAction } from './types';
 import {
@@ -16,7 +16,7 @@ import {
 } from './actions';
 
 const initialState: MainState = {
-  selectedDay: moment().format('YYYY-MM-DD'),
+  selectedDay: dayjs().format('YYYY-MM-DD'),
   isPanelActive: false,
   agenda: {
     data: [],

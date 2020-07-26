@@ -7,6 +7,7 @@ import InputLayout from '../InputLayout';
 function Input({
   title,
   disabled = false,
+  required = false,
   value,
   placeholder,
   onChangeText,

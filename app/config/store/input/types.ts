@@ -1,4 +1,5 @@
-// ------------------ useInput.ts Props ------------------
+import * as actions from './actions';
+import { ActionType } from 'typesafe-actions';
 
 export type AuthInputState = {
   username: string;
@@ -19,9 +20,15 @@ export type TodoInputState = {
   amountDifference: string;
 };
 
-export type UseInputState = {
+export type InputState = {
   auth: AuthInputState;
   todo: TodoInputState;
 };
 
-// -------------------------------------------------------
+export type InputAction = ActionType<typeof actions>;
+
+export type OnChangeTextParams = {
+  field: keyof InputState;
+  key: any;
+  value: string;
+};
