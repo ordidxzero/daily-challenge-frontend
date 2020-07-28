@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from 'react';
 import { FlatList, Dimensions } from 'react-native';
-import useGetTodos from './useGetTodos';
+import useGetTodos from '../apollo/useGetTodos';
 import useReduxState from '../common/useReduxState';
 import { generateRange } from './utils/tools';
 

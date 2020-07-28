@@ -1,5 +1,25 @@
 import { gql } from '@apollo/client';
 
+export const GET_TODOS = gql`
+  query GetTodos($dateString: String!, $position: [Int!]!) {
+    getTodos(dateString: $dateString, position: $position) {
+      ok
+      error
+      agenda {
+        dateString
+        todos {
+          title
+          amount
+          startTime
+          endTime
+          unit
+          done
+        }
+      }
+    }
+  }
+`;
+
 export const CREATE_TODO_MOLD = gql`
   mutation CreateTodoMold(
     $startDate: String!
@@ -31,6 +51,19 @@ export const CREATE_TODO_MOLD = gql`
     ) {
       ok
       error
+    }
+  }
+`;
+
+export const GET_TODO_MOLDS = gql`
+  query GetTodoMolds($dateString: String!) {
+    getTodoMolds {
+      ok
+      data {
+        title
+        progressRate(dateString: $dateString)
+        completionRate(dateString: $dateString)
+      }
     }
   }
 `;

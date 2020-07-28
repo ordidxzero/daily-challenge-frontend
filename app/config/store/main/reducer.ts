@@ -13,6 +13,9 @@ import {
   GET_AROUND_TODOS_SUCCESS,
   GET_AFTER_TODOS_FAILURE,
   TOGGLE_SWIPEABLE_PANEL,
+  GET_MOLD_DATA,
+  GET_MOLD_DATA_SUCCESS,
+  GET_MOLD_DATA_FAILURE,
 } from './actions';
 
 const initialState: MainState = {
@@ -22,7 +25,12 @@ const initialState: MainState = {
     data: [],
     error: null,
   },
+  moldData: {
+    data: [],
+    error: null,
+  },
   loading: {
+    moldData: false,
     around: false,
     before: false,
     after: false,
@@ -31,6 +39,10 @@ const initialState: MainState = {
 
 const reducer = createReducer<MainState, MainAction>(initialState, {
   [SELECT_DAY]: (state, { payload }) => ({ ...state, selectedDay: payload }),
+  [GET_MOLD_DATA]: state => ({
+    ...state,
+    loading: { ...state.loading, moldData: true },
+  }),
   [GET_AROUND_TODOS]: state => ({
     ...state,
     loading: { ...state.loading, around: true },
@@ -42,6 +54,11 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
   [GET_AFTER_TODOS]: state => ({
     ...state,
     loading: { ...state.loading, after: true },
+  }),
+  [GET_MOLD_DATA_SUCCESS]: (state, { payload }) => ({
+    ...state,
+    moldData: { error: null, data: payload },
+    loading: { ...state.loading, moldData: false },
   }),
   [GET_AROUND_TODOS_SUCCESS]: (state, { payload }) => ({
     ...state,
@@ -57,6 +74,11 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
     ...state,
     agenda: { error: null, data: [...state.agenda.data, ...payload] },
     loading: { ...state.loading, after: false },
+  }),
+  [GET_MOLD_DATA_FAILURE]: (state, { payload }) => ({
+    ...state,
+    moldData: { error: payload, ...state.moldData },
+    loading: { ...state.loading, moldData: false },
   }),
   [GET_AROUND_TODOS_FAILURE]: (state, { payload }) => ({
     ...state,

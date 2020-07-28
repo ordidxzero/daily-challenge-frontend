@@ -1,20 +1,28 @@
 // Modules
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView } from 'react-native';
 import styles from './styles';
-import useMoldData from '../hooks/grid/useMoldData';
+import useMoldData from '../hooks/apollo/useMoldData';
 import ProgressCard from '../components/grid/ProgressCard';
 import dayjs from 'dayjs';
+import useReduxState from '../hooks/common/useReduxState';
 
 function GridScreen() {
-  const data = useMoldData(dayjs().format('YYYY-MM-DD'));
+  const {
+    main: {
+      moldData: { data },
+    },
+  } = useReduxState();
+  const getTodoMolds = useMoldData();
+  useEffect(
+    () => getTodoMolds({ dateString: dayjs().format('YYYY-MM-DD') }),
+    [],
+  );
   return (
     <SafeAreaView
       style={[styles.safeAreaViewContainer, { justifyContent: 'flex-start' }]}>
       {data &&
-        data.getTodoMolds.data.map((item: any) => (
-          <ProgressCard key={item.title} {...item} />
-        ))}
+        data.map((item: any) => <ProgressCard key={item.title} {...item} />)}
     </SafeAreaView>
   );
 }

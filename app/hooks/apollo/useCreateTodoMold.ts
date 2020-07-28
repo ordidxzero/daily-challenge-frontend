@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { useMutation } from '@apollo/client';
-import { CREATE_TODO_MOLD } from './graphql';
+import { CREATE_TODO_MOLD } from './utils/graphql';
 import useInput from '../common/useInput';
-import useSelectWeekdays from './useSelectWeekdays';
+import useSelectWeekdays from '../swipeablePanel/useSelectWeekdays';
 
 function useCreateTodoMold() {
   const { dayNameToRepeat } = useSelectWeekdays();
