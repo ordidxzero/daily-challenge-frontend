@@ -29,3 +29,5 @@ export const selectedDayButtonBackgroundColor = LIGHT_LIGHT_BLUE_COLOR;
 
 export const checkerDoneColor = LIGHT_GREEN_COLOR;
 export const checkerUndoneColor = LIGHT_RED_COLOR;
+
+export const progressbarColor = LIGHT_LIGHT_BLUE_COLOR;
