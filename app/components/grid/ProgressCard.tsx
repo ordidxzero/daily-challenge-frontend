@@ -1,8 +1,8 @@
-import React from "react";
-import { View, Text, Dimensions } from "react-native";
-import ProgressBar from "./ProgressBar";
+import React from 'react';
+import { View, Text, Dimensions } from 'react-native';
+import ProgressBar from './ProgressBar';
 
-const { width } = Dimensions.get("window");
+const { width } = Dimensions.get('window');
 
 function ProgressCard({
   title,
@@ -10,8 +10,8 @@ function ProgressCard({
   completionRate,
 }: {
   title: string;
-  progressRate: string;
-  completionRate: string;
+  progressRate: number;
+  completionRate: number;
 }) {
   return (
     <View
@@ -21,10 +21,9 @@ function ProgressCard({
         paddingVertical: 5,
         borderWidth: 1,
         borderRadius: 5,
-        borderColor: "black",
+        borderColor: 'black',
         marginBottom: 10,
-      }}
-    >
+      }}>
       <Text>{title}</Text>
       <ProgressBar data={progressRate} />
       <ProgressBar data={completionRate} />

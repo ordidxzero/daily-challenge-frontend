@@ -8,6 +8,8 @@ export const GET_TODOS = gql`
       agenda {
         dateString
         todos {
+          id
+          dateString
           title
           amount
           startTime
@@ -60,6 +62,7 @@ export const GET_TODO_MOLDS = gql`
     getTodoMolds {
       ok
       data {
+        id
         title
         progressRate(dateString: $dateString)
         completionRate(dateString: $dateString)

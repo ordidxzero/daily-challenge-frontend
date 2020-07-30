@@ -10,8 +10,12 @@ const initialState: InputState = {
   },
   todo: {
     startDate: dayjs().format('YYYY-MM-DD'),
+    endDate: dayjs().add(1, 'month').format('YYYY-MM-DD'),
     title: '',
     amount: '',
+    unit: '',
+    startTime: '',
+    endTime: '',
     weekDifference: '',
     dateDifference: '',
     amountDifference: '',

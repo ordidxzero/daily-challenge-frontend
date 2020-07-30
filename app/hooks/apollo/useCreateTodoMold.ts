@@ -1,12 +1,9 @@
-import { useCallback } from 'react';
 import { useMutation } from '@apollo/client';
 import { CREATE_TODO_MOLD } from './utils/graphql';
 import useInput from '../common/useInput';
-import useSelectWeekdays from '../swipeablePanel/useSelectWeekdays';
 
 function useCreateTodoMold() {
-  const { dayNameToRepeat } = useSelectWeekdays();
-  const { form } = useInput();
+  const { softenForm } = useInput();
   const [createTodoMoldMutation] = useMutation(CREATE_TODO_MOLD);
   const {
     startDate,
@@ -20,23 +17,23 @@ function useCreateTodoMold() {
     dateDifference,
     amountDifference,
     amountChangeInterval,
-  } = form.todo;
-  const checkIsNumber = useCallback((text: string) => parseInt(text) || 0, []);
+    dayNameToRepeat,
+  } = softenForm.todo;
   const createTodoMold = () =>
     createTodoMoldMutation({
       variables: {
         startDate,
-        endDate: endDate || startDate,
-        startTime: startTime || '99:99',
-        endTime: endTime || '99:99',
+        endDate,
+        startTime,
+        endTime,
         title,
-        unit: unit || '개',
+        unit,
         dayNameToRepeat,
-        currentAmount: checkIsNumber(amount),
-        weekDifference: checkIsNumber(weekDifference),
-        dateDifference: checkIsNumber(dateDifference),
-        amountDifference: checkIsNumber(amountDifference),
-        amountChangeInterval: checkIsNumber(amountChangeInterval),
+        currentAmount: amount,
+        weekDifference,
+        dateDifference,
+        amountDifference,
+        amountChangeInterval,
       },
     });
   return createTodoMold;

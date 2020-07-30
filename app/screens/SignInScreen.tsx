@@ -11,8 +11,8 @@ import useInput from '../hooks/common/useInput';
 import useSignIn from '../hooks/auth/useSignIn';
 
 function SignInScreen({ navigation }: CustomStackScreenProp<'SignIn'>) {
-  const { form, onChangeText } = useInput();
-  const { username, password } = form.auth;
+  const { hardenForm, onChangeText } = useInput();
+  const { username, password } = hardenForm.auth;
   const signInQuery = useSignIn();
   const signIn = () => {
     if (username && password) {

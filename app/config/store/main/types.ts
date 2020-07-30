@@ -1,24 +1,18 @@
 import * as actions from './actions';
 import { ActionType } from 'typesafe-actions';
+import { AgendaDataType, MoldDataType, TodoType } from '../../../@types';
 
-export type TodoType = {
-  title: string;
-  amount: number;
-  startTime: string;
-  endTime: string;
-  done: boolean;
-};
-
-export type AgendaDataType = {
+export type FakeTodoDataType = {
   dateString: string;
-  todos: TodoType[];
+  todo: TodoType;
 };
 
-export type MoldDataType = {
-  title: string;
-  progressRate: number;
-  completionRate: number;
+export type ToggledTodoData = {
+  dateString: string;
+  id: string;
 };
+
+export type FakeTodoData = FakeTodoDataType[];
 
 export type MainState = {
   selectedDay: string;

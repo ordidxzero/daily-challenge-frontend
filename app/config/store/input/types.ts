@@ -7,13 +7,13 @@ export type AuthInputState = {
 };
 
 export type TodoInputState = {
-  startDate?: string;
-  endDate?: string; // TODO: 나중에 필수로 바꿀 것
+  startDate: string;
+  endDate: string;
   title: string;
   amount: string;
-  unit?: string;
-  startTime?: string;
-  endTime?: string;
+  unit: string;
+  startTime: string;
+  endTime: string;
   weekDifference: string;
   dateDifference: string;
   amountChangeInterval: string;
@@ -23,6 +23,24 @@ export type TodoInputState = {
 export type InputState = {
   auth: AuthInputState;
   todo: TodoInputState;
+};
+
+export type SoftenInputState = {
+  auth: AuthInputState;
+  todo: {
+    startDate: string;
+    endDate: string;
+    title: string;
+    unit: string;
+    startTime: string;
+    endTime: string;
+    dayNameToRepeat: number[];
+    amount: number;
+    weekDifference: number;
+    dateDifference: number;
+    amountChangeInterval: number;
+    amountDifference: number;
+  };
 };
 
 export type InputAction = ActionType<typeof actions>;

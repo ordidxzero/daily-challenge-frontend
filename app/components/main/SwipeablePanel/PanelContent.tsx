@@ -20,8 +20,8 @@ function PanelContent() {
   });
   const animation = useFoldAnimation(isRepeat.current === 'yes');
   const resetReduxState = useResetState();
-  const { form, onChangeText } = useInput();
-  const { todo } = form;
+  const { hardenForm, onChangeText } = useInput();
+  const { todo } = hardenForm;
 
   useEffect(() => {
     return () => {

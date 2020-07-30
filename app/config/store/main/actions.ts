@@ -1,7 +1,9 @@
 import { createAsyncAction, createAction } from 'typesafe-actions';
 import { ApolloError } from '@apollo/client';
+import { FakeTodoData, ToggledTodoData } from './types';
 
 export const SELECT_DAY = 'main/SELECT_DAY';
+export const ADD_TODOS = 'main/ADD_TODOS';
 export const GET_MOLD_DATA = 'main/GET_MOLD_DATA';
 export const GET_MOLD_DATA_SUCCESS = 'main/GET_MOLD_DATA_SUCCESS';
 export const GET_MOLD_DATA_FAILURE = 'main/GET_MOLD_DATA_FAILURE';
@@ -15,8 +17,10 @@ export const GET_AFTER_TODOS = 'main/GET_AFTER_TODOS';
 export const GET_AFTER_TODOS_SUCCESS = 'main/GET_AFTER_TODOS_SUCCESS';
 export const GET_AFTER_TODOS_FAILURE = 'main/GET_AFTER_TODOS_FAILURE';
 export const TOGGLE_SWIPEABLE_PANEL = 'main/TOGGLE_SWIPEABLE_PANEL';
+export const TOGGLE_TODO = 'main/TOGGLE_TODO';
 
 export const selectDay = createAction(SELECT_DAY)<string>();
+export const addTodos = createAction(ADD_TODOS)<FakeTodoData>();
 export const getMoldDataAsync = createAsyncAction(
   GET_MOLD_DATA,
   GET_MOLD_DATA_SUCCESS,
@@ -40,3 +44,4 @@ export const getAfterTodosAsync = createAsyncAction(
 export const toggleSwipeablePanel = createAction(TOGGLE_SWIPEABLE_PANEL)<
   boolean
 >();
+export const toggleTodo = createAction(TOGGLE_TODO)<ToggledTodoData>();

@@ -4,14 +4,51 @@ import useReduxState from './useReduxState';
 import {
   onChangeText as onChangeTextAction,
   InputState,
+  SoftenInputState,
 } from '../../config/store/input';
+import useSelectWeekdays from '../swipeablePanel/useSelectWeekdays';
 
 /**
  * Hook that manage value of input component for using at react
  */
 function useInput() {
   const dispatch = useDispatch();
-  const { form } = useReduxState();
+  const { dayNameToRepeat } = useSelectWeekdays();
+  const { form: hardenForm } = useReduxState();
+  const checkIsNumber = useCallback(
+    (text: string) => parseInt(text, 10) || 0,
+    [],
+  );
+  const {
+    startDate,
+    endDate,
+    startTime,
+    endTime,
+    title,
+    unit,
+    amount,
+    weekDifference,
+    dateDifference,
+    amountDifference,
+    amountChangeInterval,
+  } = hardenForm.todo;
+  const softenForm: SoftenInputState = {
+    auth: hardenForm.auth,
+    todo: {
+      startDate,
+      endDate: endDate || startDate,
+      startTime: startTime || '99:99',
+      endTime: endTime || '99:99',
+      title,
+      unit: unit || '개',
+      dayNameToRepeat,
+      amount: checkIsNumber(amount),
+      weekDifference: checkIsNumber(weekDifference),
+      dateDifference: checkIsNumber(dateDifference),
+      amountChangeInterval: checkIsNumber(amountChangeInterval),
+      amountDifference: checkIsNumber(amountDifference),
+    },
+  };
   const onChangeText = useCallback(
     <T extends keyof InputState, K extends keyof InputState[T]>(
       field: T,
@@ -19,7 +56,7 @@ function useInput() {
     ) => (value: string) => dispatch(onChangeTextAction({ field, key, value })),
     [],
   );
-  return { form, onChangeText };
+  return { hardenForm, softenForm, onChangeText };
 }
 
 export default useInput;

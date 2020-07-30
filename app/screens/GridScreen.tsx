@@ -21,8 +21,7 @@ function GridScreen() {
   return (
     <SafeAreaView
       style={[styles.safeAreaViewContainer, { justifyContent: 'flex-start' }]}>
-      {data &&
-        data.map((item: any) => <ProgressCard key={item.title} {...item} />)}
+      {data && data.map(item => <ProgressCard key={item.id} {...item} />)}
     </SafeAreaView>
   );
 }

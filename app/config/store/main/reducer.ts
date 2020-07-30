@@ -16,6 +16,8 @@ import {
   GET_MOLD_DATA,
   GET_MOLD_DATA_SUCCESS,
   GET_MOLD_DATA_FAILURE,
+  ADD_TODOS,
+  TOGGLE_TODO,
 } from './actions';
 
 const initialState: MainState = {
@@ -39,6 +41,22 @@ const initialState: MainState = {
 
 const reducer = createReducer<MainState, MainAction>(initialState, {
   [SELECT_DAY]: (state, { payload }) => ({ ...state, selectedDay: payload }),
+  [ADD_TODOS]: (state, { payload }) => {
+    const oldAgenda = state.agenda.data;
+    const newAgenda = oldAgenda.map(agenda => {
+      const newTodo = payload.find(
+        item => item.dateString === agenda.dateString,
+      );
+      if (!newTodo) {
+        return agenda;
+      }
+      return {
+        dateString: agenda.dateString,
+        todos: agenda.todos.concat(newTodo.todo),
+      };
+    });
+    return { ...state, agenda: { ...state.agenda, data: newAgenda } };
+  },
   [GET_MOLD_DATA]: state => ({
     ...state,
     loading: { ...state.loading, moldData: true },
@@ -99,6 +117,28 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
     ...state,
     isPanelActive: payload,
   }),
+  [TOGGLE_TODO]: (state, { payload }) => {
+    const data = state.agenda.data.find(
+      agenda => agenda.dateString === payload.dateString,
+    );
+    if (data) {
+      const newData = data?.todos.map(todo =>
+        todo.id === payload.id ? { ...todo, done: !todo.done } : todo,
+      );
+      return {
+        ...state,
+        agenda: {
+          ...state.agenda,
+          data: state.agenda.data.map(item =>
+            item.dateString === payload.dateString
+              ? { ...item, todos: newData }
+              : item,
+          ),
+        },
+      };
+    }
+    return state;
+  },
 });
 
 export default reducer;

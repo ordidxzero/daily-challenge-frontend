@@ -11,9 +11,9 @@ import useInput from '../hooks/common/useInput';
 import useCreateAccount from '../hooks/auth/useCreateAccount';
 
 function SignUpScreen({ navigation }: CustomStackScreenProp<'SignUp'>) {
-  const { form, onChangeText } = useInput();
+  const { hardenForm, onChangeText } = useInput();
   const createAccountMutation = useCreateAccount();
-  const { username, password } = form.auth;
+  const { username, password } = hardenForm.auth;
   const createAccount = () => {
     if (username && password) {
       return createAccountMutation({ variables: { username, password } });

@@ -26,3 +26,6 @@ export const noRadioButtonColor = LIGHT_RED_COLOR;
 export const inputSectionTitleBorderColor = LIGHT_GRAY_COLOR;
 export const selectDayButtonBorderColor = LIGHT_LIGHT_BLUE_COLOR;
 export const selectedDayButtonBackgroundColor = LIGHT_LIGHT_BLUE_COLOR;
+
+export const checkerDoneColor = LIGHT_GREEN_COLOR;
+export const checkerUndoneColor = LIGHT_RED_COLOR;
