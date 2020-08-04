@@ -12,11 +12,20 @@ export type ToggledTodoData = {
   id: string;
 };
 
+export type PanelData = {
+  key: 'create' | 'mold' | 'todo';
+  isActive: boolean;
+};
+
 export type FakeTodoData = FakeTodoDataType[];
 
 export type MainState = {
   selectedDay: string;
-  isPanelActive: boolean;
+  panel: {
+    create: boolean;
+    todo: boolean;
+    mold: boolean;
+  };
   agenda: {
     data: AgendaDataType[];
     error: string | null;

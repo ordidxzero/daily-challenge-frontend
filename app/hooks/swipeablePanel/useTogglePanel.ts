@@ -6,13 +6,21 @@ import useReduxState from '../common/useReduxState';
 function useTogglePanel() {
   const dispatch = useDispatch();
   const {
-    main: { isPanelActive },
+    main: {
+      panel: { create, todo, mold },
+    },
   } = useReduxState();
   const setIsPanelActive = useCallback(
-    (isPanelActive: boolean) => dispatch(toggleSwipeablePanel(isPanelActive)),
+    (key: 'create' | 'todo' | 'mold', isActive: boolean) =>
+      dispatch(toggleSwipeablePanel({ key, isActive })),
     [dispatch],
   );
-  return { isPanelActive, setIsPanelActive };
+  return {
+    isCreatePanelActive: create,
+    isTodoPanelActive: todo,
+    isMoldPanelActive: mold,
+    setIsPanelActive,
+  };
 }
 
 export default useTogglePanel;

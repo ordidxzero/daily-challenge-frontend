@@ -2,14 +2,21 @@ import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { ToDoManagerProps } from './types';
 import styles from './styles';
+import { Entypo } from '@expo/vector-icons';
 
-function ToDoManager({ onPress }: ToDoManagerProps) {
+function ToDoManager({ onPress, screenIndex }: ToDoManagerProps) {
   return (
     <TouchableOpacity
       style={[styles.touchableOpacity, styles.todoCreateButton]}
       onPress={onPress}>
       <View>
-        <Text style={[styles.touchableOpacityText]}>+</Text>
+        <Text
+          style={[
+            styles.touchableOpacityText,
+            !!screenIndex && { marginBottom: -3 },
+          ]}>
+          {screenIndex ? <Entypo name="cog" color="#fff" size={30} /> : '+'}
+        </Text>
       </View>
     </TouchableOpacity>
   );

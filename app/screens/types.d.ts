@@ -1,5 +1,6 @@
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
+import { MoldDataType } from '../@types';
 
 // ------------------ Stack Navigation Types -----------------
 
@@ -7,8 +8,7 @@ export type RootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
   Main: undefined;
-  AddTodo: { type: 'todo' | 'period' };
-  SelectType: undefined;
+  Mold: { data: MoldDataType };
 };
 
 export type CustomStackScreenProp<

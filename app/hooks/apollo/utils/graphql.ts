@@ -64,6 +64,17 @@ export const GET_TODO_MOLDS = gql`
       data {
         id
         title
+        startDate
+        endDate
+        startTime
+        endTime
+        dayNameToRepeat
+        weekDifference
+        dateDifference
+        amountDifference
+        amountChangeInterval
+        priority
+        isValid
         progressRate(dateString: $dateString)
         completionRate(dateString: $dateString)
       }

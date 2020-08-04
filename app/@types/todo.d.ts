@@ -17,6 +17,17 @@ export type AgendaDataType = {
 export type MoldDataType = {
   id: string;
   title: string;
+  startDate: string;
+  endDate: string;
+  startTime: string;
+  endTime: string;
+  dayNameToRepeat: number[];
+  weekDifference: number;
+  dateDifference: number;
+  amountDifference: number;
+  amountChangeInterval: number;
+  priority: number;
+  isValid: boolean;
   progressRate: number;
   completionRate: number;
 };

@@ -22,7 +22,11 @@ import {
 
 const initialState: MainState = {
   selectedDay: dayjs().format('YYYY-MM-DD'),
-  isPanelActive: false,
+  panel: {
+    create: false,
+    todo: false,
+    mold: false,
+  },
   agenda: {
     data: [],
     error: null,
@@ -113,9 +117,9 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
     agenda: { error: payload, ...state.agenda },
     loading: { ...state.loading, after: false },
   }),
-  [TOGGLE_SWIPEABLE_PANEL]: (state, { payload }) => ({
+  [TOGGLE_SWIPEABLE_PANEL]: (state, { payload: { key, isActive } }) => ({
     ...state,
-    isPanelActive: payload,
+    panel: { ...state.panel, [key]: isActive },
   }),
   [TOGGLE_TODO]: (state, { payload }) => {
     const data = state.agenda.data.find(

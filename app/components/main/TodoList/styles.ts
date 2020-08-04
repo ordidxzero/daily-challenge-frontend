@@ -9,11 +9,9 @@ const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   dayComponentContainer: {
-    position: 'relative',
     width,
   },
   todoContainer: {
-    position: 'relative',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',

@@ -1,6 +1,6 @@
 import { createAsyncAction, createAction } from 'typesafe-actions';
 import { ApolloError } from '@apollo/client';
-import { FakeTodoData, ToggledTodoData } from './types';
+import { FakeTodoData, ToggledTodoData, PanelData } from './types';
 
 export const SELECT_DAY = 'main/SELECT_DAY';
 export const ADD_TODOS = 'main/ADD_TODOS';
@@ -42,6 +42,6 @@ export const getAfterTodosAsync = createAsyncAction(
   GET_AFTER_TODOS_FAILURE,
 )<undefined, any, ApolloError>();
 export const toggleSwipeablePanel = createAction(TOGGLE_SWIPEABLE_PANEL)<
-  boolean
+  PanelData
 >();
 export const toggleTodo = createAction(TOGGLE_TODO)<ToggledTodoData>();

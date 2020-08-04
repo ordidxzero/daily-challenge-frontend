@@ -5,6 +5,7 @@ import { progressbarColor } from '../../config/styles';
 const { width } = Dimensions.get('window');
 
 function ProgressBar({ data }: { data: number }) {
+  const percent = data ? (data * 100).toFixed(2) : '0.00';
   return (
     <View
       style={{
@@ -31,7 +32,7 @@ function ProgressBar({ data }: { data: number }) {
             marginRight: 5,
           }}></View>
       </View>
-      <Text style={{ fontSize: 11 }}>{data ? data * 100 : '0.00'}%</Text>
+      <Text style={{ fontSize: 11 }}>{percent}%</Text>
     </View>
   );
 }

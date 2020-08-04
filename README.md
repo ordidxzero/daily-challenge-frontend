@@ -16,7 +16,7 @@ Line 179 : Add `showsVerticalScrollIndicator={false}`
 - [x] createTodoMold를 했을 때 TodoList에 방금 생성한 Todo가 들어가야됨
   - [x] Grid -> Main으로 넘어가도 백엔드 요청을 안하니까, state말고 redux를 사용해도 될 듯?
   - [ ] 아직 시간대별로 정리하는 로직은 못 짬.. 리듀서가 더러워짐
-- [ ] GridScreen으로 갔을 때 ToDoManager의 text를 바꿔야하는데, props에 접근하면 AppLoading에서 에러가 발생해서 문제;;
+- [x] GridScreen으로 갔을 때 ToDoManager의 text를 바꿔야하는데, props에 접근하면 AppLoading에서 에러가 발생해서 문제;;
 - [ ] GridScreen도 개선해야될 듯..
   - [ ] ProgressBar 게이지를 채울 때 loading이 끝나면 채워지도록 할 것
 - [ ] Edit 기능 추가할 것
@@ -27,6 +27,7 @@ Line 179 : Add `showsVerticalScrollIndicator={false}`
 - [ ] Todo Toggle 버튼 개선할 것
   - [ ] 백엔드에 toggle된 정보를 보낼 때 발생하는 딜레이 동안은 toggle 버튼을 disabled하면 되지 않을까?
   - [ ] 아니면 toggle 버튼이 눌린 후 일정시간 동안 toggle 버튼이 눌리지 않으면 백엔드에 요청을?
+- [ ] Todo를 생성할 때, 일수로 설정가능하도록 할 것. 예를 들어 100일동안 진행하겠다 등..
 
 ## MEMO
 
