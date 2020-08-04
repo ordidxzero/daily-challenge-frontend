@@ -1,4 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+import { todoDateColor } from '../config/styles';
+
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   safeAreaViewContainer: {
@@ -6,6 +9,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
+  },
+  gridScrollView: {
+    paddingTop: 30,
+    width,
+  },
+  gridContentStyleProp: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  color: {
+    color: todoDateColor,
   },
 });
 

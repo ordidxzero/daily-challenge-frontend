@@ -1,7 +1,9 @@
+import { StyleProp, TextStyle } from 'react-native';
 // ----------------- ToDoManager.tsx type -----------------
 
 export type ToDoManagerProps = {
-  screenIndex: number;
+  screenIndex?: number;
+  style?: StyleProp<TextStyle>;
   onPress?: () => void;
 };
 
