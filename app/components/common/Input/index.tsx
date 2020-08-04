@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { TextInput } from 'react-native';
 import { InputProps } from './type';
 import styles from './styles';
@@ -7,17 +7,20 @@ import InputLayout from '../InputLayout';
 function Input({
   title,
   disabled = false,
-  required = false,
   value,
   placeholder,
   onChangeText,
 }: InputProps) {
+  const textInput = useRef<TextInput>(null);
+  const onTitlePress = () => textInput.current?.focus();
   return (
     <InputLayout
       containerStyle={styles.inputContainer}
       titleStyle={styles.inputTitle}
-      title={title}>
+      title={title}
+      onTitlePress={onTitlePress}>
       <TextInput
+        ref={textInput}
         editable={!disabled}
         selectTextOnFocus={!disabled}
         value={value}

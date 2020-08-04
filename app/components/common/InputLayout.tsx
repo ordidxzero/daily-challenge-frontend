@@ -7,10 +7,15 @@ function InputLayout({
   titleStyle,
   title,
   children,
+  onTitlePress,
 }: InputLayoutProps) {
   return (
     <View style={containerStyle}>
-      <Text style={titleStyle}>{title}</Text>
+      <Text
+        style={[{ textTransform: 'capitalize' }, titleStyle]}
+        onPress={onTitlePress}>
+        {title}
+      </Text>
       {children}
     </View>
   );

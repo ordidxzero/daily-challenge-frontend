@@ -4,6 +4,7 @@ import useReduxState from '../hooks/common/useReduxState';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import BottomTabNavigation from './BottomTabNavigation';
+import TodoScreen from '../screens/TodoScreen';
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,7 @@ function StackNavigation() {
         component={BottomTabNavigation}
         options={{ gestureEnabled: false }}
       />
+      <Stack.Screen name="Todo" component={TodoScreen} />
     </Stack.Navigator>
   );
 }

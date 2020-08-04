@@ -3,25 +3,25 @@ import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import styles from './styles';
 import { TodoType } from '../../../@types';
 import Checker from './Checker';
+import { useNavigation } from '@react-navigation/native';
 
-function Todo({
-  title,
-  amount,
-  done,
-  startTime,
-  endTime,
-  unit,
-  id,
-  dateString,
-}: TodoType) {
+function Todo({ data }: { data: TodoType }) {
+  const navigation = useNavigation();
   return (
-    <TouchableWithoutFeedback onPress={() => console.log('press')}>
+    <TouchableWithoutFeedback
+      onPress={() => navigation.navigate('Todo', { data })}>
       <View style={styles.todoContainer}>
         <View>
-          <Text style={styles.timezone}>{`${startTime} ~ ${endTime}`}</Text>
-          <Text style={styles.content}>{`${title} ${amount}${unit}`}</Text>
+          <Text
+            style={
+              styles.timezone
+            }>{`${data.startTime} ~ ${data.endTime}`}</Text>
+          <Text
+            style={
+              styles.content
+            }>{`${data.title} ${data.amount}${data.unit}`}</Text>
         </View>
-        <Checker done={done} dateString={dateString} id={id} />
+        <Checker done={data.done} dateString={data.dateString} id={data.id} />
       </View>
     </TouchableWithoutFeedback>
   );
