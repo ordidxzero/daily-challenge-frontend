@@ -4,10 +4,14 @@ import { ToDoManagerProps } from './types';
 import styles from './styles';
 import { Entypo } from '@expo/vector-icons';
 
-function ToDoManager({ onPress, screenIndex, style }: ToDoManagerProps) {
+function ToDoManager({ onPress, screenIndex, type }: ToDoManagerProps) {
   return (
     <TouchableOpacity
-      style={[styles.touchableOpacity, styles.todoCreateButton, style]}
+      style={[
+        styles.touchableOpacity,
+        styles.detailButton,
+        !type && styles.todoCreateButton,
+      ]}
       onPress={onPress}>
       <View>
         <Text

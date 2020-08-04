@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   done: { borderColor: checkerDoneColor, backgroundColor: checkerDoneColor },
   doneText: { color: 'white' },
   undone: { borderColor: checkerUndoneColor },
-  undoneText: { color: checkerUndoneColor },
+  undoneText: { color: checkerUndoneColor, marginLeft: 1, marginTop: 2 },
 });
 
 export default styles;

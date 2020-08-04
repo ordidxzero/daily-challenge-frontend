@@ -23,6 +23,16 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     zIndex: 1000,
   },
+  detailButton: {
+    backgroundColor: todoCreateButtonBackgroundColor,
+    position: 'absolute',
+    bottom: 30,
+    left: width * 0.5 - 30,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    zIndex: 1000,
+  },
 });
 
 export default styles;

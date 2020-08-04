@@ -28,7 +28,7 @@ function TodoScreen({
             {`${data.startTime} ~ ${data.endTime}`}
           </Text>
         </View>
-        <TodoManager style={{ top: 0, bottom: 30 }} />
+        <TodoManager type="detail" />
       </View>
     </SafeAreaView>
   );
