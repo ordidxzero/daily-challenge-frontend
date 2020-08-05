@@ -18,8 +18,15 @@ function ToDoManager({ onPress, screenIndex, type }: ToDoManagerProps) {
           style={[
             styles.touchableOpacityText,
             !!screenIndex && { marginBottom: -3 },
+            type && { marginBottom: -3 },
           ]}>
-          {screenIndex ? <Entypo name="cog" color="#fff" size={30} /> : '+'}
+          {screenIndex ? (
+            <Entypo name="cog" color="#fff" size={30} />
+          ) : type ? (
+            <Entypo name="edit" color="#fff" size={23} />
+          ) : (
+            '+'
+          )}
         </Text>
       </View>
     </TouchableOpacity>

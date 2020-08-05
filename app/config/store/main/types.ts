@@ -7,6 +7,8 @@ export type FakeTodoDataType = {
   todo: TodoType;
 };
 
+export type EditTodoDataType = TodoType;
+
 export type ToggledTodoData = {
   dateString: string;
   id: string;
@@ -21,6 +23,7 @@ export type FakeTodoData = FakeTodoDataType[];
 
 export type MainState = {
   selectedDay: string;
+  selectedTodo?: string;
   panel: {
     create: boolean;
     todo: boolean;

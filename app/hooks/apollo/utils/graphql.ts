@@ -81,3 +81,37 @@ export const GET_TODO_MOLDS = gql`
     }
   }
 `;
+
+export const EDIT_TODO = gql`
+  mutation EditTodo(
+    $id: String!
+    $title: String
+    $dateString: String
+    $amount: Int
+    $unit: String
+    $startTime: String
+    $endTime: String
+  ) {
+    editTodo(
+      id: $id
+      title: $title
+      dateString: $dateString
+      amount: $amount
+      unit: $unit
+      startTime: $startTime
+      endTime: $endTime
+    ) {
+      ok
+      error
+    }
+  }
+`;
+
+export const DELETE_TODO = gql`
+  mutation RemoveTodo($id: String!) {
+    removeTodo(id: $id) {
+      ok
+      error
+    }
+  }
+`;

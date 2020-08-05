@@ -6,7 +6,7 @@ import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import BottomTabNavigation from './BottomTabNavigation';
 import TodoScreen from '../screens/TodoScreen';
-import { Button } from 'react-native';
+import useCreateHeaderButton from '../hooks/swipeablePanel/useCreateHeaderButton';
 
 const Stack = createStackNavigator();
 
@@ -14,6 +14,7 @@ function StackNavigation() {
   const {
     login: { token },
   } = useReduxState();
+  const headerRight = useCreateHeaderButton();
   return (
     <Stack.Navigator
       headerMode="float"
@@ -32,16 +33,14 @@ function StackNavigation() {
       <Stack.Screen
         name="Todo"
         component={TodoScreen}
-        options={{
+        options={({ navigation }) => ({
           headerBackTitleVisible: false,
           headerTitle: '세부사항',
-          headerRight: () => (
-            <Button onPress={() => console.log('Delete')} title="Delete" />
-          ),
-        }}
+          headerRight: headerRight && headerRight(navigation),
+        })}
       />
     </Stack.Navigator>
   );
 }
 
-export default StackNavigation;
+export default React.memo(StackNavigation);

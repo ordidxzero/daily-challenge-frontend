@@ -18,6 +18,9 @@ import {
   GET_MOLD_DATA_FAILURE,
   ADD_TODOS,
   TOGGLE_TODO,
+  EDIT_TODO,
+  DELETE_TODO,
+  SELECT_TODO,
 } from './actions';
 
 const initialState: MainState = {
@@ -143,6 +146,49 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
     }
     return state;
   },
+  [EDIT_TODO]: (state, { payload }) => {
+    const data = state.agenda.data.find(
+      agenda => agenda.dateString === payload.dateString,
+    );
+    if (data) {
+      const newData = data?.todos.map(todo =>
+        todo.id === payload.id ? payload : todo,
+      );
+      return {
+        ...state,
+        agenda: {
+          ...state.agenda,
+          data: state.agenda.data.map(item =>
+            item.dateString === payload.dateString
+              ? { ...item, todos: newData }
+              : item,
+          ),
+        },
+      };
+    }
+    return state;
+  },
+  [DELETE_TODO]: (state, { payload }) => {
+    const data = state.agenda.data.find(
+      agenda => agenda.dateString === payload.dateString,
+    );
+    if (data) {
+      const newData = data?.todos.filter(todo => todo.id !== payload.id);
+      return {
+        ...state,
+        agenda: {
+          ...state.agenda,
+          data: state.agenda.data.map(item =>
+            item.dateString === payload.dateString
+              ? { ...item, todos: newData }
+              : item,
+          ),
+        },
+      };
+    }
+    return state;
+  },
+  [SELECT_TODO]: (state, { payload }) => ({ ...state, selectedTodo: payload }),
 });
 
 export default reducer;
