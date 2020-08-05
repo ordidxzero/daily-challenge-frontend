@@ -20,11 +20,11 @@ Line 179 : Add `showsVerticalScrollIndicator={false}`
 - [ ] GridScreen도 개선해야될 듯..
   - [ ] ProgressBar 게이지를 채울 때 loading이 끝나면 채워지도록 할 것
 - [ ] Edit 기능 추가할 것
-  - [ ] Redux에 있는 todo를 수정하고, 백엔드에서도 resolver 만들 것 
+  - [x] Redux에 있는 todo를 수정하고, 백엔드에서도 resolver 만들 것 
   - [ ] 앞으로의 모든 Todo를 수정하는 경우, Mold를 새로 만드는 것도 나쁘지 않을듯?
   - [ ] 이것도 BottomPanel을 사용할까? checkbox 만들어서, 위처럼 Mold를 새로 만들지 여부를 물어보면 될 듯
   - [ ] BottomPanel의 단점이 Remove 버튼을 어떻게 추가해야될 지 모르겠다는 것
-- [ ] Remove 기능 추가할 것
+- [x] Remove 기능 추가할 것
 - [ ] Todo Toggle 버튼 개선할 것
   - [ ] 백엔드에 toggle된 정보를 보낼 때 발생하는 딜레이 동안은 toggle 버튼을 disabled하면 되지 않을까?
   - [ ] 아니면 toggle 버튼이 눌린 후 일정시간 동안 toggle 버튼이 눌리지 않으면 백엔드에 요청을?
