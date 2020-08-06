@@ -5,7 +5,7 @@ import { Platform, StatusBar, SafeAreaView } from 'react-native';
 import styles from './styles';
 // Components
 import Calendar from '../components/main/Calendar';
-import { CreatePanel } from '../components/main/SwipeablePanel';
+import SwipeablePanel from '../components/main/SwipeablePanel';
 
 function MainScreen() {
   return (
@@ -18,7 +18,7 @@ function MainScreen() {
         },
       ]}>
       <Calendar />
-      <CreatePanel />
+      <SwipeablePanel />
     </SafeAreaView>
   );
 }

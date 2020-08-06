@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { inputSectionTitleBorderColor } from '../../../../config/styles';
+import { inputSectionTitleBorderColor } from '../../../config/styles';
 
 const styles = StyleSheet.create({
   inputSectionTitleContainer: {
