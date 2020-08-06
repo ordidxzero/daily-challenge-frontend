@@ -2,16 +2,9 @@ import React from 'react';
 import { TouchableWithoutFeedback, View, Text } from 'react-native';
 import styles from './styles';
 import useToggleTodo from '../../../hooks/todoList/useToggleTodo';
+import { CheckerProps } from './types';
 
-function Checker({
-  done,
-  dateString,
-  id,
-}: {
-  done: boolean;
-  dateString: string;
-  id: string;
-}) {
+function Checker({ done, dateString, id }: CheckerProps) {
   const toggleTodo = useToggleTodo();
   return (
     <TouchableWithoutFeedback onPress={() => toggleTodo({ dateString, id })}>

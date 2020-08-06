@@ -1,10 +1,14 @@
+// Modules
 import React, { useMemo, useCallback, useRef } from 'react';
 import { Dimensions, FlatList } from 'react-native';
+// Components
 import DayComponent from './DayComponent';
-import { ViewableItemsType } from './types';
+// Hooks
 import useTodoData from '../../../hooks/todoList/useTodoData';
 import useScroll from '../../../hooks/todoList/useScroll';
 import useSelectDay from '../../../hooks/common/useSelectDay';
+// Utils
+import { ViewableItemsType } from './types';
 
 const { width } = Dimensions.get('window');
 

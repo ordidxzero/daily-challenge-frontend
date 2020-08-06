@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
-import styles from './styles';
-import { TodoType } from '../../../@types';
-import Checker from './Checker';
 import { useNavigation } from '@react-navigation/native';
+import styles from './styles';
+import { TodoProps } from './types';
+import Checker from './Checker';
 
-function Todo({ data }: { data: TodoType }) {
+function Todo({ data }: TodoProps) {
   const navigation = useNavigation();
   return (
     <TouchableWithoutFeedback

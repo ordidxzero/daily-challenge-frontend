@@ -2,8 +2,9 @@ import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import useSelectWeekdays from '../../../hooks/swipeablePanel/useSelectWeekdays';
+import { DayProps } from './types';
 
-function Day({ day, selected }: { day: string; selected: boolean }) {
+function Day({ day, selected }: DayProps) {
   const { setSelectedWeekdays } = useSelectWeekdays();
   return (
     <TouchableOpacity onPress={() => setSelectedWeekdays(day)}>
