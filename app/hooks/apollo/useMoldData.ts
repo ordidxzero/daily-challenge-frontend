@@ -1,32 +1,16 @@
-import { useDispatch } from 'react-redux';
 import { getMoldDataAsync } from '../../config/store/main';
 import { GET_TODO_MOLDS } from './utils/graphql';
-import useImperativeQuery from '../common/useImperativeQuery';
+import useImperativeQueryThunk from '../common/useImperativeQueryThunk';
 
 function useMoldData() {
-  const { request, failure, success } = getMoldDataAsync;
-  const dispatch = useDispatch();
-  const refetch = useImperativeQuery(GET_TODO_MOLDS, {
-    variables: { dateString: '' },
+  const refetch = useImperativeQueryThunk({
+    query: GET_TODO_MOLDS,
+    options: {
+      variables: { dateString: '' },
+    },
+    action: getMoldDataAsync,
   });
-  const getTodoMolds = (variables?: { dateString: string }) => {
-    dispatch(request());
-    refetch(variables)
-      .then(
-        ({
-          data: {
-            getTodoMolds: { data, error },
-          },
-        }) => {
-          if (error) {
-            return dispatch(failure(error));
-          } else {
-            return dispatch(success(data));
-          }
-        },
-      )
-      .catch(error => console.log(error));
-  };
+  const getTodoMolds = refetch('getTodoMolds');
   return getTodoMolds;
 }
 

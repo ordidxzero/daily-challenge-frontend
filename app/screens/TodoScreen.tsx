@@ -6,8 +6,7 @@ import dayjs from 'dayjs';
 import TodoManager from '../components/main/TodoManager';
 import { TodoPanel } from '../components/main/SwipeablePanel';
 import useTogglePanel from '../hooks/swipeablePanel/useTogglePanel';
-import useEditTodo from '../hooks/swipeablePanel/useEditTodo';
-import useEditTodoDB from '../hooks/apollo/useEditTodoDB';
+import useEditTodo from '../hooks/apollo/useEditTodo';
 import useSelectedTodo from '../hooks/swipeablePanel/useSelectedTodo';
 
 const { width } = Dimensions.get('window');
@@ -18,14 +17,13 @@ function TodoScreen({
   },
 }: CustomStackScreenProp<'Todo'>) {
   const { setIsPanelActive, isTodoPanelActive } = useTogglePanel();
-  const editTodo = useEditTodo();
+  const { editTodoBack, editTodoFront } = useEditTodo();
   const selectTodo = useSelectedTodo();
-  const editTodoMutation = useEditTodoDB();
   const openPanel = () => setIsPanelActive('todo', true);
   const closePanel = () => {
     setIsPanelActive('todo', false);
-    editTodoMutation(data.id);
-    editTodo(data.id, data.done);
+    editTodoBack(data.id);
+    editTodoFront(data.id, data.done);
   };
   useEffect(() => {
     selectTodo(data.id);

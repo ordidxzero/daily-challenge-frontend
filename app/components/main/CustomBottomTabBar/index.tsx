@@ -8,21 +8,19 @@ import {
 } from '@react-navigation/bottom-tabs';
 import useTogglePanel from '../../../hooks/swipeablePanel/useTogglePanel';
 import useCreateTodoMold from '../../../hooks/apollo/useCreateTodoMold';
-import useTodoAdder from '../../../hooks/swipeablePanel/useTodoAdder';
 
 function CustomBottomTabBar(props: BottomTabBarProps<BottomTabBarOptions>) {
   const { setIsPanelActive, isCreatePanelActive } = useTogglePanel();
-  const addFakeTodos = useTodoAdder();
-  const createTodoMold = useCreateTodoMold();
+  const { createTodoMoldBack, addFakeTodoFront } = useCreateTodoMold();
   const openPanel = useCallback(() => setIsPanelActive('create', true), []);
   const closePanel = useCallback(() => {
-    createTodoMold()
+    createTodoMoldBack()
       .then(() => {
-        addFakeTodos();
+        addFakeTodoFront();
         setIsPanelActive('create', false);
       })
       .catch(error => console.log(error));
-  }, [createTodoMold]);
+  }, [createTodoMoldBack]);
   return (
     <View>
       <TodoManager

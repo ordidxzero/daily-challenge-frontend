@@ -6,6 +6,7 @@ import {
   QueryResult,
 } from '@apollo/client';
 
+// Original
 function useImperativeQuery<TData = any, TVariables = OperationVariables>(
   query: DocumentNode,
   options: QueryHookOptions<TData, TVariables> = {},

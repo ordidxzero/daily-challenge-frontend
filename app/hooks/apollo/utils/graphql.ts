@@ -5,7 +5,7 @@ export const GET_TODOS = gql`
     getTodos(dateString: $dateString, position: $position) {
       ok
       error
-      agenda {
+      data {
         dateString
         todos {
           id

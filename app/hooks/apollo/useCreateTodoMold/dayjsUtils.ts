@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import week from 'dayjs/plugin/weekOfYear';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
-import { CheckOverRangeParams, GetDateStringArrayParams } from '../types';
+import { CheckOverRangeParams, GetDateStringArrayParams } from './types';
 
 dayjs.extend(week);
 dayjs.extend(isSameOrBefore);
