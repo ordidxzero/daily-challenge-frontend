@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import SwipeablePanelComponent from 'rn-swipeable-panel';
-import useTogglePanel from '../../../../hooks/swipeablePanel/useTogglePanel';
-import PanelContent from './PanelContent';
+import useTogglePanel from '../../../hooks/swipeablePanel/useTogglePanel';
+import CreatePanelContent from './CreatePanelContent';
+import TodoPanelContent from './TodoPanelContent';
+import { SwipeablePanelProps } from './types';
 
-function CreatePanel() {
+function SwipeablePanel({ type = 'create', data }: SwipeablePanelProps) {
   const { isCreatePanelActive, setIsPanelActive } = useTogglePanel();
   const [panelProps] = useState({
     fullWidth: true,
@@ -17,9 +19,10 @@ function CreatePanel() {
   });
   return (
     <SwipeablePanelComponent {...panelProps} isActive={isCreatePanelActive}>
-      <PanelContent />
+      {type === 'create' && <CreatePanelContent />}
+      {type === 'todo' && data && <TodoPanelContent data={data} />}
     </SwipeablePanelComponent>
   );
 }
 
-export default React.memo(CreatePanel);
+export default React.memo(SwipeablePanel);

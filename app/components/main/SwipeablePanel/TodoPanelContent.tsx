@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { View } from 'react-native';
-import Input from '../../../common/Input';
-import useInput from '../../../../hooks/common/useInput';
-import useResetState from '../../../../hooks/swipeablePanel/useResetState';
-import { TodoType } from '../../../../@types';
+import Input from '../../common/Input';
+import useInput from '../../../hooks/common/useInput';
+import useResetState from '../../../hooks/swipeablePanel/useResetState';
+import { TodoType } from '../../../@types';
 
-function PanelContent({ data }: { data: TodoType }) {
+function TodoPanelContent({ data }: { data: TodoType }) {
   const resetReduxState = useResetState();
   const { hardenForm, onChangeText } = useInput();
   const { todo } = hardenForm;
@@ -64,4 +64,4 @@ function PanelContent({ data }: { data: TodoType }) {
   );
 }
 
-export default React.memo(PanelContent);
+export default React.memo(TodoPanelContent);

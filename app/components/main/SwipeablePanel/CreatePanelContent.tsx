@@ -3,18 +3,18 @@ import React, { useEffect } from 'react';
 import { View, Animated } from 'react-native';
 
 // Hooks
-import useInput from '../../../../hooks/common/useInput';
-import useFoldAnimation from '../../../../hooks/swipeablePanel/useFoldAnimation';
-import useRadioState from '../../../../hooks/swipeablePanel/useRadioState';
-import useResetState from '../../../../hooks/swipeablePanel/useResetState';
+import useInput from '../../../hooks/common/useInput';
+import useFoldAnimation from '../../../hooks/swipeablePanel/useFoldAnimation';
+import useRadioState from '../../../hooks/swipeablePanel/useRadioState';
+import useResetState from '../../../hooks/swipeablePanel/useResetState';
 
 // Components
-import Input from '../../../common/Input';
+import Input from '../../common/Input';
 import InputSection from './InputSection';
-import Radio from '../../../common/Radio';
-import ListOfWeekday from '../../ListOfWeekday';
+import Radio from '../../common/Radio';
+import ListOfWeekday from '../ListOfWeekday';
 
-function PanelContent() {
+function CreatePanelContent() {
   const [isRepeat, setIsRepeat] = useRadioState({
     current: 'no',
     data: ['yes', 'no'],
@@ -135,4 +135,4 @@ function PanelContent() {
   );
 }
 
-export default React.memo(PanelContent);
+export default React.memo(CreatePanelContent);
