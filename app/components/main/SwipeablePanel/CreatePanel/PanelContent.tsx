@@ -10,11 +10,11 @@ import ListOfWeekday from '../../ListOfWeekday';
 import useResetState from '../../../../hooks/swipeablePanel/useResetState';
 
 function PanelContent() {
-  const { radioState: isRepeat, setter: setIsRepeat } = useRadioState({
+  const [isRepeat, setIsRepeat] = useRadioState({
     current: 'no',
     data: ['yes', 'no'],
   });
-  const { radioState: selectMethod, setter: setMethod } = useRadioState({
+  const [selectMethod, setMethod] = useRadioState({
     current: 'weekdays',
     data: ['weekdays', 'dateDifference'],
   });
