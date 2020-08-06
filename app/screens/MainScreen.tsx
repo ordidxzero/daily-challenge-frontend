@@ -1,11 +1,11 @@
 // Modules
 import React from 'react';
 import { Platform, StatusBar, SafeAreaView } from 'react-native';
-//Utils
+// Utils
 import styles from './styles';
+// Components
 import Calendar from '../components/main/Calendar';
 import { CreatePanel } from '../components/main/SwipeablePanel';
-// Components
 
 function MainScreen() {
   return (

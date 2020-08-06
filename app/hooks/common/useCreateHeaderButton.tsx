@@ -1,7 +1,7 @@
 import React from 'react';
-import useSelectDay from '../common/useSelectDay';
+import useSelectDay from './useSelectDay';
 import { Button, Alert } from 'react-native';
-import useReduxState from '../common/useReduxState';
+import useReduxState from './useReduxState';
 import useDeleteTodo from '../apollo/useDeleteTodo';
 function useCreateHeaderButton() {
   const {
