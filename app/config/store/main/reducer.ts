@@ -21,10 +21,12 @@ import {
   EDIT_TODO,
   DELETE_TODO,
   SELECT_TODO,
+  SET_STATUS_BAR_STYLE,
 } from './actions';
 
 const initialState: MainState = {
   selectedDay: dayjs().format('YYYY-MM-DD'),
+  statusBarStyle: 'dark-content',
   panel: {
     create: false,
     todo: false,
@@ -189,6 +191,10 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
     return state;
   },
   [SELECT_TODO]: (state, { payload }) => ({ ...state, selectedTodo: payload }),
+  [SET_STATUS_BAR_STYLE]: (state, { payload }) => ({
+    ...state,
+    statusBarStyle: payload,
+  }),
 });
 
 export default reducer;

@@ -24,6 +24,7 @@ export type FakeTodoData = FakeTodoDataType[];
 export type MainState = {
   selectedDay: string;
   selectedTodo?: string;
+  statusBarStyle: 'dark-content' | 'light-content';
   panel: {
     create: boolean;
     todo: boolean;

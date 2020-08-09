@@ -1,33 +1,55 @@
 import React, { useState } from 'react';
-import SwipeablePanelComponent from 'rn-swipeable-panel';
+import FloatingPanel from '../FloatingPanel';
 import useTogglePanel from '../../../hooks/swipeablePanel/useTogglePanel';
 import CreatePanelContent from './CreatePanelContent';
 import TodoPanelContent from './TodoPanelContent';
 import { SwipeablePanelProps } from './types';
 
-function SwipeablePanel({ type = 'create', data }: SwipeablePanelProps) {
+function SwipeablePanel({
+  containerStyle = {},
+  panelHeight,
+  type = 'create',
+  data,
+  children,
+}: SwipeablePanelProps) {
   const {
     isCreatePanelActive,
     setIsPanelActive,
     isTodoPanelActive,
+    setStatusBarStyle,
   } = useTogglePanel();
   const [panelProps] = useState({
     fullWidth: true,
     openLarge: true,
     onlyLarge: true,
+    noBackgroundOpacity: true,
     showCloseButton: true,
     closeOnTouchOutside: true,
-    onClose: () => setIsPanelActive(type, false),
-    onPressCloseButton: () => setIsPanelActive(type, false),
+    onClose: () => {
+      setStatusBarStyle('dark-content');
+      setIsPanelActive(type, false);
+    },
+    onPressCloseButton: () => {
+      setStatusBarStyle('dark-content');
+      setIsPanelActive(type, false);
+    },
     // ...or any prop you want
   });
   return (
-    <SwipeablePanelComponent
+    <FloatingPanel
       {...panelProps}
-      isActive={type === 'todo' ? isTodoPanelActive : isCreatePanelActive}>
-      {type === 'create' && <CreatePanelContent />}
-      {type === 'todo' && data && <TodoPanelContent data={data} />}
-    </SwipeablePanelComponent>
+      panelHeight={panelHeight}
+      containerStyle={containerStyle}
+      isActive={type === 'todo' ? isTodoPanelActive : isCreatePanelActive}
+      panelContent={
+        type === 'create' ? (
+          <CreatePanelContent />
+        ) : (
+          type === 'todo' && data && <TodoPanelContent data={data} />
+        )
+      }>
+      {children}
+    </FloatingPanel>
   );
 }
 

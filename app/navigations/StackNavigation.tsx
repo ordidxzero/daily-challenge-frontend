@@ -6,7 +6,6 @@ import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import BottomTabNavigation from './BottomTabNavigation';
 import TodoScreen from '../screens/TodoScreen';
-import useCreateHeaderButton from '../hooks/common/useCreateHeaderButton';
 
 const Stack = createStackNavigator();
 
@@ -14,11 +13,8 @@ function StackNavigation() {
   const {
     login: { token },
   } = useReduxState();
-  const headerRight = useCreateHeaderButton();
   return (
-    <Stack.Navigator
-      headerMode="float"
-      screenOptions={{ gestureEnabled: true }}>
+    <Stack.Navigator headerMode="none" screenOptions={{ gestureEnabled: true }}>
       {!token && (
         <>
           <Stack.Screen name="SignIn" component={SignInScreen} />
@@ -28,17 +24,9 @@ function StackNavigation() {
       <Stack.Screen
         name="Main"
         component={BottomTabNavigation}
-        options={{ gestureEnabled: false, headerShown: false }}
+        options={{ gestureEnabled: false }}
       />
-      <Stack.Screen
-        name="Todo"
-        component={TodoScreen}
-        options={({ navigation }) => ({
-          headerBackTitleVisible: false,
-          headerTitle: '세부사항',
-          headerRight: headerRight && headerRight(navigation),
-        })}
-      />
+      <Stack.Screen name="Todo" component={TodoScreen} />
     </Stack.Navigator>
   );
 }

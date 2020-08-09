@@ -12,8 +12,11 @@ export type InputSectionProps = {
 // ----------------- SwipeablePanel.tsx type -----------------
 
 export type SwipeablePanelProps = {
+  containerStyle?: any;
+  panelHeight: number;
   type?: 'create' | 'todo';
   data?: TodoType;
+  children: React.ReactNode;
 };
 
 // -----------------------------------------------------------

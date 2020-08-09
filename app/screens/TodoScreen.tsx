@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView, Text, View, Dimensions } from 'react-native';
+import { Text, View, Dimensions } from 'react-native';
 import { CustomStackScreenProp } from './types';
 import styles from './styles';
 import dayjs from 'dayjs';
@@ -8,6 +8,7 @@ import SwipeablePanel from '../components/main/SwipeablePanel';
 import useTogglePanel from '../hooks/swipeablePanel/useTogglePanel';
 import useEditTodo from '../hooks/apollo/useEditTodo';
 import useSelectedTodo from '../hooks/swipeablePanel/useSelectedTodo';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const { width } = Dimensions.get('window');
 
@@ -16,10 +17,17 @@ function TodoScreen({
     params: { data },
   },
 }: CustomStackScreenProp<'Todo'>) {
-  const { setIsPanelActive, isTodoPanelActive } = useTogglePanel();
+  const {
+    setIsPanelActive,
+    isTodoPanelActive,
+    setStatusBarStyle,
+  } = useTogglePanel();
   const { editTodoBack, editTodoFront } = useEditTodo();
   const selectTodo = useSelectedTodo();
-  const openPanel = () => setIsPanelActive('todo', true);
+  const openPanel = () => {
+    setStatusBarStyle('light-content');
+    setIsPanelActive('todo', true);
+  };
   const closePanel = () => {
     setIsPanelActive('todo', false);
     editTodoBack(data.id);
@@ -29,7 +37,27 @@ function TodoScreen({
     selectTodo(data.id);
   }, []);
   return (
-    <SafeAreaView style={styles.safeAreaViewContainer}>
+    <SwipeablePanel type="todo" data={data} panelHeight={60}>
+      <View
+        style={{
+          width,
+          height: 50,
+          paddingHorizontal: 20,
+          backgroundColor: 'blue',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <TouchableWithoutFeedback>
+          <Text>{'<'}</Text>
+        </TouchableWithoutFeedback>
+        <View>
+          <Text>ㅅㅔ부사항</Text>
+        </View>
+        <TouchableWithoutFeedback>
+          <Text>{'delete'}</Text>
+        </TouchableWithoutFeedback>
+      </View>
       <View style={{ flex: 1, width, padding: 20 }}>
         <View style={{ marginBottom: 30 }}>
           <Text style={{ fontSize: 30, fontWeight: '700' }}>{data.title}</Text>
@@ -48,9 +76,8 @@ function TodoScreen({
           type="detail"
           onPress={isTodoPanelActive ? closePanel : openPanel}
         />
-        <SwipeablePanel type="todo" data={data} />
       </View>
-    </SafeAreaView>
+    </SwipeablePanel>
   );
 }
 

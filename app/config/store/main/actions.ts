@@ -26,6 +26,7 @@ export const GET_AFTER_TODOS_SUCCESS = 'main/GET_AFTER_TODOS_SUCCESS';
 export const GET_AFTER_TODOS_FAILURE = 'main/GET_AFTER_TODOS_FAILURE';
 export const TOGGLE_SWIPEABLE_PANEL = 'main/TOGGLE_SWIPEABLE_PANEL';
 export const TOGGLE_TODO = 'main/TOGGLE_TODO';
+export const SET_STATUS_BAR_STYLE = 'main/SET_STATUS_BAR_STYLE';
 
 export const selectDay = createAction(SELECT_DAY)<string>();
 export const addTodos = createAction(ADD_TODOS)<FakeTodoData>();
@@ -56,3 +57,6 @@ export const toggleSwipeablePanel = createAction(TOGGLE_SWIPEABLE_PANEL)<
   PanelData
 >();
 export const toggleTodo = createAction(TOGGLE_TODO)<ToggledTodoData>();
+export const setStatusBarStyle = createAction(SET_STATUS_BAR_STYLE)<
+  'dark-content' | 'light-content'
+>();

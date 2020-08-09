@@ -7,6 +7,7 @@ import { Asset } from 'expo-asset';
 import { Entypo } from '@expo/vector-icons';
 import StackNavigation from './navigations/StackNavigation';
 import useSetToken from './hooks/common/useSetToken';
+import useTogglePanel from './hooks/swipeablePanel/useTogglePanel';
 
 const cacheImages = (images: any[]) =>
   images.map(image => {
@@ -21,6 +22,7 @@ const cacheFonts = (fonts: any[]) => fonts.map(font => Font.loadAsync(font));
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
+  const { statusBarStyle } = useTogglePanel();
   const { checkLogin } = useSetToken();
 
   const loadAssets = async () => {
@@ -39,7 +41,7 @@ export default function App() {
         <StackNavigation />
       </NavigationContainer>
       <StatusBar
-        barStyle={Platform.OS === 'android' ? 'light-content' : 'dark-content'}
+        barStyle={Platform.OS === 'android' ? 'light-content' : statusBarStyle}
       />
     </>
   ) : (
