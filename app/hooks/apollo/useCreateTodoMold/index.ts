@@ -3,16 +3,10 @@ import { useDispatch } from 'react-redux';
 import { CREATE_TODO_MOLD } from '../utils/graphql';
 import useInput from '../../common/useInput';
 import { addTodos } from '../../../config/store/main';
-import { generateID } from './utils';
-import {
-  checkOverRange,
-  getDateStringArray,
-  filterByDateDifference,
-  filterByDayName,
-} from './dayjsUtils';
+import { generateTodoData } from './utils';
 import { useMemo } from 'react';
 
-function useCreateTodoMold() {
+function useTodoMoldAdder() {
   const dispatch = useDispatch();
   const { softenForm } = useInput();
   const [createTodoMoldMutation] = useMutation(CREATE_TODO_MOLD);
@@ -31,46 +25,11 @@ function useCreateTodoMold() {
     dayNameToRepeat,
   } = softenForm.todo;
 
-  let amountAccumulator = amount;
+  const fakeData = useMemo(() => generateTodoData(softenForm.todo), [
+    softenForm.todo,
+  ]);
 
-  const dateStringArray = useMemo(
-    () =>
-      checkOverRange({
-        end: endDate,
-        target: getDateStringArray({ start: startDate }),
-      }),
-    [endDate, startDate],
-  );
-
-  const validDates = useMemo(
-    () =>
-      dateDifference
-        ? filterByDateDifference(dateDifference, dateStringArray)
-        : filterByDayName(dayNameToRepeat, weekDifference, dateStringArray),
-    [dateDifference, dateStringArray, dayNameToRepeat, weekDifference],
-  );
-
-  const data = validDates.map((dateString, index) => {
-    const hasChanged = index % amountChangeInterval === 0;
-    amountAccumulator = hasChanged
-      ? amount + (index / amountChangeInterval) * amountDifference
-      : amountAccumulator;
-    return {
-      dateString,
-      todo: {
-        id: generateID(),
-        dateString,
-        title,
-        amount: amountAccumulator,
-        unit,
-        startTime,
-        endTime,
-        done: false,
-      },
-    };
-  });
-
-  const addFakeTodoFront = () => dispatch(addTodos(data));
+  const addFakeTodoFront = () => dispatch(addTodos(fakeData));
 
   const createTodoMoldBack = () =>
     createTodoMoldMutation({
@@ -93,4 +52,4 @@ function useCreateTodoMold() {
   return { createTodoMoldBack, addFakeTodoFront };
 }
 
-export default useCreateTodoMold;
+export default useTodoMoldAdder;

@@ -6,7 +6,7 @@ import {
   BottomTabBarProps,
   BottomTabBarOptions,
 } from '@react-navigation/bottom-tabs';
-import useTogglePanel from '../../../hooks/swipeablePanel/useTogglePanel';
+import useTogglePanel from '../../../hooks/floatingPanel/useTogglePanel';
 import useCreateTodoMold from '../../../hooks/apollo/useCreateTodoMold';
 
 function CustomBottomTabBar(props: BottomTabBarProps<BottomTabBarOptions>) {
@@ -14,18 +14,18 @@ function CustomBottomTabBar(props: BottomTabBarProps<BottomTabBarOptions>) {
     setIsPanelActive,
     isCreatePanelActive,
     setStatusBarStyle,
-  } = useTogglePanel();
+  } = useTogglePanel('create');
   const { createTodoMoldBack, addFakeTodoFront } = useCreateTodoMold();
   const openPanel = useCallback(() => {
     setStatusBarStyle('light-content');
-    setIsPanelActive('create', true);
+    setIsPanelActive(true);
   }, []);
   const closePanel = useCallback(() => {
     createTodoMoldBack()
       .then(() => {
         addFakeTodoFront();
         setStatusBarStyle('dark-content');
-        setIsPanelActive('create', false);
+        setIsPanelActive(false);
       })
       .catch(error => console.log(error));
   }, [createTodoMoldBack]);

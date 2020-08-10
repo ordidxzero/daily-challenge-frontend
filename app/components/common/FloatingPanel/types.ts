@@ -1,3 +1,5 @@
+import { Animated } from 'react-native';
+
 export type PanelProps = {
   isActive: boolean;
   onClose: () => any;
@@ -38,10 +40,13 @@ type Rename<T, K extends keyof T, N extends string> = Pick<
 type RenamedPanelProps = Rename<
   PanelProps,
   'panelHeight',
-  'panelBackgroundHeight'
+  'panelOutsideHeight'
 >;
 
-export type FloatingPanelProps = Omit<RenamedPanelProps, 'pan'>;
+export type FloatingPanelProps = Omit<RenamedPanelProps, 'pan'> & {
+  containerStyle?: any;
+  panelContent: React.ReactNode;
+};
 
 export type PanelPropsUsingUser = Omit<
   PanelProps,

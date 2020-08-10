@@ -6,7 +6,7 @@ import {
 import { useCallback } from 'react';
 import useReduxState from '../common/useReduxState';
 
-function useTogglePanel() {
+function useTogglePanel(key?: 'create' | 'todo' | 'mold') {
   const dispatch = useDispatch();
   const {
     main: {
@@ -20,8 +20,8 @@ function useTogglePanel() {
     [dispatch],
   );
   const setIsPanelActive = useCallback(
-    (key: 'create' | 'todo' | 'mold', isActive: boolean) =>
-      dispatch(toggleSwipeablePanel({ key, isActive })),
+    (isActive: boolean) =>
+      key && dispatch(toggleSwipeablePanel({ key, isActive })),
     [dispatch],
   );
   return {

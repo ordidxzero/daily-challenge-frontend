@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import Day from './Day';
 import styles from './styles';
-import useSelectWeekdays from '../../../hooks/swipeablePanel/useSelectWeekdays';
+import useSelectWeekdays from '../../../hooks/common/useSelectWeekdays';
 import InputLayout from '../../common/InputLayout';
 
 function ListOfWeekday() {

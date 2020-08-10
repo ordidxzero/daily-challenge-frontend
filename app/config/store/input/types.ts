@@ -25,22 +25,24 @@ export type InputState = {
   todo: TodoInputState;
 };
 
+export type SoftenTodoInputState = {
+  startDate: string;
+  endDate: string;
+  title: string;
+  unit: string;
+  startTime: string;
+  endTime: string;
+  amount: number;
+  weekDifference: number;
+  dateDifference: number;
+  amountChangeInterval: number;
+  amountDifference: number;
+  dayNameToRepeat: number[];
+};
+
 export type SoftenInputState = {
   auth: AuthInputState;
-  todo: {
-    startDate: string;
-    endDate: string;
-    title: string;
-    unit: string;
-    startTime: string;
-    endTime: string;
-    dayNameToRepeat: number[];
-    amount: number;
-    weekDifference: number;
-    dateDifference: number;
-    amountChangeInterval: number;
-    amountDifference: number;
-  };
+  todo: SoftenTodoInputState;
 };
 
 export type InputAction = ActionType<typeof actions>;

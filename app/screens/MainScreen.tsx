@@ -3,16 +3,16 @@ import React from 'react';
 // Utils
 // Components
 import Calendar from '../components/main/Calendar';
-import SwipeablePanel from '../components/common/SwipeablePanel';
+import FloatingPanelWrapper from '../components/common/FloatingPanelWrapper';
 
 function MainScreen() {
   return (
-    <SwipeablePanel
+    <FloatingPanelWrapper
       containerStyle={{
         justifyContent: 'flex-start',
       }}>
       <Calendar />
-    </SwipeablePanel>
+    </FloatingPanelWrapper>
   );
 }
 

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { View } from 'react-native';
-import Input from '../Input';
-import useInput from '../../../hooks/common/useInput';
-import useResetState from '../../../hooks/swipeablePanel/useResetState';
-import { TodoType } from '../../../@types';
+import Input from '../../Input';
+import useInput from '../../../../hooks/common/useInput';
+import useResetState from '../../../../hooks/floatingPanel/useResetState';
+import { TodoType } from '../../../../@types';
 
 function TodoPanelContent({ data }: { data: TodoType }) {
   const resetReduxState = useResetState();

@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
 import FloatingPanel, { PanelProps } from '../FloatingPanel';
-import useTogglePanel from '../../../hooks/swipeablePanel/useTogglePanel';
-import CreatePanelContent from './CreatePanelContent';
-import TodoPanelContent from './TodoPanelContent';
-import { SwipeablePanelProps } from './types';
+import useTogglePanel from '../../../hooks/floatingPanel/useTogglePanel';
+import PanelContent from './PanelContent';
+import { FloatingPanelWrapper } from './types';
 
-function SwipeablePanel({
+function FloatingPanelWrapper({
   containerStyle = {},
   type = 'create',
   data,
   children,
-}: SwipeablePanelProps) {
+}: FloatingPanelWrapper) {
   const {
     isCreatePanelActive,
     setIsPanelActive,
     isTodoPanelActive,
     setStatusBarStyle,
-  } = useTogglePanel();
+  } = useTogglePanel(type);
   const onClose = () => {
     setStatusBarStyle('dark-content');
-    setIsPanelActive(type, false);
+    setIsPanelActive(false);
   };
   const [panelProps] = useState<PanelProps>({
     fullWidth: true,
@@ -33,19 +32,13 @@ function SwipeablePanel({
   return (
     <FloatingPanel
       {...panelProps}
-      panelBackgroundHeight={type === 'todo' ? 80 : 140}
+      panelOutsideHeight={type === 'todo' ? 55 : 130}
       containerStyle={containerStyle}
       isActive={type === 'todo' ? isTodoPanelActive : isCreatePanelActive}
-      panelContent={
-        type === 'create' ? (
-          <CreatePanelContent />
-        ) : (
-          type === 'todo' && data && <TodoPanelContent data={data} />
-        )
-      }>
+      panelContent={<PanelContent type={type} data={data} />}>
       {children}
     </FloatingPanel>
   );
 }
 
-export default React.memo(SwipeablePanel);
+export default React.memo(FloatingPanelWrapper);

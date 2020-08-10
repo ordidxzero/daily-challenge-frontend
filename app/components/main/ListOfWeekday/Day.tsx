@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
-import useSelectWeekdays from '../../../hooks/swipeablePanel/useSelectWeekdays';
+import useSelectWeekdays from '../../../hooks/common/useSelectWeekdays';
 import { DayProps } from './types';
 
 function Day({ day, selected }: DayProps) {

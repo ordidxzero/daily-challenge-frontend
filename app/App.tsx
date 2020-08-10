@@ -7,7 +7,7 @@ import { Asset } from 'expo-asset';
 import { Entypo } from '@expo/vector-icons';
 import StackNavigation from './navigations/StackNavigation';
 import useSetToken from './hooks/common/useSetToken';
-import useTogglePanel from './hooks/swipeablePanel/useTogglePanel';
+import useTogglePanel from './hooks/floatingPanel/useTogglePanel';
 
 const cacheImages = (images: any[]) =>
   images.map(image => {

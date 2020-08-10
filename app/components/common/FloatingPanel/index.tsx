@@ -34,15 +34,11 @@ export default function FloatingPanel({
   containerStyle,
   children,
   panelContent,
-  panelBackgroundHeight,
+  panelOutsideHeight,
   ...panelProps
-}: {
-  panelBackgroundHeight: number;
-  containerStyle?: any;
-  panelContent: React.ReactNode;
-} & FloatingPanelProps) {
+}: FloatingPanelProps) {
   const FULL_HEIGHT = height;
-  const PANEL_HEIGHT = FULL_HEIGHT - panelBackgroundHeight;
+  const PANEL_HEIGHT = FULL_HEIGHT - panelOutsideHeight;
   const animation = useRef(new Animated.ValueXY({ x: 0, y: FULL_HEIGHT }));
   return (
     <View style={[styles.container, containerStyle]}>

@@ -11,7 +11,7 @@ export type InputSectionProps = {
 
 // ----------------- SwipeablePanel.tsx type -----------------
 
-export type SwipeablePanelProps = {
+export type FloatingPanelWrapper = {
   containerStyle?: any;
   type?: 'create' | 'todo';
   data?: TodoType;

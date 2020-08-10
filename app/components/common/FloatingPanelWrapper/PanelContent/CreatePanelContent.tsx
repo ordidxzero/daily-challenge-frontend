@@ -3,16 +3,16 @@ import React, { useEffect } from 'react';
 import { View, Animated } from 'react-native';
 
 // Hooks
-import useInput from '../../../hooks/common/useInput';
-import useFoldAnimation from '../../../hooks/swipeablePanel/useFoldAnimation';
-import useRadioState from '../../../hooks/swipeablePanel/useRadioState';
-import useResetState from '../../../hooks/swipeablePanel/useResetState';
+import useInput from '../../../../hooks/common/useInput';
+import useFoldAnimation from '../../../../hooks/floatingPanel/useFoldAnimation';
+import useRadioState from '../../../../hooks/floatingPanel/useRadioState';
+import useResetState from '../../../../hooks/floatingPanel/useResetState';
 
 // Components
-import Input from '../Input';
-import InputSection from './InputSection';
-import Radio from '../Radio';
-import ListOfWeekday from '../../main/ListOfWeekday';
+import Input from '../../Input';
+import InputSection from '../InputSection';
+import Radio from '../../Radio';
+import ListOfWeekday from '../../../main/ListOfWeekday';
 
 function CreatePanelContent() {
   const [isRepeat, setIsRepeat] = useRadioState({

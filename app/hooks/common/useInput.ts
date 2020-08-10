@@ -6,7 +6,7 @@ import {
   InputState,
   SoftenInputState,
 } from '../../config/store/input';
-import useSelectWeekdays from '../swipeablePanel/useSelectWeekdays';
+import useSelectWeekdays from './useSelectWeekdays';
 
 /**
  * Hook that manage value of input component for using at react

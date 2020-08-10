@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Text, View, Dimensions } from 'react-native';
 import { CustomStackScreenProp } from './types';
 import styles from './styles';
 import dayjs from 'dayjs';
 import TodoManager from '../components/main/TodoManager';
-import SwipeablePanel from '../components/common/SwipeablePanel';
-import useTogglePanel from '../hooks/swipeablePanel/useTogglePanel';
+import FloatingPanelWrapper from '../components/common/FloatingPanelWrapper';
+import useTogglePanel from '../hooks/floatingPanel/useTogglePanel';
 import useEditTodo from '../hooks/apollo/useEditTodo';
-import useSelectedTodo from '../hooks/swipeablePanel/useSelectedTodo';
+import useSelectedTodo from '../hooks/floatingPanel/useSelectedTodo';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const { width } = Dimensions.get('window');
@@ -17,27 +17,24 @@ function TodoScreen({
     params: { data },
   },
 }: CustomStackScreenProp<'Todo'>) {
+  useSelectedTodo(data.id);
   const {
     setIsPanelActive,
     isTodoPanelActive,
     setStatusBarStyle,
-  } = useTogglePanel();
+  } = useTogglePanel('todo');
   const { editTodoBack, editTodoFront } = useEditTodo();
-  const selectTodo = useSelectedTodo();
   const openPanel = () => {
     setStatusBarStyle('light-content');
-    setIsPanelActive('todo', true);
+    setIsPanelActive(true);
   };
   const closePanel = () => {
-    setIsPanelActive('todo', false);
+    setIsPanelActive(false);
     editTodoBack(data.id);
     editTodoFront(data.id, data.done);
   };
-  useEffect(() => {
-    selectTodo(data.id);
-  }, []);
   return (
-    <SwipeablePanel type="todo" data={data}>
+    <FloatingPanelWrapper type="todo" data={data}>
       <View
         style={{
           width,
@@ -77,7 +74,7 @@ function TodoScreen({
           onPress={isTodoPanelActive ? closePanel : openPanel}
         />
       </View>
-    </SwipeablePanel>
+    </FloatingPanelWrapper>
   );
 }
 
