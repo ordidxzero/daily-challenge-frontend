@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { View } from 'react-native';
-import Input from '../../common/Input';
+import Input from '../Input';
 import useInput from '../../../hooks/common/useInput';
 import useResetState from '../../../hooks/swipeablePanel/useResetState';
 import { TodoType } from '../../../@types';

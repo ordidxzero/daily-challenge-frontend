@@ -4,7 +4,7 @@ import { CustomStackScreenProp } from './types';
 import styles from './styles';
 import dayjs from 'dayjs';
 import TodoManager from '../components/main/TodoManager';
-import SwipeablePanel from '../components/main/SwipeablePanel';
+import SwipeablePanel from '../components/common/SwipeablePanel';
 import useTogglePanel from '../hooks/swipeablePanel/useTogglePanel';
 import useEditTodo from '../hooks/apollo/useEditTodo';
 import useSelectedTodo from '../hooks/swipeablePanel/useSelectedTodo';
@@ -37,7 +37,7 @@ function TodoScreen({
     selectTodo(data.id);
   }, []);
   return (
-    <SwipeablePanel type="todo" data={data} panelHeight={60}>
+    <SwipeablePanel type="todo" data={data}>
       <View
         style={{
           width,

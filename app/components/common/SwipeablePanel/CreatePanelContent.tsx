@@ -9,10 +9,10 @@ import useRadioState from '../../../hooks/swipeablePanel/useRadioState';
 import useResetState from '../../../hooks/swipeablePanel/useResetState';
 
 // Components
-import Input from '../../common/Input';
+import Input from '../Input';
 import InputSection from './InputSection';
-import Radio from '../../common/Radio';
-import ListOfWeekday from '../ListOfWeekday';
+import Radio from '../Radio';
+import ListOfWeekday from '../../main/ListOfWeekday';
 
 function CreatePanelContent() {
   const [isRepeat, setIsRepeat] = useRadioState({

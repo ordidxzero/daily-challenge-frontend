@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FloatingPanel from '../FloatingPanel';
+import FloatingPanel, { PanelProps } from '../FloatingPanel';
 import useTogglePanel from '../../../hooks/swipeablePanel/useTogglePanel';
 import CreatePanelContent from './CreatePanelContent';
 import TodoPanelContent from './TodoPanelContent';
@@ -7,7 +7,6 @@ import { SwipeablePanelProps } from './types';
 
 function SwipeablePanel({
   containerStyle = {},
-  panelHeight,
   type = 'create',
   data,
   children,
@@ -18,27 +17,23 @@ function SwipeablePanel({
     isTodoPanelActive,
     setStatusBarStyle,
   } = useTogglePanel();
-  const [panelProps] = useState({
+  const onClose = () => {
+    setStatusBarStyle('dark-content');
+    setIsPanelActive(type, false);
+  };
+  const [panelProps] = useState<PanelProps>({
     fullWidth: true,
     openLarge: true,
     onlyLarge: true,
     noBackgroundOpacity: true,
     showCloseButton: true,
     closeOnTouchOutside: true,
-    onClose: () => {
-      setStatusBarStyle('dark-content');
-      setIsPanelActive(type, false);
-    },
-    onPressCloseButton: () => {
-      setStatusBarStyle('dark-content');
-      setIsPanelActive(type, false);
-    },
-    // ...or any prop you want
+    onClose,
   });
   return (
     <FloatingPanel
       {...panelProps}
-      panelHeight={panelHeight}
+      panelBackgroundHeight={type === 'todo' ? 80 : 140}
       containerStyle={containerStyle}
       isActive={type === 'todo' ? isTodoPanelActive : isCreatePanelActive}
       panelContent={

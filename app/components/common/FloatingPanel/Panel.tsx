@@ -9,12 +9,13 @@ import {
   Dimensions,
   PanResponder,
 } from 'react-native';
+import { PanelProps, PanelState } from './types';
 
 import { Bar } from './Bar';
 import { Close } from './Close';
 
-let FULL_HEIGHT = Dimensions.get('window').height;
-let FULL_WIDTH = Dimensions.get('window').width;
+const FULL_HEIGHT = Dimensions.get('window').height;
+const FULL_WIDTH = Dimensions.get('window').width;
 
 const STATUS = {
   CLOSED: 0,
@@ -41,26 +42,25 @@ const Panel = ({
   children,
   pan,
   panelHeight,
-}: FloatingPanelProps) => {
-  let PANEL_HEIGHT = FULL_HEIGHT - panelHeight;
+}: PanelProps) => {
   const animatedValueY = useRef(0);
   const isActiveState = useRef(false);
   const status = useRef(STATUS.CLOSED);
   const canScroll = useRef(false);
-  const [state, setState] = useState<FloatingPanelState>({
+  const [state, setState] = useState<PanelState>({
     showComponent: false,
     opacity: new Animated.Value(0),
     orientation: FULL_HEIGHT >= FULL_WIDTH ? 'portrait' : 'landscape',
     deviceWidth: FULL_WIDTH,
     deviceHeight: FULL_HEIGHT,
-    panelHeight: PANEL_HEIGHT,
+    panelHeight,
     isClosing: false,
   });
 
   const animateTo = (newStatus = 0) => {
     let newY = 0;
 
-    if (newStatus == STATUS.CLOSED) newY = PANEL_HEIGHT;
+    if (newStatus == STATUS.CLOSED) newY = panelHeight;
     else if (newStatus == STATUS.SMALL)
       newY =
         state.orientation === 'portrait' ? FULL_HEIGHT - 400 : FULL_HEIGHT / 3;
@@ -82,25 +82,6 @@ const Panel = ({
         setState({ ...state, showComponent: false });
       } else canScroll.current = newStatus == STATUS.LARGE ? true : false;
     });
-  };
-
-  const onOrientationChange = () => {
-    const dimesions = Dimensions.get('screen');
-    FULL_HEIGHT = dimesions.height;
-    FULL_WIDTH = dimesions.width;
-    PANEL_HEIGHT = FULL_HEIGHT - 100;
-
-    setState({
-      ...state,
-      orientation:
-        dimesions.height >= dimesions.width ? 'portrait' : 'landscape',
-      deviceWidth: FULL_WIDTH,
-      deviceHeight: FULL_HEIGHT,
-      panelHeight: PANEL_HEIGHT,
-    });
-
-    onClose();
-    return dimesions.height >= dimesions.width ? 'portrait' : 'landscape';
   };
 
   const panResponder = useMemo(
@@ -159,8 +140,6 @@ const Panel = ({
           : STATUS.SMALL,
       );
     }
-
-    Dimensions.addEventListener('change', onOrientationChange);
   }, []);
 
   useEffect(() => {

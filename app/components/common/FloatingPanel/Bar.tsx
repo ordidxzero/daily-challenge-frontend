@@ -1,9 +1,6 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-
-type BarProps = {
-  barStyle?: object;
-};
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { BarProps } from './types';
 
 export const Bar = ({ barStyle }: BarProps) => {
   return (
@@ -15,16 +12,16 @@ export const Bar = ({ barStyle }: BarProps) => {
 
 const BarStyles = StyleSheet.create({
   barContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   bar: {
-    width: "50%",
+    width: '50%',
     height: 6,
     borderRadius: 5,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor: "#e2e2e2",
+    backgroundColor: '#e2e2e2',
   },
 });

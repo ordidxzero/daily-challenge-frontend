@@ -2,12 +2,10 @@ import React, { useRef } from 'react';
 import { StyleSheet, Animated, Dimensions, View, Platform } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { ifIphoneX, getBottomSpace } from 'react-native-iphone-x-helper';
+import { FloatingPanelProps, PanelPropsUsingUser } from './types';
 import Panel from './Panel';
 
 const { width, height } = Dimensions.get('window');
-
-const FULL_HEIGHT = height;
-const PANEL_HEIGHT = FULL_HEIGHT - 140;
 
 const styles = StyleSheet.create({
   container: {
@@ -17,41 +15,40 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width,
   },
+  animatedView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    overflow: 'hidden',
+    width,
+    paddingTop:
+      Platform.OS === 'android'
+        ? getStatusBarHeight(true)
+        : getStatusBarHeight(),
+    ...ifIphoneX({ paddingBottom: getBottomSpace() }, {}),
+  },
 });
 
 export default function FloatingPanel({
   containerStyle,
   children,
   panelContent,
-  panelHeight,
+  panelBackgroundHeight,
   ...panelProps
 }: {
-  panelHeight: number;
+  panelBackgroundHeight: number;
   containerStyle?: any;
-  children: React.ReactNode;
   panelContent: React.ReactNode;
-  isActive: boolean;
-} & Omit<FloatingPanelProps, 'pan'>) {
+} & FloatingPanelProps) {
+  const FULL_HEIGHT = height;
+  const PANEL_HEIGHT = FULL_HEIGHT - panelBackgroundHeight;
   const animation = useRef(new Animated.ValueXY({ x: 0, y: FULL_HEIGHT }));
   return (
     <View style={[styles.container, containerStyle]}>
       <Animated.View
         style={[
-          {
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: '#fff',
-            overflow: 'hidden',
-            width,
-            height,
-          },
-          {
-            paddingTop:
-              Platform.OS === 'android'
-                ? getStatusBarHeight(true)
-                : getStatusBarHeight(),
-            ...ifIphoneX({ paddingBottom: getBottomSpace() }, {}),
-          },
+          styles.animatedView,
           {
             borderRadius: animation.current.y.interpolate({
               inputRange: [0, PANEL_HEIGHT],
@@ -73,9 +70,11 @@ export default function FloatingPanel({
         ]}>
         {children}
       </Animated.View>
-      <Panel {...panelProps} pan={animation.current} panelHeight={panelHeight}>
+      <Panel {...panelProps} pan={animation.current} panelHeight={PANEL_HEIGHT}>
         {panelContent}
       </Panel>
     </View>
   );
 }
+
+export { PanelPropsUsingUser as PanelProps };

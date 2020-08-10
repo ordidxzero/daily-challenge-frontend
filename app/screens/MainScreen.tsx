@@ -3,12 +3,11 @@ import React from 'react';
 // Utils
 // Components
 import Calendar from '../components/main/Calendar';
-import SwipeablePanel from '../components/main/SwipeablePanel';
+import SwipeablePanel from '../components/common/SwipeablePanel';
 
 function MainScreen() {
   return (
     <SwipeablePanel
-      panelHeight={140}
       containerStyle={{
         justifyContent: 'flex-start',
       }}>
