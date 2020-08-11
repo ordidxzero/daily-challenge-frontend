@@ -3,14 +3,14 @@ import useSelectDay from './useSelectDay';
 import { Button, Alert } from 'react-native';
 import useReduxState from './useReduxState';
 import useDeleteTodo from '../apollo/useDeleteTodo';
-function useCreateHeaderButton() {
+function useCreateHeaderButton(navigation: any) {
   const {
     main: { selectedTodo },
   } = useReduxState();
   const { deleteTodoBack, deleteTodoFront } = useDeleteTodo();
   const { selectedDay } = useSelectDay();
   if (selectedTodo) {
-    const onPress = (navigation: any) => () => {
+    const onPress = () => {
       Alert.alert(
         'Delete',
         'Really?',
@@ -30,8 +30,21 @@ function useCreateHeaderButton() {
         { cancelable: false },
       );
     };
-    const headerRight = (navigation: any) => () => (
-      <Button onPress={onPress(navigation)} title="Delete" />
+    const headerRight = () => <Button onPress={onPress} title="Delete" />;
+    return headerRight;
+  } else {
+    const headerRight = () => (
+      <Button
+        onPress={() =>
+          Alert.alert('Error', 'You sholud escape this screen.', [
+            {
+              text: 'Yes',
+              onPress: () => navigation.navigate('Main'),
+            },
+          ])
+        }
+        title="Error"
+      />
     );
     return headerRight;
   }

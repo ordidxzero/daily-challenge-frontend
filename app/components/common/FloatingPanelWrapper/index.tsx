@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import FloatingPanel, { PanelProps } from '../FloatingPanel';
 import useTogglePanel from '../../../hooks/floatingPanel/useTogglePanel';
 import PanelContent from './PanelContent';
-import { FloatingPanelWrapper } from './types';
+import { FloatingPanelWrapperProps } from './types';
 
 function FloatingPanelWrapper({
   containerStyle = {},
   type = 'create',
   data,
   children,
-}: FloatingPanelWrapper) {
+}: FloatingPanelWrapperProps) {
   const {
     isCreatePanelActive,
     setIsPanelActive,

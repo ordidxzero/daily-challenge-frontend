@@ -1,29 +1,32 @@
-import React, { useEffect } from 'react';
-import { View } from 'react-native';
+import React from 'react';
+import { View, Dimensions } from 'react-native';
 import Input from '../../Input';
 import useInput from '../../../../hooks/common/useInput';
-import useResetState from '../../../../hooks/floatingPanel/useResetState';
 import { TodoType } from '../../../../@types';
+import TodoManager from '../../../main/TodoManager';
+import useEditTodo from '../../../../hooks/apollo/useEditTodo';
+import useTogglePanel from '../../../../hooks/floatingPanel/useTogglePanel';
+
+const { width } = Dimensions.get('window');
 
 function TodoPanelContent({ data }: { data: TodoType }) {
-  const resetReduxState = useResetState();
+  const { editTodoBack, editTodoFront } = useEditTodo();
+  const { setIsPanelActive } = useTogglePanel('todo');
   const { hardenForm, onChangeText } = useInput();
   const { todo } = hardenForm;
 
-  useEffect(() => {
-    onChangeText('todo', 'startDate')(data.dateString);
-    onChangeText('todo', 'title')(data.title);
-    onChangeText('todo', 'amount')(String(data.amount));
-    onChangeText('todo', 'unit')(data.unit);
-    onChangeText('todo', 'startTime')(data.startTime);
-    onChangeText('todo', 'endTime')(data.endTime);
-    return () => {
-      resetReduxState();
-    };
-  }, []);
+  const closePanel = () => {
+    setIsPanelActive(false);
+    editTodoBack(data.id);
+    editTodoFront(data.id, data.done);
+  };
 
   return (
-    <View style={{ alignItems: 'center', marginTop: 15 }}>
+    <View
+      style={{
+        alignItems: 'center',
+        marginTop: 15,
+      }}>
       <Input
         title="Date"
         disabled={true}
@@ -60,6 +63,9 @@ function TodoPanelContent({ data }: { data: TodoType }) {
         value={todo.endTime}
         onChangeText={onChangeText('todo', 'endTime')}
       />
+      <View style={{ height: 100, position: 'relative', width }}>
+        <TodoManager type="detail" onPress={closePanel} />
+      </View>
     </View>
   );
 }

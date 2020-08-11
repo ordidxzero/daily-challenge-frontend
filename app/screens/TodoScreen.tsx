@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { Text, View, Dimensions } from 'react-native';
 import { CustomStackScreenProp } from './types';
 import styles from './styles';
@@ -6,73 +6,58 @@ import dayjs from 'dayjs';
 import TodoManager from '../components/main/TodoManager';
 import FloatingPanelWrapper from '../components/common/FloatingPanelWrapper';
 import useTogglePanel from '../hooks/floatingPanel/useTogglePanel';
-import useEditTodo from '../hooks/apollo/useEditTodo';
 import useSelectedTodo from '../hooks/floatingPanel/useSelectedTodo';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import Header from '../components/todo/Header';
+import useResetState from '../hooks/floatingPanel/useResetState';
+import useInput from '../hooks/common/useInput';
 
 const { width } = Dimensions.get('window');
 
 function TodoScreen({
+  navigation,
   route: {
     params: { data },
   },
 }: CustomStackScreenProp<'Todo'>) {
   useSelectedTodo(data.id);
-  const {
-    setIsPanelActive,
-    isTodoPanelActive,
-    setStatusBarStyle,
-  } = useTogglePanel('todo');
-  const { editTodoBack, editTodoFront } = useEditTodo();
+  const resetReduxState = useResetState();
+  const { onChangeText, hardenForm } = useInput();
+  const { todo } = hardenForm;
+  const { setIsPanelActive, setStatusBarStyle } = useTogglePanel('todo');
   const openPanel = () => {
     setStatusBarStyle('light-content');
     setIsPanelActive(true);
   };
-  const closePanel = () => {
-    setIsPanelActive(false);
-    editTodoBack(data.id);
-    editTodoFront(data.id, data.done);
-  };
+
+  useLayoutEffect(() => {
+    onChangeText('todo', 'startDate')(data.dateString);
+    onChangeText('todo', 'title')(data.title);
+    onChangeText('todo', 'amount')(String(data.amount));
+    onChangeText('todo', 'unit')(data.unit);
+    onChangeText('todo', 'startTime')(data.startTime);
+    onChangeText('todo', 'endTime')(data.endTime);
+    return () => {
+      resetReduxState();
+    };
+  }, []);
   return (
     <FloatingPanelWrapper type="todo" data={data}>
-      <View
-        style={{
-          width,
-          height: 50,
-          paddingHorizontal: 20,
-          backgroundColor: 'blue',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}>
-        <TouchableWithoutFeedback>
-          <Text>{'<'}</Text>
-        </TouchableWithoutFeedback>
-        <View>
-          <Text>ㅅㅔ부사항</Text>
-        </View>
-        <TouchableWithoutFeedback>
-          <Text>{'delete'}</Text>
-        </TouchableWithoutFeedback>
-      </View>
+      <Header navigation={navigation} />
       <View style={{ flex: 1, width, padding: 20 }}>
         <View style={{ marginBottom: 30 }}>
-          <Text style={{ fontSize: 30, fontWeight: '700' }}>{data.title}</Text>
+          <Text style={{ fontSize: 30, fontWeight: '700' }}>{todo.title}</Text>
         </View>
         <View style={{ marginBottom: 10 }}>
           <Text style={[{ fontSize: 15 }, styles.color]}>
-            {dayjs(data.dateString).format('YYYY / MM / DD dddd')}
+            {dayjs(todo.startDate).format('YYYY / MM / DD dddd')}
           </Text>
         </View>
         <View style={{ marginBottom: 30 }}>
           <Text style={[{ fontSize: 15 }, styles.color]}>
-            {`${data.startTime} ~ ${data.endTime}`}
+            {`${todo.startTime} ~ ${todo.endTime}`}
           </Text>
         </View>
-        <TodoManager
-          type="detail"
-          onPress={isTodoPanelActive ? closePanel : openPanel}
-        />
+        <TodoManager type="detail" onPress={openPanel} />
       </View>
     </FloatingPanelWrapper>
   );
