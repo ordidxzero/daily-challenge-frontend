@@ -11,10 +11,14 @@ function ProgressInfo({
 }) {
   return (
     <View>
-      <Text>todo 진행률</Text>
-      <ProgressBar rate={progressRate} />
-      <Text>todo 달성률</Text>
-      <ProgressBar rate={completionRate} />
+      <View style={{ marginBottom: 20 }}>
+        <Text>전체 진행률</Text>
+        <ProgressBar rate={progressRate} />
+      </View>
+      <View style={{ marginBottom: 20 }}>
+        <Text>현재 달성률</Text>
+        <ProgressBar rate={completionRate} />
+      </View>
     </View>
   );
 }
