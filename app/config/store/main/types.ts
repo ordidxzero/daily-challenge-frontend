@@ -8,6 +8,8 @@ export type FakeTodoDataType = {
   todo: TodoType;
 };
 
+export type FakeTodoData = FakeTodoDataType[];
+
 export type EditTodoDataType = TodoType;
 
 export type ToggledTodoData = {
@@ -20,11 +22,9 @@ export type PanelData = {
   isActive: boolean;
 };
 
-export type FakeTodoData = FakeTodoDataType[];
-
 export type MainState = {
   selectedDay: string;
-  selectedTodo?: string;
+  detail: string | null;
   statusBarStyle: 'dark-content' | 'light-content';
   panel: {
     create: boolean;

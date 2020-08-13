@@ -7,9 +7,7 @@ import {
 import useReduxState from '../../hooks/common/useReduxState';
 
 const ApolloProvider = ({ children }: { children: React.ReactNode }) => {
-  const {
-    login: { token },
-  } = useReduxState();
+  const { login: token } = useReduxState();
   const client = new ApolloClient({
     uri: 'http://localhost:8000/graphql',
     cache: new InMemoryCache(),

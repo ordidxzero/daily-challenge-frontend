@@ -2,22 +2,23 @@ import dayjs from 'dayjs';
 import { createReducer } from 'typesafe-actions';
 import { MainState, MainAction } from './types';
 import {
-  SELECT_DAY,
   TOGGLE_PANEL,
   ADD_TODOS,
   TOGGLE_TODO,
   EDIT_TODO,
   DELETE_TODO,
-  SELECT_TODO,
-  SET_STATUS_BAR_STYLE,
   START_LOADING,
   GET_DATA_SUCCESS,
   GET_DATA_FAILURE,
+  SELECT_DAY,
+  SELECT_DETAIL,
+  SET_STATUS_BAR_STYLE,
 } from './actions';
 
 const initialState: MainState = {
   selectedDay: dayjs().format('YYYY-MM-DD'),
   statusBarStyle: 'dark-content',
+  detail: null,
   panel: {
     create: false,
     todo: false,
@@ -41,6 +42,11 @@ const initialState: MainState = {
 
 const reducer = createReducer<MainState, MainAction>(initialState, {
   [SELECT_DAY]: (state, { payload }) => ({ ...state, selectedDay: payload }),
+  [SELECT_DETAIL]: (state, { payload }) => ({ ...state, detail: payload }),
+  [SET_STATUS_BAR_STYLE]: (state, { payload }) => ({
+    ...state,
+    statusBarStyle: payload,
+  }),
   [ADD_TODOS]: (state, { payload }) => {
     const oldAgenda = state.agenda.data;
     const newAgenda = oldAgenda.map(agenda => {
@@ -155,11 +161,6 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
     }
     return state;
   },
-  [SELECT_TODO]: (state, { payload }) => ({ ...state, selectedTodo: payload }),
-  [SET_STATUS_BAR_STYLE]: (state, { payload }) => ({
-    ...state,
-    statusBarStyle: payload,
-  }),
 });
 
 export default reducer;

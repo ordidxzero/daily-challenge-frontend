@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import TodoManager from '../components/main/TodoManager';
 import FloatingPanelWrapper from '../components/common/FloatingPanelWrapper';
 import useTogglePanel from '../hooks/floatingPanel/useTogglePanel';
-import useSelectedTodo from '../hooks/floatingPanel/useSelectedTodo';
+import useDetailSetter from '../hooks/floatingPanel/useDetailSetter';
 import Header from '../components/common/Header';
 import useResetState from '../hooks/floatingPanel/useResetState';
 import useInput from '../hooks/common/useInput';
@@ -19,7 +19,7 @@ function TodoScreen({
     params: { data },
   },
 }: CustomStackScreenProp<'Todo'>) {
-  useSelectedTodo(data.id);
+  useDetailSetter(data.id);
   const resetReduxState = useResetState();
   const { onChangeText, hardenForm } = useInput();
   const { todo } = hardenForm;

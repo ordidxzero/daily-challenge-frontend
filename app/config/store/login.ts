@@ -1,33 +1,17 @@
-// TODO: apollo client의 local state로 옮길 것. directory rule에 안맞음
+import { createAction, ActionType, createReducer } from 'typesafe-actions';
 
-const SET_TOKEN = "login/SET_TOKEN" as const;
+const SET_TOKEN = 'login/SET_TOKEN';
 
-export const setToken = (token: string | null) => ({
-  type: SET_TOKEN,
-  payload: token,
+export const setToken = createAction(SET_TOKEN)<string | null>();
+
+type LoginAction = ActionType<typeof setToken>;
+
+type LoginState = string | null;
+
+const initialState: LoginState = null;
+
+const reducer = createReducer<LoginState, LoginAction>(initialState, {
+  [SET_TOKEN]: (_, { payload }) => payload,
 });
 
-type LoginAction = ReturnType<typeof setToken>;
-
-type LoginState = {
-  token: string | null;
-};
-
-const initialState: LoginState = {
-  token: null,
-};
-
-function loginReducer(
-  state: LoginState = initialState,
-  action: LoginAction
-): LoginState {
-  switch (action.type) {
-    case SET_TOKEN:
-      return { token: action.payload };
-
-    default:
-      return state;
-  }
-}
-
-export default loginReducer;
+export default reducer;

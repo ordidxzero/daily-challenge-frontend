@@ -5,11 +5,11 @@ import useReduxState from './useReduxState';
 import useDeleteTodo from '../apollo/useDeleteTodo';
 function useCreateHeaderButton(navigation: any) {
   const {
-    main: { selectedTodo },
+    main: { detail },
   } = useReduxState();
   const { deleteTodoBack, deleteTodoFront } = useDeleteTodo();
   const { selectedDay } = useSelectDay();
-  if (selectedTodo) {
+  if (detail) {
     const onPress = () => {
       Alert.alert(
         'Delete',
@@ -18,8 +18,8 @@ function useCreateHeaderButton(navigation: any) {
           {
             text: 'Yes',
             onPress: () => {
-              deleteTodoBack(selectedTodo);
-              deleteTodoFront({ dateString: selectedDay, id: selectedTodo });
+              deleteTodoBack(detail);
+              deleteTodoFront({ dateString: selectedDay, id: detail });
               navigation.goBack();
             },
           },
