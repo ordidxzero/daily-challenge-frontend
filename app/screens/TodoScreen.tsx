@@ -7,7 +7,7 @@ import TodoManager from '../components/main/TodoManager';
 import FloatingPanelWrapper from '../components/common/FloatingPanelWrapper';
 import useTogglePanel from '../hooks/floatingPanel/useTogglePanel';
 import useSelectedTodo from '../hooks/floatingPanel/useSelectedTodo';
-import Header from '../components/todo/Header';
+import Header from '../components/common/Header';
 import useResetState from '../hooks/floatingPanel/useResetState';
 import useInput from '../hooks/common/useInput';
 

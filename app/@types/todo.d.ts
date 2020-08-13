@@ -30,4 +30,6 @@ export type MoldDataType = {
   isValid: boolean;
   progressRate: number;
   completionRate: number;
+  currentContinuousAchievement: number;
+  maxContinuousAchievement: number;
 };

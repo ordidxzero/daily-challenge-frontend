@@ -6,6 +6,7 @@ import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import BottomTabNavigation from './BottomTabNavigation';
 import TodoScreen from '../screens/TodoScreen';
+import MoldScreen from '../screens/MoldScreen';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,7 @@ function StackNavigation() {
         options={{ gestureEnabled: false }}
       />
       <Stack.Screen name="Todo" component={TodoScreen} />
+      <Stack.Screen name="Mold" component={MoldScreen} />
     </Stack.Navigator>
   );
 }

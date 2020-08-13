@@ -20,7 +20,7 @@ function useCreateHeaderButton(navigation: any) {
             onPress: () => {
               deleteTodoBack(selectedTodo);
               deleteTodoFront({ dateString: selectedDay, id: selectedTodo });
-              navigation.navigate('Main');
+              navigation.goBack();
             },
           },
           {
@@ -39,7 +39,7 @@ function useCreateHeaderButton(navigation: any) {
           Alert.alert('Error', 'You sholud escape this screen.', [
             {
               text: 'Yes',
-              onPress: () => navigation.navigate('Main'),
+              onPress: () => navigation.goBack(),
             },
           ])
         }

@@ -41,10 +41,11 @@ export default function FloatingPanel({
   const PANEL_HEIGHT = FULL_HEIGHT - panelOutsideHeight;
   const animation = useRef(new Animated.ValueXY({ x: 0, y: FULL_HEIGHT }));
   return (
-    <View style={[styles.container, containerStyle]}>
+    <View style={[styles.container]}>
       <Animated.View
         style={[
           styles.animatedView,
+          containerStyle,
           {
             borderRadius: animation.current.y.interpolate({
               inputRange: [0, PANEL_HEIGHT],

@@ -1,9 +1,8 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { progressBarStyle } from './styles';
-import { ProgressBarProps } from './types';
 
-function ProgressBar({ rate }: ProgressBarProps) {
+function ProgressBar({ rate }: { rate: number }) {
   const percent = rate ? (rate * 100).toFixed(2) : '0.00';
   const styles = progressBarStyle(rate);
   return (

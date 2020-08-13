@@ -77,6 +77,8 @@ export const GET_TODO_MOLDS = gql`
         isValid
         progressRate(dateString: $dateString)
         completionRate(dateString: $dateString)
+        currentContinuousAchievement(dateString: $dateString)
+        maxContinuousAchievement
       }
     }
   }

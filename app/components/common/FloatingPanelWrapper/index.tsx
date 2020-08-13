@@ -32,7 +32,7 @@ function FloatingPanelWrapper({
   return (
     <FloatingPanel
       {...panelProps}
-      panelOutsideHeight={type === 'todo' ? 55 : 130}
+      panelOutsideHeight={type === 'create' ? 130 : 55}
       containerStyle={containerStyle}
       isActive={type === 'todo' ? isTodoPanelActive : isCreatePanelActive}
       panelContent={<PanelContent type={type} data={data} />}>
