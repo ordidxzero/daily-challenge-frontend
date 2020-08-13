@@ -9,7 +9,7 @@ function useSelectWeekdays() {
     addTodo: { selectedWeekdays },
   } = useReduxState();
   const setSelectedWeekdays = useCallback(
-    (day: string) => dispatch(selectWeekday(day)),
+    (day: string | number[]) => dispatch(selectWeekday(day)),
     [dispatch],
   );
   const dayNameToRepeat = selectedWeekdays

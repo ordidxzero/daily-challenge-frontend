@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import { TodoProps } from './types';
@@ -8,8 +8,7 @@ import Checker from './Checker';
 function Todo({ data }: TodoProps) {
   const navigation = useNavigation();
   return (
-    <TouchableWithoutFeedback
-      onPress={() => navigation.navigate('Todo', { data })}>
+    <TouchableOpacity onPress={() => navigation.navigate('Todo', { data })}>
       <View style={styles.todoContainer}>
         <View>
           <Text
@@ -23,7 +22,7 @@ function Todo({ data }: TodoProps) {
         </View>
         <Checker done={data.done} dateString={data.dateString} id={data.id} />
       </View>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
 }
 

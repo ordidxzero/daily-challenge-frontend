@@ -13,7 +13,7 @@ export type InputSectionProps = {
 export type FloatingPanelWrapperProps = {
   containerStyle?: any;
   type?: 'create' | 'todo' | 'mold';
-  data?: TodoType | MoldDataType;
+  data?: TodoType;
   children: React.ReactNode;
 };
 

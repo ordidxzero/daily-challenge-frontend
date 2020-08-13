@@ -2,14 +2,14 @@ import React from 'react';
 import { View, Dimensions } from 'react-native';
 import Input from '../../Input';
 import useInput from '../../../../hooks/common/useInput';
-import { TodoType, MoldDataType } from '../../../../@types';
+import { TodoType } from '../../../../@types';
 import TodoManager from '../../../main/TodoManager';
 import useEditTodo from '../../../../hooks/apollo/useEditTodo';
 import useTogglePanel from '../../../../hooks/floatingPanel/useTogglePanel';
 
 const { width } = Dimensions.get('window');
 
-function TodoPanelContent({ data }: { data: TodoType | MoldDataType }) {
+function TodoPanelContent({ data }: { data: TodoType }) {
   const { editTodoBack, editTodoFront } = useEditTodo();
   const { setIsPanelActive, setStatusBarStyle } = useTogglePanel('todo');
   const { hardenForm, onChangeText } = useInput();
