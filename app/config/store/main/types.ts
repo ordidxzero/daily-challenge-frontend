@@ -1,6 +1,7 @@
 import * as actions from './actions';
 import { ActionType } from 'typesafe-actions';
 import { AgendaDataType, MoldDataType, TodoType } from '../../../@types';
+import { ApolloError } from '@apollo/client';
 
 export type FakeTodoDataType = {
   dateString: string;
@@ -44,6 +45,18 @@ export type MainState = {
     before: boolean;
     after: boolean;
   };
+};
+
+export type RequestType = 'around' | 'before' | 'after' | 'moldData';
+
+export type SuccessType = {
+  type: RequestType;
+  data: any;
+};
+
+export type FailureType = {
+  type: RequestType;
+  error: ApolloError;
 };
 
 export type MainAction = ActionType<typeof actions>;

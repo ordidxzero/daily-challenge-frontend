@@ -3,25 +3,16 @@ import { createReducer } from 'typesafe-actions';
 import { MainState, MainAction } from './types';
 import {
   SELECT_DAY,
-  GET_AROUND_TODOS,
-  GET_AFTER_TODOS_SUCCESS,
-  GET_AROUND_TODOS_FAILURE,
-  GET_BEFORE_TODOS,
-  GET_BEFORE_TODOS_SUCCESS,
-  GET_BEFORE_TODOS_FAILURE,
-  GET_AFTER_TODOS,
-  GET_AROUND_TODOS_SUCCESS,
-  GET_AFTER_TODOS_FAILURE,
-  TOGGLE_SWIPEABLE_PANEL,
-  GET_MOLD_DATA,
-  GET_MOLD_DATA_SUCCESS,
-  GET_MOLD_DATA_FAILURE,
+  TOGGLE_PANEL,
   ADD_TODOS,
   TOGGLE_TODO,
   EDIT_TODO,
   DELETE_TODO,
   SELECT_TODO,
   SET_STATUS_BAR_STYLE,
+  START_LOADING,
+  GET_DATA_SUCCESS,
+  GET_DATA_FAILURE,
 } from './actions';
 
 const initialState: MainState = {
@@ -66,63 +57,37 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
     });
     return { ...state, agenda: { ...state.agenda, data: newAgenda } };
   },
-  [GET_MOLD_DATA]: state => ({
+  [START_LOADING]: (state, { payload: type }) => ({
     ...state,
-    loading: { ...state.loading, moldData: true },
+    loading: { ...state.loading, [type]: true },
   }),
-  [GET_AROUND_TODOS]: state => ({
+  [GET_DATA_SUCCESS]: (state, { payload: { type, data } }) => {
+    if (type === 'moldData') {
+      return {
+        ...state,
+        moldData: { error: null, data },
+        loading: { ...state.loading, moldData: false },
+      };
+    } else {
+      const newData =
+        type === 'around'
+          ? data
+          : type === 'before'
+          ? [...data, ...state.agenda.data]
+          : [...state.agenda.data, ...data];
+      return {
+        ...state,
+        agenda: { error: null, data: newData },
+        loading: { ...state.loading, [type]: false },
+      };
+    }
+  },
+  [GET_DATA_FAILURE]: (state, { payload: { type, error } }) => ({
     ...state,
-    loading: { ...state.loading, around: true },
+    agenda: { error, ...state.agenda },
+    loading: { ...state.loading, [type]: false },
   }),
-  [GET_BEFORE_TODOS]: state => ({
-    ...state,
-    loading: { ...state.loading, before: true },
-  }),
-  [GET_AFTER_TODOS]: state => ({
-    ...state,
-    loading: { ...state.loading, after: true },
-  }),
-  [GET_MOLD_DATA_SUCCESS]: (state, { payload }) => ({
-    ...state,
-    moldData: { error: null, data: payload },
-    loading: { ...state.loading, moldData: false },
-  }),
-  [GET_AROUND_TODOS_SUCCESS]: (state, { payload }) => ({
-    ...state,
-    agenda: { error: null, data: payload },
-    loading: { ...state.loading, around: false },
-  }),
-  [GET_BEFORE_TODOS_SUCCESS]: (state, { payload }) => ({
-    ...state,
-    agenda: { error: null, data: [...payload, ...state.agenda.data] },
-    loading: { ...state.loading, before: false },
-  }),
-  [GET_AFTER_TODOS_SUCCESS]: (state, { payload }) => ({
-    ...state,
-    agenda: { error: null, data: [...state.agenda.data, ...payload] },
-    loading: { ...state.loading, after: false },
-  }),
-  [GET_MOLD_DATA_FAILURE]: (state, { payload }) => ({
-    ...state,
-    moldData: { error: payload, ...state.moldData },
-    loading: { ...state.loading, moldData: false },
-  }),
-  [GET_AROUND_TODOS_FAILURE]: (state, { payload }) => ({
-    ...state,
-    agenda: { error: payload, ...state.agenda },
-    loading: { ...state.loading, around: false },
-  }),
-  [GET_BEFORE_TODOS_FAILURE]: (state, { payload }) => ({
-    ...state,
-    agenda: { error: payload, ...state.agenda },
-    loading: { ...state.loading, before: false },
-  }),
-  [GET_AFTER_TODOS_FAILURE]: (state, { payload }) => ({
-    ...state,
-    agenda: { error: payload, ...state.agenda },
-    loading: { ...state.loading, after: false },
-  }),
-  [TOGGLE_SWIPEABLE_PANEL]: (state, { payload: { key, isActive } }) => ({
+  [TOGGLE_PANEL]: (state, { payload: { key, isActive } }) => ({
     ...state,
     panel: { ...state.panel, [key]: isActive },
   }),

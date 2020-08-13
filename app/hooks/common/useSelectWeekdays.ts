@@ -1,21 +1,19 @@
 import { useDispatch } from 'react-redux';
 import { useCallback } from 'react';
-import { selectWeekday } from '../../config/store/addTodo';
+import { selectWeekday } from '../../config/store/week';
 import useReduxState from './useReduxState';
 
 function useSelectWeekdays() {
   const dispatch = useDispatch();
-  const {
-    addTodo: { selectedWeekdays },
-  } = useReduxState();
+  const { week } = useReduxState();
   const setSelectedWeekdays = useCallback(
     (day: string | number[]) => dispatch(selectWeekday(day)),
     [dispatch],
   );
-  const dayNameToRepeat = selectedWeekdays
+  const dayNameToRepeat = week
     .map(({ selected }, index) => selected && index)
     .filter(item => typeof item !== 'boolean') as number[];
-  return { selectedWeekdays, setSelectedWeekdays, dayNameToRepeat };
+  return { selectedWeekdays: week, setSelectedWeekdays, dayNameToRepeat };
 }
 
 export default useSelectWeekdays;

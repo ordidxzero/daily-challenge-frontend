@@ -1,16 +1,5 @@
 import { GET_TODOS } from './utils/graphql';
-import {
-  getAroundTodosAsync,
-  getBeforeTodosAsync,
-  getAfterTodosAsync,
-} from '../../config/store/main/actions';
 import useImperativeQueryThunk from '../common/useImperativeQueryThunk';
-
-const requestType = {
-  around: getAroundTodosAsync,
-  before: getBeforeTodosAsync,
-  after: getAfterTodosAsync,
-};
 
 function useGetTodos(type: 'around' | 'before' | 'after') {
   const refetch = useImperativeQueryThunk({
@@ -18,9 +7,9 @@ function useGetTodos(type: 'around' | 'before' | 'after') {
     options: {
       variables: { dateString: '', position: [] as number[] },
     },
-    action: requestType[type],
+    type,
   });
-  const getTodos = refetch('getTodos');
+  const getTodos = refetch();
   return getTodos;
 }
 

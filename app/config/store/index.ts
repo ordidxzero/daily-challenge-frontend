@@ -1,16 +1,14 @@
 import { combineReducers } from 'redux';
-import addTodo from './addTodo';
+import week from './week';
 import login from './login';
 import main from './main';
 import form from './input';
-import loading from './loading';
 
 const rootReducer = combineReducers({
   form,
   main,
-  addTodo,
+  week,
   login,
-  loading,
 });
 
 export default rootReducer;
