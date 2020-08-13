@@ -25,7 +25,7 @@ function useImperativeQueryThunk<TVariables = OperationVariables>({
   const dispatch = useDispatch();
   const refetch = useImperativeQuery(query, options);
   const { request, success, failure } = getDataAsync;
-  const imperativelyCallQueryThunk = () => (queryVariables: TVariables) => {
+  const imperativelyCallQueryThunk = (queryVariables: TVariables) => {
     dispatch(request(type));
     refetch(queryVariables).then(
       ({
@@ -34,9 +34,9 @@ function useImperativeQueryThunk<TVariables = OperationVariables>({
         },
       }) => {
         if (error) {
-          return dispatch(failure(error));
+          return dispatch(failure({ type, error }));
         } else {
-          return dispatch(success(data));
+          return dispatch(success({ type, data }));
         }
       },
     );

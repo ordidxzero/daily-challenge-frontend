@@ -1,7 +1,10 @@
+// Modules
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+// Components
 import ProgressBar from '../../common/ProgressBar';
+// Utils
 import { progressCardStyle } from './styles';
 import { ProgressCardProps } from './types';
 
@@ -18,4 +21,4 @@ function ProgressCard({ data }: ProgressCardProps) {
   );
 }
 
-export default ProgressCard;
+export default React.memo(ProgressCard);

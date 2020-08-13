@@ -10,21 +10,13 @@ import useTogglePanel from '../../../hooks/floatingPanel/useTogglePanel';
 import useCreateTodoMold from '../../../hooks/apollo/useCreateTodoMold';
 
 function CustomBottomTabBar(props: BottomTabBarProps<BottomTabBarOptions>) {
-  const {
-    setIsPanelActive,
-    isCreatePanelActive,
-    setStatusBarStyle,
-  } = useTogglePanel('create');
+  const { setIsPanelActive, isCreatePanelActive } = useTogglePanel('create');
   const { createTodoMoldBack, addFakeTodoFront } = useCreateTodoMold();
-  const openPanel = useCallback(() => {
-    setStatusBarStyle('light-content');
-    setIsPanelActive(true);
-  }, []);
+  const openPanel = useCallback(() => setIsPanelActive(true), []);
   const closePanel = useCallback(() => {
     createTodoMoldBack()
       .then(() => {
         addFakeTodoFront();
-        setStatusBarStyle('dark-content');
         setIsPanelActive(false);
       })
       .catch(error => console.log(error));

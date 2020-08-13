@@ -12,12 +12,10 @@ import {
   GET_DATA_FAILURE,
   SELECT_DAY,
   SELECT_DETAIL,
-  SET_STATUS_BAR_STYLE,
 } from './actions';
 
 const initialState: MainState = {
   selectedDay: dayjs().format('YYYY-MM-DD'),
-  statusBarStyle: 'dark-content',
   detail: null,
   panel: {
     create: false,
@@ -43,10 +41,6 @@ const initialState: MainState = {
 const reducer = createReducer<MainState, MainAction>(initialState, {
   [SELECT_DAY]: (state, { payload }) => ({ ...state, selectedDay: payload }),
   [SELECT_DETAIL]: (state, { payload }) => ({ ...state, detail: payload }),
-  [SET_STATUS_BAR_STYLE]: (state, { payload }) => ({
-    ...state,
-    statusBarStyle: payload,
-  }),
   [ADD_TODOS]: (state, { payload }) => {
     const oldAgenda = state.agenda.data;
     const newAgenda = oldAgenda.map(agenda => {

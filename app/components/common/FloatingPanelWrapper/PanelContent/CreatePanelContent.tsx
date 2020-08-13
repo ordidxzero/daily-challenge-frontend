@@ -6,7 +6,7 @@ import { View, Animated } from 'react-native';
 import useInput from '../../../../hooks/common/useInput';
 import useFoldAnimation from '../../../../hooks/floatingPanel/useFoldAnimation';
 import useRadioState from '../../../../hooks/floatingPanel/useRadioState';
-import useResetState from '../../../../hooks/floatingPanel/useResetState';
+import useResetWeekdays from '../../../../hooks/floatingPanel/useResetWeekdays';
 
 // Components
 import Input from '../../Input';
@@ -24,20 +24,20 @@ function CreatePanelContent() {
     data: ['weekdays', 'dateDifference'],
   });
   const animation = useFoldAnimation(isRepeat.current === 'yes');
-  const resetReduxState = useResetState();
+  const resetSelectedWeekdays = useResetWeekdays();
   const { hardenForm, onChangeText } = useInput();
   const { todo } = hardenForm;
 
   useEffect(() => {
     return () => {
-      resetReduxState();
+      resetSelectedWeekdays();
     };
   }, []);
 
   useEffect(() => {
     onChangeText('todo', 'dateDifference')('');
     onChangeText('todo', 'weekDifference')('');
-    resetReduxState();
+    resetSelectedWeekdays();
   }, [selectMethod.current]);
 
   return (

@@ -8,7 +8,7 @@ import FloatingPanelWrapper from '../components/common/FloatingPanelWrapper';
 import useTogglePanel from '../hooks/floatingPanel/useTogglePanel';
 import useDetailSetter from '../hooks/floatingPanel/useDetailSetter';
 import Header from '../components/common/Header';
-import useResetState from '../hooks/floatingPanel/useResetState';
+import useResetWeekdays from '../hooks/floatingPanel/useResetWeekdays';
 import useInput from '../hooks/common/useInput';
 
 const { width } = Dimensions.get('window');
@@ -20,14 +20,11 @@ function TodoScreen({
   },
 }: CustomStackScreenProp<'Todo'>) {
   useDetailSetter(data.id);
-  const resetReduxState = useResetState();
+  const resetSelectedWeekdays = useResetWeekdays();
   const { onChangeText, hardenForm } = useInput();
   const { todo } = hardenForm;
-  const { setIsPanelActive, setStatusBarStyle } = useTogglePanel('todo');
-  const openPanel = () => {
-    setStatusBarStyle('light-content');
-    setIsPanelActive(true);
-  };
+  const { setIsPanelActive } = useTogglePanel('todo');
+  const openPanel = () => setIsPanelActive(true);
 
   useLayoutEffect(() => {
     onChangeText('todo', 'startDate')(data.dateString);
@@ -37,7 +34,7 @@ function TodoScreen({
     onChangeText('todo', 'startTime')(data.startTime);
     onChangeText('todo', 'endTime')(data.endTime);
     return () => {
-      resetReduxState();
+      resetSelectedWeekdays();
     };
   }, []);
   return (

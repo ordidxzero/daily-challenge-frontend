@@ -9,8 +9,7 @@ function useGetTodos(type: 'around' | 'before' | 'after') {
     },
     type,
   });
-  const getTodos = refetch();
-  return getTodos;
+  return refetch;
 }
 
 export default useGetTodos;

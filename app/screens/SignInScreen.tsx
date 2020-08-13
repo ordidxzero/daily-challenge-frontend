@@ -15,6 +15,7 @@ function SignInScreen({ navigation }: CustomStackScreenProp<'SignIn'>) {
   const { username, password } = hardenForm.auth;
   const signInQuery = useSignIn();
   const signIn = () => {
+    console.log(username, password);
     if (username && password) {
       return signInQuery({ variables: { username, password } });
     }

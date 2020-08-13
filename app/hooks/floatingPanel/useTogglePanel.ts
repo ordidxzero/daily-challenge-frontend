@@ -1,8 +1,5 @@
 import { useDispatch } from 'react-redux';
-import {
-  toggleSwipeablePanel,
-  setStatusBarStyle as setStatusBarStyleAction,
-} from '../../config/store/main';
+import { toggleSwipeablePanel } from '../../config/store/main';
 import { useCallback } from 'react';
 import useReduxState from '../common/useReduxState';
 
@@ -11,26 +8,20 @@ function useTogglePanel(key?: 'create' | 'todo' | 'mold') {
   const {
     main: {
       panel: { create, todo, mold },
-      statusBarStyle,
     },
   } = useReduxState();
-  const setStatusBarStyle = useCallback(
-    (style: 'dark-content' | 'light-content') =>
-      dispatch(setStatusBarStyleAction(style)),
-    [dispatch],
-  );
   const setIsPanelActive = useCallback(
     (isActive: boolean) =>
       key && dispatch(toggleSwipeablePanel({ key, isActive })),
     [dispatch],
   );
+  const isPanelActive = create || todo || mold;
   return {
     isCreatePanelActive: create,
     isTodoPanelActive: todo,
     isMoldPanelActive: mold,
-    statusBarStyle,
+    isPanelActive,
     setIsPanelActive,
-    setStatusBarStyle,
   };
 }
 

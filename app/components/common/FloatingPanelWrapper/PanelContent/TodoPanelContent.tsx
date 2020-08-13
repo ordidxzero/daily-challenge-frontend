@@ -11,12 +11,11 @@ const { width } = Dimensions.get('window');
 
 function TodoPanelContent({ data }: { data: TodoType }) {
   const { editTodoBack, editTodoFront } = useEditTodo();
-  const { setIsPanelActive, setStatusBarStyle } = useTogglePanel('todo');
+  const { setIsPanelActive } = useTogglePanel('todo');
   const { hardenForm, onChangeText } = useInput();
   const { todo } = hardenForm;
 
   const closePanel = () => {
-    setStatusBarStyle('dark-content');
     setIsPanelActive(false);
     editTodoBack(data.id);
     editTodoFront(data.id, data.done);

@@ -11,7 +11,6 @@ import {
 
 export const SELECT_DAY = 'main/SELECT_DAY';
 export const SELECT_DETAIL = 'main/SELECT_DETAIL';
-export const SET_STATUS_BAR_STYLE = 'main/SET_STATUS_BAR_STYLE';
 export const ADD_TODOS = 'main/ADD_TODOS';
 export const EDIT_TODO = 'main/EDIT_TODO';
 export const DELETE_TODO = 'main/DELETE_TODO';
@@ -23,9 +22,6 @@ export const TOGGLE_PANEL = 'main/TOGGLE_PANEL';
 
 export const selectDay = createAction(SELECT_DAY)<string>();
 export const selectDetail = createAction(SELECT_DETAIL)<string>();
-export const setStatusBarStyle = createAction(SET_STATUS_BAR_STYLE)<
-  'dark-content' | 'light-content'
->();
 export const addTodos = createAction(ADD_TODOS)<FakeTodoData>();
 export const editTodo = createAction(EDIT_TODO)<EditTodoDataType>();
 export const deleteTodo = createAction(DELETE_TODO)<ToggledTodoData>();

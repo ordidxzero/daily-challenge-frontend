@@ -11,9 +11,7 @@ import MoldScreen from '../screens/MoldScreen';
 const Stack = createStackNavigator();
 
 function StackNavigation() {
-  const {
-    login: { token },
-  } = useReduxState();
+  const { login: token } = useReduxState();
   return (
     <Stack.Navigator headerMode="none" screenOptions={{ gestureEnabled: true }}>
       {!token && (

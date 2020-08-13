@@ -1,8 +1,12 @@
+// Modules
 import React from 'react';
 import { SafeAreaView, ScrollView } from 'react-native';
-import styles from './styles';
+// Hooks
 import useMoldData from '../hooks/apollo/useMoldData';
+// Components
 import ProgressCard from '../components/grid/ProgressCard';
+// Utils
+import styles from './styles';
 
 function GridScreen() {
   const data = useMoldData();

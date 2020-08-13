@@ -14,12 +14,8 @@ function FloatingPanelWrapper({
     isCreatePanelActive,
     setIsPanelActive,
     isTodoPanelActive,
-    setStatusBarStyle,
   } = useTogglePanel(type);
-  const onClose = () => {
-    setStatusBarStyle('dark-content');
-    setIsPanelActive(false);
-  };
+  const onClose = () => setIsPanelActive(false);
   const [panelProps] = useState<PanelProps>({
     fullWidth: true,
     openLarge: true,

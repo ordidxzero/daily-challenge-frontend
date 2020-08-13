@@ -9,7 +9,7 @@ import ProgressInfo from '../components/mold/ProgressInfo';
 import Input from '../components/common/Input';
 import useSelectWeekdays from '../hooks/common/useSelectWeekdays';
 import ListOfWeekday from '../components/main/ListOfWeekday';
-import useResetState from '../hooks/floatingPanel/useResetState';
+import useResetWeekdays from '../hooks/floatingPanel/useResetWeekdays';
 
 function MoldScreen({
   navigation,
@@ -18,11 +18,11 @@ function MoldScreen({
   },
 }: CustomStackScreenProp<'Mold'>) {
   const { setSelectedWeekdays } = useSelectWeekdays();
-  const resetState = useResetState();
+  const resetSelectedWeekdays = useResetWeekdays();
   useEffect(() => {
     setSelectedWeekdays(data.dayNameToRepeat);
     return () => {
-      resetState();
+      resetSelectedWeekdays();
     };
   }, []);
   return (

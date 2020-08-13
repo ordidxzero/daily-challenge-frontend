@@ -25,7 +25,6 @@ export type PanelData = {
 export type MainState = {
   selectedDay: string;
   detail: string | null;
-  statusBarStyle: 'dark-content' | 'light-content';
   panel: {
     create: boolean;
     todo: boolean;

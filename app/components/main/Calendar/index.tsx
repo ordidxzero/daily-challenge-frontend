@@ -1,9 +1,13 @@
+// Modules
 import React from 'react';
 import { CalendarList } from 'react-native-calendars';
 import { View } from 'react-native';
-import styles from './styles';
-import TodoList from '../TodoList';
+// Hooks
 import useSelectDay from '../../../hooks/common/useSelectDay';
+// Components
+import TodoList from '../TodoList';
+// Utils
+import styles from './styles';
 
 function Calendar() {
   const { selectedDay, setSelectedDay } = useSelectDay();

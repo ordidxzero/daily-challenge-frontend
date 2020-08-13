@@ -1,6 +1,5 @@
 // Modules
 import React from 'react';
-// Utils
 // Components
 import Calendar from '../components/main/Calendar';
 import FloatingPanelWrapper from '../components/common/FloatingPanelWrapper';

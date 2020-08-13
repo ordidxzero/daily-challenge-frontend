@@ -22,9 +22,8 @@ const cacheFonts = (fonts: any[]) => fonts.map(font => Font.loadAsync(font));
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
-  const { statusBarStyle } = useTogglePanel();
+  const { isPanelActive } = useTogglePanel();
   const { checkLogin } = useSetToken();
-
   const loadAssets = async () => {
     const images = cacheImages([
       'https://images.unsplash.com/photo-1589128833250-cba8f5b6a923?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60',
@@ -41,7 +40,11 @@ export default function App() {
         <StackNavigation />
       </NavigationContainer>
       <StatusBar
-        barStyle={Platform.OS === 'android' ? 'light-content' : statusBarStyle}
+        barStyle={
+          Platform.OS === 'android' || isPanelActive
+            ? 'light-content'
+            : 'dark-content'
+        }
       />
     </>
   ) : (

@@ -1,5 +1,7 @@
+// Modules
 import React from 'react';
 import { View, Text } from 'react-native';
+// Utils
 import { progressBarStyle } from './styles';
 
 function ProgressBar({ rate }: { rate: number }) {
@@ -15,4 +17,4 @@ function ProgressBar({ rate }: { rate: number }) {
   );
 }
 
-export default ProgressBar;
+export default React.memo(ProgressBar);
