@@ -29,9 +29,7 @@ function useTodoMoldAdder() {
     softenForm.todo,
   ]);
 
-  const addFakeTodoFront = () => dispatch(addTodos(fakeData));
-
-  const createTodoMoldBack = () =>
+  const createTodoMold = () =>
     createTodoMoldMutation({
       variables: {
         startDate,
@@ -47,9 +45,9 @@ function useTodoMoldAdder() {
         amountDifference,
         amountChangeInterval,
       },
-    });
+    }).then(() => dispatch(addTodos(fakeData)));
 
-  return { createTodoMoldBack, addFakeTodoFront };
+  return createTodoMold;
 }
 
 export default useTodoMoldAdder;

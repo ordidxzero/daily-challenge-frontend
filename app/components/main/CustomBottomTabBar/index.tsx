@@ -11,16 +11,13 @@ import useTodoMoldAdder from '../../../hooks/apollo/useTodoMoldAdder';
 
 function CustomBottomTabBar(props: BottomTabBarProps<BottomTabBarOptions>) {
   const { setIsPanelActive, isCreatePanelActive } = useTogglePanel('create');
-  const { createTodoMoldBack, addFakeTodoFront } = useTodoMoldAdder();
+  const createTodoMold = useTodoMoldAdder();
   const openPanel = useCallback(() => setIsPanelActive(true), []);
   const closePanel = useCallback(() => {
-    createTodoMoldBack()
-      .then(() => {
-        addFakeTodoFront();
-        setIsPanelActive(false);
-      })
+    createTodoMold()
+      .then(() => setIsPanelActive(false))
       .catch(error => console.log(error));
-  }, [createTodoMoldBack]);
+  }, [createTodoMold]);
   return (
     <View>
       <TodoManager
