@@ -13,6 +13,7 @@ import useResetWeekdays from '../hooks/floatingPanel/useResetWeekdays';
 import useDetailSetter from '../hooks/floatingPanel/useDetailSetter';
 import useInput from '../hooks/common/useInput';
 import TodoManager from '../components/main/TodoManager';
+import useTogglePanel from '../hooks/floatingPanel/useTogglePanel';
 
 function MoldScreen({
   navigation,
@@ -22,11 +23,17 @@ function MoldScreen({
 }: CustomStackScreenProp<'Mold'>) {
   useDetailSetter(data.id);
   const { setSelectedWeekdays } = useSelectWeekdays();
+  const { setIsPanelActive } = useTogglePanel('mold');
   const { hardenForm, onChangeText } = useInput();
   const { todo } = hardenForm;
   const resetSelectedWeekdays = useResetWeekdays();
   useEffect(() => {
     setSelectedWeekdays(data.dayNameToRepeat);
+    onChangeText('todo', 'title')(data.title);
+    onChangeText('todo', 'startDate')(data.startDate);
+    onChangeText('todo', 'startTime')(data.startTime);
+    onChangeText('todo', 'endTime')(data.endTime);
+    onChangeText('todo', 'endDate')(data.endDate);
     onChangeText('todo', 'weekDifference')(String(data.weekDifference));
     onChangeText('todo', 'dateDifference')(String(data.dateDifference));
     onChangeText(
@@ -39,7 +46,7 @@ function MoldScreen({
     };
   }, []);
   return (
-    <FloatingPanelWrapper type="mold">
+    <FloatingPanelWrapper type="mold" data={data}>
       <Header navigation={navigation} />
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -61,17 +68,23 @@ function MoldScreen({
             progressRate={data.progressRate}
             completionRate={data.completionRate}
           />
-          <ListOfWeekday title="반복되는 요일" disabled={true} />
-          <Input
-            title="Week Difference"
-            value={todo.weekDifference}
-            disabled={true}
-          />
-          <Input
-            title="Date Difference"
-            value={todo.dateDifference}
-            disabled={true}
-          />
+          {data.method === 'weekdays' && (
+            <>
+              <ListOfWeekday title="반복되는 요일" disabled={true} />
+              <Input
+                title="Week Difference"
+                value={todo.weekDifference}
+                disabled={true}
+              />
+            </>
+          )}
+          {data.method === 'dateDifference' && (
+            <Input
+              title="Date Difference"
+              value={todo.dateDifference}
+              disabled={true}
+            />
+          )}
           <Input
             title="Amount Change Interval"
             value={todo.amountChangeInterval}
@@ -84,7 +97,7 @@ function MoldScreen({
           />
         </View>
       </ScrollView>
-      <TodoManager type="detail" />
+      <TodoManager type="detail" onPress={() => setIsPanelActive(true)} />
     </FloatingPanelWrapper>
   );
 }

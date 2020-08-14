@@ -14,6 +14,7 @@ function FloatingPanelWrapper({
     isCreatePanelActive,
     setIsPanelActive,
     isTodoPanelActive,
+    isMoldPanelActive,
   } = useTogglePanel(type);
   const onClose = () => setIsPanelActive(false);
   const [panelProps] = useState<PanelProps>({
@@ -30,7 +31,13 @@ function FloatingPanelWrapper({
       {...panelProps}
       panelOutsideHeight={type === 'create' ? 130 : 55}
       containerStyle={containerStyle}
-      isActive={type === 'todo' ? isTodoPanelActive : isCreatePanelActive}
+      isActive={
+        type === 'todo'
+          ? isTodoPanelActive
+          : type === 'mold'
+          ? isMoldPanelActive
+          : isCreatePanelActive
+      }
       panelContent={<PanelContent type={type} data={data} />}>
       {children}
     </FloatingPanel>

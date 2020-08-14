@@ -12,6 +12,8 @@ export type TodoInputState = {
   title: string;
   amount: string;
   unit: string;
+  isRepeat: 'yes' | 'no';
+  method: 'weekdays' | 'dateDifference';
   startTime: string;
   endTime: string;
   weekDifference: string;
@@ -33,6 +35,8 @@ export type SoftenTodoInputState = {
   startTime: string;
   endTime: string;
   amount: number;
+  isRepeat: boolean;
+  method: 'weekdays' | 'dateDifference';
   weekDifference: number;
   dateDifference: number;
   amountChangeInterval: number;

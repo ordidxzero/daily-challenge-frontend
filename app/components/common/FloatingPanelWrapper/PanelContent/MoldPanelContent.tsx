@@ -1,20 +1,20 @@
 // Modules
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { View, Animated } from 'react-native';
 
 // Hooks
 import useInput from '../../../../hooks/common/useInput';
 import useFoldAnimation from '../../../../hooks/floatingPanel/useFoldAnimation';
 import useRadioState from '../../../../hooks/floatingPanel/useRadioState';
-import useResetWeekdays from '../../../../hooks/floatingPanel/useResetWeekdays';
 
 // Components
 import Input from '../../Input';
 import InputSection from '../InputSection';
 import Radio from '../../Radio';
 import ListOfWeekday from '../../../main/ListOfWeekday';
+import { MoldDataType } from '../../../../@types';
 
-function CreatePanelContent() {
+function MoldPanelContent({ data }: { data: MoldDataType }) {
   const [isRepeat, setIsRepeat] = useRadioState({
     current: 'no',
     data: [
@@ -30,16 +30,21 @@ function CreatePanelContent() {
     ],
   });
   const animation = useFoldAnimation(isRepeat.current === 'yes');
-  const resetSelectedWeekdays = useResetWeekdays();
   const { hardenForm, onChangeText } = useInput();
   const { todo } = hardenForm;
 
-  useEffect(() => {
-    return () => {
-      resetSelectedWeekdays();
-    };
+  useLayoutEffect(() => {
+    setIsRepeat(data.isRepeat ? 'yes' : 'no')();
+    setMethod(data.method)();
   }, []);
 
+  useLayoutEffect(() => {
+    onChangeText('todo', 'isRepeat')(isRepeat.current);
+  }, [isRepeat.current]);
+
+  useLayoutEffect(() => {
+    onChangeText('todo', 'method')(selectMethod.current);
+  }, [selectMethod.current]);
   return (
     <View style={{ alignItems: 'center', marginTop: 15 }}>
       <InputSection title="BASIC INFOMATION">
@@ -55,18 +60,22 @@ function CreatePanelContent() {
           value={todo.title}
           onChangeText={onChangeText('todo', 'title')}
         />
-        <Input
-          title="Amount"
-          placeholder="5"
-          value={todo.amount}
-          onChangeText={onChangeText('todo', 'amount')}
-        />
-        <Input
-          title="Unit"
-          placeholder="개"
-          value={todo.unit}
-          onChangeText={onChangeText('todo', 'unit')}
-        />
+        {!data && (
+          <>
+            <Input
+              title="Amount"
+              placeholder="5"
+              value={todo.amount}
+              onChangeText={onChangeText('todo', 'amount')}
+            />
+            <Input
+              title="Unit"
+              placeholder="개"
+              value={todo.unit}
+              onChangeText={onChangeText('todo', 'unit')}
+            />
+          </>
+        )}
         <Input
           title="Start Time"
           placeholder="09:00"
@@ -135,4 +144,4 @@ function CreatePanelContent() {
   );
 }
 
-export default React.memo(CreatePanelContent);
+export default React.memo(MoldPanelContent);

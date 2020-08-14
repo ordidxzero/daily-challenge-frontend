@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
 import ProgressBar from '../../common/ProgressBar';
+
+const { width } = Dimensions.get('window');
 
 function ProgressInfo({
   progressRate,
@@ -10,12 +12,19 @@ function ProgressInfo({
   completionRate: number;
 }) {
   return (
-    <View>
+    <View
+      style={{
+        width: width - 50,
+        borderBottomColor: '#dcdde1',
+        borderBottomWidth: 1,
+        marginTop: 10,
+        marginBottom: 20,
+      }}>
       <View style={{ marginBottom: 20 }}>
         <Text>전체 진행률</Text>
         <ProgressBar rate={progressRate} />
       </View>
-      <View style={{ marginBottom: 20 }}>
+      <View style={{ marginBottom: 30 }}>
         <Text>현재 달성률</Text>
         <ProgressBar rate={completionRate} />
       </View>

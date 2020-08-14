@@ -31,6 +31,8 @@ export const CREATE_TODO_MOLD = gql`
     $title: String!
     $currentAmount: Int!
     $unit: String!
+    $isRepeat: Boolean!
+    $method: String!
     $dayNameToRepeat: [Int!]!
     $weekDifference: Int!
     $dateDifference: Int!
@@ -45,6 +47,8 @@ export const CREATE_TODO_MOLD = gql`
       title: $title
       currentAmount: $currentAmount
       unit: $unit
+      isRepeat: $isRepeat
+      method: $method
       dayNameToRepeat: $dayNameToRepeat
       weekDifference: $weekDifference
       dateDifference: $dateDifference
@@ -68,6 +72,8 @@ export const GET_TODO_MOLDS = gql`
         endDate
         startTime
         endTime
+        isRepeat
+        method
         dayNameToRepeat
         weekDifference
         dateDifference
