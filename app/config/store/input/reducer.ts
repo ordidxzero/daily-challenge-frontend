@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { createReducer } from 'typesafe-actions';
 import { InputAction, InputState } from './types';
-import { ON_CHANGE_TEXT } from './actions';
+import { ON_CHANGE_TEXT, RESET_INPUT } from './actions';
 
 const initialState: InputState = {
   auth: {
@@ -30,6 +30,7 @@ const reducer = createReducer<InputState, InputAction>(initialState, {
     ...state,
     [field]: { ...state[field], [key]: value },
   }),
+  [RESET_INPUT]: () => initialState,
 });
 
 export default reducer;

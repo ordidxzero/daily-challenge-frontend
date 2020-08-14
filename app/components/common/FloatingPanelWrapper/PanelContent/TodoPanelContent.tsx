@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Dimensions } from 'react-native';
 import Input from '../../Input';
 import useInput from '../../../../hooks/common/useInput';
-import { TodoType, MoldDataType } from '../../../../@types';
+import { TodoType } from '../../../../@types';
 import TodoManager from '../../../main/TodoManager';
 import useEditTodo from '../../../../hooks/apollo/useEditTodo';
 import useTogglePanel from '../../../../hooks/floatingPanel/useTogglePanel';
@@ -62,7 +62,12 @@ function TodoPanelContent({ data }: { data: TodoType }) {
         value={todo.endTime}
         onChangeText={onChangeText('todo', 'endTime')}
       />
-      <View style={{ height: 100, position: 'relative', width }}>
+      <View
+        style={{
+          height: 150,
+          position: 'relative',
+          width,
+        }}>
         <TodoManager type="detail" onPress={closePanel} />
       </View>
     </View>

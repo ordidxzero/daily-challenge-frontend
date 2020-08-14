@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import useReduxState from './useReduxState';
 import {
   onChangeText as onChangeTextAction,
+  resetInput as resetInputAction,
   InputState,
   SoftenInputState,
 } from '../../config/store/input';
@@ -53,14 +54,20 @@ function useInput() {
       amountDifference: checkIsNumber(amountDifference),
     },
   };
+
+  const resetInput = useCallback(() => dispatch(resetInputAction()), [
+    dispatch,
+  ]);
+
   const onChangeText = useCallback(
     <T extends keyof InputState, K extends keyof InputState[T]>(
       field: T,
       key: K,
     ) => (value: string) => dispatch(onChangeTextAction({ field, key, value })),
-    [],
+    [dispatch],
   );
-  return { hardenForm, softenForm, onChangeText };
+
+  return { hardenForm, softenForm, onChangeText, resetInput };
 }
 
 export default useInput;

@@ -1,6 +1,6 @@
 // Modules
-import React, { useLayoutEffect } from 'react';
-import { View, Animated } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Animated, Dimensions } from 'react-native';
 
 // Hooks
 import useInput from '../../../../hooks/common/useInput';
@@ -13,6 +13,10 @@ import InputSection from '../InputSection';
 import Radio from '../../Radio';
 import ListOfWeekday from '../../../main/ListOfWeekday';
 import { MoldDataType } from '../../../../@types';
+import TodoManager from '../../../main/TodoManager';
+import useTogglePanel from '../../../../hooks/floatingPanel/useTogglePanel';
+
+const { width } = Dimensions.get('window');
 
 function MoldPanelContent({ data }: { data: MoldDataType }) {
   const [isRepeat, setIsRepeat] = useRadioState({
@@ -30,30 +34,27 @@ function MoldPanelContent({ data }: { data: MoldDataType }) {
     ],
   });
   const animation = useFoldAnimation(isRepeat.current === 'yes');
+  const { setIsPanelActive } = useTogglePanel('mold');
   const { hardenForm, onChangeText } = useInput();
   const { todo } = hardenForm;
 
-  useLayoutEffect(() => {
+  const closePanel = () => setIsPanelActive(false);
+
+  useEffect(() => {
     setIsRepeat(data.isRepeat ? 'yes' : 'no')();
     setMethod(data.method)();
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     onChangeText('todo', 'isRepeat')(isRepeat.current);
   }, [isRepeat.current]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     onChangeText('todo', 'method')(selectMethod.current);
   }, [selectMethod.current]);
   return (
     <View style={{ alignItems: 'center', marginTop: 15 }}>
       <InputSection title="BASIC INFOMATION">
-        <Input
-          title="Start Date"
-          disabled={true}
-          value={todo.startDate}
-          onChangeText={onChangeText('todo', 'startDate')}
-        />
         <Input
           title="Title"
           placeholder="푸쉬업"
@@ -94,7 +95,7 @@ function MoldPanelContent({ data }: { data: MoldDataType }) {
         style={{
           height: animation.interpolate({
             inputRange: [0, 1],
-            outputRange: [0, 660],
+            outputRange: [0, 600],
             extrapolate: 'clamp',
           }),
           overflow: 'hidden',
@@ -140,6 +141,9 @@ function MoldPanelContent({ data }: { data: MoldDataType }) {
           />
         </InputSection>
       </Animated.View>
+      <View style={{ height: 100, position: 'relative', width }}>
+        <TodoManager type="detail" onPress={closePanel} />
+      </View>
     </View>
   );
 }

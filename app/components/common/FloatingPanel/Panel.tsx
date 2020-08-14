@@ -197,7 +197,17 @@ const Panel = ({
             width: fullWidth ? state.deviceWidth : state.deviceWidth - 50,
             height: state.panelHeight,
           },
-          { transform: pan.getTranslateTransform() },
+          {
+            transform: [
+              {
+                translateY: pan.y.interpolate({
+                  inputRange: [0, panelHeight],
+                  outputRange: [0, panelHeight],
+                  extrapolate: 'clamp',
+                }),
+              },
+            ],
+          },
           style,
         ]}
         {...panResponder.panHandlers}>

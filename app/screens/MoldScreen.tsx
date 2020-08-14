@@ -24,7 +24,7 @@ function MoldScreen({
   useDetailSetter(data.id);
   const { setSelectedWeekdays } = useSelectWeekdays();
   const { setIsPanelActive } = useTogglePanel('mold');
-  const { hardenForm, onChangeText } = useInput();
+  const { hardenForm, onChangeText, resetInput } = useInput();
   const { todo } = hardenForm;
   const resetSelectedWeekdays = useResetWeekdays();
   useEffect(() => {
@@ -43,6 +43,7 @@ function MoldScreen({
     onChangeText('todo', 'amountDifference')(String(data.amountDifference));
     return () => {
       resetSelectedWeekdays();
+      resetInput();
     };
   }, []);
   return (
