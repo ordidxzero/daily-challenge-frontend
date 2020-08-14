@@ -11,32 +11,23 @@ function useEditTodo() {
     todo: { startDate, title, amount, unit, startTime, endTime },
   } = softenForm;
   const dispatch = useDispatch();
-  const editTodoFront = (id: string, done: boolean) =>
-    dispatch(
-      editTodoAction({
-        id,
-        dateString: startDate,
-        title,
-        amount,
-        unit,
-        startTime,
-        endTime,
-        done,
-      }),
-    );
-  const editTodoBack = (id: string) =>
+
+  const editTodo = (id: string) => {
+    const data = {
+      id,
+      title,
+      dateString: startDate,
+      amount,
+      unit,
+      startTime,
+      endTime,
+    };
+    dispatch(editTodoAction(data));
     editTodoMutation({
-      variables: {
-        id,
-        title,
-        dateString: startDate,
-        amount,
-        unit,
-        startTime,
-        endTime,
-      },
+      variables: data,
     });
-  return { editTodoBack, editTodoFront };
+  };
+  return editTodo;
 }
 
 export default useEditTodo;

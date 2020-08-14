@@ -119,7 +119,7 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
     );
     if (data) {
       const newData = data?.todos.map(todo =>
-        todo.id === payload.id ? payload : todo,
+        todo.id === payload.id ? { ...payload, done: todo.done } : todo,
       );
       return {
         ...state,

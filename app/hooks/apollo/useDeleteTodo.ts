@@ -6,11 +6,11 @@ import { deleteTodo as deleteTodoAction } from '../../config/store/main';
 function useDeleteTodo() {
   const [deleteTodoMutation] = useMutation(DELETE_TODO);
   const dispatch = useDispatch();
-  const deleteTodoFront = (data: { dateString: string; id: string }) =>
+  const deleteTodo = (data: { dateString: string; id: string }) => {
     dispatch(deleteTodoAction(data));
-  const deleteTodoBack = (id: string) =>
-    deleteTodoMutation({ variables: { id } });
-  return { deleteTodoBack, deleteTodoFront };
+    deleteTodoMutation({ variables: { id: data.id } });
+  };
+  return deleteTodo;
 }
 
 export default useDeleteTodo;

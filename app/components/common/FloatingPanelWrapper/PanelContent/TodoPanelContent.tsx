@@ -10,15 +10,14 @@ import useTogglePanel from '../../../../hooks/floatingPanel/useTogglePanel';
 const { width } = Dimensions.get('window');
 
 function TodoPanelContent({ data }: { data: TodoType }) {
-  const { editTodoBack, editTodoFront } = useEditTodo();
+  const editTodo = useEditTodo();
   const { setIsPanelActive } = useTogglePanel('todo');
   const { hardenForm, onChangeText } = useInput();
   const { todo } = hardenForm;
 
   const closePanel = () => {
     setIsPanelActive(false);
-    editTodoBack(data.id);
-    editTodoFront(data.id, data.done);
+    editTodo(data.id, data.done);
   };
 
   return (

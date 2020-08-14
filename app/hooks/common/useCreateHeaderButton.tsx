@@ -7,7 +7,7 @@ function useCreateHeaderButton(navigation: any) {
   const {
     main: { detail },
   } = useReduxState();
-  const { deleteTodoBack, deleteTodoFront } = useDeleteTodo();
+  const deleteTodo = useDeleteTodo();
   const { selectedDay } = useSelectDay();
   if (detail) {
     const onPress = () => {
@@ -18,8 +18,7 @@ function useCreateHeaderButton(navigation: any) {
           {
             text: 'Yes',
             onPress: () => {
-              deleteTodoBack(detail);
-              deleteTodoFront({ dateString: selectedDay, id: detail });
+              deleteTodo({ dateString: selectedDay, id: detail });
               navigation.goBack();
             },
           },

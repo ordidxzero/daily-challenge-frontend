@@ -10,7 +10,7 @@ export type FakeTodoDataType = {
 
 export type FakeTodoData = FakeTodoDataType[];
 
-export type EditTodoDataType = TodoType;
+export type EditTodoDataType = Omit<TodoType, 'done'>;
 
 export type ToggledTodoData = {
   dateString: string;
