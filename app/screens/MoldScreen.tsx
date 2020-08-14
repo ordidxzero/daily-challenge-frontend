@@ -10,6 +10,7 @@ import Input from '../components/common/Input';
 import useSelectWeekdays from '../hooks/common/useSelectWeekdays';
 import ListOfWeekday from '../components/main/ListOfWeekday';
 import useResetWeekdays from '../hooks/floatingPanel/useResetWeekdays';
+import useDetailSetter from '../hooks/floatingPanel/useDetailSetter';
 
 function MoldScreen({
   navigation,
@@ -17,6 +18,7 @@ function MoldScreen({
     params: { data },
   },
 }: CustomStackScreenProp<'Mold'>) {
+  useDetailSetter(data.id);
   const { setSelectedWeekdays } = useSelectWeekdays();
   const resetSelectedWeekdays = useResetWeekdays();
   useEffect(() => {

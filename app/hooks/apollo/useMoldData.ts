@@ -11,15 +11,13 @@ function useMoldData() {
     },
   } = useReduxState();
 
-  const refetch = useImperativeQueryThunk({
+  const getTodoMolds = useImperativeQueryThunk({
     query: GET_TODO_MOLDS,
     options: {
       variables: { dateString: '' },
     },
     type: 'moldData',
   });
-
-  const getTodoMolds = refetch();
 
   useEffect(
     () => getTodoMolds({ dateString: dayjs().format('YYYY-MM-DD') }),
