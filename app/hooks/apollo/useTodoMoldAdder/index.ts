@@ -10,20 +10,7 @@ function useTodoMoldAdder() {
   const dispatch = useDispatch();
   const { softenForm } = useInput();
   const [createTodoMoldMutation] = useMutation(CREATE_TODO_MOLD);
-  const {
-    startDate,
-    endDate,
-    startTime,
-    endTime,
-    title,
-    unit,
-    amount,
-    weekDifference,
-    dateDifference,
-    amountDifference,
-    amountChangeInterval,
-    dayNameToRepeat,
-  } = softenForm.todo;
+  const { amount, ...data } = softenForm.todo;
 
   const fakeData = useMemo(() => generateTodoData(softenForm.todo), [
     softenForm.todo,
@@ -31,20 +18,7 @@ function useTodoMoldAdder() {
 
   const createTodoMold = () =>
     createTodoMoldMutation({
-      variables: {
-        startDate,
-        endDate,
-        startTime,
-        endTime,
-        title,
-        unit,
-        dayNameToRepeat,
-        currentAmount: amount,
-        weekDifference,
-        dateDifference,
-        amountDifference,
-        amountChangeInterval,
-      },
+      variables: { ...data, currentAmount: amount },
     }).then(() => dispatch(addTodos(fakeData)));
 
   return createTodoMold;

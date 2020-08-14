@@ -4,10 +4,12 @@ import styles from './styles';
 import useSelectWeekdays from '../../../hooks/common/useSelectWeekdays';
 import { DayProps } from './types';
 
-function Day({ day, selected }: DayProps) {
+function Day({ day, selected, disabled }: DayProps) {
   const { setSelectedWeekdays } = useSelectWeekdays();
   return (
-    <TouchableOpacity onPress={() => setSelectedWeekdays(day)}>
+    <TouchableOpacity
+      onPress={() => setSelectedWeekdays(day)}
+      disabled={disabled}>
       <View
         style={[
           styles.selectDayButton,

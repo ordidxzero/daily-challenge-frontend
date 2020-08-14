@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   detailButton: {
     backgroundColor: todoCreateButtonBackgroundColor,
-    bottom: 30,
+    bottom: 60,
   },
 });
 

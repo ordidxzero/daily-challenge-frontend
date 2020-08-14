@@ -4,16 +4,15 @@ import Day from './Day';
 import styles from './styles';
 import useSelectWeekdays from '../../../hooks/common/useSelectWeekdays';
 import InputLayout from '../../common/InputLayout';
+import { ListOfWeekdayProps } from './types';
 
-function ListOfWeekday() {
+function ListOfWeekday({ title, disabled = false }: ListOfWeekdayProps) {
   const { selectedWeekdays } = useSelectWeekdays();
   return (
-    <InputLayout
-      titleStyle={styles.listOfWeekdayTitle}
-      title="무슨 요일마다 반복할 지?">
+    <InputLayout titleStyle={styles.listOfWeekdayTitle} title={title}>
       <View style={styles.listOfWeekdayContainer}>
         {selectedWeekdays.map(day => (
-          <Day key={day.day} {...day} />
+          <Day key={day.day} {...day} disabled={disabled} />
         ))}
       </View>
     </InputLayout>

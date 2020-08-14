@@ -14,10 +14,10 @@ function Radio({ current, data, onPress, title }: RadioProps) {
       <View style={styles.radioContainer}>
         {data.map(item => (
           <RadioButton
-            key={item}
-            label={item}
-            selected={current === item}
-            onPress={onPress(item)}
+            key={item.key}
+            label={item.label}
+            selected={current === item.key}
+            onPress={onPress(item.key)}
           />
         ))}
       </View>

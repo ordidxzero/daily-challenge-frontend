@@ -1,8 +1,13 @@
 // ----------------- index.tsx type -----------------
 
+type DataType = {
+  key: string;
+  label: string;
+};
+
 export type RadioState = {
   current: string;
-  data: string[];
+  data: DataType[];
 };
 
 export type RadioProps = RadioState & {

@@ -11,6 +11,8 @@ import useSelectWeekdays from '../hooks/common/useSelectWeekdays';
 import ListOfWeekday from '../components/main/ListOfWeekday';
 import useResetWeekdays from '../hooks/floatingPanel/useResetWeekdays';
 import useDetailSetter from '../hooks/floatingPanel/useDetailSetter';
+import useInput from '../hooks/common/useInput';
+import TodoManager from '../components/main/TodoManager';
 
 function MoldScreen({
   navigation,
@@ -20,9 +22,18 @@ function MoldScreen({
 }: CustomStackScreenProp<'Mold'>) {
   useDetailSetter(data.id);
   const { setSelectedWeekdays } = useSelectWeekdays();
+  const { hardenForm, onChangeText } = useInput();
+  const { todo } = hardenForm;
   const resetSelectedWeekdays = useResetWeekdays();
   useEffect(() => {
     setSelectedWeekdays(data.dayNameToRepeat);
+    onChangeText('todo', 'weekDifference')(String(data.weekDifference));
+    onChangeText('todo', 'dateDifference')(String(data.dateDifference));
+    onChangeText(
+      'todo',
+      'amountChangeInterval',
+    )(String(data.amountChangeInterval));
+    onChangeText('todo', 'amountDifference')(String(data.amountDifference));
     return () => {
       resetSelectedWeekdays();
     };
@@ -50,13 +61,30 @@ function MoldScreen({
             progressRate={data.progressRate}
             completionRate={data.completionRate}
           />
-          <ListOfWeekday />
-          <Input title="Week Difference" value="test" disabled={true} />
-          <Input title="Date Difference" value="test" disabled={true} />
-          <Input title="Amount Change Interval" value="test" disabled={true} />
-          <Input title="Amount Difference" value="test" disabled={true} />
+          <ListOfWeekday title="반복되는 요일" disabled={true} />
+          <Input
+            title="Week Difference"
+            value={todo.weekDifference}
+            disabled={true}
+          />
+          <Input
+            title="Date Difference"
+            value={todo.dateDifference}
+            disabled={true}
+          />
+          <Input
+            title="Amount Change Interval"
+            value={todo.amountChangeInterval}
+            disabled={true}
+          />
+          <Input
+            title="Amount Difference"
+            value={todo.amountDifference}
+            disabled={true}
+          />
         </View>
       </ScrollView>
+      <TodoManager type="detail" />
     </FloatingPanelWrapper>
   );
 }

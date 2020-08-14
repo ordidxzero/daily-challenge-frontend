@@ -17,11 +17,17 @@ import ListOfWeekday from '../../../main/ListOfWeekday';
 function CreatePanelContent() {
   const [isRepeat, setIsRepeat] = useRadioState({
     current: 'no',
-    data: ['yes', 'no'],
+    data: [
+      { key: 'yes', label: 'yes' },
+      { key: 'no', label: 'no' },
+    ],
   });
   const [selectMethod, setMethod] = useRadioState({
     current: 'weekdays',
-    data: ['weekdays', 'dateDifference'],
+    data: [
+      { key: 'weekdays', label: '요일' },
+      { key: 'dateDifference', label: '날짜 간격' },
+    ],
   });
   const animation = useFoldAnimation(isRepeat.current === 'yes');
   const resetSelectedWeekdays = useResetWeekdays();
@@ -100,7 +106,7 @@ function CreatePanelContent() {
           <Radio {...selectMethod} onPress={setMethod} title="생성방식" />
           {selectMethod.current === 'weekdays' && (
             <>
-              <ListOfWeekday />
+              <ListOfWeekday title="무슨 요일마다 반복할 지?" />
               <Input
                 title="몇 주 마다 반복할 지?"
                 placeholder="1"

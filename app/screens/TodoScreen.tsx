@@ -54,8 +54,8 @@ function TodoScreen({
             {`${todo.startTime} ~ ${todo.endTime}`}
           </Text>
         </View>
-        <TodoManager type="detail" onPress={openPanel} />
       </View>
+      <TodoManager type="detail" onPress={openPanel} />
     </FloatingPanelWrapper>
   );
 }
