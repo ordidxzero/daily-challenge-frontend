@@ -36,3 +36,5 @@ export type MoldDataType = {
   currentContinuousAchievement: number;
   maxContinuousAchievement: number;
 };
+
+export type RequestType = 'around' | 'before' | 'after' | 'mold';

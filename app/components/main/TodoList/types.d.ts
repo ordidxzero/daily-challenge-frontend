@@ -7,11 +7,6 @@ export type ViewableItemsType = {
   viewableItems: ViewToken[];
   changed: ViewToken[];
 };
-
-export type AgendaDataType = {
-  dateString: string;
-  todos: TodoDataType[];
-};
 // --------------------------------------------------
 
 // ----------------- Checker.tsx type -----------------

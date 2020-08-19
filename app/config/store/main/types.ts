@@ -1,6 +1,12 @@
 import * as actions from './actions';
 import { ActionType } from 'typesafe-actions';
-import { AgendaDataType, MoldDataType, TodoDataType } from '../../../@types';
+import {
+  AgendaDataType,
+  MoldDataType,
+  TodoDataType,
+  PanelType,
+  RequestType as RequestTypeOriginal,
+} from '../../../@types';
 import { ApolloError } from '@apollo/client';
 
 export type FakeTodoDataType = {
@@ -38,7 +44,7 @@ export type ToggledTodoData = {
 };
 
 export type PanelData = {
-  key: 'create' | 'mold' | 'todo';
+  key: PanelType;
   isActive: boolean;
 };
 
@@ -66,15 +72,15 @@ export type MainState = {
   };
 };
 
-export type RequestType = 'around' | 'before' | 'after' | 'mold';
+export type RequestType = RequestTypeOriginal;
 
 export type SuccessType = {
-  type: RequestType;
+  type: RequestTypeOriginal;
   data: any;
 };
 
 export type FailureType = {
-  type: RequestType;
+  type: RequestTypeOriginal;
   error: ApolloError;
 };
 

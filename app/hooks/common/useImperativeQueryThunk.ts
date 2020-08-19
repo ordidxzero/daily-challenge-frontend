@@ -6,6 +6,7 @@ import {
 import { useDispatch } from 'react-redux';
 import useImperativeQuery from './useImperativeQuery';
 import { getDataAsync } from '../../config/store/main';
+import { RequestType } from '../../@types';
 
 function useImperativeQueryThunk<TVariables = OperationVariables>({
   query,
@@ -14,7 +15,7 @@ function useImperativeQueryThunk<TVariables = OperationVariables>({
 }: {
   query: DocumentNode;
   options: QueryHookOptions<any, TVariables>;
-  type: 'around' | 'before' | 'after' | 'mold';
+  type: RequestType;
 }) {
   const keys = {
     around: 'getTodos',

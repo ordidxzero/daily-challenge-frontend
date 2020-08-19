@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
-import { RadioData } from './types';
+import { RadioButtonProps } from './types';
 import styles from './styles';
 
 const typeProperty = (label: string, selected: boolean) => {
@@ -16,7 +16,7 @@ const typeProperty = (label: string, selected: boolean) => {
   );
 };
 
-function RadioButton({ label, selected, onPress }: RadioData) {
+function RadioButton({ label, selected, onPress }: RadioButtonProps) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View

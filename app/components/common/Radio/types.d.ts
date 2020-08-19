@@ -1,14 +1,5 @@
+import { RadioState } from '../../../@types';
 // ----------------- index.tsx type -----------------
-
-type DataType = {
-  key: string;
-  label: string;
-};
-
-export type RadioState = {
-  current: string;
-  data: DataType[];
-};
 
 export type RadioProps = RadioState & {
   title: string;
@@ -19,7 +10,7 @@ export type RadioProps = RadioState & {
 
 // ----------------- Button.tsx type -----------------
 
-export type RadioData = {
+export type RadioButtonProps = {
   label: string;
   selected: boolean;
   onPress: any;

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { RadioState } from './types';
+import { RadioState } from '../../@types';
 
 function useRadioState({
   current,

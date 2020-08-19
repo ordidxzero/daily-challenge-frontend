@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, ScrollView } from 'react-native';
-import { AgendaDataType } from './types';
+import { AgendaDataType } from '../../../@types';
 import Todo from './Todo';
 import styles from './styles';
 
