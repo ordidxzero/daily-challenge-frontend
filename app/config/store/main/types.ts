@@ -50,23 +50,23 @@ export type MainState = {
     todo: boolean;
     mold: boolean;
   };
-  agenda: {
-    data: AgendaDataType[];
-    error: string | null;
-  };
-  moldData: {
-    data: MoldDataType[];
-    error: string | null;
+  agendas: AgendaDataType[];
+  molds: MoldDataType[];
+  error: {
+    around: string | null;
+    before: string | null;
+    after: string | null;
+    mold: string | null;
   };
   loading: {
-    moldData: boolean;
+    mold: boolean;
     around: boolean;
     before: boolean;
     after: boolean;
   };
 };
 
-export type RequestType = 'around' | 'before' | 'after' | 'moldData';
+export type RequestType = 'around' | 'before' | 'after' | 'mold';
 
 export type SuccessType = {
   type: RequestType;

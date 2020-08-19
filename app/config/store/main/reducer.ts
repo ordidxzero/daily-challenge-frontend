@@ -24,16 +24,16 @@ const initialState: MainState = {
     todo: false,
     mold: false,
   },
-  agenda: {
-    data: [],
-    error: null,
-  },
-  moldData: {
-    data: [],
-    error: null,
+  agendas: [],
+  molds: [],
+  error: {
+    around: null,
+    before: null,
+    after: null,
+    mold: null,
   },
   loading: {
-    moldData: false,
+    mold: false,
     around: false,
     before: false,
     after: false,
@@ -44,10 +44,10 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
   [SELECT_DAY]: (state, { payload }) => ({ ...state, selectedDay: payload }),
   [SELECT_DETAIL]: (state, { payload }) => ({ ...state, detail: payload }),
   [ADD_DATA]: (state, { payload: { todoData, moldData } }) => {
-    const oldAgenda = state.agenda.data;
-    const newAgenda = oldAgenda.map(agenda => {
+    const oldAgendas = state.agendas;
+    const newAgendas = oldAgendas.map(agenda => {
       const newTodo = todoData.find(
-        item => item.dateString === agenda.dateString,
+        todo => todo.dateString === agenda.dateString,
       );
       if (!newTodo) {
         return agenda;
@@ -59,11 +59,8 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
     });
     return {
       ...state,
-      agenda: { ...state.agenda, data: newAgenda },
-      moldData: {
-        ...state.moldData,
-        data: state.moldData.data.concat(moldData),
-      },
+      agendas: newAgendas,
+      molds: state.molds.concat(moldData),
     };
   },
   [START_LOADING]: (state, { payload: type }) => ({
@@ -71,29 +68,29 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
     loading: { ...state.loading, [type]: true },
   }),
   [GET_DATA_SUCCESS]: (state, { payload: { type, data } }) => {
-    if (type === 'moldData') {
+    if (type === 'mold') {
       return {
         ...state,
         moldData: { error: null, data },
         loading: { ...state.loading, moldData: false },
       };
     } else {
-      const newData =
+      const newAgendaData =
         type === 'around'
           ? data
           : type === 'before'
-          ? [...data, ...state.agenda.data]
-          : [...state.agenda.data, ...data];
+          ? [...data, ...state.agendas]
+          : [...state.agendas, ...data];
       return {
         ...state,
-        agenda: { error: null, data: newData },
+        agendas: newAgendaData,
         loading: { ...state.loading, [type]: false },
       };
     }
   },
   [GET_DATA_FAILURE]: (state, { payload: { type, error } }) => ({
     ...state,
-    agenda: { error, ...state.agenda },
+    error: { ...state.error, [type]: error },
     loading: { ...state.loading, [type]: false },
   }),
   [TOGGLE_PANEL]: (state, { payload: { key, isActive } }) => ({
@@ -101,7 +98,7 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
     panel: { ...state.panel, [key]: isActive },
   }),
   [TOGGLE_TODO]: (state, { payload }) => {
-    const data = state.agenda.data.find(
+    const data = state.agendas.find(
       agenda => agenda.dateString === payload.dateString,
     );
     if (data) {
@@ -110,20 +107,17 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
       );
       return {
         ...state,
-        agenda: {
-          ...state.agenda,
-          data: state.agenda.data.map(item =>
-            item.dateString === payload.dateString
-              ? { ...item, todos: newData }
-              : item,
-          ),
-        },
+        agendas: state.agendas.map(agenda =>
+          agenda.dateString === payload.dateString
+            ? { ...agenda, todos: newData }
+            : agenda,
+        ),
       };
     }
     return state;
   },
   [EDIT_TODO]: (state, { payload }) => {
-    const data = state.agenda.data.find(
+    const data = state.agendas.find(
       agenda => agenda.dateString === payload.dateString,
     );
     if (data) {
@@ -132,55 +126,49 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
       );
       return {
         ...state,
-        agenda: {
-          ...state.agenda,
-          data: state.agenda.data.map(item =>
-            item.dateString === payload.dateString
-              ? { ...item, todos: newData }
-              : item,
-          ),
-        },
+        agendas: state.agendas.map(item =>
+          item.dateString === payload.dateString
+            ? { ...item, todos: newData }
+            : item,
+        ),
       };
     }
     return state;
   },
   [DELETE_TODO]: (state, { payload }) => {
-    const data = state.agenda.data.find(
+    const data = state.agendas.find(
       agenda => agenda.dateString === payload.dateString,
     );
     if (data) {
       const newData = data?.todos.filter(todo => todo.id !== payload.id);
       return {
         ...state,
-        agenda: {
-          ...state.agenda,
-          data: state.agenda.data.map(item =>
-            item.dateString === payload.dateString
-              ? { ...item, todos: newData }
-              : item,
-          ),
-        },
+        agendas: state.agendas.map(agenda =>
+          agenda.dateString === payload.dateString
+            ? { ...agenda, todos: newData }
+            : agenda,
+        ),
       };
     }
     return state;
   },
   [DELETE_TODO_MOLD]: (state, { payload }) => {
-    const newMoldData = state.moldData.data.filter(mold => mold.id !== payload);
-    const newTodoData = state.agenda.data.map(data => ({
+    const newMoldData = state.molds.filter(mold => mold.id !== payload);
+    const newAgendaData = state.agendas.map(data => ({
       ...data,
       todos: data.todos.filter(todo => todo.todoMoldId !== payload),
     }));
     return {
       ...state,
-      moldData: { ...state.moldData, data: newMoldData },
-      agenda: { ...state.agenda, data: newTodoData },
+      molds: newMoldData,
+      agendas: newAgendaData,
     };
   },
   [EDIT_TODO_MOLD]: (state, { payload: { id, data, todoData } }) => {
-    const newMoldData = state.moldData.data.map(mold =>
+    const newMoldData = state.molds.map(mold =>
       mold.id === id ? { ...mold, ...data } : mold,
     );
-    const oldAgenda = state.agenda.data;
+    const oldAgenda = state.agendas;
     const filterOldAgenda = oldAgenda.map(agenda => {
       // restartDate 가 있어야됨
       const filteredTodos = agenda.todos.filter(todo => todo.todoMoldId !== id);
@@ -189,7 +177,7 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
         todos: filteredTodos,
       };
     });
-    const newAgenda = filterOldAgenda.map(agenda => {
+    const newAgendaData = filterOldAgenda.map(agenda => {
       const newTodo = todoData.find(
         item => item.dateString === agenda.dateString,
       );
@@ -203,8 +191,8 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
     });
     return {
       ...state,
-      agenda: { ...state.agenda, data: newAgenda },
-      moldData: { ...state.moldData, data: newMoldData },
+      agendas: newAgendaData,
+      molds: newMoldData,
     };
   },
 });

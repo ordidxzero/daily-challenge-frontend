@@ -16,7 +16,7 @@ function TodoList() {
   const flatList = useRef<FlatList>(null);
   const { onScroll, resetExecutable, isScroll, setIsScroll } = useScroll();
   const { setSelectedDay } = useSelectDay();
-  const { data, onRightEndReached, onLeftEndReached } = useTodoData(
+  const { agendas, onRightEndReached, onLeftEndReached } = useTodoData(
     isScroll,
     flatList,
   );
@@ -37,7 +37,7 @@ function TodoList() {
     <FlatList
       ref={flatList}
       style={{ width, flex: 1 }}
-      data={data}
+      data={agendas}
       renderItem={({ item }) => <DayComponent {...item} />}
       keyExtractor={item => item.dateString}
       horizontal={true}
@@ -47,7 +47,7 @@ function TodoList() {
       initialScrollIndex={3}
       initialNumToRender={5}
       scrollEventThrottle={16}
-      onScroll={onScroll(data.length, onLeftEndReached, onRightEndReached)}
+      onScroll={onScroll(agendas.length, onLeftEndReached, onRightEndReached)}
       onScrollBeginDrag={() => {
         resetExecutable();
         setIsScroll(true);

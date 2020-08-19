@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import useReduxState from './useReduxState';
 import {
   onChangeText as onChangeTextAction,
+  onChangeMultipleTexts as onChangeMultipleTextsAction,
   resetInput as resetInputAction,
   InputState,
   SoftenInputState,
@@ -21,32 +22,24 @@ function useInput() {
     [],
   );
   const {
-    startDate,
-    endDate,
     startTime,
     endTime,
-    title,
-    unit,
-    isRepeat,
-    method,
     amount,
+    unit,
     weekDifference,
     dateDifference,
     amountDifference,
     amountChangeInterval,
+    ...rest
   } = hardenForm.todo;
   const softenForm: SoftenInputState = {
     auth: hardenForm.auth,
     todo: {
-      startDate,
-      endDate: endDate || startDate,
       startTime: startTime || '99:99',
       endTime: endTime || '99:99',
-      title,
-      isRepeat,
-      method,
       unit: unit || '개',
       dayNameToRepeat,
+      ...rest,
       amount: checkIsNumber(amount),
       weekDifference: checkIsNumber(weekDifference),
       dateDifference: checkIsNumber(dateDifference),
@@ -68,7 +61,19 @@ function useInput() {
     [dispatch],
   );
 
-  return { hardenForm, softenForm, onChangeText, resetInput };
+  const onChangeMultipleTexts = useCallback(
+    <T extends keyof InputState>(field: T, data: Record<string, unknown>) =>
+      dispatch(onChangeMultipleTextsAction({ field, data })),
+    [dispatch],
+  );
+
+  return {
+    hardenForm,
+    softenForm,
+    onChangeText,
+    onChangeMultipleTexts,
+    resetInput,
+  };
 }
 
 export default useInput;

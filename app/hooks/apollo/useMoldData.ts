@@ -6,9 +6,7 @@ import useReduxState from '../common/useReduxState';
 
 function useMoldData() {
   const {
-    main: {
-      moldData: { data },
-    },
+    main: { molds },
   } = useReduxState();
 
   const getTodoMolds = useImperativeQueryThunk({
@@ -23,7 +21,7 @@ function useMoldData() {
     () => getTodoMolds({ dateString: dayjs().format('YYYY-MM-DD') }),
     [],
   );
-  return data;
+  return molds;
 }
 
 export default useMoldData;

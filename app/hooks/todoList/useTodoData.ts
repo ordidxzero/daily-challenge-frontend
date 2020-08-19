@@ -26,11 +26,7 @@ function useTodoData(
   const getBeforeTodos = useGetTodos('before');
   const getAfterTodos = useGetTodos('after');
   const {
-    main: {
-      selectedDay,
-      agenda: { data },
-      loading,
-    },
+    main: { selectedDay, agendas, loading },
   } = useReduxState();
   const onRightEndReached = useCallback(() => {
     if (isScroll) {
@@ -46,9 +42,11 @@ function useTodoData(
   }, [selectedDay]);
 
   useEffect(() => {
-    if (data.findIndex(item => item.dateString === selectedDay) !== -1) {
+    if (agendas.findIndex(agenda => agenda.dateString === selectedDay) !== -1) {
       if (!isScroll) {
-        const index = data.findIndex(item => item.dateString === selectedDay);
+        const index = agendas.findIndex(
+          agenda => agenda.dateString === selectedDay,
+        );
         flatList.current?.scrollToOffset({
           offset: width * index,
           animated: false,
@@ -65,7 +63,7 @@ function useTodoData(
   return {
     onRightEndReached,
     onLeftEndReached,
-    data,
+    agendas,
     loading,
   };
 }

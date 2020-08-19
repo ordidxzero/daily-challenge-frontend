@@ -22,11 +22,6 @@ export type TodoInputState = {
   amountDifference: string;
 };
 
-export type InputState = {
-  auth: AuthInputState;
-  todo: TodoInputState;
-};
-
 export type SoftenTodoInputState = {
   startDate: string;
   endDate: string;
@@ -44,6 +39,11 @@ export type SoftenTodoInputState = {
   dayNameToRepeat: number[];
 };
 
+export type InputState = {
+  auth: AuthInputState;
+  todo: TodoInputState;
+};
+
 export type SoftenInputState = {
   auth: AuthInputState;
   todo: SoftenTodoInputState;
@@ -55,4 +55,9 @@ export type OnChangeTextParams = {
   field: keyof InputState;
   key: any;
   value: string | boolean;
+};
+
+export type OnChangeMultipleTextsParams = {
+  field: keyof InputState;
+  data: Record<string, unknown>;
 };
