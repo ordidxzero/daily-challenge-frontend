@@ -1,5 +1,5 @@
 import React from 'react';
-import { TodoType, MoldDataType } from '../../../../@types';
+import { TodoDataType, MoldDataType } from '../../../../@types';
 import CreatePanelContent from './CreatePanelContent';
 import TodoPanelContent from './TodoPanelContent';
 import MoldPanelContent from './MoldPanelContent';
@@ -9,10 +9,10 @@ function PanelContent({
   data,
 }: {
   type?: 'create' | 'todo' | 'mold';
-  data?: TodoType | MoldDataType;
+  data?: TodoDataType | MoldDataType;
 }) {
   if (type === 'todo' && data) {
-    return <TodoPanelContent data={data as TodoType} />;
+    return <TodoPanelContent data={data as TodoDataType} />;
   }
   if (type === 'mold' && data) {
     return <MoldPanelContent data={data as MoldDataType} />;

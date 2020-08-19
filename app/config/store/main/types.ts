@@ -1,11 +1,11 @@
 import * as actions from './actions';
 import { ActionType } from 'typesafe-actions';
-import { AgendaDataType, MoldDataType, TodoType } from '../../../@types';
+import { AgendaDataType, MoldDataType, TodoDataType } from '../../../@types';
 import { ApolloError } from '@apollo/client';
 
 export type FakeTodoDataType = {
   dateString: string;
-  todo: TodoType;
+  todo: TodoDataType;
 };
 
 export type FakeData = {
@@ -13,7 +13,7 @@ export type FakeData = {
   todoData: FakeTodoDataType[];
 };
 
-export type EditTodoDataType = Omit<TodoType, 'done'>;
+export type EditTodoDataType = Omit<TodoDataType, 'done'>;
 export type EditTodoMoldDataType = {
   id: string;
   data: {

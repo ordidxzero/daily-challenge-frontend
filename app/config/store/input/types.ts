@@ -54,10 +54,5 @@ export type InputAction = ActionType<typeof actions>;
 export type OnChangeTextParams = {
   field: keyof InputState;
   key: any;
-  value: string | boolean;
-};
-
-export type OnChangeMultipleTextsParams = {
-  field: keyof InputState;
-  data: Record<string, unknown>;
+  value: string | number | boolean;
 };

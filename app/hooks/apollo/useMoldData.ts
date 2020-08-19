@@ -14,7 +14,7 @@ function useMoldData() {
     options: {
       variables: { dateString: '' },
     },
-    type: 'moldData',
+    type: 'mold',
   });
 
   useEffect(

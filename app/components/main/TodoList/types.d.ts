@@ -1,5 +1,5 @@
 import { ViewToken } from 'react-native';
-import { TodoType } from '../../../@types';
+import { TodoDataType } from '../../../@types';
 
 // ----------------- index.tsx type -----------------
 
@@ -10,7 +10,7 @@ export type ViewableItemsType = {
 
 export type AgendaDataType = {
   dateString: string;
-  todos: TodoType[];
+  todos: TodoDataType[];
 };
 // --------------------------------------------------
 
@@ -25,5 +25,5 @@ export type CheckerProps = {
 
 // ----------------- Todo.tsx type -----------------
 
-export type TodoProps = { data: TodoType };
+export type TodoProps = { data: TodoDataType };
 // -------------------------------------------------

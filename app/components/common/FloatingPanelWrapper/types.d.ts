@@ -1,4 +1,4 @@
-import { TodoType, MoldDataType } from '../../../@types';
+import { TodoDataType, MoldDataType } from '../../../@types';
 // ----------------- InputSection.tsx type -----------------
 
 export type InputSectionProps = {
@@ -13,7 +13,7 @@ export type InputSectionProps = {
 export type FloatingPanelWrapperProps = {
   containerStyle?: any;
   type?: 'create' | 'todo' | 'mold';
-  data?: TodoType | MoldDataType;
+  data?: TodoDataType | MoldDataType;
   children: React.ReactNode;
 };
 

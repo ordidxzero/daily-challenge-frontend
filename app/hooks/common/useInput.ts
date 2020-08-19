@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import useReduxState from './useReduxState';
 import {
   onChangeText as onChangeTextAction,
-  onChangeMultipleTexts as onChangeMultipleTextsAction,
   resetInput as resetInputAction,
   InputState,
   SoftenInputState,
@@ -56,14 +55,8 @@ function useInput() {
     <T extends keyof InputState, K extends keyof InputState[T]>(
       field: T,
       key: K,
-    ) => (value: string | boolean) =>
+    ) => (value: string | number | boolean) =>
       dispatch(onChangeTextAction({ field, key, value })),
-    [dispatch],
-  );
-
-  const onChangeMultipleTexts = useCallback(
-    <T extends keyof InputState>(field: T, data: Record<string, unknown>) =>
-      dispatch(onChangeMultipleTextsAction({ field, data })),
     [dispatch],
   );
 
@@ -71,7 +64,6 @@ function useInput() {
     hardenForm,
     softenForm,
     onChangeText,
-    onChangeMultipleTexts,
     resetInput,
   };
 }

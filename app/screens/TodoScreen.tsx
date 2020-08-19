@@ -21,21 +21,18 @@ function TodoScreen({
 }: CustomStackScreenProp<'Todo'>) {
   useDetailSetter(data.id);
   const resetSelectedWeekdays = useResetWeekdays();
-  const { onChangeMultipleTexts, hardenForm } = useInput();
+  const { onChangeText, hardenForm } = useInput();
   const { todo } = hardenForm;
   const { setIsPanelActive } = useTogglePanel('todo');
   const openPanel = () => setIsPanelActive(true);
 
   useLayoutEffect(() => {
-    const { dateString, title, amount, unit, startTime, endTime } = data;
-    onChangeMultipleTexts('todo', {
-      startDate: dateString,
-      title,
-      amount,
-      unit,
-      startTime,
-      endTime,
-    });
+    onChangeText('todo', 'startDate')(data.dateString);
+    onChangeText('todo', 'title')(data.title);
+    onChangeText('todo', 'amount')(data.amount);
+    onChangeText('todo', 'unit')(data.unit);
+    onChangeText('todo', 'startTime')(data.startTime);
+    onChangeText('todo', 'endTime')(data.endTime);
     return () => {
       resetSelectedWeekdays();
     };

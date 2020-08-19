@@ -14,13 +14,13 @@ function useImperativeQueryThunk<TVariables = OperationVariables>({
 }: {
   query: DocumentNode;
   options: QueryHookOptions<any, TVariables>;
-  type: 'around' | 'before' | 'after' | 'moldData';
+  type: 'around' | 'before' | 'after' | 'mold';
 }) {
   const keys = {
     around: 'getTodos',
     before: 'getTodos',
     after: 'getTodos',
-    moldData: 'getTodoMolds',
+    mold: 'getTodoMolds',
   };
   const dispatch = useDispatch();
   const refetch = useImperativeQuery(query, options);

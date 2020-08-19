@@ -24,35 +24,21 @@ function MoldScreen({
   useDetailSetter(data.id);
   const { setSelectedWeekdays } = useSelectWeekdays();
   const { setIsPanelActive } = useTogglePanel('mold');
-  const { onChangeMultipleTexts, resetInput, hardenForm } = useInput();
+  const { onChangeText, resetInput, hardenForm } = useInput();
   const { todo } = hardenForm;
 
   const resetSelectedWeekdays = useResetWeekdays();
   useEffect(() => {
-    const {
-      dayNameToRepeat,
-      title,
-      startDate,
-      startTime,
-      endTime,
-      endDate,
-      weekDifference,
-      dateDifference,
-      amountChangeInterval,
-      amountDifference,
-    } = data;
-    setSelectedWeekdays(dayNameToRepeat);
-    onChangeMultipleTexts('todo', {
-      title,
-      startDate,
-      endDate,
-      startTime,
-      endTime,
-      weekDifference,
-      dateDifference,
-      amountChangeInterval,
-      amountDifference,
-    });
+    setSelectedWeekdays(data.dayNameToRepeat);
+    onChangeText('todo', 'title')(data.title);
+    onChangeText('todo', 'startDate')(data.startDate);
+    onChangeText('todo', 'endDate')(data.endDate);
+    onChangeText('todo', 'startTime')(data.startTime);
+    onChangeText('todo', 'endTime')(data.endTime);
+    onChangeText('todo', 'weekDifference')(data.weekDifference);
+    onChangeText('todo', 'dateDifference')(data.dateDifference);
+    onChangeText('todo', 'amountChangeInterval')(data.amountChangeInterval);
+    onChangeText('todo', 'amountDifference')(data.amountDifference);
     return () => {
       resetSelectedWeekdays();
       resetInput();

@@ -71,7 +71,7 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
     if (type === 'mold') {
       return {
         ...state,
-        moldData: { error: null, data },
+        molds: data,
         loading: { ...state.loading, moldData: false },
       };
     } else {

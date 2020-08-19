@@ -1,11 +1,7 @@
 import dayjs from 'dayjs';
 import { createReducer } from 'typesafe-actions';
 import { InputAction, InputState } from './types';
-import {
-  ON_CHANGE_TEXT,
-  RESET_INPUT,
-  ON_CHANGE_MULTIPLE_TEXTS,
-} from './actions';
+import { ON_CHANGE_TEXT, RESET_INPUT } from './actions';
 
 const initialState: InputState = {
   auth: {
@@ -30,17 +26,11 @@ const initialState: InputState = {
 };
 
 const reducer = createReducer<InputState, InputAction>(initialState, {
-  [ON_CHANGE_TEXT]: (state, { payload: { field, key, value } }) => ({
-    ...state,
-    [field]: { ...state[field], [key]: value },
-  }),
-  [ON_CHANGE_MULTIPLE_TEXTS]: (state, { payload: { field, data } }) => {
-    const formattedData = Object.keys(data).map(key =>
-      typeof data[key] === 'number' ? String(data[key]) : data[key],
-    );
+  [ON_CHANGE_TEXT]: (state, { payload: { field, key, value } }) => {
+    const typeCastedValue = typeof value === 'number' ? String(value) : value;
     return {
       ...state,
-      [field]: { ...state[field], ...formattedData },
+      [field]: { ...state[field], [key]: typeCastedValue },
     };
   },
   [RESET_INPUT]: () => initialState,

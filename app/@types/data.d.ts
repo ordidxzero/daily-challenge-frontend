@@ -1,4 +1,4 @@
-export type TodoType = {
+export type TodoDataType = {
   id: string;
   dateString: string;
   title: string;
@@ -12,7 +12,7 @@ export type TodoType = {
 
 export type AgendaDataType = {
   dateString: string;
-  todos: TodoType[];
+  todos: TodoDataType[];
 };
 
 export type MoldDataType = {
