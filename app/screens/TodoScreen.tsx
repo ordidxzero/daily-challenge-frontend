@@ -39,7 +39,7 @@ function TodoScreen({
   }, []);
   return (
     <FloatingPanelWrapper type="todo" data={data}>
-      <Header navigation={navigation} />
+      <Header navigation={navigation} type="todo" />
       <View style={{ flex: 1, width, padding: 20 }}>
         <View style={{ marginBottom: 30 }}>
           <Text style={{ fontSize: 30, fontWeight: '700' }}>{todo.title}</Text>

@@ -3,11 +3,13 @@ import useSelectDay from './useSelectDay';
 import { Button, Alert } from 'react-native';
 import useReduxState from './useReduxState';
 import useDeleteTodo from '../apollo/useDeleteTodo';
-function useCreateHeaderButton(navigation: any) {
+import useDeleteTodoMold from '../apollo/useDeleteTodoMold';
+function useCreateHeaderButton(type: 'todo' | 'mold', navigation: any) {
   const {
     main: { detail },
   } = useReduxState();
   const deleteTodo = useDeleteTodo();
+  const deleteTodoMold = useDeleteTodoMold();
   const { selectedDay } = useSelectDay();
   if (detail) {
     const onPress = () => {
@@ -18,7 +20,11 @@ function useCreateHeaderButton(navigation: any) {
           {
             text: 'Yes',
             onPress: () => {
-              deleteTodo({ dateString: selectedDay, id: detail });
+              if (type === 'todo') {
+                deleteTodo({ dateString: selectedDay, id: detail });
+              } else {
+                deleteTodoMold(detail);
+              }
               navigation.goBack();
             },
           },

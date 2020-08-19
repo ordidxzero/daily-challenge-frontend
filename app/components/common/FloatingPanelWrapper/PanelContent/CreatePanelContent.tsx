@@ -31,12 +31,17 @@ function CreatePanelContent() {
   });
   const animation = useFoldAnimation(isRepeat.current === 'yes');
   const resetSelectedWeekdays = useResetWeekdays();
-  const { hardenForm, onChangeText } = useInput();
+  const { hardenForm, onChangeText, resetInput } = useInput();
   const { todo } = hardenForm;
+
+  useEffect(() => {
+    onChangeText('todo', 'isRepeat')(isRepeat.current === 'yes');
+  }, [isRepeat.current]);
 
   useEffect(() => {
     return () => {
       resetSelectedWeekdays();
+      resetInput();
     };
   }, []);
 

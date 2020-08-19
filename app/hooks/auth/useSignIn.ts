@@ -19,7 +19,7 @@ function useSignIn() {
       }
       AsyncStorage.setItem('dc_login_token', token);
       setToken(token);
-      navigation.navigate('Main');
+      return navigation.navigate('Main');
     },
   });
   return signIn;

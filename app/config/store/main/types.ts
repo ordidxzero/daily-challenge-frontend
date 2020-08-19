@@ -8,9 +8,29 @@ export type FakeTodoDataType = {
   todo: TodoType;
 };
 
-export type FakeTodoData = FakeTodoDataType[];
+export type FakeData = {
+  moldData: MoldDataType;
+  todoData: FakeTodoDataType[];
+};
 
 export type EditTodoDataType = Omit<TodoType, 'done'>;
+export type EditTodoMoldDataType = {
+  id: string;
+  data: {
+    title: string;
+    endDate: string;
+    startTime: string;
+    endTime: string;
+    isRepeat: boolean;
+    method: 'weekdays' | 'dateDifference';
+    dayNameToRepeat: number[];
+    weekDifference: number;
+    dateDifference: number;
+    amountChangeInterval: number;
+    amountDifference: number;
+  };
+  todoData: FakeTodoDataType[];
+};
 
 export type ToggledTodoData = {
   dateString: string;

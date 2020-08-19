@@ -14,7 +14,7 @@ const initialState: InputState = {
     title: '',
     amount: '',
     unit: '',
-    isRepeat: 'no',
+    isRepeat: false,
     method: 'weekdays',
     startTime: '',
     endTime: '',

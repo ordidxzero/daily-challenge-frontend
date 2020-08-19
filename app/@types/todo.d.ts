@@ -7,6 +7,7 @@ export type TodoType = {
   startTime: string;
   endTime: string;
   done: boolean;
+  todoMoldId: string;
 };
 
 export type AgendaDataType = {

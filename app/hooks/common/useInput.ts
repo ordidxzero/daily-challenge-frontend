@@ -43,7 +43,7 @@ function useInput() {
       startTime: startTime || '99:99',
       endTime: endTime || '99:99',
       title,
-      isRepeat: isRepeat === 'yes',
+      isRepeat,
       method,
       unit: unit || '개',
       dayNameToRepeat,
@@ -63,7 +63,8 @@ function useInput() {
     <T extends keyof InputState, K extends keyof InputState[T]>(
       field: T,
       key: K,
-    ) => (value: string) => dispatch(onChangeTextAction({ field, key, value })),
+    ) => (value: string | boolean) =>
+      dispatch(onChangeTextAction({ field, key, value })),
     [dispatch],
   );
 

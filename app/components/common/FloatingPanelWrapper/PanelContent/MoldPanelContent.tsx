@@ -15,12 +15,13 @@ import ListOfWeekday from '../../../main/ListOfWeekday';
 import { MoldDataType } from '../../../../@types';
 import TodoManager from '../../../main/TodoManager';
 import useTogglePanel from '../../../../hooks/floatingPanel/useTogglePanel';
+import useEditTodoMold from '../../../../hooks/apollo/useEditTodoMold';
 
 const { width } = Dimensions.get('window');
 
 function MoldPanelContent({ data }: { data: MoldDataType }) {
   const [isRepeat, setIsRepeat] = useRadioState({
-    current: 'no',
+    current: 'yes',
     data: [
       { key: 'yes', label: 'yes' },
       { key: 'no', label: 'no' },
@@ -35,10 +36,12 @@ function MoldPanelContent({ data }: { data: MoldDataType }) {
   });
   const animation = useFoldAnimation(isRepeat.current === 'yes');
   const { setIsPanelActive } = useTogglePanel('mold');
+  const editTodoMold = useEditTodoMold();
   const { hardenForm, onChangeText } = useInput();
   const { todo } = hardenForm;
 
-  const closePanel = () => setIsPanelActive(false);
+  const closePanel = () =>
+    editTodoMold(data.id).then(() => setIsPanelActive(false));
 
   useEffect(() => {
     setIsRepeat(data.isRepeat ? 'yes' : 'no')();
@@ -46,37 +49,28 @@ function MoldPanelContent({ data }: { data: MoldDataType }) {
   }, []);
 
   useEffect(() => {
-    onChangeText('todo', 'isRepeat')(isRepeat.current);
+    onChangeText('todo', 'isRepeat')(isRepeat.current === 'yes');
   }, [isRepeat.current]);
 
   useEffect(() => {
     onChangeText('todo', 'method')(selectMethod.current);
   }, [selectMethod.current]);
+
   return (
     <View style={{ alignItems: 'center', marginTop: 15 }}>
       <InputSection title="BASIC INFOMATION">
+        <Input
+          title="Title"
+          placeholder="언제부터 적용하시겠습니까?"
+          value={todo.startDate}
+          onChangeText={onChangeText('todo', 'startDate')}
+        />
         <Input
           title="Title"
           placeholder="푸쉬업"
           value={todo.title}
           onChangeText={onChangeText('todo', 'title')}
         />
-        {!data && (
-          <>
-            <Input
-              title="Amount"
-              placeholder="5"
-              value={todo.amount}
-              onChangeText={onChangeText('todo', 'amount')}
-            />
-            <Input
-              title="Unit"
-              placeholder="개"
-              value={todo.unit}
-              onChangeText={onChangeText('todo', 'unit')}
-            />
-          </>
-        )}
         <Input
           title="Start Time"
           placeholder="09:00"

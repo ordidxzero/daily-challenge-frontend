@@ -16,6 +16,7 @@ export const GET_TODOS = gql`
           endTime
           unit
           done
+          todoMoldId
         }
       }
     }
@@ -56,6 +57,7 @@ export const CREATE_TODO_MOLD = gql`
       amountChangeInterval: $amountChangeInterval
     ) {
       ok
+      todoMoldId
       error
     }
   }
@@ -90,6 +92,51 @@ export const GET_TODO_MOLDS = gql`
   }
 `;
 
+export const EDIT_TODO_MOLD = gql`
+  mutation EditTodoMold(
+    $id: String!
+    $restartDate: String!
+    $endDate: String!
+    $startTime: String!
+    $endTime: String!
+    $title: String!
+    $newAmount: Int!
+    $unit: String!
+    $isRepeat: Boolean!
+    $method: String!
+    $dayNameToRepeat: [Int!]!
+    $weekDifference: Int!
+    $dateDifference: Int!
+    $amountDifference: Int!
+    $amountChangeInterval: Int!
+  ) {
+    editTodoMold(
+      id: $id
+      restartDate: $restartDate
+      endDate: $endDate
+      startTime: $startTime
+      endTime: $endTime
+      title: $title
+      newAmount: $newAmount
+      unit: $unit
+      isRepeat: $isRepeat
+      method: $method
+      dayNameToRepeat: $dayNameToRepeat
+      weekDifference: $weekDifference
+      dateDifference: $dateDifference
+      amountDifference: $amountDifference
+      amountChangeInterval: $amountChangeInterval
+    ) {
+      ok
+      undeletedLastTodo {
+        dateString
+        amount
+      }
+      error
+    }
+  }
+`;
+
 export const EDIT_TODO = gql`
   mutation EditTodo(
     $id: String!
@@ -118,6 +165,15 @@ export const EDIT_TODO = gql`
 export const DELETE_TODO = gql`
   mutation RemoveTodo($id: String!) {
     removeTodo(id: $id) {
+      ok
+      error
+    }
+  }
+`;
+
+export const DELETE_TODO_MOLD = gql`
+  mutation RemoveTodoMold($id: String!) {
+    removeTodoMold(id: $id) {
       ok
       error
     }

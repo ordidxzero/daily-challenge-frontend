@@ -5,8 +5,8 @@ import { Entypo } from '@expo/vector-icons';
 import useCreateHeaderButton from '../../../hooks/common/useCreateHeaderButton';
 import styles from './styles';
 
-function Header({ navigation }: ScreenHeaderProps) {
-  const headerRight = useCreateHeaderButton(navigation);
+function Header({ type, navigation }: ScreenHeaderProps) {
+  const headerRight = useCreateHeaderButton(type, navigation);
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigation.goBack()}>

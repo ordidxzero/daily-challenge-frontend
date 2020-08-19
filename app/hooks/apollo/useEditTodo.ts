@@ -12,7 +12,7 @@ function useEditTodo() {
   } = softenForm;
   const dispatch = useDispatch();
 
-  const editTodo = (id: string) => {
+  const editTodo = (id: string, todoMoldId: string) => {
     const data = {
       id,
       title,
@@ -21,6 +21,7 @@ function useEditTodo() {
       unit,
       startTime,
       endTime,
+      todoMoldId,
     };
     dispatch(editTodoAction(data));
     editTodoMutation({

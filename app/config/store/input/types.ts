@@ -12,7 +12,7 @@ export type TodoInputState = {
   title: string;
   amount: string;
   unit: string;
-  isRepeat: 'yes' | 'no';
+  isRepeat: boolean;
   method: 'weekdays' | 'dateDifference';
   startTime: string;
   endTime: string;
@@ -54,5 +54,5 @@ export type InputAction = ActionType<typeof actions>;
 export type OnChangeTextParams = {
   field: keyof InputState;
   key: any;
-  value: string;
+  value: string | boolean;
 };

@@ -17,7 +17,7 @@ function TodoPanelContent({ data }: { data: TodoType }) {
 
   const closePanel = () => {
     setIsPanelActive(false);
-    editTodo(data.id);
+    editTodo(data.id, data.todoMoldId);
   };
 
   return (

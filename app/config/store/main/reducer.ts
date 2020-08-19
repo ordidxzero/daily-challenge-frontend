@@ -3,15 +3,17 @@ import { createReducer } from 'typesafe-actions';
 import { MainState, MainAction } from './types';
 import {
   TOGGLE_PANEL,
-  ADD_TODOS,
+  ADD_DATA,
   TOGGLE_TODO,
   EDIT_TODO,
   DELETE_TODO,
+  DELETE_TODO_MOLD,
   START_LOADING,
   GET_DATA_SUCCESS,
   GET_DATA_FAILURE,
   SELECT_DAY,
   SELECT_DETAIL,
+  EDIT_TODO_MOLD,
 } from './actions';
 
 const initialState: MainState = {
@@ -41,10 +43,10 @@ const initialState: MainState = {
 const reducer = createReducer<MainState, MainAction>(initialState, {
   [SELECT_DAY]: (state, { payload }) => ({ ...state, selectedDay: payload }),
   [SELECT_DETAIL]: (state, { payload }) => ({ ...state, detail: payload }),
-  [ADD_TODOS]: (state, { payload }) => {
+  [ADD_DATA]: (state, { payload: { todoData, moldData } }) => {
     const oldAgenda = state.agenda.data;
     const newAgenda = oldAgenda.map(agenda => {
-      const newTodo = payload.find(
+      const newTodo = todoData.find(
         item => item.dateString === agenda.dateString,
       );
       if (!newTodo) {
@@ -55,7 +57,14 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
         todos: agenda.todos.concat(newTodo.todo),
       };
     });
-    return { ...state, agenda: { ...state.agenda, data: newAgenda } };
+    return {
+      ...state,
+      agenda: { ...state.agenda, data: newAgenda },
+      moldData: {
+        ...state.moldData,
+        data: state.moldData.data.concat(moldData),
+      },
+    };
   },
   [START_LOADING]: (state, { payload: type }) => ({
     ...state,
@@ -154,6 +163,49 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
       };
     }
     return state;
+  },
+  [DELETE_TODO_MOLD]: (state, { payload }) => {
+    const newMoldData = state.moldData.data.filter(mold => mold.id !== payload);
+    const newTodoData = state.agenda.data.map(data => ({
+      ...data,
+      todos: data.todos.filter(todo => todo.todoMoldId !== payload),
+    }));
+    return {
+      ...state,
+      moldData: { ...state.moldData, data: newMoldData },
+      agenda: { ...state.agenda, data: newTodoData },
+    };
+  },
+  [EDIT_TODO_MOLD]: (state, { payload: { id, data, todoData } }) => {
+    const newMoldData = state.moldData.data.map(mold =>
+      mold.id === id ? { ...mold, ...data } : mold,
+    );
+    const oldAgenda = state.agenda.data;
+    const filterOldAgenda = oldAgenda.map(agenda => {
+      // restartDate 가 있어야됨
+      const filteredTodos = agenda.todos.filter(todo => todo.todoMoldId !== id);
+      return {
+        dateString: agenda.dateString,
+        todos: filteredTodos,
+      };
+    });
+    const newAgenda = filterOldAgenda.map(agenda => {
+      const newTodo = todoData.find(
+        item => item.dateString === agenda.dateString,
+      );
+      if (!newTodo) {
+        return agenda;
+      }
+      return {
+        dateString: agenda.dateString,
+        todos: agenda.todos.concat(newTodo.todo),
+      };
+    });
+    return {
+      ...state,
+      agenda: { ...state.agenda, data: newAgenda },
+      moldData: { ...state.moldData, data: newMoldData },
+    };
   },
 });
 

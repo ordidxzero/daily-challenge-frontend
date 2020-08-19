@@ -5,16 +5,20 @@ import {
   filterByDateDifference,
   filterByDayName,
 } from './dayjsUtils';
+import { MoldDataType } from '../../../@types';
 
 export const generateID = () => {
-  const random_1 = Math.random().toString(36).slice(2);
-  const random_2 = Math.random().toString(36).slice(2);
   const specials = '!$%^&*()_+|~-=`{}[]:;<>?,./';
-  const random_3 = specials[Math.floor(Math.random() * (specials.length - 1))];
-  return `${random_1}${random_3}${random_2}`;
+  const randomString = () => Math.random().toString(36).slice(2);
+  const randomSpecial =
+    specials[Math.floor(Math.random() * (specials.length - 1))];
+  return `${randomString()}${randomSpecial}${randomString()}`;
 };
 
-export const generateTodoData = (data: SoftenTodoInputState) => {
+export const generateTodoData = (
+  data: SoftenTodoInputState,
+  todoMoldId: string,
+) => {
   const {
     startDate,
     endDate,
@@ -57,9 +61,31 @@ export const generateTodoData = (data: SoftenTodoInputState) => {
         startTime,
         endTime,
         done: false,
+        todoMoldId,
       },
     };
   });
 
   return result;
+};
+
+export const generateMoldData = (
+  data: SoftenTodoInputState,
+  id: string,
+): MoldDataType => ({
+  id,
+  ...data,
+  priority: 1,
+  completionRate: 0,
+  progressRate: 0,
+  currentContinuousAchievement: 0,
+  maxContinuousAchievement: 0,
+  isValid: true,
+});
+
+export const generateData = (data: SoftenTodoInputState, id: string) => {
+  return {
+    moldData: generateMoldData(data, id),
+    todoData: generateTodoData(data, id),
+  };
 };

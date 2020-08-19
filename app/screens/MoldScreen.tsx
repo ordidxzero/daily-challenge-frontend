@@ -24,7 +24,7 @@ function MoldScreen({
   useDetailSetter(data.id);
   const { setSelectedWeekdays } = useSelectWeekdays();
   const { setIsPanelActive } = useTogglePanel('mold');
-  const { hardenForm, onChangeText, resetInput } = useInput();
+  const { onChangeText, resetInput, hardenForm } = useInput();
   const { todo } = hardenForm;
   const resetSelectedWeekdays = useResetWeekdays();
   useEffect(() => {
@@ -48,7 +48,7 @@ function MoldScreen({
   }, []);
   return (
     <FloatingPanelWrapper type="mold" data={data}>
-      <Header navigation={navigation} />
+      <Header navigation={navigation} type="mold" />
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
@@ -56,9 +56,9 @@ function MoldScreen({
           alignItems: 'center',
         }}>
         <InfoBox
-          title={data.title}
+          title={todo.title}
           startDate={data.startDate}
-          endDate={data.endDate}
+          endDate={todo.endDate}
         />
         <View>
           <ContinuousAchievement
@@ -69,7 +69,7 @@ function MoldScreen({
             progressRate={data.progressRate}
             completionRate={data.completionRate}
           />
-          {data.method === 'weekdays' && (
+          {todo.method === 'weekdays' && (
             <>
               <ListOfWeekday title="반복되는 요일" disabled={true} />
               <Input
@@ -79,7 +79,7 @@ function MoldScreen({
               />
             </>
           )}
-          {data.method === 'dateDifference' && (
+          {todo.method === 'dateDifference' && (
             <Input
               title="Date Difference"
               value={todo.dateDifference}
