@@ -31,6 +31,7 @@ function Input({
         ]}
         placeholder={placeholder}
         autoCapitalize="none"
+        keyboardType="default"
       />
     </InputLayout>
   );

@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { useLazyQuery } from '@apollo/client';
 import { SIGN_IN } from './graphql';
-import useSetToken from '../common/useSetToken';
+import useLoginToken from '../common/useLoginToken';
 
 /**
  * Hook that create signIn Query function
@@ -10,7 +10,7 @@ import useSetToken from '../common/useSetToken';
 function useSignIn() {
   // useNavigation Typing 지원 안되는거 해결해야됨.
   const navigation = useNavigation();
-  const { setToken } = useSetToken();
+  const { setToken } = useLoginToken();
   const [signIn] = useLazyQuery(SIGN_IN, {
     onCompleted: ({ signIn: { token, error } }) => {
       if (error) {

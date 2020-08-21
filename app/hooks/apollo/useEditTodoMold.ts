@@ -3,7 +3,12 @@ import { useDispatch } from 'react-redux';
 import { useMutation } from '@apollo/client';
 import { EDIT_TODO_MOLD } from './utils/graphql';
 import useInput from '../common/useInput';
-import { editTodoMold as editTodoMoldAction } from '../../config/store/main';
+import {
+  editTodoMold as editTodoMoldAction,
+  startLoading,
+  failureGetData,
+  finishLoading,
+} from '../../config/store/main';
 import { generateTodoData } from './useTodoMoldAdder/utils';
 
 function useEditTodoMold() {
@@ -25,31 +30,36 @@ function useEditTodoMold() {
     [softenForm.todo],
   );
 
-  const editTodoMold = (id: string) =>
-    editTodoMoldMutation({
+  const editTodoMold = (id: string) => {
+    dispatch(startLoading('editTodoMold'));
+    return editTodoMoldMutation({
       variables: {
         id,
         ...inputData,
         restartDate: startDate,
         newAmount: inputData.amountDifference,
       },
-    }).then(
-      ({
-        data: {
-          editTodoMold: {
-            undeletedLastTodo: { amount },
+    })
+      .then(
+        ({
+          data: {
+            editTodoMold: {
+              undeletedLastTodo: { amount },
+            },
           },
+        }) => {
+          dispatch(
+            editTodoMoldAction({
+              id,
+              data: editData,
+              todoData: fakeTodoData(id, amount + editData.amountDifference),
+            }),
+          );
         },
-      }) => {
-        dispatch(
-          editTodoMoldAction({
-            id,
-            data: editData,
-            todoData: fakeTodoData(id, amount + editData.amountDifference),
-          }),
-        );
-      },
-    );
+      )
+      .catch(error => dispatch(failureGetData({ type: 'editTodoMold', error })))
+      .finally(() => dispatch(finishLoading('editTodoMold')));
+  };
   return editTodoMold;
 }
 

@@ -1,7 +1,12 @@
 import { useMutation } from '@apollo/client';
 import { EDIT_TODO } from './utils/graphql';
 import useInput from '../common/useInput';
-import { editTodo as editTodoAction } from '../../config/store/main';
+import {
+  editTodo as editTodoAction,
+  startLoading,
+  failureGetData,
+  finishLoading,
+} from '../../config/store/main';
 import { useDispatch } from 'react-redux';
 
 function useEditTodo() {
@@ -23,10 +28,15 @@ function useEditTodo() {
       endTime,
       todoMoldId,
     };
-    dispatch(editTodoAction(data));
-    editTodoMutation({
+    dispatch(startLoading('editTodo'));
+    return editTodoMutation({
       variables: data,
-    });
+    })
+      .then(() => {
+        dispatch(editTodoAction(data));
+      })
+      .catch(error => dispatch(failureGetData({ type: 'editTodo', error })))
+      .finally(() => dispatch(finishLoading('editTodo')));
   };
   return editTodo;
 }

@@ -1,4 +1,4 @@
-import { createAsyncAction, createAction } from 'typesafe-actions';
+import { createAction } from 'typesafe-actions';
 import {
   FakeData,
   ToggledTodoData,
@@ -19,6 +19,7 @@ export const DELETE_TODO = 'main/DELETE_TODO';
 export const TOGGLE_TODO = 'main/TOGGLE_TODO';
 export const DELETE_TODO_MOLD = 'main/DELETE_TODO_MOLD';
 export const START_LOADING = 'main/START_LOADING';
+export const FINISH_LOADING = 'main/FINISH_LOADING';
 export const GET_DATA_SUCCESS = 'main/GET_DATA_SUCCESS';
 export const GET_DATA_FAILURE = 'main/GET_DATA_FAILURE';
 export const TOGGLE_PANEL = 'main/TOGGLE_PANEL';
@@ -32,10 +33,9 @@ export const editTodoMold = createAction(EDIT_TODO_MOLD)<
 >();
 export const deleteTodo = createAction(DELETE_TODO)<ToggledTodoData>();
 export const deleteTodoMold = createAction(DELETE_TODO_MOLD)<string>();
-export const getDataAsync = createAsyncAction(
-  START_LOADING,
-  GET_DATA_SUCCESS,
-  GET_DATA_FAILURE,
-)<RequestType, SuccessType, FailureType>();
+export const startLoading = createAction(START_LOADING)<RequestType>();
+export const finishLoading = createAction(FINISH_LOADING)<RequestType>();
+export const successGetData = createAction(GET_DATA_SUCCESS)<SuccessType>();
+export const failureGetData = createAction(GET_DATA_FAILURE)<FailureType>();
 export const toggleSwipeablePanel = createAction(TOGGLE_PANEL)<PanelData>();
 export const toggleTodo = createAction(TOGGLE_TODO)<ToggledTodoData>();

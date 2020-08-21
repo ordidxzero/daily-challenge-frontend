@@ -35,12 +35,11 @@ Line 179 : Add `showsVerticalScrollIndicator={false}`
   - [ ] 아니면 toggle 버튼이 눌린 후 일정시간 동안 toggle 버튼이 눌리지 않으면 백엔드에 요청을?
 - [ ] Todo를 생성할 때, 일수로 설정가능하도록 할 것. 예를 들어 100일동안 진행하겠다 등..
 - [x] StatusBarStyle과 Detail은 굳이 리덕스를 사용하지 않아도 되지않을까?
-- [ ] MoldScreen 수정 페이지를 어떻게 해결할 지 고민 중...
-
-  - [ ] Todo Screen과 동일하게?
+- [ ] GraphQL 요청을 보내는 곳에서 loading 값을 사용할 수 있도록 설정할 것
 
 - [ ] Panel 자체에 버그가 상당함. react-native-modalize 적용을 고민해볼 것. 혹은 PanResponder를 개선할 방법을 찾아볼 것
   - [x] 일정 HEIGHT 이상으로 스크롤 했을 때, Component가 분리되는 현상 해결할 것
+  - [ ] MoldPanel을 처음 열 때, ADVANCED INFOMATION Animated View의 height가 줄었다가 커짐. 원인 불명
 
 ## MEMO
 

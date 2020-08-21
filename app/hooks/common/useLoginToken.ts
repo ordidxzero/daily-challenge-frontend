@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 import { setToken as setTokenAction } from '../../config/store/login';
 
-function useSetToken() {
+function useLoginToken() {
   const dispatch = useDispatch();
   const setToken = useCallback(
     (token: string | null) => dispatch(setTokenAction(token)),
@@ -20,4 +20,4 @@ function useSetToken() {
   return { checkLogin, setToken };
 }
 
-export default useSetToken;
+export default useLoginToken;

@@ -14,6 +14,7 @@ import {
   SELECT_DAY,
   SELECT_DETAIL,
   EDIT_TODO_MOLD,
+  FINISH_LOADING,
 } from './actions';
 
 const initialState: MainState = {
@@ -31,12 +32,24 @@ const initialState: MainState = {
     before: null,
     after: null,
     mold: null,
+    createMold: null,
+    deleteTodo: null,
+    deleteTodoMold: null,
+    editTodo: null,
+    editTodoMold: null,
+    toggleTodo: null,
   },
   loading: {
     mold: false,
     around: false,
     before: false,
     after: false,
+    createMold: false,
+    deleteTodo: false,
+    deleteTodoMold: false,
+    editTodo: false,
+    editTodoMold: false,
+    toggleTodo: false,
   },
 };
 
@@ -67,12 +80,15 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
     ...state,
     loading: { ...state.loading, [type]: true },
   }),
+  [FINISH_LOADING]: (state, { payload: type }) => ({
+    ...state,
+    loading: { ...state.loading, [type]: false },
+  }),
   [GET_DATA_SUCCESS]: (state, { payload: { type, data } }) => {
     if (type === 'mold') {
       return {
         ...state,
         molds: data,
-        loading: { ...state.loading, moldData: false },
       };
     } else {
       const newAgendaData =
@@ -84,14 +100,12 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
       return {
         ...state,
         agendas: newAgendaData,
-        loading: { ...state.loading, [type]: false },
       };
     }
   },
   [GET_DATA_FAILURE]: (state, { payload: { type, error } }) => ({
     ...state,
     error: { ...state.error, [type]: error },
-    loading: { ...state.loading, [type]: false },
   }),
   [TOGGLE_PANEL]: (state, { payload: { key, isActive } }) => ({
     ...state,

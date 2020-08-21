@@ -5,8 +5,12 @@ import {
 } from '@apollo/client';
 import { useDispatch } from 'react-redux';
 import useImperativeQuery from './useImperativeQuery';
-import { getDataAsync } from '../../config/store/main';
-import { RequestType } from '../../@types';
+import {
+  startLoading,
+  successGetData,
+  failureGetData,
+  finishLoading,
+} from '../../config/store/main';
 
 function useImperativeQueryThunk<TVariables = OperationVariables>({
   query,
@@ -15,7 +19,7 @@ function useImperativeQueryThunk<TVariables = OperationVariables>({
 }: {
   query: DocumentNode;
   options: QueryHookOptions<any, TVariables>;
-  type: RequestType;
+  type: 'around' | 'before' | 'after' | 'mold';
 }) {
   const keys = {
     around: 'getTodos',
@@ -25,22 +29,24 @@ function useImperativeQueryThunk<TVariables = OperationVariables>({
   };
   const dispatch = useDispatch();
   const refetch = useImperativeQuery(query, options);
-  const { request, success, failure } = getDataAsync;
   const imperativelyCallQueryThunk = (queryVariables: TVariables) => {
-    dispatch(request(type));
-    refetch(queryVariables).then(
-      ({
-        data: {
-          [keys[type]]: { data, error },
+    dispatch(startLoading(type));
+    refetch(queryVariables)
+      .then(
+        ({
+          data: {
+            [keys[type]]: { data, error },
+          },
+        }) => {
+          if (error) {
+            return dispatch(failureGetData({ type, error }));
+          } else {
+            return dispatch(successGetData({ type, data }));
+          }
         },
-      }) => {
-        if (error) {
-          return dispatch(failure({ type, error }));
-        } else {
-          return dispatch(success({ type, data }));
-        }
-      },
-    );
+      )
+      .catch(error => dispatch(failureGetData({ type, error })))
+      .finally(() => dispatch(finishLoading(type)));
   };
 
   return imperativelyCallQueryThunk;

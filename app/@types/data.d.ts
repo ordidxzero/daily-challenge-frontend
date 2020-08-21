@@ -1,3 +1,5 @@
+import { RequestType as RequestTypeOriginal } from '../config/store/main';
+
 export type TodoDataType = {
   id: string;
   dateString: string;
@@ -37,4 +39,4 @@ export type MoldDataType = {
   maxContinuousAchievement: number;
 };
 
-export type RequestType = 'around' | 'before' | 'after' | 'mold';
+export type RequestType = RequestTypeOriginal;

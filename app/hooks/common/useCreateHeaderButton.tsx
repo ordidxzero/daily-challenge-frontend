@@ -21,11 +21,12 @@ function useCreateHeaderButton(type: 'todo' | 'mold', navigation: any) {
             text: 'Yes',
             onPress: () => {
               if (type === 'todo') {
-                deleteTodo({ dateString: selectedDay, id: detail });
-              } else {
-                deleteTodoMold(detail);
+                return deleteTodo({
+                  dateString: selectedDay,
+                  id: detail,
+                }).then(() => navigation.goBack());
               }
-              navigation.goBack();
+              return deleteTodoMold(detail).then(() => navigation.goBack());
             },
           },
           {

@@ -8,8 +8,10 @@ import {
 } from '@react-navigation/bottom-tabs';
 import useTogglePanel from '../../../hooks/floatingPanel/useTogglePanel';
 import useTodoMoldAdder from '../../../hooks/apollo/useTodoMoldAdder';
+import useLoadingState from '../../../hooks/common/useLoadingState';
 
 function CustomBottomTabBar(props: BottomTabBarProps<BottomTabBarOptions>) {
+  const loading = useLoadingState('createMold');
   const { setIsPanelActive, isCreatePanelActive } = useTogglePanel('create');
   const createTodoMold = useTodoMoldAdder();
   const openPanel = useCallback(() => setIsPanelActive(true), []);
@@ -18,6 +20,7 @@ function CustomBottomTabBar(props: BottomTabBarProps<BottomTabBarOptions>) {
       .then(() => setIsPanelActive(false))
       .catch(error => console.log(error));
   }, [createTodoMold]);
+  console.log(loading);
   return (
     <View>
       <TodoManager

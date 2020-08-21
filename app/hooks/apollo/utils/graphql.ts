@@ -179,3 +179,12 @@ export const DELETE_TODO_MOLD = gql`
     }
   }
 `;
+
+export const TOGGLE_TODO = gql`
+  mutation ToggleTodo($id: String!, $done: Boolean!) {
+    toggleTodo(id: $id, done: $done) {
+      ok
+      error
+    }
+  }
+`;

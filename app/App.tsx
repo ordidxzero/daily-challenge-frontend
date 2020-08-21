@@ -6,7 +6,7 @@ import * as Font from 'expo-font';
 import { Asset } from 'expo-asset';
 import { Entypo } from '@expo/vector-icons';
 import StackNavigation from './navigations/StackNavigation';
-import useSetToken from './hooks/common/useSetToken';
+import useLoginToken from './hooks/common/useLoginToken';
 import useTogglePanel from './hooks/floatingPanel/useTogglePanel';
 
 const cacheImages = (images: any[]) =>
@@ -23,7 +23,7 @@ const cacheFonts = (fonts: any[]) => fonts.map(font => Font.loadAsync(font));
 export default function App() {
   const [isReady, setIsReady] = useState(false);
   const { isPanelActive } = useTogglePanel();
-  const { checkLogin } = useSetToken();
+  const { checkLogin } = useLoginToken();
   const loadAssets = async () => {
     const images = cacheImages([
       'https://images.unsplash.com/photo-1589128833250-cba8f5b6a923?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60',

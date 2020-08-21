@@ -6,6 +6,8 @@ import { View, Animated, Dimensions } from 'react-native';
 import useInput from '../../../../hooks/common/useInput';
 import useFoldAnimation from '../../../../hooks/floatingPanel/useFoldAnimation';
 import useRadioState from '../../../../hooks/floatingPanel/useRadioState';
+import useTogglePanel from '../../../../hooks/floatingPanel/useTogglePanel';
+import useEditTodoMold from '../../../../hooks/apollo/useEditTodoMold';
 
 // Components
 import Input from '../../Input';
@@ -14,12 +16,12 @@ import Radio from '../../Radio';
 import ListOfWeekday from '../../../main/ListOfWeekday';
 import { MoldDataType } from '../../../../@types';
 import TodoManager from '../../../main/TodoManager';
-import useTogglePanel from '../../../../hooks/floatingPanel/useTogglePanel';
-import useEditTodoMold from '../../../../hooks/apollo/useEditTodoMold';
+import useLoadingState from '../../../../hooks/common/useLoadingState';
 
 const { width } = Dimensions.get('window');
 
 function MoldPanelContent({ data }: { data: MoldDataType }) {
+  const loading = useLoadingState('editTodoMold');
   const [isRepeat, setIsRepeat] = useRadioState({
     current: 'yes',
     data: [
@@ -39,6 +41,8 @@ function MoldPanelContent({ data }: { data: MoldDataType }) {
   const editTodoMold = useEditTodoMold();
   const { hardenForm, onChangeText } = useInput();
   const { todo } = hardenForm;
+
+  console.log(loading);
 
   const closePanel = () =>
     editTodoMold(data.id).then(() => setIsPanelActive(false));

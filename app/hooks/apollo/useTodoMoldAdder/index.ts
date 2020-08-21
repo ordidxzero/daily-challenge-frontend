@@ -3,7 +3,11 @@ import { useMutation } from '@apollo/client';
 import { useDispatch } from 'react-redux';
 import { CREATE_TODO_MOLD } from '../utils/graphql';
 import useInput from '../../common/useInput';
-import { addData } from '../../../config/store/main';
+import {
+  addData,
+  startLoading,
+  finishLoading,
+} from '../../../config/store/main';
 import { generateData } from './utils';
 
 function useTodoMoldAdder() {
@@ -17,18 +21,22 @@ function useTodoMoldAdder() {
     [softenForm.todo],
   );
 
-  const createTodoMold = () =>
-    createTodoMoldMutation({
+  const createTodoMold = () => {
+    dispatch(startLoading('createMold'));
+    return createTodoMoldMutation({
       variables: { ...data, currentAmount: amount },
-    }).then(
-      ({
-        data: {
-          createTodoMold: { todoMoldId },
+    })
+      .then(
+        ({
+          data: {
+            createTodoMold: { todoMoldId },
+          },
+        }) => {
+          dispatch(addData(fakeData(todoMoldId)));
         },
-      }) => {
-        dispatch(addData(fakeData(todoMoldId)));
-      },
-    );
+      )
+      .finally(() => dispatch(finishLoading('createMold')));
+  };
 
   return createTodoMold;
 }

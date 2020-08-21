@@ -16,7 +16,7 @@ function TodoList() {
   const flatList = useRef<FlatList>(null);
   const { onScroll, resetExecutable, isScroll, setIsScroll } = useScroll();
   const { setSelectedDay } = useSelectDay();
-  const { agendas, onRightEndReached, onLeftEndReached } = useTodoData(
+  const { agendas, onRightEndReached, onLeftEndReached, loading } = useTodoData(
     isScroll,
     flatList,
   );
@@ -32,6 +32,8 @@ function TodoList() {
     () => ({ viewAreaCoveragePercentThreshold: 50, minimumViewTime: 300 }),
     [],
   );
+
+  console.log(loading);
 
   return (
     <FlatList

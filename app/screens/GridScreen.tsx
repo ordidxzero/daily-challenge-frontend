@@ -9,7 +9,8 @@ import ProgressCard from '../components/grid/ProgressCard';
 import styles from './styles';
 
 function GridScreen() {
-  const data = useMoldData();
+  const { data, loading } = useMoldData();
+  console.log(loading);
   return (
     <SafeAreaView
       style={[styles.safeAreaViewContainer, { justifyContent: 'flex-start' }]}>
