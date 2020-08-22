@@ -4,6 +4,7 @@ import { RadioState } from '../../../@types';
 export type RadioProps = RadioState & {
   title: string;
   onPress: any;
+  type?: 'circle' | 'rect';
 };
 
 // --------------------------------------------------

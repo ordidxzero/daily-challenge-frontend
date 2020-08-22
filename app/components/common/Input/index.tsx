@@ -10,12 +10,13 @@ function Input({
   value,
   placeholder,
   onChangeText,
+  containerStyle = {},
 }: InputProps) {
   const textInput = useRef<TextInput>(null);
   const onTitlePress = () => textInput.current?.focus();
   return (
     <InputLayout
-      containerStyle={styles.inputContainer}
+      containerStyle={[styles.inputContainer, containerStyle]}
       titleStyle={styles.inputTitle}
       title={title}
       onTitlePress={onTitlePress}>

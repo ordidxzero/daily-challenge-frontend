@@ -13,13 +13,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   inputTitle: {
-    marginBottom: 6,
+    marginBottom: 10,
+    letterSpacing: 1,
     fontWeight: '400',
     fontSize: 13,
     color: inputTitleColor,
   },
   textInputContainer: {
-    width: width * 0.7,
+    width: width * 0.75,
     fontSize: 16,
   },
 });

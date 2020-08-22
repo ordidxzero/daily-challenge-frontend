@@ -10,6 +10,8 @@ export type RootStackParamList = {
   Main: undefined;
   Todo: { data: TodoDataType };
   Mold: { data: MoldDataType };
+  Grid: undefined;
+  Create: undefined;
 };
 
 export type CustomStackScreenProp<

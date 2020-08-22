@@ -4,7 +4,10 @@ import { Button, Alert } from 'react-native';
 import useReduxState from './useReduxState';
 import useDeleteTodo from '../apollo/useDeleteTodo';
 import useDeleteTodoMold from '../apollo/useDeleteTodoMold';
-function useCreateHeaderButton(type: 'todo' | 'mold', navigation: any) {
+function useCreateHeaderButton(
+  type: 'todo' | 'mold' | 'create',
+  navigation: any,
+) {
   const {
     main: { detail },
   } = useReduxState();
@@ -36,7 +39,7 @@ function useCreateHeaderButton(type: 'todo' | 'mold', navigation: any) {
         { cancelable: false },
       );
     };
-    const headerRight = () => <Button onPress={onPress} title="Delete" />;
+    const headerRight = () => <Button onPress={onPress} title="삭제" />;
     return headerRight;
   } else {
     const headerRight = () => (

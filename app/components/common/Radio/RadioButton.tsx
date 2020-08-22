@@ -8,12 +8,10 @@ const typeProperty = (label: string, selected: boolean) => {
     yes: styles.yes,
     no: styles.no,
   };
-  return (
-    type[label] && {
-      borderColor: type[label].borderColor,
-      backgroundColor: selected ? type[label].backgroundColor : 'white',
-    }
-  );
+  return {
+    borderColor: type[label].borderColor,
+    backgroundColor: selected ? type[label].backgroundColor : 'white',
+  };
 };
 
 function RadioButton({ label, selected, onPress }: RadioButtonProps) {

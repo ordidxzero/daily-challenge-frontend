@@ -9,7 +9,8 @@ const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   radioContainer: {
-    width: width * 0.7 + 14,
+    width: width - 50,
+    height: 50,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',

@@ -6,22 +6,24 @@ const styles = StyleSheet.create({
   container: {
     position: 'relative',
     width,
-    height: 50,
+    height: 45,
     backgroundColor: '#fff',
+    borderBottomColor: '#f0f0f0',
+    borderBottomWidth: 0.7,
     paddingHorizontal: 20,
-    borderBottomColor: '#dcdde1',
-    borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    zIndex: 100000,
   },
   title: {
     width,
     position: 'absolute',
+    justifyContent: 'center',
     alignItems: 'center',
     zIndex: -1,
   },
-  titleText: { fontSize: 20, fontWeight: '600' },
+  titleText: { fontSize: 16, fontWeight: '700' },
 });
 
 export default styles;

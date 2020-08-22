@@ -16,7 +16,6 @@ import TodoManager from '../components/main/TodoManager';
 import useTogglePanel from '../hooks/floatingPanel/useTogglePanel';
 
 function MoldScreen({
-  navigation,
   route: {
     params: { data },
   },
@@ -46,7 +45,7 @@ function MoldScreen({
   }, []);
   return (
     <FloatingPanelWrapper type="mold" data={data}>
-      <Header navigation={navigation} type="mold" />
+      <Header type="mold" />
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{

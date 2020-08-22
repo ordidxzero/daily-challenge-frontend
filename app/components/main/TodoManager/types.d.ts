@@ -1,7 +1,6 @@
 // ----------------- ToDoManager.tsx type -----------------
 
 export type ToDoManagerProps = {
-  screenIndex?: number;
   type?: 'detail';
   onPress?: () => void;
 };

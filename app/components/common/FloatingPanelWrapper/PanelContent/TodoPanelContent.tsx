@@ -6,18 +6,14 @@ import { TodoDataType } from '../../../../@types';
 import TodoManager from '../../../main/TodoManager';
 import useEditTodo from '../../../../hooks/apollo/useEditTodo';
 import useTogglePanel from '../../../../hooks/floatingPanel/useTogglePanel';
-import useLoadingState from '../../../../hooks/common/useLoadingState';
 
 const { width } = Dimensions.get('window');
 
 function TodoPanelContent({ data }: { data: TodoDataType }) {
-  const loading = useLoadingState('editTodo');
   const editTodo = useEditTodo();
   const { setIsPanelActive } = useTogglePanel('todo');
   const { hardenForm, onChangeText } = useInput();
   const { todo } = hardenForm;
-
-  console.log(loading);
 
   const closePanel = () =>
     editTodo(data.id, data.todoMoldId).then(() => setIsPanelActive(false));

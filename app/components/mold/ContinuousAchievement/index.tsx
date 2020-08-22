@@ -1,7 +1,7 @@
 import React from 'react';
 import AchievementLayout from './AchievementLayout';
 import { View, Text, Dimensions } from 'react-native';
-import { Entypo } from '@expo/vector-icons';
+import { SimpleLineIcons } from '@expo/vector-icons';
 
 const { width } = Dimensions.get('window');
 
@@ -27,8 +27,8 @@ function ContinuousAchievement({
         marginVertical: 15,
       }}>
       <AchievementLayout data={currentContinuousAchievement}>
-        <Entypo
-          name="thumbs-up"
+        <SimpleLineIcons
+          name="fire"
           size={24}
           color="#3498db"
           style={{ marginRight: 5 }}
@@ -37,8 +37,8 @@ function ContinuousAchievement({
       </AchievementLayout>
       <View style={{ height: 60, backgroundColor: '#dcdde1', width: 1 }}></View>
       <AchievementLayout data={maxContinuousAchievement}>
-        <Entypo
-          name="trophy"
+        <SimpleLineIcons
+          name="badge"
           size={24}
           color="#f1c40f"
           style={{ marginRight: 5 }}

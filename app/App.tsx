@@ -4,10 +4,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import { Asset } from 'expo-asset';
-import { Entypo } from '@expo/vector-icons';
-import StackNavigation from './navigations/StackNavigation';
+import { SimpleLineIcons } from '@expo/vector-icons';
 import useLoginToken from './hooks/common/useLoginToken';
 import useTogglePanel from './hooks/floatingPanel/useTogglePanel';
+import DrawerNavigation from './navigations/DrawerNavigation';
 
 const cacheImages = (images: any[]) =>
   images.map(image => {
@@ -29,7 +29,7 @@ export default function App() {
       'https://images.unsplash.com/photo-1589128833250-cba8f5b6a923?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60',
       require('./assets/splash.png'),
     ]);
-    const fonts = cacheFonts([Entypo.font]);
+    const fonts = cacheFonts([SimpleLineIcons.font]);
     const token = checkLogin();
     await Promise.all([...images, ...fonts, token]);
   };
@@ -37,7 +37,7 @@ export default function App() {
   return isReady ? (
     <>
       <NavigationContainer>
-        <StackNavigation />
+        <DrawerNavigation />
       </NavigationContainer>
       <StatusBar
         barStyle={

@@ -1,17 +1,19 @@
 // Modules
 import React from 'react';
+import { SafeAreaView } from 'react-native';
 // Components
 import Calendar from '../components/main/Calendar';
-import FloatingPanelWrapper from '../components/common/FloatingPanelWrapper';
+import styles from './styles';
+import TodoCreateButton from '../components/common/TodoCreateButton';
+import { CustomStackScreenProp } from './types';
 
-function MainScreen() {
+function MainScreen({ navigation }: CustomStackScreenProp<'Main'>) {
   return (
-    <FloatingPanelWrapper
-      containerStyle={{
-        justifyContent: 'flex-start',
-      }}>
+    <SafeAreaView
+      style={[styles.safeAreaViewContainer, { position: 'relative' }]}>
       <Calendar />
-    </FloatingPanelWrapper>
+      <TodoCreateButton onPress={() => navigation.navigate('Create')} />
+    </SafeAreaView>
   );
 }
 

@@ -5,4 +5,5 @@ export type InputProps = {
   value?: string;
   placeholder?: string;
   onChangeText?: (text: string) => void;
+  containerStyle?: any;
 };
