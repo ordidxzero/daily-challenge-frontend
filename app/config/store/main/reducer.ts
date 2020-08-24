@@ -20,11 +20,7 @@ import {
 const initialState: MainState = {
   selectedDay: dayjs().format('YYYY-MM-DD'),
   detail: null,
-  panel: {
-    create: false,
-    todo: false,
-    mold: false,
-  },
+  isPanelActive: false,
   agendas: [],
   molds: [],
   error: {
@@ -107,9 +103,9 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
     ...state,
     error: { ...state.error, [type]: error },
   }),
-  [TOGGLE_PANEL]: (state, { payload: { key, isActive } }) => ({
+  [TOGGLE_PANEL]: (state, { payload }) => ({
     ...state,
-    panel: { ...state.panel, [key]: isActive },
+    isPanelActive: payload,
   }),
   [TOGGLE_TODO]: (state, { payload }) => {
     const data = state.agendas.find(
@@ -135,8 +131,10 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
       agenda => agenda.dateString === payload.dateString,
     );
     if (data) {
-      const newData = data?.todos.map(todo =>
-        todo.id === payload.id ? { ...payload, done: todo.done } : todo,
+      const newData = data.todos.map(todo =>
+        todo.id === payload.id
+          ? { ...payload, done: todo.done, todoMoldId: todo.todoMoldId }
+          : todo,
       );
       return {
         ...state,

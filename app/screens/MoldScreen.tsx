@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { ScrollView, View } from 'react-native';
-import FloatingPanelWrapper from '../components/common/FloatingPanelWrapper';
+import { ScrollView, View, SafeAreaView } from 'react-native';
 import { CustomStackScreenProp } from './types';
 import Header from '../components/common/Header';
 import ContinuousAchievement from '../components/mold/ContinuousAchievement';
@@ -9,11 +8,10 @@ import ProgressInfo from '../components/mold/ProgressInfo';
 import Input from '../components/common/Input';
 import useSelectWeekdays from '../hooks/common/useSelectWeekdays';
 import ListOfWeekday from '../components/main/ListOfWeekday';
-import useResetWeekdays from '../hooks/floatingPanel/useResetWeekdays';
+import useResetWeekdays from '../hooks/common/useResetWeekdays';
 import useDetailSetter from '../hooks/floatingPanel/useDetailSetter';
 import useInput from '../hooks/common/useInput';
-import TodoManager from '../components/main/TodoManager';
-import useTogglePanel from '../hooks/floatingPanel/useTogglePanel';
+import styles from './styles';
 
 function MoldScreen({
   route: {
@@ -22,7 +20,6 @@ function MoldScreen({
 }: CustomStackScreenProp<'Mold'>) {
   useDetailSetter(data.id);
   const { setSelectedWeekdays } = useSelectWeekdays();
-  const { setIsPanelActive } = useTogglePanel('mold');
   const { onChangeText, resetInput, hardenForm } = useInput();
   const { todo } = hardenForm;
 
@@ -44,7 +41,7 @@ function MoldScreen({
     };
   }, []);
   return (
-    <FloatingPanelWrapper type="mold" data={data}>
+    <SafeAreaView style={styles.safeAreaViewContainer}>
       <Header type="mold" />
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -95,8 +92,7 @@ function MoldScreen({
           />
         </View>
       </ScrollView>
-      <TodoManager type="detail" onPress={() => setIsPanelActive(true)} />
-    </FloatingPanelWrapper>
+    </SafeAreaView>
   );
 }
 

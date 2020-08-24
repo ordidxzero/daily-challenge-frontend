@@ -18,7 +18,7 @@ function DrawerContent(
         <TouchableOpacity onPress={() => navigation.navigate('Grid')}>
           <Drawer.Item icon="format-list-checkbox" label="Grid" />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
           <Drawer.Item icon="settings" label="Settings" />
         </TouchableOpacity>
       </DrawerContentScrollView>

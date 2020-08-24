@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView, Animated } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
@@ -12,8 +12,10 @@ import ListOfWeekday from '../components/main/ListOfWeekday';
 import useRadioState from '../hooks/floatingPanel/useRadioState';
 import useFoldAnimation from '../hooks/floatingPanel/useFoldAnimation';
 import DateSetter from '../components/create/DateSetter';
+import useUnmountReset from '../hooks/common/useUnmountReset';
 
 function CreateScreen() {
+  useUnmountReset();
   const [isRepeat, setIsRepeat] = useRadioState({
     current: 'no',
     data: [
@@ -21,7 +23,7 @@ function CreateScreen() {
       { key: 'no', label: 'no' },
     ],
   });
-  const [selectMethod, setMethod] = useRadioState({
+  const [method, setMethod] = useRadioState({
     current: 'weekdays',
     data: [
       { key: 'weekdays', label: '요일' },
@@ -32,6 +34,10 @@ function CreateScreen() {
   const { selectedDay } = useSelectDay();
   const { hardenForm, onChangeText } = useInput();
   const { todo } = hardenForm;
+  useEffect(() => {
+    onChangeText('todo', 'isRepeat')(isRepeat.current === 'yes');
+    onChangeText('todo', 'method')(method.current);
+  }, [isRepeat.current, method.current]);
   return (
     <SafeAreaView
       style={[styles.safeAreaViewContainer, { justifyContent: 'flex-start' }]}>
@@ -91,12 +97,12 @@ function CreateScreen() {
           <InputSection title="ADVANCED INFOMATION">
             <DateSetter />
             <Radio
-              {...selectMethod}
+              {...method}
               onPress={setMethod}
               type="rect"
               title="생성방식"
             />
-            {selectMethod.current === 'weekdays' && (
+            {method.current === 'weekdays' && (
               <>
                 <ListOfWeekday title="무슨 요일마다 반복할 지?" />
                 <Input
@@ -107,7 +113,7 @@ function CreateScreen() {
                 />
               </>
             )}
-            {selectMethod.current === 'dateDifference' && (
+            {method.current === 'dateDifference' && (
               <Input
                 title="며칠마다 반복할 지?"
                 placeholder="1"

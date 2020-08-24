@@ -3,23 +3,16 @@ import { toggleSwipeablePanel } from '../../config/store/main';
 import { useCallback } from 'react';
 import useReduxState from '../common/useReduxState';
 
-function useTogglePanel(key?: 'create' | 'todo' | 'mold') {
+function useTogglePanel() {
   const dispatch = useDispatch();
   const {
-    main: {
-      panel: { create, todo, mold },
-    },
+    main: { isPanelActive },
   } = useReduxState();
   const setIsPanelActive = useCallback(
-    (isActive: boolean) =>
-      key && dispatch(toggleSwipeablePanel({ key, isActive })),
+    (isPanelActive: boolean) => dispatch(toggleSwipeablePanel(isPanelActive)),
     [dispatch],
   );
-  const isPanelActive = create || todo || mold;
   return {
-    isCreatePanelActive: create,
-    isTodoPanelActive: todo,
-    isMoldPanelActive: mold,
     isPanelActive,
     setIsPanelActive,
   };

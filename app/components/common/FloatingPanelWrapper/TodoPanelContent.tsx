@@ -1,22 +1,11 @@
 import React from 'react';
-import { View, Dimensions } from 'react-native';
-import Input from '../../Input';
-import useInput from '../../../../hooks/common/useInput';
-import { TodoDataType } from '../../../../@types';
-import TodoManager from '../../../main/TodoManager';
-import useEditTodo from '../../../../hooks/apollo/useEditTodo';
-import useTogglePanel from '../../../../hooks/floatingPanel/useTogglePanel';
+import { View } from 'react-native';
+import Input from '../Input';
+import useInput from '../../../hooks/common/useInput';
 
-const { width } = Dimensions.get('window');
-
-function TodoPanelContent({ data }: { data: TodoDataType }) {
-  const editTodo = useEditTodo();
-  const { setIsPanelActive } = useTogglePanel('todo');
+function TodoPanelContent() {
   const { hardenForm, onChangeText } = useInput();
   const { todo } = hardenForm;
-
-  const closePanel = () =>
-    editTodo(data.id, data.todoMoldId).then(() => setIsPanelActive(false));
 
   return (
     <View
@@ -60,14 +49,6 @@ function TodoPanelContent({ data }: { data: TodoDataType }) {
         value={todo.endTime}
         onChangeText={onChangeText('todo', 'endTime')}
       />
-      <View
-        style={{
-          height: 150,
-          position: 'relative',
-          width,
-        }}>
-        <TodoManager type="detail" onPress={closePanel} />
-      </View>
     </View>
   );
 }

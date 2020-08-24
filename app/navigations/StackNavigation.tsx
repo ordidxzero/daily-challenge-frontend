@@ -9,6 +9,7 @@ import MoldScreen from '../screens/MoldScreen';
 import MainScreen from '../screens/MainScreen';
 import GridScreen from '../screens/GridScreen';
 import CreateScreen from '../screens/CreateScreen';
+import SettingScreen from '../screens/SettingScreen';
 
 const Stack = createStackNavigator();
 
@@ -31,6 +32,7 @@ function StackNavigation() {
       <Stack.Screen name="Mold" component={MoldScreen} />
       <Stack.Screen name="Grid" component={GridScreen} />
       <Stack.Screen name="Create" component={CreateScreen} />
+      <Stack.Screen name="Setting" component={SettingScreen} />
     </Stack.Navigator>
   );
 }

@@ -3,7 +3,12 @@ import { Animated } from 'react-native';
 export type PanelProps = {
   isActive: boolean;
   onClose: () => any;
-  showCloseButton?: boolean;
+  onRightPress?: () => any;
+  onLeftPress?: () => any;
+  renderRightButton?: () => JSX.Element;
+  renderLeftButton?: () => JSX.Element;
+  showRightButton?: boolean;
+  showLeftButton?: boolean;
   fullWidth?: boolean;
   openLarge?: boolean;
   onlyLarge?: boolean;
@@ -59,6 +64,7 @@ export type BarProps = {
 
 export type CloseProps = {
   onPress: () => void;
+  renderButton?: () => JSX.Element;
   rootStyle?: any;
   iconStyle?: any;
 };

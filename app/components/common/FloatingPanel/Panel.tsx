@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import {
   StyleSheet,
-  ScrollView,
   View,
   TouchableHighlight,
   TouchableWithoutFeedback,
@@ -13,6 +12,7 @@ import { PanelProps, PanelState } from './types';
 
 import { Bar } from './Bar';
 import { Close } from './Close';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const FULL_HEIGHT = Dimensions.get('window').height;
 const FULL_WIDTH = Dimensions.get('window').width;
@@ -26,13 +26,18 @@ const STATUS = {
 const Panel = ({
   style = {},
   onClose,
+  onRightPress,
+  onLeftPress,
+  renderRightButton,
+  renderLeftButton,
   fullWidth = true,
   closeRootStyle = {},
   closeIconStyle = {},
   openLarge = false,
   onlyLarge = false,
   onlySmall = false,
-  showCloseButton = false,
+  showRightButton = false,
+  showLeftButton = true,
   noBar = false,
   closeOnTouchOutside = false,
   allowTouchOutside = false,
@@ -211,15 +216,24 @@ const Panel = ({
           style,
         ]}
         {...panResponder.panHandlers}>
+        {showLeftButton && (
+          <Close
+            rootStyle={{ left: 12 }}
+            iconStyle={closeIconStyle}
+            onPress={onLeftPress ? onLeftPress : onClose}
+            renderButton={renderLeftButton}
+          />
+        )}
         {!noBar && <Bar barStyle={barStyle} />}
-        {showCloseButton && (
+        {showRightButton && (
           <Close
             rootStyle={closeRootStyle}
             iconStyle={closeIconStyle}
-            onPress={onClose}
+            onPress={onRightPress ? onRightPress : onClose}
+            renderButton={renderRightButton}
           />
         )}
-        <ScrollView
+        <KeyboardAwareScrollView
           onTouchStart={() => {
             return false;
           }}
@@ -238,7 +252,7 @@ const Panel = ({
           ) : (
             children
           )}
-        </ScrollView>
+        </KeyboardAwareScrollView>
       </Animated.View>
     </Animated.View>
   ) : null;
@@ -277,6 +291,7 @@ const SwipeablePanelStyles = StyleSheet.create({
   },
   scrollViewContentContainerStyle: {
     width: '100%',
+    paddingTop: 10,
   },
 });
 

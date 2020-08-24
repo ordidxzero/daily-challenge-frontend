@@ -140,12 +140,12 @@ export const EDIT_TODO_MOLD = gql`
 export const EDIT_TODO = gql`
   mutation EditTodo(
     $id: String!
-    $title: String
-    $dateString: String
-    $amount: Int
-    $unit: String
-    $startTime: String
-    $endTime: String
+    $title: String!
+    $dateString: String!
+    $amount: Int!
+    $unit: String!
+    $startTime: String!
+    $endTime: String!
   ) {
     editTodo(
       id: $id

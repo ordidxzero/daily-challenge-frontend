@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import { useDispatch } from 'react-redux';
 import { EDIT_TODO } from './utils/graphql';
 import useInput from '../common/useInput';
 import {
@@ -7,27 +8,31 @@ import {
   failureGetData,
   finishLoading,
 } from '../../config/store/main';
-import { useDispatch } from 'react-redux';
 
-function useEditTodo() {
-  const [editTodoMutation] = useMutation(EDIT_TODO);
-  const { softenForm } = useInput();
-  const {
-    todo: { startDate, title, amount, unit, startTime, endTime },
-  } = softenForm;
+function useEditTodo(id: string) {
   const dispatch = useDispatch();
+  const { softenForm } = useInput();
+  const [editTodoMutation] = useMutation(EDIT_TODO);
+  const {
+    startDate,
+    title,
+    amount,
+    unit,
+    startTime,
+    endTime,
+  } = softenForm.todo;
 
-  const editTodo = (id: string, todoMoldId: string) => {
-    const data = {
-      id,
-      title,
-      dateString: startDate,
-      amount,
-      unit,
-      startTime,
-      endTime,
-      todoMoldId,
-    };
+  const data = {
+    id,
+    title,
+    dateString: startDate,
+    amount,
+    unit,
+    startTime,
+    endTime,
+  };
+
+  const editTodo = () => {
     dispatch(startLoading('editTodo'));
     return editTodoMutation({
       variables: data,

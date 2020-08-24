@@ -2,7 +2,6 @@ import { createAction } from 'typesafe-actions';
 import {
   FakeData,
   ToggledTodoData,
-  PanelData,
   EditTodoDataType,
   RequestType,
   SuccessType,
@@ -37,5 +36,5 @@ export const startLoading = createAction(START_LOADING)<RequestType>();
 export const finishLoading = createAction(FINISH_LOADING)<RequestType>();
 export const successGetData = createAction(GET_DATA_SUCCESS)<SuccessType>();
 export const failureGetData = createAction(GET_DATA_FAILURE)<FailureType>();
-export const toggleSwipeablePanel = createAction(TOGGLE_PANEL)<PanelData>();
+export const toggleSwipeablePanel = createAction(TOGGLE_PANEL)<boolean>();
 export const toggleTodo = createAction(TOGGLE_TODO)<ToggledTodoData>();

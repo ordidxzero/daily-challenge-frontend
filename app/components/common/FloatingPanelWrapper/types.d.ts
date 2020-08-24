@@ -1,4 +1,3 @@
-import { PanelContentProps } from '../../../@types';
 // ----------------- InputSection.tsx type -----------------
 
 export type InputSectionProps = {
@@ -10,9 +9,10 @@ export type InputSectionProps = {
 
 // ----------------- SwipeablePanel.tsx type -----------------
 
-export type FloatingPanelWrapperProps = PanelContentProps & {
+export type FloatingPanelWrapperProps = {
   containerStyle?: any;
   children: React.ReactNode;
+  detail: string;
 };
 
 // -----------------------------------------------------------

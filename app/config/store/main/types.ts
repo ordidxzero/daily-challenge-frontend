@@ -1,11 +1,6 @@
 import * as actions from './actions';
 import { ActionType } from 'typesafe-actions';
-import {
-  AgendaDataType,
-  MoldDataType,
-  TodoDataType,
-  PanelType,
-} from '../../../@types';
+import { AgendaDataType, MoldDataType, TodoDataType } from '../../../@types';
 import { ApolloError } from '@apollo/client';
 
 export type FakeTodoDataType = {
@@ -18,7 +13,7 @@ export type FakeData = {
   todoData: FakeTodoDataType[];
 };
 
-export type EditTodoDataType = Omit<TodoDataType, 'done'>;
+export type EditTodoDataType = Omit<TodoDataType, 'done' | 'todoMoldId'>;
 export type EditTodoMoldDataType = {
   id: string;
   data: {
@@ -42,11 +37,6 @@ export type ToggledTodoData = {
   id: string;
 };
 
-export type PanelData = {
-  key: PanelType;
-  isActive: boolean;
-};
-
 export type RequestState = {
   around: boolean | string | null;
   before: boolean | string | null;
@@ -63,11 +53,7 @@ export type RequestState = {
 export type MainState = {
   selectedDay: string;
   detail: string | null;
-  panel: {
-    create: boolean;
-    todo: boolean;
-    mold: boolean;
-  };
+  isPanelActive: boolean;
   agendas: AgendaDataType[];
   molds: MoldDataType[];
   error: RequestState;

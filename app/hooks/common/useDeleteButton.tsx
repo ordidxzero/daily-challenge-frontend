@@ -4,10 +4,7 @@ import { Button, Alert } from 'react-native';
 import useReduxState from './useReduxState';
 import useDeleteTodo from '../apollo/useDeleteTodo';
 import useDeleteTodoMold from '../apollo/useDeleteTodoMold';
-function useCreateHeaderButton(
-  type: 'todo' | 'mold' | 'create',
-  navigation: any,
-) {
+function useDeleteButton(type: 'todo' | 'mold', navigation: any) {
   const {
     main: { detail },
   } = useReduxState();
@@ -22,7 +19,7 @@ function useCreateHeaderButton(
         [
           {
             text: 'Yes',
-            onPress: () => {
+            onPress: async () => {
               if (type === 'todo') {
                 return deleteTodo({
                   dateString: selectedDay,
@@ -41,22 +38,21 @@ function useCreateHeaderButton(
     };
     const headerRight = () => <Button onPress={onPress} title="삭제" />;
     return headerRight;
-  } else {
-    const headerRight = () => (
-      <Button
-        onPress={() =>
-          Alert.alert('Error', 'You sholud escape this screen.', [
-            {
-              text: 'Yes',
-              onPress: () => navigation.goBack(),
-            },
-          ])
-        }
-        title="Error"
-      />
-    );
-    return headerRight;
   }
+  const headerRight = () => (
+    <Button
+      onPress={() =>
+        Alert.alert('Error', 'You sholud escape this screen.', [
+          {
+            text: 'Yes',
+            onPress: () => navigation.goBack(),
+          },
+        ])
+      }
+      title="Error"
+    />
+  );
+  return headerRight;
 }
 
-export default useCreateHeaderButton;
+export default useDeleteButton;
