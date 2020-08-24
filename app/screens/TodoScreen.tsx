@@ -3,9 +3,7 @@ import { Text, View, Dimensions } from 'react-native';
 import { CustomStackScreenProp } from './types';
 import styles from './styles';
 import dayjs from 'dayjs';
-import TodoManager from '../components/main/TodoManager';
 import FloatingPanelWrapper from '../components/common/FloatingPanelWrapper';
-import useTogglePanel from '../hooks/floatingPanel/useTogglePanel';
 import Header from '../components/common/Header';
 import useInput from '../hooks/common/useInput';
 import useDetailSetter from '../hooks/floatingPanel/useDetailSetter';
@@ -23,8 +21,6 @@ function TodoScreen({
   const [loading, setLoading] = useState(false);
   const { onChangeText, hardenForm } = useInput();
   const { todo } = hardenForm;
-  const { setIsPanelActive } = useTogglePanel();
-  const openPanel = () => setIsPanelActive(true);
 
   useEffect(() => {
     setLoading(true);
@@ -62,7 +58,6 @@ function TodoScreen({
               </Text>
             </View>
           </View>
-          <TodoManager type="detail" onPress={openPanel} />
         </>
       )}
     </FloatingPanelWrapper>

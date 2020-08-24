@@ -7,6 +7,7 @@ import {
   Animated,
   Dimensions,
   PanResponder,
+  Keyboard,
 } from 'react-native';
 import { PanelProps, PanelState } from './types';
 
@@ -240,11 +241,11 @@ const Panel = ({
           onTouchEnd={() => {
             return false;
           }}
+          onScrollBeginDrag={() => Keyboard.dismiss()}
           contentContainerStyle={
             SwipeablePanelStyles.scrollViewContentContainerStyle
           }
-          showsVerticalScrollIndicator={false}
-          bounces={false}>
+          showsVerticalScrollIndicator={false}>
           {canScroll.current ? (
             <TouchableHighlight>
               <React.Fragment>{children}</React.Fragment>

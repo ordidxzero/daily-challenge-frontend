@@ -1,11 +1,24 @@
 import React from 'react';
 import { View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Input from '../Input';
 import useInput from '../../../hooks/common/useInput';
+import DeleteButton from '../DeleteButton';
+import useDeleteTodo from '../../../hooks/apollo/useDeleteTodo';
+import useTogglePanel from '../../../hooks/floatingPanel/useTogglePanel';
 
-function TodoPanelContent() {
+function TodoPanelContent({ detail }: { detail: string }) {
+  const navigation = useNavigation();
+  const deleteTodo = useDeleteTodo();
+  const { setIsPanelActive } = useTogglePanel();
   const { hardenForm, onChangeText } = useInput();
   const { todo } = hardenForm;
+
+  const onPress = () =>
+    deleteTodo({ dateString: todo.startDate, id: detail }).then(() => {
+      navigation.goBack();
+      setIsPanelActive(false);
+    });
 
   return (
     <View
@@ -49,6 +62,7 @@ function TodoPanelContent() {
         value={todo.endTime}
         onChangeText={onChangeText('todo', 'endTime')}
       />
+      <DeleteButton onPress={onPress} type="panel" />
     </View>
   );
 }

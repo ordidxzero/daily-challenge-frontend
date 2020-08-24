@@ -11,7 +11,8 @@ export type RootStackParamList = {
   Todo: { data: TodoDataType };
   Mold: { data: MoldDataType };
   Grid: undefined;
-  Create: undefined;
+  TodoForm: { type: 'create' | 'edit' };
+  Setting: undefined;
 };
 
 export type CustomStackScreenProp<

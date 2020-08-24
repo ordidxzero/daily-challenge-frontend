@@ -21,7 +21,7 @@ function FloatingPanelWrapper({
         height: 30,
         justifyContent: 'center',
       }}>
-      <Text style={{ fontSize: 17 }}>수정</Text>
+      <Text style={{ fontSize: 17 }}>완료</Text>
     </View>
   );
   const [panelProps] = useState<PanelProps>({
@@ -42,7 +42,7 @@ function FloatingPanelWrapper({
       panelOutsideHeight={55}
       containerStyle={containerStyle}
       isActive={isPanelActive}
-      panelContent={<TodoPanelContent />}>
+      panelContent={<TodoPanelContent detail={detail} />}>
       {children}
     </FloatingPanel>
   );

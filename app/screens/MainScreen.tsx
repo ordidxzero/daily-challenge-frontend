@@ -12,7 +12,9 @@ function MainScreen({ navigation }: CustomStackScreenProp<'Main'>) {
     <SafeAreaView
       style={[styles.safeAreaViewContainer, { position: 'relative' }]}>
       <Calendar />
-      <TodoCreateButton onPress={() => navigation.navigate('Create')} />
+      <TodoCreateButton
+        onPress={() => navigation.navigate('TodoForm', { type: 'create' })}
+      />
     </SafeAreaView>
   );
 }

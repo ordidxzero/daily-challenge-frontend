@@ -1,4 +1,4 @@
 export type ScreenHeaderProps = {
   title?: string;
-  type?: 'todo' | 'mold' | 'create';
+  type?: 'todo' | 'mold' | 'create' | 'edit';
 };

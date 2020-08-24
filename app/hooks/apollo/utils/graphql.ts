@@ -74,6 +74,7 @@ export const GET_TODO_MOLDS = gql`
         endDate
         startTime
         endTime
+        unit
         isRepeat
         method
         dayNameToRepeat

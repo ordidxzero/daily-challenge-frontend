@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { SafeAreaView, Animated } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { SafeAreaView, Animated, Keyboard } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
 import Header from '../components/common/Header';
@@ -13,9 +13,22 @@ import useRadioState from '../hooks/floatingPanel/useRadioState';
 import useFoldAnimation from '../hooks/floatingPanel/useFoldAnimation';
 import DateSetter from '../components/create/DateSetter';
 import useUnmountReset from '../hooks/common/useUnmountReset';
+import { CustomStackScreenProp } from './types';
+import useReduxState from '../hooks/common/useReduxState';
+import useDeleteTodoMold from '../hooks/apollo/useDeleteTodoMold';
+import DeleteButton from '../components/common/DeleteButton';
 
-function CreateScreen() {
-  useUnmountReset();
+function TodoFormScreen({
+  navigation,
+  route: {
+    params: { type },
+  },
+}: CustomStackScreenProp<'TodoForm'>) {
+  useUnmountReset(type === 'create');
+  const {
+    main: { detail },
+  } = useReduxState();
+  const scrollView = useRef<KeyboardAwareScrollView>(null);
   const [isRepeat, setIsRepeat] = useRadioState({
     current: 'no',
     data: [
@@ -34,18 +47,36 @@ function CreateScreen() {
   const { selectedDay } = useSelectDay();
   const { hardenForm, onChangeText } = useInput();
   const { todo } = hardenForm;
+  const deleteTodoMold = useDeleteTodoMold();
+  const onDeleteButtonPress = () =>
+    detail && deleteTodoMold(detail).then(() => navigation.navigate('Grid'));
   useEffect(() => {
+    if (type === 'edit') {
+      setIsRepeat(todo.isRepeat ? 'yes' : 'no')();
+      setMethod(todo.method)();
+    }
+  }, []);
+  useEffect(() => {
+    if (isRepeat.current === 'yes') {
+      setTimeout(() => scrollView.current?.scrollToEnd(), 300);
+    }
     onChangeText('todo', 'isRepeat')(isRepeat.current === 'yes');
     onChangeText('todo', 'method')(method.current);
   }, [isRepeat.current, method.current]);
   return (
     <SafeAreaView
       style={[styles.safeAreaViewContainer, { justifyContent: 'flex-start' }]}>
-      <Header title="할 일 생성하기" type="create" />
+      <Header
+        title={type === 'create' ? '할 일 생성하기' : '수정하기'}
+        type={type}
+      />
       <KeyboardAwareScrollView
         style={{ padding: 10 }}
+        onScrollBeginDrag={() => Keyboard.dismiss()}
+        ref={scrollView}
         showsVerticalScrollIndicator={false}>
         <InputSection title="BASIC INFOMATION">
+          {/** react-native-date-picker 사용할 것 */}
           <Input
             title="날짜"
             placeholder={selectedDay}
@@ -64,6 +95,7 @@ function CreateScreen() {
             placeholder="5"
             value={todo.amount}
             onChangeText={onChangeText('todo', 'amount')}
+            keyboardType="numeric"
           />
           <Input
             title="단위"
@@ -71,12 +103,14 @@ function CreateScreen() {
             value={todo.unit}
             onChangeText={onChangeText('todo', 'unit')}
           />
+          {/** react-native-date-picker 사용할 것 */}
           <Input
             title="시작 시간"
             placeholder="09:00"
             value={todo.startTime}
             onChangeText={onChangeText('todo', 'startTime')}
           />
+          {/** react-native-date-picker 사용할 것 */}
           <Input
             title="마감 시간"
             placeholder="10:00"
@@ -95,6 +129,7 @@ function CreateScreen() {
             overflow: 'hidden',
           }}>
           <InputSection title="ADVANCED INFOMATION">
+            {/** react-native-date-picker 사용할 것 */}
             <DateSetter />
             <Radio
               {...method}
@@ -110,6 +145,7 @@ function CreateScreen() {
                   placeholder="1"
                   value={todo.weekDifference}
                   onChangeText={onChangeText('todo', 'weekDifference')}
+                  keyboardType="numeric"
                 />
               </>
             )}
@@ -119,6 +155,7 @@ function CreateScreen() {
                 placeholder="1"
                 value={todo.dateDifference}
                 onChangeText={onChangeText('todo', 'dateDifference')}
+                keyboardType="numeric"
               />
             )}
             <Input
@@ -126,18 +163,23 @@ function CreateScreen() {
               placeholder="1"
               value={todo.amountChangeInterval}
               onChangeText={onChangeText('todo', 'amountChangeInterval')}
+              keyboardType="numeric"
             />
             <Input
               title="amount를 몇 개씩 증가시킬 지?"
               placeholder="5"
               value={todo.amountDifference}
               onChangeText={onChangeText('todo', 'amountDifference')}
+              keyboardType="numeric"
             />
           </InputSection>
         </Animated.View>
       </KeyboardAwareScrollView>
+      {type === 'edit' && (
+        <DeleteButton type="screen" onPress={onDeleteButtonPress} />
+      )}
     </SafeAreaView>
   );
 }
 
-export default CreateScreen;
+export default TodoFormScreen;

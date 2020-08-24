@@ -8,10 +8,10 @@ import ProgressInfo from '../components/mold/ProgressInfo';
 import Input from '../components/common/Input';
 import useSelectWeekdays from '../hooks/common/useSelectWeekdays';
 import ListOfWeekday from '../components/main/ListOfWeekday';
-import useResetWeekdays from '../hooks/common/useResetWeekdays';
 import useDetailSetter from '../hooks/floatingPanel/useDetailSetter';
 import useInput from '../hooks/common/useInput';
 import styles from './styles';
+import useUnmountReset from '../hooks/common/useUnmountReset';
 
 function MoldScreen({
   route: {
@@ -19,11 +19,11 @@ function MoldScreen({
   },
 }: CustomStackScreenProp<'Mold'>) {
   useDetailSetter(data.id);
+  useUnmountReset();
   const { setSelectedWeekdays } = useSelectWeekdays();
-  const { onChangeText, resetInput, hardenForm } = useInput();
+  const { onChangeText, hardenForm } = useInput();
   const { todo } = hardenForm;
 
-  const resetSelectedWeekdays = useResetWeekdays();
   useEffect(() => {
     setSelectedWeekdays(data.dayNameToRepeat);
     onChangeText('todo', 'title')(data.title);
@@ -31,14 +31,13 @@ function MoldScreen({
     onChangeText('todo', 'endDate')(data.endDate);
     onChangeText('todo', 'startTime')(data.startTime);
     onChangeText('todo', 'endTime')(data.endTime);
+    onChangeText('todo', 'unit')(data.unit);
+    onChangeText('todo', 'isRepeat')(data.isRepeat);
+    onChangeText('todo', 'method')(data.method);
     onChangeText('todo', 'weekDifference')(data.weekDifference);
     onChangeText('todo', 'dateDifference')(data.dateDifference);
     onChangeText('todo', 'amountChangeInterval')(data.amountChangeInterval);
     onChangeText('todo', 'amountDifference')(data.amountDifference);
-    return () => {
-      resetSelectedWeekdays();
-      resetInput();
-    };
   }, []);
   return (
     <SafeAreaView style={styles.safeAreaViewContainer}>

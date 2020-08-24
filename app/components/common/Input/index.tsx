@@ -10,6 +10,7 @@ function Input({
   value,
   placeholder,
   onChangeText,
+  keyboardType,
   containerStyle = {},
 }: InputProps) {
   const textInput = useRef<TextInput>(null);
@@ -23,7 +24,7 @@ function Input({
       <TextInput
         ref={textInput}
         editable={!disabled}
-        selectTextOnFocus={!disabled}
+        selectTextOnFocus={false}
         value={value}
         onChangeText={onChangeText}
         style={[
@@ -32,7 +33,9 @@ function Input({
         ]}
         placeholder={placeholder}
         autoCapitalize="none"
-        keyboardType="default"
+        autoCompleteType="off"
+        keyboardType={keyboardType}
+        returnKeyType="done"
       />
     </InputLayout>
   );
