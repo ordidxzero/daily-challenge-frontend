@@ -1,21 +1,25 @@
+// Modules
 import React, { useEffect, useRef } from 'react';
 import { SafeAreaView, Animated, Keyboard } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+// Utils
 import styles from './styles';
-import Header from '../components/common/Header';
-import Input from '../components/common/Input';
+import { CustomStackScreenProp } from './types';
+// Hooks
 import useInput from '../hooks/common/useInput';
 import useSelectDay from '../hooks/common/useSelectDay';
+import useRadioState from '../hooks/floatingPanel/useRadioState';
+import useFoldAnimation from '../hooks/floatingPanel/useFoldAnimation';
+import useUnmountReset from '../hooks/common/useUnmountReset';
+import useReduxState from '../hooks/common/useReduxState';
+import useDeleteTodoMold from '../hooks/apollo/useDeleteTodoMold';
+// Components
+import Header from '../components/common/Header';
+import Input from '../components/common/Input';
 import InputSection from '../components/common/FloatingPanelWrapper/InputSection';
 import Radio from '../components/common/Radio';
 import ListOfWeekday from '../components/main/ListOfWeekday';
-import useRadioState from '../hooks/floatingPanel/useRadioState';
-import useFoldAnimation from '../hooks/floatingPanel/useFoldAnimation';
 import DateSetter from '../components/create/DateSetter';
-import useUnmountReset from '../hooks/common/useUnmountReset';
-import { CustomStackScreenProp } from './types';
-import useReduxState from '../hooks/common/useReduxState';
-import useDeleteTodoMold from '../hooks/apollo/useDeleteTodoMold';
 import DeleteButton from '../components/common/DeleteButton';
 
 function TodoFormScreen({

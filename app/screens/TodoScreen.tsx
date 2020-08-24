@@ -1,13 +1,17 @@
+// Modules
 import React, { useEffect, useState } from 'react';
 import { Text, View, Dimensions } from 'react-native';
-import { CustomStackScreenProp } from './types';
-import styles from './styles';
 import dayjs from 'dayjs';
-import FloatingPanelWrapper from '../components/common/FloatingPanelWrapper';
-import Header from '../components/common/Header';
+// Utils
+import styles from './styles';
+import { CustomStackScreenProp } from './types';
+// Hooks
 import useInput from '../hooks/common/useInput';
 import useDetailSetter from '../hooks/floatingPanel/useDetailSetter';
 import useUnmountReset from '../hooks/common/useUnmountReset';
+// Components
+import FloatingPanelWrapper from '../components/common/FloatingPanelWrapper';
+import Header from '../components/common/Header';
 
 const { width } = Dimensions.get('window');
 

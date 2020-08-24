@@ -1,17 +1,21 @@
+// Modules
 import React, { useEffect } from 'react';
 import { ScrollView, View, SafeAreaView } from 'react-native';
+// Utils
 import { CustomStackScreenProp } from './types';
+import styles from './styles';
+// Hooks
+import useSelectWeekdays from '../hooks/common/useSelectWeekdays';
+import useDetailSetter from '../hooks/floatingPanel/useDetailSetter';
+import useInput from '../hooks/common/useInput';
+import useUnmountReset from '../hooks/common/useUnmountReset';
+// Components
 import Header from '../components/common/Header';
+import Input from '../components/common/Input';
 import ContinuousAchievement from '../components/mold/ContinuousAchievement';
 import InfoBox from '../components/mold/InfoBox';
 import ProgressInfo from '../components/mold/ProgressInfo';
-import Input from '../components/common/Input';
-import useSelectWeekdays from '../hooks/common/useSelectWeekdays';
 import ListOfWeekday from '../components/main/ListOfWeekday';
-import useDetailSetter from '../hooks/floatingPanel/useDetailSetter';
-import useInput from '../hooks/common/useInput';
-import styles from './styles';
-import useUnmountReset from '../hooks/common/useUnmountReset';
 
 function MoldScreen({
   route: {
