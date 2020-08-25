@@ -12,13 +12,13 @@ import {
   finishLoading,
 } from '../../config/store/main';
 
-function useImperativeQueryThunk<TVariables = OperationVariables>({
+function useImperativeQueryThunk<TData = any, TVariables = OperationVariables>({
   query,
   options = {},
   type,
 }: {
   query: DocumentNode;
-  options: QueryHookOptions<any, TVariables>;
+  options: QueryHookOptions<TData, TVariables>;
   type: 'around' | 'before' | 'after' | 'mold';
 }) {
   const keys = {

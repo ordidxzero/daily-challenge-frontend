@@ -1,6 +1,6 @@
 // Modules
-import React, { useEffect } from 'react';
-import { ScrollView, View, SafeAreaView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, View, SafeAreaView, Text } from 'react-native';
 // Utils
 import { CustomStackScreenProp } from './types';
 import styles from './styles';
@@ -24,6 +24,7 @@ function MoldScreen({
 }: CustomStackScreenProp<'Mold'>) {
   useDetailSetter(data.id);
   useUnmountReset();
+  const [loading, setLoading] = useState(true);
   const { setSelectedWeekdays } = useSelectWeekdays();
   const { onChangeText, hardenForm } = useInput();
   const { todo } = hardenForm;
@@ -42,59 +43,66 @@ function MoldScreen({
     onChangeText('todo', 'dateDifference')(data.dateDifference);
     onChangeText('todo', 'amountChangeInterval')(data.amountChangeInterval);
     onChangeText('todo', 'amountDifference')(data.amountDifference);
+    setLoading(false);
   }, []);
   return (
     <SafeAreaView style={styles.safeAreaViewContainer}>
       <Header type="mold" />
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <InfoBox
-          title={todo.title}
-          startDate={data.startDate}
-          endDate={todo.endDate}
-        />
+      {loading ? (
         <View>
-          <ContinuousAchievement
-            currentContinuousAchievement={data.currentContinuousAchievement}
-            maxContinuousAchievement={data.maxContinuousAchievement}
+          <Text>123</Text>
+        </View>
+      ) : (
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <InfoBox
+            title={todo.title}
+            startDate={data.startDate}
+            endDate={todo.endDate}
           />
-          <ProgressInfo
-            progressRate={data.progressRate}
-            completionRate={data.completionRate}
-          />
-          {todo.method === 'weekdays' && (
-            <>
-              <ListOfWeekday title="반복되는 요일" disabled={true} />
+          <View>
+            <ContinuousAchievement
+              currentContinuousAchievement={data.currentContinuousAchievement}
+              maxContinuousAchievement={data.maxContinuousAchievement}
+            />
+            <ProgressInfo
+              progressRate={data.progressRate}
+              completionRate={data.completionRate}
+            />
+            {todo.method === 'weekdays' && (
+              <>
+                <ListOfWeekday title="반복되는 요일" disabled={true} />
+                <Input
+                  title="Week Difference"
+                  value={todo.weekDifference}
+                  disabled={true}
+                />
+              </>
+            )}
+            {todo.method === 'dateDifference' && (
               <Input
-                title="Week Difference"
-                value={todo.weekDifference}
+                title="Date Difference"
+                value={todo.dateDifference}
                 disabled={true}
               />
-            </>
-          )}
-          {todo.method === 'dateDifference' && (
+            )}
             <Input
-              title="Date Difference"
-              value={todo.dateDifference}
+              title="Amount Change Interval"
+              value={todo.amountChangeInterval}
               disabled={true}
             />
-          )}
-          <Input
-            title="Amount Change Interval"
-            value={todo.amountChangeInterval}
-            disabled={true}
-          />
-          <Input
-            title="Amount Difference"
-            value={todo.amountDifference}
-            disabled={true}
-          />
-        </View>
-      </ScrollView>
+            <Input
+              title="Amount Difference"
+              value={todo.amountDifference}
+              disabled={true}
+            />
+          </View>
+        </ScrollView>
+      )}
     </SafeAreaView>
   );
 }

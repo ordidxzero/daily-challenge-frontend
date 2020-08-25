@@ -7,9 +7,12 @@ import {
   failureGetData,
   finishLoading,
 } from '../../config/store/main';
+import { UDTData, UDInput } from './utils/type';
 
 function useDeleteTodoMold() {
-  const [deleteTodoMoldMutation] = useMutation(DELETE_TODO_MOLD);
+  const [deleteTodoMoldMutation] = useMutation<UDTData, UDInput>(
+    DELETE_TODO_MOLD,
+  );
   const dispatch = useDispatch();
   const deleteTodoMold = (id: string) => {
     dispatch(startLoading('deleteTodoMold'));

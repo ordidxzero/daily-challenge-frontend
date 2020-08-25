@@ -9,10 +9,13 @@ import {
 import { useCallback } from 'react';
 import { useMutation } from '@apollo/client';
 import { TOGGLE_TODO } from './utils/graphql';
+import { ToggleTodoData, ToggleTodoInput } from './utils/type';
 
 function useToggleTodo() {
   const dispatch = useDispatch();
-  const [toggleTodoMutation] = useMutation(TOGGLE_TODO);
+  const [toggleTodoMutation] = useMutation<ToggleTodoData, ToggleTodoInput>(
+    TOGGLE_TODO,
+  );
   const toggleTodo = useCallback(
     ({ dateString, id, done }: ToggledTodoData & { done: boolean }) => {
       dispatch(startLoading('toggleTodo'));

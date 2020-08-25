@@ -8,11 +8,12 @@ import {
   failureGetData,
   finishLoading,
 } from '../../config/store/main';
+import { UDTData, UDInput } from './utils/type';
 
 function useEditTodo(id: string) {
   const dispatch = useDispatch();
   const { softenForm } = useInput();
-  const [editTodoMutation] = useMutation(EDIT_TODO);
+  const [editTodoMutation] = useMutation<UDTData, UDInput>(EDIT_TODO);
   const {
     startDate,
     title,

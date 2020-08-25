@@ -10,9 +10,13 @@ import {
   finishLoading,
 } from '../../config/store/main';
 import { generateTodoData } from './useTodoMoldAdder/utils';
+import { EditTodoMoldData, EditTodoMoldInput } from './utils/type';
 
 function useEditTodoMold() {
-  const [editTodoMoldMutation] = useMutation(EDIT_TODO_MOLD);
+  const [editTodoMoldMutation] = useMutation<
+    EditTodoMoldData,
+    EditTodoMoldInput
+  >(EDIT_TODO_MOLD);
   const { softenForm } = useInput();
   const dispatch = useDispatch();
   const {
@@ -37,26 +41,20 @@ function useEditTodoMold() {
         id,
         ...inputData,
         restartDate: startDate,
-        newAmount: inputData.amountDifference,
+        amount: inputData.amountDifference,
       },
     })
-      .then(
-        ({
-          data: {
-            editTodoMold: {
-              undeletedLastTodo: { amount },
-            },
-          },
-        }) => {
-          dispatch(
-            editTodoMoldAction({
-              id,
-              data: editData,
-              todoData: fakeTodoData(id, amount + editData.amountDifference),
-            }),
-          );
-        },
-      )
+      .then(({ data }) => {
+        const undeletedLastTodo = data?.editTodoMold.undeletedLastTodo;
+        const amount = undeletedLastTodo ? undeletedLastTodo.amount : 0;
+        dispatch(
+          editTodoMoldAction({
+            id,
+            data: editData,
+            todoData: fakeTodoData(id, amount + editData.amountDifference),
+          }),
+        );
+      })
       .catch(error => dispatch(failureGetData({ type: 'editTodoMold', error })))
       .finally(() => dispatch(finishLoading('editTodoMold')));
   };

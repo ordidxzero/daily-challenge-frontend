@@ -7,9 +7,10 @@ import {
   failureGetData,
   finishLoading,
 } from '../../config/store/main';
+import { UDInput, UDTData } from './utils/type';
 
 function useDeleteTodo() {
-  const [deleteTodoMutation] = useMutation(DELETE_TODO);
+  const [deleteTodoMutation] = useMutation<UDTData, UDInput>(DELETE_TODO);
   const dispatch = useDispatch();
   const deleteTodo = (data: { dateString: string; id: string }) => {
     dispatch(startLoading('deleteTodo'));

@@ -24,7 +24,6 @@ function useInput() {
     startTime,
     endTime,
     amount,
-    unit,
     weekDifference,
     dateDifference,
     amountDifference,
@@ -36,14 +35,13 @@ function useInput() {
     todo: {
       startTime: startTime || '99:99',
       endTime: endTime || '99:99',
-      unit: unit || '개',
       dayNameToRepeat,
-      ...rest,
       amount: checkIsNumber(amount),
       weekDifference: checkIsNumber(weekDifference),
       dateDifference: checkIsNumber(dateDifference),
       amountChangeInterval: checkIsNumber(amountChangeInterval),
       amountDifference: checkIsNumber(amountDifference),
+      ...rest,
     },
   };
 

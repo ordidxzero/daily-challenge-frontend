@@ -32,7 +32,6 @@ function TodoFormScreen({
   const {
     main: { detail },
   } = useReduxState();
-  const scrollView = useRef<KeyboardAwareScrollView>(null);
   const [isRepeat, setIsRepeat] = useRadioState({
     current: 'no',
     data: [
@@ -47,6 +46,7 @@ function TodoFormScreen({
       { key: 'dateDifference', label: '날짜 간격' },
     ],
   });
+  const scrollView = useRef<KeyboardAwareScrollView>(null);
   const animation = useFoldAnimation(isRepeat.current === 'yes');
   const { selectedDay } = useSelectDay();
   const { hardenForm, onChangeText } = useInput();

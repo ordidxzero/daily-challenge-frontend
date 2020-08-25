@@ -48,9 +48,9 @@ Line 179 : Add `showsVerticalScrollIndicator={false}`
 기능 테스트
 - [x] Login / Sign Up
 - [x] GET Data (Todo, TodoMold)
-- [ ] Edit Todo
+- [x] Edit Todo
   - [x] Front
-  - [ ] Back
+  - [x] Back
 - [x] Delete Todo (Back, Front)
 - [x] Create TodoMold (Back, Front)
 - [x] Delete TodoMold (Back, Front)
@@ -68,10 +68,12 @@ Line 179 : Add `showsVerticalScrollIndicator={false}`
 
 - OPTIONAL
   - `amount` = 0
-  - `unit` = '개', if `amount` = 0, null
+  - `unit` = '개', if `amount` = 0, empty string
   - `startTime` = -1 or '99:99'
   - `endTime` = -1 or '99:99'
-  - `endDate` = `startDate`
+  - `isRepeat` = false
+  - `method` = 'weekdays'
+  - `endDate`
   - `weekDifference` = 0
   - `dateDifference` = 0
   - `amountChangeInterval` = 0

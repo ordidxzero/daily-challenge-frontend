@@ -22,12 +22,11 @@ function TodoScreen({
 }: CustomStackScreenProp<'Todo'>) {
   useDetailSetter(data.id);
   useUnmountReset();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { onChangeText, hardenForm } = useInput();
   const { todo } = hardenForm;
 
   useEffect(() => {
-    setLoading(true);
     onChangeText('todo', 'startDate')(data.dateString);
     onChangeText('todo', 'title')(data.title);
     onChangeText('todo', 'amount')(data.amount);
