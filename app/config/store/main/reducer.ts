@@ -176,29 +176,29 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
       agendas: newAgendaData,
     };
   },
-  [EDIT_TODO_MOLD]: (state, { payload: { id, data, todoData } }) => {
-    const newMoldData = state.molds.map(mold =>
-      mold.id === id ? { ...mold, ...data } : mold,
-    );
+  [EDIT_TODO_MOLD]: (
+    state,
+    { payload: { oldTodoMoldId, newTodoMoldId, restartDate } },
+  ) => {
+    const newMoldData = state.molds.filter(mold => mold.id !== oldTodoMoldId);
     const oldAgenda = state.agendas;
-    const filterOldAgenda = oldAgenda.map(agenda => {
-      // restartDate 가 있어야됨
-      const filteredTodos = agenda.todos.filter(todo => todo.todoMoldId !== id);
+    const newAgendaData = oldAgenda.map(agenda => {
+      if (dayjs(agenda.dateString).isBefore(restartDate)) {
+        const newTodos = agenda.todos.map(todo => ({
+          ...todo,
+          todoMoldId: newTodoMoldId,
+        }));
+        return {
+          dateString: agenda.dateString,
+          todos: newTodos,
+        };
+      }
+      const filteredTodos = agenda.todos.filter(
+        todo => todo.todoMoldId !== oldTodoMoldId,
+      );
       return {
         dateString: agenda.dateString,
         todos: filteredTodos,
-      };
-    });
-    const newAgendaData = filterOldAgenda.map(agenda => {
-      const newTodo = todoData.find(
-        item => item.dateString === agenda.dateString,
-      );
-      if (!newTodo) {
-        return agenda;
-      }
-      return {
-        dateString: agenda.dateString,
-        todos: agenda.todos.concat(newTodo.todo),
       };
     });
     return {

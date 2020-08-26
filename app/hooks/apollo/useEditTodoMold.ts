@@ -1,15 +1,15 @@
-import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useMutation } from '@apollo/client';
 import { EDIT_TODO_MOLD } from './utils/graphql';
 import useInput from '../common/useInput';
 import {
   editTodoMold as editTodoMoldAction,
+  addData,
   startLoading,
   failureGetData,
   finishLoading,
 } from '../../config/store/main';
-import { generateTodoData } from './useTodoMoldAdder/utils';
+import { generateData } from './useTodoMoldAdder/utils';
 import { EditTodoMoldData, EditTodoMoldInput } from './utils/type';
 
 function useEditTodoMold() {
@@ -20,19 +20,8 @@ function useEditTodoMold() {
   const { softenForm } = useInput();
   const dispatch = useDispatch();
   const {
-    todo: { startDate, ...inputData },
+    todo: { startDate, amount, ...inputData },
   } = softenForm;
-
-  const {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    todo: { amount: a, startDate: b, unit: c, ...editData },
-  } = softenForm;
-
-  const fakeTodoData = useCallback(
-    (id: string, amount: number) =>
-      generateTodoData({ ...softenForm.todo, amount }, id),
-    [softenForm.todo],
-  );
 
   const editTodoMold = (id: string) => {
     dispatch(startLoading('editTodoMold'));
@@ -41,19 +30,35 @@ function useEditTodoMold() {
         id,
         ...inputData,
         restartDate: startDate,
-        amount: inputData.amountDifference,
+        newAmount: amount,
       },
     })
       .then(({ data }) => {
-        const undeletedLastTodo = data?.editTodoMold.undeletedLastTodo;
-        const amount = undeletedLastTodo ? undeletedLastTodo.amount : 0;
-        dispatch(
-          editTodoMoldAction({
-            id,
-            data: editData,
-            todoData: fakeTodoData(id, amount + editData.amountDifference),
-          }),
-        );
+        if (data) {
+          const { newTodoMold, oldTodoMoldId } = data.editTodoMold;
+          if (newTodoMold && oldTodoMoldId) {
+            const { id, amount } = newTodoMold;
+            dispatch(
+              editTodoMoldAction({
+                oldTodoMoldId,
+                newTodoMoldId: id,
+                restartDate: startDate,
+              }),
+            );
+            return dispatch(
+              addData(
+                generateData(
+                  {
+                    ...softenForm.todo,
+                    amount,
+                  },
+                  id,
+                ),
+              ),
+            );
+          }
+        }
+        throw Error('Data does not returned..');
       })
       .catch(error => dispatch(failureGetData({ type: 'editTodoMold', error })))
       .finally(() => dispatch(finishLoading('editTodoMold')));

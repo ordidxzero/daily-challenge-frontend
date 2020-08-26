@@ -27,6 +27,7 @@ export type MoldDataType = {
   unit: string;
   isRepeat: boolean;
   method: 'weekdays' | 'dateDifference';
+  initialAmount: number;
   dayNameToRepeat: number[];
   weekDifference: number;
   dateDifference: number;

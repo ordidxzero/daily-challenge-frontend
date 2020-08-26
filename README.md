@@ -40,6 +40,7 @@ Line 179 : Add `showsVerticalScrollIndicator={false}`
 - [x] EditScreen / TodoPanelContent에 삭제 버튼 추가할 것
 - [ ] Form에서 done,next 등을 누르면 다음 TextInput으로 넘어가게 할 것
 - [ ] MoldScreen에서 연속 달성 숫자를 프론트에서 조절할 수 있도록 바꿀 것
+- [ ] Logout 기능 추가할 것
 
 - [ ] Panel 자체에 버그가 상당함. react-native-modalize 적용을 고민해볼 것. 혹은 PanResponder를 개선할 방법을 찾아볼 것
   - [x] 일정 HEIGHT 이상으로 스크롤 했을 때, Component가 분리되는 현상 해결할 것
@@ -54,8 +55,8 @@ Line 179 : Add `showsVerticalScrollIndicator={false}`
 - [x] Delete Todo (Back, Front)
 - [x] Create TodoMold (Back, Front)
 - [x] Delete TodoMold (Back, Front)
-- [ ] Edit TodoMold (Back, Front)
-  - [ ] 일단, 기존 TodoMold와 관련된 Todo가 삭제되는 것 까지는 정상 작동, TodoMold는 수정 안됨 (Back, Front)
+- [x] Edit TodoMold (Back, Front)
+  - [x] 일단, 기존 TodoMold와 관련된 Todo가 삭제되는 것 까지는 정상 작동, TodoMold는 수정 안됨 (Back, Front)
 
 --> Edit Todo (Back)과 Edit TodoMold를 수정할 것.
 

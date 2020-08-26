@@ -15,21 +15,9 @@ export type FakeData = {
 
 export type EditTodoDataType = Omit<TodoDataType, 'done' | 'todoMoldId'>;
 export type EditTodoMoldDataType = {
-  id: string;
-  data: {
-    title: string;
-    endDate: string;
-    startTime: string;
-    endTime: string;
-    isRepeat: boolean;
-    method: 'weekdays' | 'dateDifference';
-    dayNameToRepeat: number[];
-    weekDifference: number;
-    dateDifference: number;
-    amountChangeInterval: number;
-    amountDifference: number;
-  };
-  todoData: FakeTodoDataType[];
+  oldTodoMoldId: string;
+  newTodoMoldId: string;
+  restartDate: string;
 };
 
 export type ToggledTodoData = {

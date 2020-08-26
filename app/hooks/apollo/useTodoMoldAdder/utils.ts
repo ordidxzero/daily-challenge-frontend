@@ -75,6 +75,7 @@ export const generateMoldData = (
 ): MoldDataType => ({
   id,
   ...data,
+  initialAmount: data.amount,
   priority: 1,
   completionRate: 0,
   progressRate: 0,

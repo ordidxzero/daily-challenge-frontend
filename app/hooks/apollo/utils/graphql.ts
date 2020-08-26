@@ -77,6 +77,7 @@ export const GET_TODO_MOLDS = gql`
         unit
         isRepeat
         method
+        initialAmount
         dayNameToRepeat
         weekDifference
         dateDifference
@@ -129,8 +130,9 @@ export const EDIT_TODO_MOLD = gql`
       amountChangeInterval: $amountChangeInterval
     ) {
       ok
-      undeletedLastTodo {
-        dateString
+      oldTodoMoldId
+      newTodoMold {
+        id
         amount
       }
       error
@@ -164,8 +166,8 @@ export const EDIT_TODO = gql`
 `;
 
 export const DELETE_TODO = gql`
-  mutation RemoveTodo($id: String!) {
-    removeTodo(id: $id) {
+  mutation DeleteTodo($id: String!) {
+    deleteTodo(id: $id) {
       ok
       error
     }
@@ -173,8 +175,8 @@ export const DELETE_TODO = gql`
 `;
 
 export const DELETE_TODO_MOLD = gql`
-  mutation RemoveTodoMold($id: String!) {
-    removeTodoMold(id: $id) {
+  mutation DeleteTodoMold($id: String!) {
+    deleteTodoMold(id: $id) {
       ok
       error
     }

@@ -51,14 +51,15 @@ export type GetTodoMoldsData = {
 export type EditTodoMoldInput = MoldInput & {
   id: string;
   restartDate: string;
-  amount: number;
+  newAmount: number;
 };
 
 export type EditTodoMoldData = {
   editTodoMold: {
     ok: boolean;
-    undeletedLastTodo?: {
-      dateString: string;
+    oldTodoMoldId?: string;
+    newTodoMold?: {
+      id: string;
       amount: number;
     };
     error?: string;
@@ -93,11 +94,11 @@ export type EditTodoData = {
 };
 
 export type DeleteTodoData = {
-  removeTodo: UDTData;
+  deleteTodo: UDTData;
 };
 
 export type DeleteTodoMoldData = {
-  removeTodoMold: UDTData;
+  deleteTodoMold: UDTData;
 };
 
 export type ToggleTodoData = {
