@@ -9,4 +9,5 @@ export type InputProps = {
   keyboardType?: KeyboardTypeOptions;
   onChangeText?: (text: string) => void;
   containerStyle?: any;
+  secureTextEntry?: boolean;
 };

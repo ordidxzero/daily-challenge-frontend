@@ -17,7 +17,16 @@ function useLoginToken() {
       return;
     }
   };
-  return { checkLogin, setToken };
+
+  const logout = async () => {
+    try {
+      await AsyncStorage.removeItem('dc_login_token');
+      setToken(null);
+    } catch (error) {
+      return;
+    }
+  };
+  return { checkLogin, setToken, logout };
 }
 
 export default useLoginToken;

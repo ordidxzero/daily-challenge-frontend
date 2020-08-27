@@ -31,6 +31,7 @@ function SignUpScreen({ navigation }: CustomStackScreenProp<'SignUp'>) {
         title="Password"
         placeholder="PW"
         onChangeText={onChangeText('auth', 'password')}
+        secureTextEntry={true}
         value={password}
       />
       <Button title="Sign Up" onPress={createAccount} />

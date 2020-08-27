@@ -23,23 +23,25 @@ export type EditTodoMoldDataType = {
 export type ToggledTodoData = {
   dateString: string;
   id: string;
+  done: boolean;
 };
 
 export type RequestState = {
-  around: boolean | string | null;
-  before: boolean | string | null;
-  after: boolean | string | null;
-  mold: boolean | string | null;
-  createMold: boolean | string | null;
-  deleteTodo: boolean | string | null;
-  deleteTodoMold: boolean | string | null;
-  editTodo: boolean | string | null;
-  editTodoMold: boolean | string | null;
-  toggleTodo: boolean | string | null;
+  around?: boolean | string;
+  before?: boolean | string;
+  after?: boolean | string;
+  mold?: boolean | string;
+  createMold?: boolean | string;
+  deleteTodo?: boolean | string;
+  deleteTodoMold?: boolean | string;
+  editTodo?: boolean | string;
+  editTodoMold?: boolean | string;
+  toggleTodo?: boolean | string;
 };
 
 export type MainState = {
   selectedDay: string;
+  darkMode: boolean;
   detail: string | null;
   isPanelActive: boolean;
   agendas: AgendaDataType[];

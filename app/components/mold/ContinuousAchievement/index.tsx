@@ -15,6 +15,7 @@ function ContinuousAchievement({
   return (
     <View
       style={{
+        position: 'relative',
         width: width - 50,
         flexDirection: 'row',
         justifyContent: 'space-around',
@@ -33,8 +34,22 @@ function ContinuousAchievement({
           color="#3498db"
           style={{ marginRight: 5 }}
         />
-        <Text>현재 연속 달성</Text>
+        <Text style={{ fontSize: 17 }}>현재 연속 달성</Text>
       </AchievementLayout>
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 1,
+          left: 0,
+          width: '100%',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text style={{ fontSize: 12, color: '#d63031', alignItems: 'center' }}>
+          <Text style={{ fontSize: 20 }}>※</Text>{' '}
+          <Text>오늘을 기준으로 집계됩니다.</Text>
+        </Text>
+      </View>
       <View style={{ height: 60, backgroundColor: '#dcdde1', width: 1 }}></View>
       <AchievementLayout data={maxContinuousAchievement}>
         <SimpleLineIcons
@@ -43,7 +58,7 @@ function ContinuousAchievement({
           color="#f1c40f"
           style={{ marginRight: 5 }}
         />
-        <Text>최고 연속 달성</Text>
+        <Text style={{ fontSize: 17 }}>최고 연속 달성</Text>
       </AchievementLayout>
     </View>
   );

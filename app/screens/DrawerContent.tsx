@@ -8,11 +8,13 @@ import {
 import { Drawer } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { ifIphoneX, getBottomSpace } from 'react-native-iphone-x-helper';
+import useLoginToken from '../hooks/common/useLoginToken';
 
 function DrawerContent(
   props: DrawerContentComponentProps<DrawerContentOptions>,
 ) {
   const { navigation } = props;
+  const { logout } = useLoginToken();
   return (
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView {...props}>
@@ -25,7 +27,12 @@ function DrawerContent(
       </DrawerContentScrollView>
       <Drawer.Section
         style={{ ...ifIphoneX({ marginBottom: getBottomSpace() }, {}) }}>
-        <TouchableOpacity activeOpacity={0.7} onPress={() => console.log(123)}>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={async () => {
+            await logout();
+            navigation.navigate('SignIn');
+          }}>
           <Drawer.Item icon="exit-to-app" label="Log Out" />
         </TouchableOpacity>
       </Drawer.Section>

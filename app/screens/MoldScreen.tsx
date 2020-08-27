@@ -50,7 +50,7 @@ function MoldScreen({
       <Header type="mold" />
       {loading ? (
         <View>
-          <Text>123</Text>
+          <Text>Skeleton</Text>
         </View>
       ) : (
         <ScrollView
@@ -61,7 +61,7 @@ function MoldScreen({
           }}>
           <InfoBox
             title={todo.title}
-            startDate={data.startDate}
+            startDate={todo.startDate}
             endDate={todo.endDate}
           />
           <View>

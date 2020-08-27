@@ -31,6 +31,7 @@ function SignInScreen({ navigation }: CustomStackScreenProp<'SignIn'>) {
         title="Password"
         placeholder="PW"
         onChangeText={onChangeText('auth', 'password')}
+        secureTextEntry={true}
         value={password}
       />
       <Button title="Sign In" onPress={signIn} />

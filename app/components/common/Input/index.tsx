@@ -11,6 +11,7 @@ function Input({
   placeholder,
   onChangeText,
   keyboardType,
+  secureTextEntry = false,
   containerStyle = {},
 }: InputProps) {
   const textInput = useRef<TextInput>(null);
@@ -31,6 +32,7 @@ function Input({
           styles.textInputContainer,
           { color: disabled ? 'grey' : 'black' },
         ]}
+        secureTextEntry={secureTextEntry}
         placeholder={placeholder}
         autoCapitalize="none"
         autoCompleteType="off"

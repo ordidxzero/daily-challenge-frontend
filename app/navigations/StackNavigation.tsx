@@ -19,7 +19,11 @@ function StackNavigation() {
     <Stack.Navigator headerMode="none" screenOptions={{ gestureEnabled: true }}>
       {!token && (
         <>
-          <Stack.Screen name="SignIn" component={SignInScreen} />
+          <Stack.Screen
+            name="SignIn"
+            component={SignInScreen}
+            options={{ gestureEnabled: false }}
+          />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
         </>
       )}

@@ -15,26 +15,17 @@ import {
   SELECT_DETAIL,
   EDIT_TODO_MOLD,
   FINISH_LOADING,
+  TOGGLE_DARK_MODE,
 } from './actions';
 
 const initialState: MainState = {
   selectedDay: dayjs().format('YYYY-MM-DD'),
   detail: null,
+  darkMode: false,
   isPanelActive: false,
   agendas: [],
   molds: [],
-  error: {
-    around: null,
-    before: null,
-    after: null,
-    mold: null,
-    createMold: null,
-    deleteTodo: null,
-    deleteTodoMold: null,
-    editTodo: null,
-    editTodoMold: null,
-    toggleTodo: null,
-  },
+  error: {},
   loading: {
     mold: false,
     around: false,
@@ -52,19 +43,18 @@ const initialState: MainState = {
 const reducer = createReducer<MainState, MainAction>(initialState, {
   [SELECT_DAY]: (state, { payload }) => ({ ...state, selectedDay: payload }),
   [SELECT_DETAIL]: (state, { payload }) => ({ ...state, detail: payload }),
+  [TOGGLE_PANEL]: (state, { payload }) => ({
+    ...state,
+    isPanelActive: payload,
+  }),
+  [TOGGLE_DARK_MODE]: (state, { payload }) => ({ ...state, darkMode: payload }),
   [ADD_DATA]: (state, { payload: { todoData, moldData } }) => {
-    const oldAgendas = state.agendas;
-    const newAgendas = oldAgendas.map(agenda => {
+    const newAgendas = state.agendas.map(agenda => {
       const newTodo = todoData.find(
         todo => todo.dateString === agenda.dateString,
       );
-      if (!newTodo) {
-        return agenda;
-      }
-      return {
-        dateString: agenda.dateString,
-        todos: agenda.todos.concat(newTodo.todo),
-      };
+      if (!newTodo) return agenda;
+      return { ...agenda, todos: agenda.todos.concat(newTodo.todo) };
     });
     return {
       ...state,
@@ -103,72 +93,41 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
     ...state,
     error: { ...state.error, [type]: error },
   }),
-  [TOGGLE_PANEL]: (state, { payload }) => ({
-    ...state,
-    isPanelActive: payload,
-  }),
-  [TOGGLE_TODO]: (state, { payload }) => {
-    const data = state.agendas.find(
-      agenda => agenda.dateString === payload.dateString,
-    );
-    if (data) {
-      const newData = data?.todos.map(todo =>
-        todo.id === payload.id ? { ...todo, done: !todo.done } : todo,
+  [TOGGLE_TODO]: (state, { payload: { id, dateString, done } }) => {
+    const newAgendaData = state.agendas.map(agenda => {
+      if (agenda.dateString !== dateString) return agenda;
+      const newTodosData = agenda.todos.map(todo =>
+        todo.id !== id ? todo : { ...todo, done },
       );
-      return {
-        ...state,
-        agendas: state.agendas.map(agenda =>
-          agenda.dateString === payload.dateString
-            ? { ...agenda, todos: newData }
-            : agenda,
-        ),
-      };
-    }
-    return state;
+      return { dateString, todos: newTodosData };
+    });
+    return { ...state, agendas: newAgendaData };
   },
   [EDIT_TODO]: (state, { payload }) => {
-    const data = state.agendas.find(
-      agenda => agenda.dateString === payload.dateString,
-    );
-    if (data) {
-      const newData = data.todos.map(todo =>
-        todo.id === payload.id
-          ? { ...payload, done: todo.done, todoMoldId: todo.todoMoldId }
-          : todo,
+    const newAgendaData = state.agendas.map(agenda => {
+      if (agenda.dateString !== payload.dateString) return agenda;
+      const newTodosData = agenda.todos.map(todo =>
+        todo.id !== payload.id
+          ? todo
+          : { ...payload, done: todo.done, todoMoldId: todo.todoMoldId },
       );
-      return {
-        ...state,
-        agendas: state.agendas.map(item =>
-          item.dateString === payload.dateString
-            ? { ...item, todos: newData }
-            : item,
-        ),
-      };
-    }
-    return state;
+      return { ...agenda, todos: newTodosData };
+    });
+    return { ...state, agendas: newAgendaData };
   },
-  [DELETE_TODO]: (state, { payload }) => {
-    const data = state.agendas.find(
-      agenda => agenda.dateString === payload.dateString,
-    );
-    if (data) {
-      const newData = data?.todos.filter(todo => todo.id !== payload.id);
-      return {
-        ...state,
-        agendas: state.agendas.map(agenda =>
-          agenda.dateString === payload.dateString
-            ? { ...agenda, todos: newData }
-            : agenda,
-        ),
-      };
-    }
-    return state;
+  [DELETE_TODO]: (state, { payload: { id, dateString } }) => {
+    const newAgendaData = state.agendas.map(agenda => {
+      if (agenda.dateString !== dateString) return agenda;
+      const newTodosData = agenda.todos.filter(todo => todo.id !== id);
+      return { dateString, todos: newTodosData };
+    });
+    return { ...state, agendas: newAgendaData };
   },
   [DELETE_TODO_MOLD]: (state, { payload }) => {
     const newMoldData = state.molds.filter(mold => mold.id !== payload);
-    const newAgendaData = state.agendas.map(data => ({
-      ...data,
-      todos: data.todos.filter(todo => todo.todoMoldId !== payload),
+    const newAgendaData = state.agendas.map(agenda => ({
+      ...agenda,
+      todos: agenda.todos.filter(todo => todo.todoMoldId !== payload),
     }));
     return {
       ...state,
@@ -181,25 +140,15 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
     { payload: { oldTodoMoldId, newTodoMoldId, restartDate } },
   ) => {
     const newMoldData = state.molds.filter(mold => mold.id !== oldTodoMoldId);
-    const oldAgenda = state.agendas;
-    const newAgendaData = oldAgenda.map(agenda => {
-      if (dayjs(agenda.dateString).isBefore(restartDate)) {
-        const newTodos = agenda.todos.map(todo => ({
-          ...todo,
-          todoMoldId: newTodoMoldId,
-        }));
-        return {
-          dateString: agenda.dateString,
-          todos: newTodos,
-        };
-      }
-      const filteredTodos = agenda.todos.filter(
-        todo => todo.todoMoldId !== oldTodoMoldId,
-      );
-      return {
-        dateString: agenda.dateString,
-        todos: filteredTodos,
-      };
+    const newAgendaData = state.agendas.map(agenda => {
+      const isBeforeStandard = dayjs(agenda.dateString).isBefore(restartDate);
+      const newTodosData = isBeforeStandard
+        ? agenda.todos.map(todo => ({
+            ...todo,
+            todoMoldId: newTodoMoldId,
+          }))
+        : agenda.todos.filter(todo => todo.todoMoldId !== oldTodoMoldId);
+      return { ...agenda, todos: newTodosData };
     });
     return {
       ...state,

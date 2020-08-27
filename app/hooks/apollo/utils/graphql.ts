@@ -85,10 +85,10 @@ export const GET_TODO_MOLDS = gql`
         amountChangeInterval
         priority
         isValid
-        progressRate(dateString: $dateString)
         completionRate(dateString: $dateString)
+        progressRate(dateString: $dateString)
         currentContinuousAchievement(dateString: $dateString)
-        maxContinuousAchievement
+        maxContinuousAchievement(dateString: $dateString)
       }
     }
   }
