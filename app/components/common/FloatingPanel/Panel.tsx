@@ -12,7 +12,7 @@ import {
 import { PanelProps, PanelState } from './types';
 
 import { Bar } from './Bar';
-import { Close } from './Close';
+import Close from './Close';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const FULL_HEIGHT = Dimensions.get('window').height;

@@ -35,8 +35,8 @@ function useEditTodoMold() {
     })
       .then(({ data }) => {
         if (data) {
-          const { newTodoMold, oldTodoMoldId } = data.editTodoMold;
-          if (newTodoMold && oldTodoMoldId) {
+          const { newTodoMold, oldTodoMoldId, todoIds } = data.editTodoMold;
+          if (newTodoMold && oldTodoMoldId && todoIds) {
             const { id, amount } = newTodoMold;
             dispatch(
               editTodoMoldAction({
@@ -47,13 +47,14 @@ function useEditTodoMold() {
             );
             return dispatch(
               addData(
-                generateData(
-                  {
+                generateData({
+                  data: {
                     ...softenForm.todo,
                     amount,
                   },
-                  id,
-                ),
+                  todoMoldId: id,
+                  todoIds,
+                }),
               ),
             );
           }

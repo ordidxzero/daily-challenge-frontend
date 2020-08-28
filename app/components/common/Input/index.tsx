@@ -7,6 +7,7 @@ import InputLayout from '../InputLayout';
 function Input({
   title,
   disabled = false,
+  required = false,
   value,
   placeholder,
   onChangeText,
@@ -18,7 +19,12 @@ function Input({
   const onTitlePress = () => textInput.current?.focus();
   return (
     <InputLayout
-      containerStyle={[styles.inputContainer, containerStyle]}
+      containerStyle={[
+        styles.inputContainer,
+        containerStyle,
+        required && value === '' && styles.requiredInputContainer,
+      ]}
+      showMessage={required && value === ''}
       titleStyle={styles.inputTitle}
       title={title}
       onTitlePress={onTitlePress}>

@@ -1,17 +1,18 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { CloseProps } from './types';
+import useInput from '../../../hooks/common/useInput';
 
-export const Close = ({
-  onPress,
-  rootStyle,
-  iconStyle,
-  renderButton,
-}: CloseProps) => {
+const Close = ({ onPress, rootStyle, iconStyle, renderButton }: CloseProps) => {
+  const {
+    hardenForm: { todo },
+  } = useInput();
+  const { startDate, title } = todo;
   return (
     <TouchableOpacity
       activeOpacity={0.5}
       onPress={onPress}
+      disabled={startDate === '' || title === ''}
       style={[
         CloseStyles.defaultButton,
         !renderButton && CloseStyles.closeButton,
@@ -40,6 +41,8 @@ export const Close = ({
     </TouchableOpacity>
   );
 };
+
+export default React.memo(Close);
 
 const CloseStyles = StyleSheet.create({
   defaultButton: {

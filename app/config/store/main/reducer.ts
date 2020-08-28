@@ -56,11 +56,17 @@ const reducer = createReducer<MainState, MainAction>(initialState, {
       if (!newTodo) return agenda;
       return { ...agenda, todos: agenda.todos.concat(newTodo.todo) };
     });
-    return {
-      ...state,
-      agendas: newAgendas,
-      molds: state.molds.concat(moldData),
-    };
+    const result = moldData
+      ? {
+          ...state,
+          agendas: newAgendas,
+          molds: state.molds.concat(moldData),
+        }
+      : {
+          ...state,
+          agendas: newAgendas,
+        };
+    return result;
   },
   [START_LOADING]: (state, { payload: type }) => ({
     ...state,

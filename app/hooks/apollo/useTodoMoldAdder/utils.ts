@@ -1,4 +1,3 @@
-import { SoftenTodoInputState } from '../../../config/store/input';
 import {
   checkOverRange,
   getDateStringArray,
@@ -6,6 +5,7 @@ import {
   filterByDayName,
 } from './dayjsUtils';
 import { MoldDataType } from '../../../@types';
+import { GenerateDataParams, GenerateMoldDataParams } from './types';
 
 export const generateID = () => {
   const specials = '!$%^&*()_+|~-=`{}[]:;<>?,./';
@@ -15,16 +15,19 @@ export const generateID = () => {
   return `${randomString()}${randomSpecial}${randomString()}`;
 };
 
-export const generateTodoData = (
-  data: SoftenTodoInputState,
-  todoMoldId: string,
-) => {
+export const generateTodoData = ({
+  data,
+  todoMoldId,
+  todoIds,
+}: GenerateDataParams) => {
   const {
     startDate,
     endDate,
     startTime,
     endTime,
     title,
+    isRepeat,
+    method,
     unit,
     amount,
     weekDifference,
@@ -34,46 +37,65 @@ export const generateTodoData = (
     dayNameToRepeat,
   } = data;
 
-  let amountAccumulator = amount;
+  if (isRepeat) {
+    let amountAccumulator = amount;
 
-  const dateStringArray = checkOverRange({
-    end: endDate,
-    target: getDateStringArray({ start: startDate }),
-  });
+    const dateStringArray = checkOverRange({
+      end: endDate,
+      target: getDateStringArray({ start: startDate }),
+    });
 
-  const validDates = dateDifference
-    ? filterByDateDifference(dateDifference, dateStringArray)
-    : filterByDayName(dayNameToRepeat, weekDifference, dateStringArray);
+    const validDates =
+      method === 'dateDifference'
+        ? filterByDateDifference(dateDifference, dateStringArray)
+        : filterByDayName(dayNameToRepeat, weekDifference, dateStringArray);
 
-  const result = validDates.map((dateString, index) => {
-    const hasChanged = index % amountChangeInterval === 0;
-    amountAccumulator = hasChanged
-      ? amount + (index / amountChangeInterval) * amountDifference
-      : amountAccumulator;
-    return {
-      dateString,
-      todo: {
-        id: generateID(),
+    const result = validDates.map((dateString, index) => {
+      const id = todoIds.find(todoId => todoId.dateString === dateString)?.id;
+      const hasChanged = index % amountChangeInterval === 0;
+      amountAccumulator = hasChanged
+        ? amount + (index / amountChangeInterval) * amountDifference
+        : amountAccumulator;
+      return {
         dateString,
+        todo: {
+          id: id ? id : generateID(),
+          dateString,
+          title,
+          amount: amountAccumulator,
+          unit,
+          startTime,
+          endTime,
+          done: false,
+          todoMoldId,
+        },
+      };
+    });
+    return result;
+  }
+  return [
+    {
+      dateString: startDate,
+      todo: {
+        id: todoIds[0].id,
+        dateString: startDate,
         title,
-        amount: amountAccumulator,
+        amount,
         unit,
         startTime,
         endTime,
         done: false,
         todoMoldId,
       },
-    };
-  });
-
-  return result;
+    },
+  ];
 };
 
-export const generateMoldData = (
-  data: SoftenTodoInputState,
-  id: string,
-): MoldDataType => ({
-  id,
+export const generateMoldData = ({
+  data,
+  todoMoldId,
+}: GenerateMoldDataParams): MoldDataType => ({
+  id: todoMoldId,
   ...data,
   initialAmount: data.amount,
   priority: 1,
@@ -84,9 +106,15 @@ export const generateMoldData = (
   isValid: true,
 });
 
-export const generateData = (data: SoftenTodoInputState, id: string) => {
-  return {
-    moldData: generateMoldData(data, id),
-    todoData: generateTodoData(data, id),
-  };
+export const generateData = (params: GenerateDataParams) => {
+  const { data, todoMoldId } = params;
+  const result = todoMoldId
+    ? {
+        moldData: generateMoldData({ data, todoMoldId }),
+        todoData: generateTodoData(params),
+      }
+    : {
+        todoData: generateTodoData(params),
+      };
+  return result;
 };

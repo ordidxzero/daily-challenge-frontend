@@ -27,7 +27,9 @@ function Calendar() {
           theme={{
             selectedDayBackgroundColor: '#2ecc71',
             selectedDayTextColor: 'white',
-            'stylesheet.calendar.header': { header: { display: 'none' } },
+            'stylesheet.calendar.header': {
+              header: { display: 'none' },
+            },
           }}
           onVisibleMonthsChange={months =>
             setVisibleMonth(

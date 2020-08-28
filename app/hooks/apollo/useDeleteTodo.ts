@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useMutation } from '@apollo/client';
 import { DELETE_TODO } from './utils/graphql';
@@ -6,21 +7,23 @@ import {
   startLoading,
   failureGetData,
   finishLoading,
+  DeleteTodoData,
 } from '../../config/store/main';
 import { UDInput, UDTData } from './utils/type';
 
 function useDeleteTodo() {
   const [deleteTodoMutation] = useMutation<UDTData, UDInput>(DELETE_TODO);
   const dispatch = useDispatch();
-  const deleteTodo = (data: { dateString: string; id: string }) => {
-    dispatch(startLoading('deleteTodo'));
-    return deleteTodoMutation({ variables: { id: data.id } })
-      .then(() => {
-        dispatch(deleteTodoAction(data));
-      })
-      .catch(error => dispatch(failureGetData({ type: 'deleteTodo', error })))
-      .finally(() => dispatch(finishLoading('deleteTodo')));
-  };
+  const deleteTodo = useCallback(
+    ({ id, dateString }: DeleteTodoData) => {
+      dispatch(startLoading('deleteTodo'));
+      return deleteTodoMutation({ variables: { id } })
+        .then(() => dispatch(deleteTodoAction({ id, dateString })))
+        .catch(error => dispatch(failureGetData({ type: 'deleteTodo', error })))
+        .finally(() => dispatch(finishLoading('deleteTodo')));
+    },
+    [dispatch],
+  );
   return deleteTodo;
 }
 

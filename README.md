@@ -12,7 +12,6 @@ Line 179 : Add `showsVerticalScrollIndicator={false}`
   - [x] softenForm 만들어서 해결.
 - [x] createTodoMold를 했을 때 TodoList에 방금 생성한 Todo가 들어가야됨
   - [x] Grid -> Main으로 넘어가도 백엔드 요청을 안하니까, state말고 redux를 사용해도 될 듯?
-  - [ ] 아직 시간대별로 정리하는 로직은 못 짬.. 리듀서가 더러워짐
 - [x] GridScreen으로 갔을 때 ToDoManager의 text를 바꿔야하는데, props에 접근하면 AppLoading에서 에러가 발생해서 문제;;
 - [x] Edit 기능 추가할 것
   - [x] Todo를 수정하는 가능 추가
@@ -35,16 +34,32 @@ Line 179 : Add `showsVerticalScrollIndicator={false}`
 - [x] Mold를 수정했을 때, 현재 진행률 및 달성률이 0%임. 그리고 이 퍼센트 계산 방법을 어떻게 할 지 고민 해 볼 것
 - [x] Logout 기능 추가할 것
 - [x] Input Title을 선택하면 TextInput에 focus. (웹에서의 `label`느낌으로)
-- [ ] (보류) 어떤 Input이 `required`인지 판단할 방법 생각하기
-- [ ] (보류) Input에 `required` 옵션 넣고 빈칸일 경우의 이펙트 설정
-  - [ ] required input을 안 채우면, Submit 버튼을 비활성화시키는 게 나을 듯.
+- [x] 어떤 Input이 `required`인지 판단할 방법 생각하기
+- [x] Input에 `required` 옵션 넣고 빈칸일 경우의 이펙트 설정
+  - [x] required input을 안 채우면, Submit 버튼을 비활성화시키는 게 나을 듯.
+- [x] CreateTodoMold / EditTodoMold 직후 생성된 Todo들은 Toggle할 때 에러 발생
+  - [x] Mutation의 리턴값으로 아이디들의 배열을 가져와야할 듯
+- [x] CreateTodoMold에서 반복하지 않는 Todo를 생성할 때, redux에 아이템이 등록 안됨.
+- [x] 반복하지 않는 Todo는 Mold를 생성하지 않도록 할 것
+- [x] Todo를 지울 때 원인을 알 수 없는 400 Error가 발생함. (deleteTodo 이름 겹쳐서 발생한 에러였음)
+- [ ] Login을 없애는 게 좋을까?
+- [ ] Todo를 아직 시간대별로 정리하는 로직은 못 짬.. 리듀서가 더러워짐
+- [ ] StartDate가 EndDate보다 after인 경우 toast message 표시할 것
+- [ ] EditTodoMold 이 후, 첫 GridScreen에서 퍼센트가 전부 0으로 초기화 되어버림.
+- [ ] EditTodoMold로 수정해도 startDate는 고정시킬 방법이 있을까?
+- [ ] Dark mode 구현 할 것
+- [ ] `react-native-skeleton-content-nonexpo` 적용할 것
+- [ ] `react-native-date-picker` 적용할 것
+- [ ] `react-native-iap` or `react-native-payment` 적용할 것
+- [ ] `react-native-admob` 적용할 것
+- [ ] 위젯 기능 추가할 것
+
+### 다음 버전에 적용할 것
+
 - [ ] GridScreen도 개선해야될 듯..
   - [ ] ProgressBar 게이지를 채울 때 loading이 끝나면 채워지도록 할 것
-- [ ] Login을 없애는 게 좋을까?
 - [ ] Todo를 생성할 때, 일수로 설정가능하도록 할 것. 예를 들어 100일동안 진행하겠다 등..
 - [ ] Form에서 done,next 등을 누르면 다음 TextInput으로 넘어가게 할 것
-- [ ] GraphQL 요청을 보내는 곳에서 loading 값을 사용할 수 있도록 설정할 것
-
 - [ ] Panel 자체에 버그가 상당함. react-native-modalize 적용을 고민해볼 것. 혹은 PanResponder를 개선할 방법을 찾아볼 것
   - [x] 일정 HEIGHT 이상으로 스크롤 했을 때, Component가 분리되는 현상 해결할 것
   - [ ] 처음 오픈됐을 때, Input에 한 글자를 타이핑하면 포커스가 사라지고, 버튼은 처음 누른 건 씹힘
@@ -62,8 +77,6 @@ Line 179 : Add `showsVerticalScrollIndicator={false}`
 - [x] Delete TodoMold (Back, Front)
 - [x] Edit TodoMold (Back, Front)
   - [x] 일단, 기존 TodoMold와 관련된 Todo가 삭제되는 것 까지는 정상 작동, TodoMold는 수정 안됨 (Back, Front)
-
---> Edit Todo (Back)과 Edit TodoMold를 수정할 것.
 
 ## MEMO
 
@@ -84,3 +97,17 @@ Line 179 : Add `showsVerticalScrollIndicator={false}`
   - `dateDifference` = 0
   - `amountChangeInterval` = 0
   - `amountDifference` = 0
+
+## react-native-calendars
+
+혹시몰라서 메모해둠
+
+calendar/header/index.js의 101번째 줄의 renderWeekDays 함수에
+
+```
+if(idx === 0) dayStyle.push(this.style.sundayHeader);
+
+if(idx === 6) dayStyle.push(this.style.saturdayHeader);
+```
+
+추가해야 dayNames가 꾸며짐

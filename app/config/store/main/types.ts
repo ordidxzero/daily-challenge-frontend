@@ -9,7 +9,7 @@ export type FakeTodoDataType = {
 };
 
 export type FakeData = {
-  moldData: MoldDataType;
+  moldData?: MoldDataType;
   todoData: FakeTodoDataType[];
 };
 
@@ -20,9 +20,12 @@ export type EditTodoMoldDataType = {
   restartDate: string;
 };
 
-export type ToggledTodoData = {
+export type DeleteTodoData = {
   dateString: string;
   id: string;
+};
+
+export type ToggledTodoData = DeleteTodoData & {
   done: boolean;
 };
 

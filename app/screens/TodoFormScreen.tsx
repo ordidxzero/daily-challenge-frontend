@@ -1,5 +1,5 @@
 // Modules
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import { SafeAreaView, Animated, Keyboard } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 // Utils
@@ -7,7 +7,6 @@ import styles from './styles';
 import { CustomStackScreenProp } from './types';
 // Hooks
 import useInput from '../hooks/common/useInput';
-import useSelectDay from '../hooks/common/useSelectDay';
 import useRadioState from '../hooks/floatingPanel/useRadioState';
 import useFoldAnimation from '../hooks/floatingPanel/useFoldAnimation';
 import useUnmountReset from '../hooks/common/useUnmountReset';
@@ -48,9 +47,9 @@ function TodoFormScreen({
   });
   const scrollView = useRef<KeyboardAwareScrollView>(null);
   const animation = useFoldAnimation(isRepeat.current === 'yes');
-  const { selectedDay } = useSelectDay();
   const { hardenForm, onChangeText } = useInput();
   const { todo } = hardenForm;
+  const fixedStartdate = useMemo(() => todo.startDate, []);
   const deleteTodoMold = useDeleteTodoMold();
   const onDeleteButtonPress = () =>
     detail && deleteTodoMold(detail).then(() => navigation.navigate('Grid'));
@@ -82,25 +81,29 @@ function TodoFormScreen({
         <InputSection title="BASIC INFOMATION">
           {/** react-native-date-picker 사용할 것 */}
           <Input
-            title="날짜"
-            placeholder={selectedDay}
-            value={selectedDay}
+            title="시작 날짜"
+            placeholder={todo.startDate}
+            value={type === 'create' ? todo.startDate : fixedStartdate}
             onChangeText={onChangeText('todo', 'startDate')}
-            disabled={true}
+            disabled
+            required
           />
           <Input
             title="제목"
             placeholder="푸쉬업"
             value={todo.title}
             onChangeText={onChangeText('todo', 'title')}
+            required
           />
-          <Input
-            title="목표량"
-            placeholder="5"
-            value={todo.amount}
-            onChangeText={onChangeText('todo', 'amount')}
-            keyboardType="numeric"
-          />
+          {type === 'create' && (
+            <Input
+              title="목표량"
+              placeholder="5"
+              value={todo.amount}
+              onChangeText={onChangeText('todo', 'amount')}
+              keyboardType="numeric"
+            />
+          )}
           <Input
             title="단위"
             placeholder="개"
@@ -122,19 +125,25 @@ function TodoFormScreen({
             onChangeText={onChangeText('todo', 'endTime')}
           />
         </InputSection>
-        <Radio {...isRepeat} onPress={setIsRepeat} title="반복하시겠습니까?" />
+        {type === 'create' && (
+          <Radio
+            {...isRepeat}
+            onPress={setIsRepeat}
+            title="반복하시겠습니까?"
+          />
+        )}
         <Animated.View
           style={{
             height: animation.interpolate({
               inputRange: [0, 1],
-              outputRange: [0, 600],
+              outputRange: [0, 670],
               extrapolate: 'clamp',
             }),
             overflow: 'hidden',
           }}>
           <InputSection title="ADVANCED INFOMATION">
             {/** react-native-date-picker 사용할 것 */}
-            <DateSetter />
+            <DateSetter type={type} />
             <Radio
               {...method}
               onPress={setMethod}
@@ -176,6 +185,15 @@ function TodoFormScreen({
               onChangeText={onChangeText('todo', 'amountDifference')}
               keyboardType="numeric"
             />
+            {type === 'edit' && (
+              <Input
+                title="목표량 재설정"
+                placeholder="5"
+                value={todo.amount}
+                onChangeText={onChangeText('todo', 'amount')}
+                keyboardType="numeric"
+              />
+            )}
           </InputSection>
         </Animated.View>
       </KeyboardAwareScrollView>

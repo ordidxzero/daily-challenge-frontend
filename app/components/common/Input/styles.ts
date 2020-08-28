@@ -5,12 +5,16 @@ const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   inputContainer: {
+    position: 'relative',
     borderWidth: 1,
     borderColor: inputBorderColor,
     paddingVertical: 5,
     paddingHorizontal: 7,
     borderRadius: 5,
     marginBottom: 20,
+  },
+  requiredInputContainer: {
+    borderColor: 'red',
   },
   inputTitle: {
     marginBottom: 10,

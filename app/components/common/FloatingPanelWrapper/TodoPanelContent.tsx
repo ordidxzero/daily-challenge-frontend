@@ -28,15 +28,17 @@ function TodoPanelContent({ detail }: { detail: string }) {
       }}>
       <Input
         title="Date"
-        disabled={true}
         value={todo.startDate}
         onChangeText={onChangeText('todo', 'startDate')}
+        disabled
+        required
       />
       <Input
         title="Title"
         placeholder="푸쉬업"
         value={todo.title}
         onChangeText={onChangeText('todo', 'title')}
+        required
       />
       <Input
         title="Amount"

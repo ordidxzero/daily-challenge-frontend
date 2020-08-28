@@ -8,13 +8,17 @@ function InputLayout({
   title,
   children,
   onTitlePress,
+  showMessage = false,
 }: InputLayoutProps) {
   return (
     <View style={containerStyle}>
       <Text
-        style={[{ textTransform: 'capitalize' }, titleStyle]}
+        style={[
+          { textTransform: 'capitalize', alignItems: 'center' },
+          titleStyle,
+        ]}
         onPress={onTitlePress}>
-        {title}
+        {title} {showMessage && <Text style={{ color: 'red' }}>(필수)</Text>}
       </Text>
       {children}
     </View>

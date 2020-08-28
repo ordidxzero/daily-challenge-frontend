@@ -31,7 +31,7 @@ function ContinuousAchievement({
         <SimpleLineIcons
           name="fire"
           size={24}
-          color="#3498db"
+          color="red"
           style={{ marginRight: 5 }}
         />
         <Text style={{ fontSize: 17 }}>현재 연속 달성</Text>

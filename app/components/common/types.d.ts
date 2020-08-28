@@ -6,6 +6,7 @@ export type InputLayoutProps = {
   title: string;
   onTitlePress?: any;
   children: React.ReactNode;
+  showMessage?: boolean;
 };
 
 // --------------------------------------------------------

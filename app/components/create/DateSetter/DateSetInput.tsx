@@ -3,10 +3,15 @@ import { View } from 'react-native';
 import Input from '../../common/Input';
 import useInput from '../../../hooks/common/useInput';
 
-function DateSetInput({ type }: { type: 'startDate' | 'endDate' }) {
+function DateSetInput({
+  type,
+  title,
+}: {
+  type: 'startDate' | 'endDate';
+  title: string;
+}) {
   const { hardenForm, onChangeText } = useInput();
   const { todo } = hardenForm;
-  const title = type === 'startDate' ? '시작 날짜' : '마지막 날짜';
   return (
     <View
       style={{

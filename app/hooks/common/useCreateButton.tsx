@@ -1,8 +1,13 @@
 import React from 'react';
 import { Button, Alert } from 'react-native';
 import useTodoMoldAdder from '../apollo/useTodoMoldAdder';
+import useInput from './useInput';
 
 function useCreateButton(navigation: any) {
+  const {
+    hardenForm: { todo },
+  } = useInput();
+  const { startDate, title } = todo;
   const createTodoMold = useTodoMoldAdder();
   const onPress = () => {
     Alert.alert(
@@ -20,7 +25,13 @@ function useCreateButton(navigation: any) {
       { cancelable: false },
     );
   };
-  const headerRight = () => <Button onPress={onPress} title="생성" />;
+  const headerRight = () => (
+    <Button
+      disabled={title === '' || startDate === ''}
+      onPress={onPress}
+      title="생성"
+    />
+  );
   return headerRight;
 }
 

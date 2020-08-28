@@ -57,6 +57,10 @@ export const CREATE_TODO_MOLD = gql`
       amountChangeInterval: $amountChangeInterval
     ) {
       ok
+      todoIds {
+        id
+        dateString
+      }
       todoMoldId
       error
     }
@@ -130,6 +134,10 @@ export const EDIT_TODO_MOLD = gql`
       amountChangeInterval: $amountChangeInterval
     ) {
       ok
+      todoIds {
+        id
+        dateString
+      }
       oldTodoMoldId
       newTodoMold {
         id
@@ -167,7 +175,7 @@ export const EDIT_TODO = gql`
 
 export const DELETE_TODO = gql`
   mutation DeleteTodo($id: String!) {
-    deleteTodo(id: $id) {
+    removeTodo(id: $id) {
       ok
       error
     }

@@ -23,7 +23,7 @@ function useToggleTodo() {
     TOGGLE_TODO,
   );
   const toggleTodo = useCallback(
-    ({ dateString, id, done }: ToggledTodoData & { done: boolean }) => {
+    ({ dateString, id, done }: ToggledTodoData) => {
       dispatch(startLoading('toggleTodo'));
       return toggleTodoMutation({ variables: { id, done: !done } })
         .then(() => dispatch(toggleTodoAction({ dateString, id, done: !done })))

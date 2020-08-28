@@ -4,7 +4,7 @@ import DateSetInput from './DateSetInput';
 
 const { width } = Dimensions.get('window');
 
-function DateSetter() {
+function DateSetter({ type }: { type: 'create' | 'edit' }) {
   return (
     <View
       style={{
@@ -17,11 +17,14 @@ function DateSetter() {
         paddingBottom: 18,
         marginBottom: 15,
       }}>
-      <DateSetInput type="startDate" />
+      <DateSetInput
+        type="startDate"
+        title={type === 'create' ? '시작 날짜' : '수정 적용 날짜'}
+      />
       <View style={{ height: 60, backgroundColor: '#dcdde1', width: 1 }}></View>
-      <DateSetInput type="endDate" />
+      <DateSetInput type="endDate" title="마지막 날짜" />
     </View>
   );
 }
 
-export default DateSetter;
+export default React.memo(DateSetter);

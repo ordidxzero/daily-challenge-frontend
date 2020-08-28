@@ -7,6 +7,7 @@ import {
   SuccessType,
   FailureType,
   EditTodoMoldDataType,
+  DeleteTodoData,
 } from './types';
 
 export const SELECT_DAY = 'main/SELECT_DAY';
@@ -31,7 +32,7 @@ export const editTodo = createAction(EDIT_TODO)<EditTodoDataType>();
 export const editTodoMold = createAction(EDIT_TODO_MOLD)<
   EditTodoMoldDataType
 >();
-export const deleteTodo = createAction(DELETE_TODO)<ToggledTodoData>();
+export const deleteTodo = createAction(DELETE_TODO)<DeleteTodoData>();
 export const deleteTodoMold = createAction(DELETE_TODO_MOLD)<string>();
 export const startLoading = createAction(START_LOADING)<RequestType>();
 export const finishLoading = createAction(FINISH_LOADING)<RequestType>();

@@ -37,7 +37,15 @@ export type CreateTodoMoldInput = MoldInput & {
 };
 
 export type CreateTodoMoldData = {
-  createTodoMold: { ok: boolean; error?: string; todoMoldId?: string };
+  createTodoMold: {
+    ok: boolean;
+    error?: string;
+    todoIds?: {
+      id: string;
+      dateString: string;
+    }[];
+    todoMoldId?: string;
+  };
 };
 
 export type GetTodoMoldsInput = {
@@ -57,6 +65,10 @@ export type EditTodoMoldInput = MoldInput & {
 export type EditTodoMoldData = {
   editTodoMold: {
     ok: boolean;
+    todoIds?: {
+      id: string;
+      dateString: string;
+    }[];
     oldTodoMoldId?: string;
     newTodoMold?: {
       id: string;
@@ -94,7 +106,7 @@ export type EditTodoData = {
 };
 
 export type DeleteTodoData = {
-  deleteTodo: UDTData;
+  removeTodo: UDTData;
 };
 
 export type DeleteTodoMoldData = {
