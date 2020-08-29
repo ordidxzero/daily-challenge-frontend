@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Dimensions } from 'react-native';
 import ProgressBar from '../../common/ProgressBar';
+import { progressInfoContainerBorderColor } from '../../../config/styles';
 
 const { width } = Dimensions.get('window');
 
@@ -15,7 +16,7 @@ function ProgressInfo({
     <View
       style={{
         width: width - 50,
-        borderBottomColor: '#dcdde1',
+        borderBottomColor: progressInfoContainerBorderColor,
         borderBottomWidth: 1,
         marginTop: 10,
         marginBottom: 20,

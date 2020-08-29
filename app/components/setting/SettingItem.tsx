@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { View, Switch, Dimensions, Text } from 'react-native';
+import {
+  switchFalseTrackColor,
+  switchTrueTrackColor,
+} from '../../config/styles';
 
 const { width } = Dimensions.get('window');
 
@@ -24,7 +28,10 @@ function SettingItem({
       <Text style={{ fontSize: 16 }}>{title}</Text>
       <Switch
         disabled={disabled}
-        trackColor={{ false: '#767577', true: '#2ecc71' }}
+        trackColor={{
+          false: switchFalseTrackColor,
+          true: switchTrueTrackColor,
+        }}
         thumbColor="white"
         ios_backgroundColor="#3e3e3e"
         onValueChange={toggleSwitch}

@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { calendarHeaderTextColor } from '../../../config/styles';
 
 const styles = StyleSheet.create({
   calendarContainer: {
@@ -18,7 +19,11 @@ const styles = StyleSheet.create({
     top: 10,
     left: 15,
   },
-  headerText: { color: '#2d4150', fontSize: 16, fontWeight: '300' },
+  headerText: {
+    color: calendarHeaderTextColor,
+    fontSize: 16,
+    fontWeight: '300',
+  },
 });
 
 export default styles;

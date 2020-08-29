@@ -1,4 +1,9 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import {
+  progressCardBorderColor,
+  progressCardDefaultBackgroundColor,
+  progressCardShadowColor,
+} from '../../../config/styles';
 
 const { width } = Dimensions.get('window');
 
@@ -10,10 +15,10 @@ export const progressCardStyle = StyleSheet.create({
     paddingVertical: 5,
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: '#fff',
+    borderColor: progressCardBorderColor,
     marginBottom: 20,
-    backgroundColor: '#fff',
-    shadowColor: '#000',
+    backgroundColor: progressCardDefaultBackgroundColor,
+    shadowColor: progressCardShadowColor,
     shadowOffset: {
       width: 5,
       height: 4,

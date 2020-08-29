@@ -10,6 +10,10 @@ import TodoList from '../TodoList';
 // Utils
 import styles from './styles';
 import Header from './Header';
+import {
+  selectedDayBackgroundColor,
+  selectedDayTextColor,
+} from '../../../config/styles';
 
 function Calendar() {
   const { selectedDay, setSelectedDay } = useSelectDay();
@@ -25,8 +29,8 @@ function Calendar() {
             [selectedDay]: { selected: true },
           }}
           theme={{
-            selectedDayBackgroundColor: '#2ecc71',
-            selectedDayTextColor: 'white',
+            selectedDayBackgroundColor,
+            selectedDayTextColor,
             'stylesheet.calendar.header': {
               header: { display: 'none' },
             },

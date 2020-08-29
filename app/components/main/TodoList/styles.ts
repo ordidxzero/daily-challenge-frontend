@@ -3,6 +3,9 @@ import {
   todoTimezoneColor,
   checkerDoneColor,
   checkerUndoneColor,
+  todoContainerBorderColor,
+  todoContainerDefaultBackgroundColor,
+  todoContainerShadowColor,
 } from '../../../config/styles';
 
 const { width } = Dimensions.get('window');
@@ -21,9 +24,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#fff',
-    backgroundColor: '#fff',
-    shadowColor: '#000',
+    borderColor: todoContainerBorderColor,
+    backgroundColor: todoContainerDefaultBackgroundColor,
+    shadowColor: todoContainerShadowColor,
     shadowOffset: {
       width: 5,
       height: 4,
