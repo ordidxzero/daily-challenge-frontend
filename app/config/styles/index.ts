@@ -1,6 +1,6 @@
 // Common Variable (Color)
 const BACKGROUND_COLOR = 'white';
-//const DARK_MODE_BACKGROUND_COLOR = '#2c3e50';
+//const DARK_MODE_BACKGROUND_COLOR = '#1a1d21';
 const CLOUD_COLOR = '#dcdde1';
 const LIGHT_LIGHT_GRAY_COLOR = '#ecf0f1';
 const LIGHT_GRAY_COLOR = '#b2bec3';
@@ -96,4 +96,6 @@ export const switchTrueTrackColor = LIGHT_GREEN_COLOR;
 //? DateSetter
 export const dateSetterContainerBorderColor = CLOUD_COLOR;
 
+//! todo
+//? TodoInfo
 export const todoDateColor = DARK_GRAY_COLOR;

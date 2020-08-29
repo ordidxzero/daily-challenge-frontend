@@ -1,5 +1,4 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { todoDateColor } from '../config/styles';
 
 const { width } = Dimensions.get('window');
 
@@ -16,10 +15,6 @@ const styles = StyleSheet.create({
     width,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  todoTextStyle: {
-    fontSize: 15,
-    color: todoDateColor,
   },
 });
 

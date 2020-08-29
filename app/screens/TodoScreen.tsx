@@ -1,9 +1,7 @@
 // Modules
 import React, { useEffect, useState } from 'react';
-import { Text, View, Dimensions } from 'react-native';
-import dayjs from 'dayjs';
+import { Text, View } from 'react-native';
 // Utils
-import styles from './styles';
 import { CustomStackScreenProp } from './types';
 // Hooks
 import useInput from '../hooks/common/useInput';
@@ -12,8 +10,7 @@ import useUnmountReset from '../hooks/common/useUnmountReset';
 // Components
 import FloatingPanelWrapper from '../components/common/FloatingPanelWrapper';
 import Header from '../components/common/ScreenHeader';
-
-const { width } = Dimensions.get('window');
+import TodoInfo from '../components/todo/TodoInfo';
 
 function TodoScreen({
   route: {
@@ -23,8 +20,7 @@ function TodoScreen({
   useDetailSetter(data.id);
   useUnmountReset();
   const [loading, setLoading] = useState(true);
-  const { onChangeText, hardenForm } = useInput();
-  const { todo } = hardenForm;
+  const { onChangeText } = useInput();
 
   useEffect(() => {
     onChangeText('todo', 'startDate')(data.dateString);
@@ -43,25 +39,7 @@ function TodoScreen({
           <Text>123</Text>
         </View>
       ) : (
-        <>
-          <View style={{ flex: 1, width, padding: 20 }}>
-            <View style={{ marginBottom: 30 }}>
-              <Text style={{ fontSize: 30, fontWeight: '700' }}>
-                {todo.title}
-              </Text>
-            </View>
-            <View style={{ marginBottom: 10 }}>
-              <Text style={styles.todoTextStyle}>
-                {dayjs(todo.startDate).format('YYYY / MM / DD dddd')}
-              </Text>
-            </View>
-            <View style={{ marginBottom: 10 }}>
-              <Text style={styles.todoTextStyle}>
-                {`${todo.startTime} ~ ${todo.endTime}`}
-              </Text>
-            </View>
-          </View>
-        </>
+        <TodoInfo />
       )}
     </FloatingPanelWrapper>
   );
