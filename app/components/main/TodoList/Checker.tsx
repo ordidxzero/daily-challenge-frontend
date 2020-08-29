@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableWithoutFeedback, View, Text } from 'react-native';
-import styles from './styles';
+import { checkerStyle } from './styles';
 import useToggleTodo from '../../../hooks/apollo/useToggleTodo';
 import { CheckerProps } from './types';
 
@@ -16,10 +16,10 @@ function Checker({ done, dateString, id }: CheckerProps) {
     <TouchableWithoutFeedback onPress={onPress}>
       <View
         style={[
-          styles.checkerDefaultStyle,
-          done ? styles.done : styles.undone,
+          checkerStyle.checkerDefaultStyle,
+          done ? checkerStyle.done : checkerStyle.undone,
         ]}>
-        <Text style={done ? styles.doneText : styles.undoneText}>
+        <Text style={done ? checkerStyle.doneText : checkerStyle.undoneText}>
           {done ? '✓' : '✕'}
         </Text>
       </View>

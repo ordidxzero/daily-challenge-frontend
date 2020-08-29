@@ -1,10 +1,11 @@
 // Common Variable (Color)
 const BACKGROUND_COLOR = 'white';
-//const DARK_MODE_BACKGROUND_COLOR = '#1a1d21';
+const DARK_MODE_BACKGROUND_COLOR = '#1a1d21';
 const CLOUD_COLOR = '#dcdde1';
 const LIGHT_LIGHT_GRAY_COLOR = '#ecf0f1';
 const LIGHT_GRAY_COLOR = '#b2bec3';
 const DARK_GRAY_COLOR = '#636e72';
+const DEEP_DARK_GRAY_COLOR = '#222529';
 const LIGHT_LIGHT_BLUE_COLOR = '#00bbf2';
 const LIGHT_BLUE_COLOR = '#0984e3';
 const DARK_BLUE_COLOR = '#2c3e50';
@@ -71,6 +72,9 @@ export const todoTimezoneColor = DARK_GRAY_COLOR;
 export const checkerDoneColor = LIGHT_GREEN_COLOR;
 export const checkerUndoneColor = LIGHT_RED_COLOR;
 
+export const todoContainerDarkModeBackgroundColor = DEEP_DARK_GRAY_COLOR;
+export const todoContainerDarkModeBorderColor = DEEP_DARK_GRAY_COLOR;
+
 //! mold
 //? ContinuousAchievement
 export const continuousAchievementContainerBorderColor = CLOUD_COLOR;
@@ -99,3 +103,6 @@ export const dateSetterContainerBorderColor = CLOUD_COLOR;
 //! todo
 //? TodoInfo
 export const todoDateColor = DARK_GRAY_COLOR;
+
+//* screens
+export const safeAreaViewBackgroundColor = DARK_MODE_BACKGROUND_COLOR;

@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import { safeAreaViewBackgroundColor } from '../config/styles';
 
 const { width } = Dimensions.get('window');
 
@@ -8,7 +9,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: safeAreaViewBackgroundColor,
   },
   gridContentStyleProp: {
     paddingTop: 30,

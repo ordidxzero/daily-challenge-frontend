@@ -10,11 +10,15 @@ import {
 
 const { width } = Dimensions.get('window');
 
-const styles = StyleSheet.create({
-  dayComponentContainer: {
+export const dayComponentStyle = StyleSheet.create({
+  container: {
     width,
+    alignItems: 'center',
   },
-  todoContainer: {
+});
+
+export const todoStyle = StyleSheet.create({
+  container: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -46,6 +50,9 @@ const styles = StyleSheet.create({
     color: todoTimezoneColor,
     marginBottom: 3,
   },
+});
+
+export const checkerStyle = StyleSheet.create({
   checkerDefaultStyle: {
     width: 40,
     height: 40,
@@ -59,5 +66,3 @@ const styles = StyleSheet.create({
   undone: { borderColor: checkerUndoneColor },
   undoneText: { color: checkerUndoneColor, marginLeft: 1, marginTop: 2 },
 });
-
-export default styles;

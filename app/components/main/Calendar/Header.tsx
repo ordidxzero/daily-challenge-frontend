@@ -11,7 +11,7 @@ function Header({ month }: { month: string }) {
       <TouchableOpacity
         style={styles.headerUserIconContainer}
         onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-        <SimpleLineIcons name="user" size={22} color="black" />
+        <SimpleLineIcons name="user" size={22} color="#A0A1A3" />
       </TouchableOpacity>
       <Text style={styles.headerText}>{month}</Text>
     </View>
