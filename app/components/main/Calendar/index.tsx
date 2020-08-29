@@ -8,14 +8,18 @@ import useSelectDay from '../../../hooks/common/useSelectDay';
 // Components
 import TodoList from '../TodoList';
 // Utils
-import styles from './styles';
+import { styles, calendarDarkModeTheme } from './styles';
 import Header from './Header';
 import {
   selectedDayBackgroundColor,
   selectedDayTextColor,
 } from '../../../config/styles';
+import useReduxState from '../../../hooks/common/useReduxState';
 
 function Calendar() {
+  const {
+    main: { darkMode },
+  } = useReduxState();
   const { selectedDay, setSelectedDay } = useSelectDay();
   const [visibleMonth, setVisibleMonth] = useState(dayjs().format('MMMM YYYY'));
   return (
@@ -30,19 +34,12 @@ function Calendar() {
           }}
           theme={{
             selectedDayBackgroundColor,
+            dayTextColor: 'grey',
             selectedDayTextColor,
-            dayTextColor: 'white',
             'stylesheet.calendar.header': {
               header: { display: 'none' },
             },
-            'stylesheet.calendar.main': {
-              container: {
-                backgroundColor: '#1a1d21',
-              },
-              monthView: {
-                backgroundColor: '#1a1d21',
-              },
-            },
+            ...calendarDarkModeTheme(darkMode),
           }}
           onVisibleMonthsChange={months =>
             setVisibleMonth(

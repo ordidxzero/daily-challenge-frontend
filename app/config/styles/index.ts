@@ -22,6 +22,10 @@ export const deleteButtonDefaultBackgroundColor = LIGHT_RED_COLOR;
 export const deleteButtonScreenBackgroundColor = BACKGROUND_COLOR;
 export const deleteButtonBorderColor = CLOUD_COLOR;
 
+//? FloatingPanel
+export const floatingPanelDefaultBackgroundColor = BACKGROUND_COLOR;
+export const floatingPanelDarkModeBackgroundColor = DARK_MODE_BACKGROUND_COLOR;
+
 //? FloatingPanelWrapper
 export const inputSectionTitleBorderColor = LIGHT_GRAY_COLOR;
 
@@ -34,6 +38,9 @@ export const inputTitleColor = LIGHT_BLUE_COLOR;
 export const progressBarDefaultBackgroundColor = LIGHT_LIGHT_GRAY_COLOR;
 export const progressBarRateColor = LIGHT_LIGHT_BLUE_COLOR;
 
+export const progressBarDarkModeBackgroundColor = DARK_GRAY_COLOR;
+export const progressBarRateDarkModeColor = LIGHT_BLUE_COLOR;
+
 //? Radio
 export const rectRadioButtonDefaultBackgroundColor = BACKGROUND_COLOR;
 export const selectedRectRadioButtonBackgroundColor = DARK_PURPLE_COLOR;
@@ -44,6 +51,8 @@ export const noRadioButtonColor = LIGHT_RED_COLOR;
 export const screenHeaderDefaultBackgroundColor = BACKGROUND_COLOR;
 export const screenHeaderBottomBorderColor = LIGHT_LIGHT_GRAY_COLOR;
 
+export const screenHeaderDarkModeBackgroundColor = DARK_MODE_BACKGROUND_COLOR;
+
 //? TodoCreateButton
 export const todoCreateButtonDefaultBackgroundColor = BACKGROUND_COLOR;
 export const todoCreateButtonShadowColor = SHADOW_COLOR;
@@ -53,6 +62,9 @@ export const todoCreateButtonShadowColor = SHADOW_COLOR;
 export const progressCardBorderColor = BACKGROUND_COLOR;
 export const progressCardDefaultBackgroundColor = BACKGROUND_COLOR;
 export const progressCardShadowColor = SHADOW_COLOR;
+
+export const progressCardDarkModeBorderColor = DEEP_DARK_GRAY_COLOR;
+export const progressCardDarkModeBackgroundColor = DEEP_DARK_GRAY_COLOR;
 
 //! main
 //? Calendar
@@ -105,4 +117,5 @@ export const dateSetterContainerBorderColor = CLOUD_COLOR;
 export const todoDateColor = DARK_GRAY_COLOR;
 
 //* screens
-export const safeAreaViewBackgroundColor = DARK_MODE_BACKGROUND_COLOR;
+export const safeAreaViewDefaultBackgroundColor = BACKGROUND_COLOR;
+export const safeAreaViewDarkModeBackgroundColor = DARK_MODE_BACKGROUND_COLOR;

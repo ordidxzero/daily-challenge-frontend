@@ -4,6 +4,11 @@ import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { ifIphoneX, getBottomSpace } from 'react-native-iphone-x-helper';
 import { FloatingPanelProps, PanelPropsUsingUser } from './types';
 import Panel from './Panel';
+import useReduxState from '../../../hooks/common/useReduxState';
+import {
+  floatingPanelDarkModeBackgroundColor,
+  floatingPanelDefaultBackgroundColor,
+} from '../../../config/styles';
 
 const { width, height } = Dimensions.get('window');
 
@@ -19,7 +24,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
     overflow: 'hidden',
     width,
     paddingTop:
@@ -29,6 +33,15 @@ const styles = StyleSheet.create({
     ...ifIphoneX({ paddingBottom: getBottomSpace() }, {}),
   },
 });
+
+const darkModeStyle = (darkMode: boolean) =>
+  StyleSheet.create({
+    animatedView: {
+      backgroundColor: darkMode
+        ? floatingPanelDarkModeBackgroundColor
+        : floatingPanelDefaultBackgroundColor,
+    },
+  });
 
 export default function FloatingPanel({
   containerStyle,
@@ -40,12 +53,17 @@ export default function FloatingPanel({
   const FULL_HEIGHT = height;
   const PANEL_HEIGHT = FULL_HEIGHT - panelOutsideHeight;
   const animation = useRef(new Animated.ValueXY({ x: 0, y: FULL_HEIGHT }));
+  const {
+    main: { darkMode },
+  } = useReduxState();
+  const dark = darkModeStyle(darkMode);
   return (
     <View style={[styles.container]}>
       <Animated.View
         style={[
           styles.animatedView,
           containerStyle,
+          dark.animatedView,
           {
             borderRadius: animation.current.y.interpolate({
               inputRange: [0, PANEL_HEIGHT],

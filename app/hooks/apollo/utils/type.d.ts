@@ -95,6 +95,8 @@ export type UDInput = {
 
 export type ToggleTodoInput = UDInput & { done: boolean };
 
+export type ToggleDarkModeInput = { darkMode: boolean };
+
 // Update, Delete, Toggle data
 export type UDTData = {
   ok: boolean;
@@ -115,4 +117,12 @@ export type DeleteTodoMoldData = {
 
 export type ToggleTodoData = {
   toggleTodo: UDTData;
+};
+
+export type ToggleDarkModeData = {
+  toggleDarkMode: UDTData;
+};
+
+export type GetDarkModeData = {
+  getDarkMode: UDTData & { darkMode?: boolean };
 };

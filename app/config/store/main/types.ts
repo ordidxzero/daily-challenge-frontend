@@ -40,6 +40,7 @@ export type RequestState = {
   editTodo?: boolean | string;
   editTodoMold?: boolean | string;
   toggleTodo?: boolean | string;
+  toggleDarkMode?: boolean | string;
 };
 
 export type MainState = {

@@ -3,6 +3,8 @@ import {
   progressCardBorderColor,
   progressCardDefaultBackgroundColor,
   progressCardShadowColor,
+  progressCardDarkModeBorderColor,
+  progressCardDarkModeBackgroundColor,
 } from '../../../config/styles';
 
 const { width } = Dimensions.get('window');
@@ -16,8 +18,8 @@ export const progressCardStyle = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     borderColor: progressCardBorderColor,
-    marginBottom: 20,
     backgroundColor: progressCardDefaultBackgroundColor,
+    marginBottom: 20,
     shadowColor: progressCardShadowColor,
     shadowOffset: {
       width: 5,
@@ -29,3 +31,18 @@ export const progressCardStyle = StyleSheet.create({
     elevation: 9,
   },
 });
+
+export const darkModeStyle = (darkMode: boolean) =>
+  StyleSheet.create({
+    container: {
+      borderColor: darkMode
+        ? progressCardDarkModeBorderColor
+        : progressCardBorderColor,
+      backgroundColor: darkMode
+        ? progressCardDarkModeBackgroundColor
+        : progressCardDefaultBackgroundColor,
+    },
+    titleText: {
+      color: darkMode ? 'white' : 'black',
+    },
+  });

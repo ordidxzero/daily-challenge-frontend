@@ -2,9 +2,11 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 import { setToken as setTokenAction } from '../../config/store/login';
+import useToggleDarkMode from '../apollo/useToggleDarkMode';
 
 function useLoginToken() {
   const dispatch = useDispatch();
+  const { getDarkMode } = useToggleDarkMode();
   const setToken = useCallback(
     (token: string | null) => dispatch(setTokenAction(token)),
     [dispatch],
@@ -13,6 +15,7 @@ function useLoginToken() {
     try {
       const token = await AsyncStorage.getItem('dc_login_token');
       setToken(token);
+      await getDarkMode();
     } catch (error) {
       return;
     }

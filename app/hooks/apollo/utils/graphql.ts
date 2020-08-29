@@ -199,3 +199,22 @@ export const TOGGLE_TODO = gql`
     }
   }
 `;
+
+export const TOGGLE_DARK_MODE = gql`
+  mutation ToggleDarkMode($darkMode: Boolean!) {
+    toggleDarkMode(darkMode: $darkMode) {
+      ok
+      error
+    }
+  }
+`;
+
+export const GET_DARK_MODE = gql`
+  query GetDarkMode {
+    getDarkMode {
+      ok
+      darkMode
+      error
+    }
+  }
+`;

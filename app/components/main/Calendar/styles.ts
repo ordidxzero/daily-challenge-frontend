@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { calendarHeaderTextColor } from '../../../config/styles';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   calendarContainer: {
     height: 360,
     overflow: 'hidden',
@@ -20,10 +20,21 @@ const styles = StyleSheet.create({
     left: 15,
   },
   headerText: {
-    color: calendarHeaderTextColor,
     fontSize: 16,
     fontWeight: '300',
   },
 });
 
-export default styles;
+export const calendarDarkModeTheme = (darkMode: boolean) => ({
+  calendarBackground: darkMode ? '#1a1d21' : undefined,
+});
+
+export const darkModeStyle = (darkMode: boolean) =>
+  StyleSheet.create({
+    headerText: {
+      color: darkMode ? 'white' : calendarHeaderTextColor,
+    },
+    headerIcon: {
+      color: darkMode ? '#A0A1A3' : 'black',
+    },
+  });

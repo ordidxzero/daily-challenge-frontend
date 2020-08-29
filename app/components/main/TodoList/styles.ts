@@ -6,6 +6,8 @@ import {
   todoContainerBorderColor,
   todoContainerDefaultBackgroundColor,
   todoContainerShadowColor,
+  todoContainerDarkModeBorderColor,
+  todoContainerDarkModeBackgroundColor,
 } from '../../../config/styles';
 
 const { width } = Dimensions.get('window');
@@ -15,6 +17,7 @@ export const dayComponentStyle = StyleSheet.create({
     width,
     alignItems: 'center',
   },
+  dateString: { fontWeight: '600', marginBottom: 20 },
 });
 
 export const todoStyle = StyleSheet.create({
@@ -28,8 +31,6 @@ export const todoStyle = StyleSheet.create({
     marginBottom: 20,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: todoContainerBorderColor,
-    backgroundColor: todoContainerDefaultBackgroundColor,
     shadowColor: todoContainerShadowColor,
     shadowOffset: {
       width: 5,
@@ -47,10 +48,30 @@ export const todoStyle = StyleSheet.create({
   timezone: {
     // `ToDo.tsx`의 시간대
     fontSize: 11,
-    color: todoTimezoneColor,
     marginBottom: 3,
   },
 });
+
+export const darkModeStyle = (darkMode: boolean) =>
+  StyleSheet.create({
+    dateString: {
+      color: darkMode ? 'white' : 'black',
+    },
+    todoContainer: {
+      borderColor: darkMode
+        ? todoContainerDarkModeBorderColor
+        : todoContainerBorderColor,
+      backgroundColor: darkMode
+        ? todoContainerDarkModeBackgroundColor
+        : todoContainerDefaultBackgroundColor,
+    },
+    content: {
+      color: darkMode ? 'white' : 'black',
+    },
+    timezone: {
+      color: darkMode ? 'white' : todoTimezoneColor,
+    },
+  });
 
 export const checkerStyle = StyleSheet.create({
   checkerDefaultStyle: {

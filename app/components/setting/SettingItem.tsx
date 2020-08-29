@@ -1,21 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Switch, Dimensions, Text } from 'react-native';
 import {
   switchFalseTrackColor,
   switchTrueTrackColor,
 } from '../../config/styles';
+import useToggleDarkMode from '../../hooks/apollo/useToggleDarkMode';
 
 const { width } = Dimensions.get('window');
 
-function SettingItem({
-  title,
-  disabled = false,
-}: {
-  title: string;
-  disabled?: boolean;
-}) {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(!isEnabled);
+function SettingItem({ title }: { title: string; disabled?: boolean }) {
+  const { toggleDarkMode, darkMode } = useToggleDarkMode();
   return (
     <View
       style={{
@@ -25,17 +19,19 @@ function SettingItem({
         justifyContent: 'space-between',
         alignItems: 'center',
       }}>
-      <Text style={{ fontSize: 16 }}>{title}</Text>
+      <Text style={[{ fontSize: 16 }, { color: darkMode ? 'white' : 'black' }]}>
+        {title}
+      </Text>
       <Switch
-        disabled={disabled}
+        disabled={false}
         trackColor={{
           false: switchFalseTrackColor,
           true: switchTrueTrackColor,
         }}
         thumbColor="white"
         ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
+        onValueChange={toggleDarkMode}
+        value={darkMode}
       />
     </View>
   );

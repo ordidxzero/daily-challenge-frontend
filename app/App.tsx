@@ -6,8 +6,8 @@ import * as Font from 'expo-font';
 import { Asset } from 'expo-asset';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import useLoginToken from './hooks/common/useLoginToken';
-import useTogglePanel from './hooks/floatingPanel/useTogglePanel';
 import DrawerNavigation from './navigations/DrawerNavigation';
+import useReduxState from './hooks/common/useReduxState';
 
 const cacheImages = (images: any[]) =>
   images.map(image => {
@@ -22,7 +22,9 @@ const cacheFonts = (fonts: any[]) => fonts.map(font => Font.loadAsync(font));
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
-  const { isPanelActive } = useTogglePanel();
+  const {
+    main: { isPanelActive, darkMode },
+  } = useReduxState();
   const { checkLogin } = useLoginToken();
   const loadAssets = async () => {
     const images = cacheImages([
@@ -41,7 +43,7 @@ export default function App() {
       </NavigationContainer>
       <StatusBar
         barStyle={
-          Platform.OS === 'android' || isPanelActive
+          Platform.OS === 'android' || isPanelActive || darkMode
             ? 'light-content'
             : 'dark-content'
         }

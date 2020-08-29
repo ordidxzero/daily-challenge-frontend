@@ -6,7 +6,7 @@ import useMoldData from '../hooks/apollo/useMoldData';
 // Components
 import ProgressCard from '../components/grid/ProgressCard';
 // Utils
-import styles from './styles';
+import { styles } from './styles';
 import CustomSafeAreaView from './CustomSafeAreaView';
 
 function GridScreen() {

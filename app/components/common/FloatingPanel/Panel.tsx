@@ -14,6 +14,11 @@ import { PanelProps, PanelState } from './types';
 import { Bar } from './Bar';
 import Close from './Close';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import {
+  floatingPanelDarkModeBackgroundColor,
+  floatingPanelDefaultBackgroundColor,
+} from '../../../config/styles';
+import useReduxState from '../../../hooks/common/useReduxState';
 
 const FULL_HEIGHT = Dimensions.get('window').height;
 const FULL_WIDTH = Dimensions.get('window').width;
@@ -50,6 +55,10 @@ const Panel = ({
   panelHeight,
 }: PanelProps) => {
   const animatedValueY = useRef(0);
+  const {
+    main: { darkMode },
+  } = useReduxState();
+  const dark = darkModeStyle(darkMode);
   const isActiveState = useRef(false);
   const status = useRef(STATUS.CLOSED);
   const canScroll = useRef(false);
@@ -199,6 +208,7 @@ const Panel = ({
       <Animated.View
         style={[
           SwipeablePanelStyles.panel,
+          dark.background,
           {
             width: fullWidth ? state.deviceWidth : state.deviceWidth - 50,
             height: state.panelHeight,
@@ -259,6 +269,15 @@ const Panel = ({
   ) : null;
 };
 
+const darkModeStyle = (darkMode: boolean) =>
+  StyleSheet.create({
+    background: {
+      backgroundColor: darkMode
+        ? floatingPanelDarkModeBackgroundColor
+        : floatingPanelDefaultBackgroundColor,
+    },
+  });
+
 const SwipeablePanelStyles = StyleSheet.create({
   background: {
     position: 'absolute',
@@ -275,7 +294,6 @@ const SwipeablePanelStyles = StyleSheet.create({
     transform: [{ translateY: FULL_HEIGHT - 100 }],
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: 'white',
     bottom: 0,
     borderRadius: 15,
     borderBottomLeftRadius: 0,
@@ -285,7 +303,7 @@ const SwipeablePanelStyles = StyleSheet.create({
       width: 0,
       height: 3,
     },
-    shadowOpacity: 0.29,
+    shadowOpacity: 0.59,
     shadowRadius: 4.65,
     elevation: 7,
     zIndex: 2,

@@ -1,15 +1,17 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { safeAreaViewBackgroundColor } from '../config/styles';
+import {
+  safeAreaViewDefaultBackgroundColor,
+  safeAreaViewDarkModeBackgroundColor,
+} from '../config/styles';
 
 const { width } = Dimensions.get('window');
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   safeAreaViewContainer: {
     flex: 1,
     position: 'relative',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: safeAreaViewBackgroundColor,
   },
   gridContentStyleProp: {
     paddingTop: 30,
@@ -19,4 +21,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default styles;
+export const darkModeStyle = (darkMode: boolean) =>
+  StyleSheet.create({
+    safeAreaViewContainer: {
+      backgroundColor: darkMode
+        ? safeAreaViewDarkModeBackgroundColor
+        : safeAreaViewDefaultBackgroundColor,
+    },
+  });
