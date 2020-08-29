@@ -11,15 +11,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
   },
-  gridScrollView: {
+  gridContentStyleProp: {
     paddingTop: 30,
     width,
-  },
-  gridContentStyleProp: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  color: {
+  todoTextStyle: {
+    fontSize: 15,
     color: todoDateColor,
   },
 });

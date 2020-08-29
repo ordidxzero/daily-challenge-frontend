@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { InputLayoutProps } from './types';
+import { inputRequireWarnColor } from '../../config/styles';
 
 function InputLayout({
   containerStyle,
@@ -18,7 +19,10 @@ function InputLayout({
           titleStyle,
         ]}
         onPress={onTitlePress}>
-        {title} {showMessage && <Text style={{ color: 'red' }}>(필수)</Text>}
+        {title}{' '}
+        {showMessage && (
+          <Text style={{ color: inputRequireWarnColor }}>(필수)</Text>
+        )}
       </Text>
       {children}
     </View>

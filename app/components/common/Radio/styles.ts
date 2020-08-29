@@ -1,6 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import {
-  circleDefaultColor,
   yesRadioButtonColor,
   noRadioButtonColor,
 } from '../../../config/styles';
@@ -27,10 +26,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: circleDefaultColor,
   },
   touchableOpacityLabel: { fontSize: 15, textTransform: 'capitalize' },
-  selectedCircle: { backgroundColor: circleDefaultColor },
   selectedLabel: { color: 'white' },
   yes: {
     borderColor: yesRadioButtonColor,

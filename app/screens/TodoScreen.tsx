@@ -51,12 +51,12 @@ function TodoScreen({
               </Text>
             </View>
             <View style={{ marginBottom: 10 }}>
-              <Text style={[{ fontSize: 15 }, styles.color]}>
+              <Text style={styles.todoTextStyle}>
                 {dayjs(todo.startDate).format('YYYY / MM / DD dddd')}
               </Text>
             </View>
-            <View style={{ marginBottom: 30 }}>
-              <Text style={[{ fontSize: 15 }, styles.color]}>
+            <View style={{ marginBottom: 10 }}>
+              <Text style={styles.todoTextStyle}>
                 {`${todo.startTime} ~ ${todo.endTime}`}
               </Text>
             </View>

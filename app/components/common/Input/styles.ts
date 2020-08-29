@@ -1,5 +1,9 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { inputBorderColor, inputTitleColor } from '../../../config/styles';
+import {
+  inputBorderColor,
+  inputTitleColor,
+  inputRequireWarnColor,
+} from '../../../config/styles';
 
 const { width } = Dimensions.get('window');
 
@@ -14,7 +18,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   requiredInputContainer: {
-    borderColor: 'red',
+    borderColor: inputRequireWarnColor,
   },
   inputTitle: {
     marginBottom: 10,

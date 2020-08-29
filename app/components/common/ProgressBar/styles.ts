@@ -1,5 +1,8 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { progressbarColor } from '../../../config/styles';
+import {
+  progressBarRateColor,
+  progressBarDefaultBackgroundColor,
+} from '../../../config/styles';
 
 const { width } = Dimensions.get('window');
 
@@ -14,7 +17,7 @@ export const progressBarStyle = (data: number) =>
       position: 'relative',
       width: width * 0.65,
       height: 5,
-      backgroundColor: '#ecf0f1',
+      backgroundColor: progressBarDefaultBackgroundColor,
       borderRadius: 3,
       marginRight: 5,
       overflow: 'hidden',
@@ -22,7 +25,7 @@ export const progressBarStyle = (data: number) =>
     barRate: {
       width: width * 0.65 * data,
       height: 5,
-      backgroundColor: progressbarColor,
+      backgroundColor: progressBarRateColor,
       borderRadius: 3,
       marginRight: 5,
     },

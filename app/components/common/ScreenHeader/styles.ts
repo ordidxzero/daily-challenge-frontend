@@ -1,4 +1,8 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import {
+  screenHeaderDefaultBackgroundColor,
+  screenHeaderBottomBorderColor,
+} from '../../../config/styles';
 
 const { width } = Dimensions.get('window');
 
@@ -7,8 +11,8 @@ const styles = StyleSheet.create({
     position: 'relative',
     width,
     height: 45,
-    backgroundColor: '#fff',
-    borderBottomColor: '#f0f0f0',
+    backgroundColor: screenHeaderDefaultBackgroundColor,
+    borderBottomColor: screenHeaderBottomBorderColor,
     borderBottomWidth: 0.7,
     paddingHorizontal: 20,
     flexDirection: 'row',

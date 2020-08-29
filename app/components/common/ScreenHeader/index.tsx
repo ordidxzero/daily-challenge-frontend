@@ -5,15 +5,14 @@ import { ScreenHeaderProps } from './types';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import styles from './styles';
 import useRightButton from '../../../hooks/common/useRightButton';
-import useCreateButton from '../../../hooks/common/useCreateButton';
-import useEditButton from '../../../hooks/common/useEditButton';
+import useFinishButton from '../../../hooks/common/useFinishButton';
 
 function ScreenHeader({ type, title = '세부 사항' }: ScreenHeaderProps) {
   const navigation = useNavigation();
   const rightButton =
     (type === 'todo' || type === 'mold') && useRightButton(type, navigation);
-  const createButton = type === 'create' && useCreateButton(navigation);
-  const editButton = type === 'edit' && useEditButton(navigation);
+  const finishButton =
+    (type === 'edit' || type === 'create') && useFinishButton(type, navigation);
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -23,8 +22,7 @@ function ScreenHeader({ type, title = '세부 사항' }: ScreenHeaderProps) {
         <Text style={styles.titleText}>{title}</Text>
       </View>
       {rightButton && rightButton()}
-      {createButton && createButton()}
-      {editButton && editButton()}
+      {finishButton && finishButton()}
     </View>
   );
 }

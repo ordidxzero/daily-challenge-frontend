@@ -13,10 +13,7 @@ function GridScreen() {
   const { data } = useMoldData();
   return (
     <CustomSafeAreaView headerTitle="Grid">
-      <ScrollView
-        bounces={false}
-        style={styles.gridScrollView}
-        contentContainerStyle={styles.gridContentStyleProp}>
+      <ScrollView contentContainerStyle={styles.gridContentStyleProp}>
         {data && data.map(item => <ProgressCard key={item.id} data={item} />)}
       </ScrollView>
     </CustomSafeAreaView>

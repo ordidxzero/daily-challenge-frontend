@@ -17,12 +17,7 @@ const typeProperty = (label: string, selected: boolean) => {
 function RadioButton({ label, selected, onPress }: RadioButtonProps) {
   return (
     <TouchableOpacity onPress={onPress}>
-      <View
-        style={[
-          styles.circle,
-          selected && styles.selectedCircle,
-          typeProperty(label, selected),
-        ]}>
+      <View style={[styles.circle, typeProperty(label, selected)]}>
         <Text
           style={[
             styles.touchableOpacityLabel,

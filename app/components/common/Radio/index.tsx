@@ -5,6 +5,10 @@ import { RadioProps } from './types';
 import RadioButton from './RadioButton';
 import { View } from 'react-native';
 import styles from './styles';
+import {
+  selectedRectRadioButtonBackgroundColor,
+  rectRadioButtonDefaultBackgroundColor,
+} from '../../../config/styles';
 
 function Radio({ current, data, onPress, title, type = 'circle' }: RadioProps) {
   return (
@@ -27,7 +31,11 @@ function Radio({ current, data, onPress, title, type = 'circle' }: RadioProps) {
             <Button
               mode="contained"
               key={item.key}
-              color={current === item.key ? '#4834d4' : 'white'}
+              color={
+                current === item.key
+                  ? selectedRectRadioButtonBackgroundColor
+                  : rectRadioButtonDefaultBackgroundColor
+              }
               onPress={onPress(item.key)}>
               {item.label}
             </Button>

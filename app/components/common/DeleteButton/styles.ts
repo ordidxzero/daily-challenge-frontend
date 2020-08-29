@@ -1,4 +1,9 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import {
+  deleteButtonDefaultBackgroundColor,
+  deleteButtonBorderColor,
+  deleteButtonScreenBackgroundColor,
+} from '../../../config/styles';
 
 const { width } = Dimensions.get('window');
 
@@ -10,16 +15,16 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#e84118',
+    backgroundColor: deleteButtonDefaultBackgroundColor,
   },
   screen: {
     width,
     height: 40,
     marginTop: 0,
     borderRadius: 0,
-    borderTopColor: '#dcdde1',
+    borderTopColor: deleteButtonBorderColor,
     borderTopWidth: 3,
-    backgroundColor: 'white',
+    backgroundColor: deleteButtonScreenBackgroundColor,
   },
 });
 
