@@ -16,7 +16,7 @@ import Input from '../components/common/Input';
 import InputSection from '../components/common/FloatingPanelWrapper/InputSection';
 import Radio from '../components/common/Radio';
 import ListOfWeekday from '../components/main/ListOfWeekday';
-import DateSetter from '../components/create/DateSetter';
+import DateSetter from '../components/todoForm/DateSetter';
 import DeleteButton from '../components/common/DeleteButton';
 import CustomSafeAreaView from './CustomSafeAreaView';
 
