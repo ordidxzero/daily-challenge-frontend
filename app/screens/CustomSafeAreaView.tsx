@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 import styles from './styles';
-import Header from '../components/common/Header';
+import Header from '../components/common/ScreenHeader';
 
 function CustomSafeAreaView({
   children,

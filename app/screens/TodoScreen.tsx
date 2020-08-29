@@ -11,7 +11,7 @@ import useDetailSetter from '../hooks/floatingPanel/useDetailSetter';
 import useUnmountReset from '../hooks/common/useUnmountReset';
 // Components
 import FloatingPanelWrapper from '../components/common/FloatingPanelWrapper';
-import Header from '../components/common/Header';
+import Header from '../components/common/ScreenHeader';
 
 const { width } = Dimensions.get('window');
 

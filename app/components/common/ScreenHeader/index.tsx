@@ -8,7 +8,7 @@ import useRightButton from '../../../hooks/common/useRightButton';
 import useCreateButton from '../../../hooks/common/useCreateButton';
 import useEditButton from '../../../hooks/common/useEditButton';
 
-function Header({ type, title = '세부 사항' }: ScreenHeaderProps) {
+function ScreenHeader({ type, title = '세부 사항' }: ScreenHeaderProps) {
   const navigation = useNavigation();
   const rightButton =
     (type === 'todo' || type === 'mold') && useRightButton(type, navigation);
@@ -29,4 +29,4 @@ function Header({ type, title = '세부 사항' }: ScreenHeaderProps) {
   );
 }
 
-export default Header;
+export default React.memo(ScreenHeader);
