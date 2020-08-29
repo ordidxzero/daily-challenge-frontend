@@ -1,9 +1,8 @@
 // Modules
 import React, { useEffect, useRef, useMemo } from 'react';
-import { SafeAreaView, Animated, Keyboard } from 'react-native';
+import { Animated, Keyboard } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 // Utils
-import styles from './styles';
 import { CustomStackScreenProp } from './types';
 // Hooks
 import useInput from '../hooks/common/useInput';
@@ -13,13 +12,13 @@ import useUnmountReset from '../hooks/common/useUnmountReset';
 import useReduxState from '../hooks/common/useReduxState';
 import useDeleteTodoMold from '../hooks/apollo/useDeleteTodoMold';
 // Components
-import Header from '../components/common/Header';
 import Input from '../components/common/Input';
 import InputSection from '../components/common/FloatingPanelWrapper/InputSection';
 import Radio from '../components/common/Radio';
 import ListOfWeekday from '../components/main/ListOfWeekday';
 import DateSetter from '../components/create/DateSetter';
 import DeleteButton from '../components/common/DeleteButton';
+import CustomSafeAreaView from './CustomSafeAreaView';
 
 function TodoFormScreen({
   navigation,
@@ -67,12 +66,9 @@ function TodoFormScreen({
     onChangeText('todo', 'method')(method.current);
   }, [isRepeat.current, method.current]);
   return (
-    <SafeAreaView
-      style={[styles.safeAreaViewContainer, { justifyContent: 'flex-start' }]}>
-      <Header
-        title={type === 'create' ? '할 일 생성하기' : '수정하기'}
-        type={type}
-      />
+    <CustomSafeAreaView
+      headerTitle={type === 'create' ? '할 일 생성하기' : '수정하기'}
+      headerType={type}>
       <KeyboardAwareScrollView
         style={{ padding: 10 }}
         onScrollBeginDrag={() => Keyboard.dismiss()}
@@ -200,7 +196,7 @@ function TodoFormScreen({
       {type === 'edit' && (
         <DeleteButton type="screen" onPress={onDeleteButtonPress} />
       )}
-    </SafeAreaView>
+    </CustomSafeAreaView>
   );
 }
 

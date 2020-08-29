@@ -1,14 +1,14 @@
 // Modules
 import React from 'react';
-import { Button, SafeAreaView } from 'react-native';
+import { Button } from 'react-native';
 // Utils
 import { CustomStackScreenProp } from './types';
-import styles from './styles';
 // Components
 import Input from '../components/common/Input';
 // Hooks
 import useInput from '../hooks/common/useInput';
 import useCreateAccount from '../hooks/auth/useCreateAccount';
+import CustomSafeAreaView from './CustomSafeAreaView';
 
 function SignUpScreen({ navigation }: CustomStackScreenProp<'SignUp'>) {
   const { hardenForm, onChangeText } = useInput();
@@ -20,7 +20,7 @@ function SignUpScreen({ navigation }: CustomStackScreenProp<'SignUp'>) {
     }
   };
   return (
-    <SafeAreaView style={styles.safeAreaViewContainer}>
+    <CustomSafeAreaView showScreenHeader={false}>
       <Input
         title="Username"
         placeholder="ID"
@@ -36,7 +36,7 @@ function SignUpScreen({ navigation }: CustomStackScreenProp<'SignUp'>) {
       />
       <Button title="Sign Up" onPress={createAccount} />
       <Button title="Sign In" onPress={() => navigation.navigate('SignIn')} />
-    </SafeAreaView>
+    </CustomSafeAreaView>
   );
 }
 

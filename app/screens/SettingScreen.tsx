@@ -1,16 +1,12 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
-import styles from './styles';
-import Header from '../components/common/Header';
 import SettingItem from '../components/setting/SettingItem';
+import CustomSafeAreaView from './CustomSafeAreaView';
 
 function SettingScreen() {
   return (
-    <SafeAreaView
-      style={[styles.safeAreaViewContainer, { justifyContent: 'flex-start' }]}>
-      <Header title="Settings" />
+    <CustomSafeAreaView headerTitle="Settings">
       <SettingItem title="Dark Mode" disabled={true} />
-    </SafeAreaView>
+    </CustomSafeAreaView>
   );
 }
 

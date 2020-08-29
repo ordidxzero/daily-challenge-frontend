@@ -42,12 +42,13 @@ Line 179 : Add `showsVerticalScrollIndicator={false}`
 - [x] CreateTodoMold에서 반복하지 않는 Todo를 생성할 때, redux에 아이템이 등록 안됨.
 - [x] 반복하지 않는 Todo는 Mold를 생성하지 않도록 할 것
 - [x] Todo를 지울 때 원인을 알 수 없는 400 Error가 발생함. (deleteTodo 이름 겹쳐서 발생한 에러였음)
+- [x] EditTodoMold로 수정해도 startDate는 고정시킬 방법이 있을까?
+  - [x] 처음 startDate로 고정하게 만듦
+  - [x] 다만, 수정하고 나서 리덕스에 적용된건 수정적용날짜임
+- [ ] Dark mode 구현 할 것
 - [ ] Login을 없애는 게 좋을까?
 - [ ] Todo를 아직 시간대별로 정리하는 로직은 못 짬.. 리듀서가 더러워짐
 - [ ] StartDate가 EndDate보다 after인 경우 toast message 표시할 것
-- [ ] EditTodoMold 이 후, 첫 GridScreen에서 퍼센트가 전부 0으로 초기화 되어버림.
-- [ ] EditTodoMold로 수정해도 startDate는 고정시킬 방법이 있을까?
-- [ ] Dark mode 구현 할 것
 - [ ] `react-native-skeleton-content-nonexpo` 적용할 것
 - [ ] `react-native-date-picker` 적용할 것
 - [ ] `react-native-iap` or `react-native-payment` 적용할 것
@@ -63,6 +64,7 @@ Line 179 : Add `showsVerticalScrollIndicator={false}`
 - [ ] Panel 자체에 버그가 상당함. react-native-modalize 적용을 고민해볼 것. 혹은 PanResponder를 개선할 방법을 찾아볼 것
   - [x] 일정 HEIGHT 이상으로 스크롤 했을 때, Component가 분리되는 현상 해결할 것
   - [ ] 처음 오픈됐을 때, Input에 한 글자를 타이핑하면 포커스가 사라지고, 버튼은 처음 누른 건 씹힘
+- [ ] (보류) EditTodoMold 이 후, 첫 GridScreen에서 퍼센트가 전부 0으로 초기화 되어버림.
 
 기능 테스트
 

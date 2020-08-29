@@ -1,21 +1,19 @@
 // Modules
 import React from 'react';
-import { SafeAreaView } from 'react-native';
 // Components
 import Calendar from '../components/main/Calendar';
-import styles from './styles';
 import TodoCreateButton from '../components/common/TodoCreateButton';
 import { CustomStackScreenProp } from './types';
+import CustomSafeAreaView from './CustomSafeAreaView';
 
 function MainScreen({ navigation }: CustomStackScreenProp<'Main'>) {
   return (
-    <SafeAreaView
-      style={[styles.safeAreaViewContainer, { position: 'relative' }]}>
+    <CustomSafeAreaView showScreenHeader={false}>
       <Calendar />
       <TodoCreateButton
         onPress={() => navigation.navigate('TodoForm', { type: 'create' })}
       />
-    </SafeAreaView>
+    </CustomSafeAreaView>
   );
 }
 

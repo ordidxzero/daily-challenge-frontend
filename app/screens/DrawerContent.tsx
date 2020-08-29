@@ -22,7 +22,7 @@ function DrawerContent(
           <Drawer.Item icon="format-list-checkbox" label="Grid" />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
-          <Drawer.Item icon="settings" label="Settings" />
+          <Drawer.Item icon="settings" label="Setting" />
         </TouchableOpacity>
       </DrawerContentScrollView>
       <Drawer.Section

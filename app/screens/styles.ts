@@ -6,7 +6,8 @@ const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   safeAreaViewContainer: {
     flex: 1,
-    justifyContent: 'center',
+    position: 'relative',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: 'white',
   },

@@ -1,21 +1,20 @@
 // Modules
 import React, { useEffect, useState } from 'react';
-import { ScrollView, View, SafeAreaView, Text } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 // Utils
 import { CustomStackScreenProp } from './types';
-import styles from './styles';
 // Hooks
 import useSelectWeekdays from '../hooks/common/useSelectWeekdays';
 import useDetailSetter from '../hooks/floatingPanel/useDetailSetter';
 import useInput from '../hooks/common/useInput';
 import useUnmountReset from '../hooks/common/useUnmountReset';
 // Components
-import Header from '../components/common/Header';
 import Input from '../components/common/Input';
 import ContinuousAchievement from '../components/mold/ContinuousAchievement';
 import InfoBox from '../components/mold/InfoBox';
 import ProgressInfo from '../components/mold/ProgressInfo';
 import ListOfWeekday from '../components/main/ListOfWeekday';
+import CustomSafeAreaView from './CustomSafeAreaView';
 
 function MoldScreen({
   route: {
@@ -46,8 +45,7 @@ function MoldScreen({
     setLoading(false);
   }, []);
   return (
-    <SafeAreaView style={styles.safeAreaViewContainer}>
-      <Header type="mold" />
+    <CustomSafeAreaView headerType="mold">
       {loading ? (
         <View>
           <Text>Skeleton</Text>
@@ -61,7 +59,7 @@ function MoldScreen({
           }}>
           <InfoBox
             title={todo.title}
-            startDate={todo.startDate}
+            startDate={data.startDate}
             endDate={todo.endDate}
           />
           <View>
@@ -103,7 +101,7 @@ function MoldScreen({
           </View>
         </ScrollView>
       )}
-    </SafeAreaView>
+    </CustomSafeAreaView>
   );
 }
 
