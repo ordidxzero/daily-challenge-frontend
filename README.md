@@ -47,17 +47,18 @@ Line 179 : Add `showsVerticalScrollIndicator={false}`
   - [x] 다만, 수정하고 나서 리덕스에 적용된건 수정적용날짜임
 - [x] Dark mode 구현 할 것
   - [x] Calendar에는 바로바로 적용 안됨.. 최적화 때문에 그런듯?
-  - [ ] Dark Mode에서의 색상 조합 찾을 것
   - [ ] Dark Mode 적용해야하는 곳
     - [ ] (보류) ScreenHeader의 disabled Button color
+    - [x] InputLayout Title
+    - [x] TodoScreen
+    - [x] RadioButton
+    - [x] ListOfWeekDays
+    - [x] Panel Close Button
+    - [x] Panel Bar
+    - [x] Panel Right Button
+    - [x] DeleteButton-screen
     - [ ] MoldScreen
-    - [ ] TodoScreen
-    - [ ] RadioButton
-    - [ ] InputLayout Title
-    - [ ] ListOfWeekDays
-    - [ ] Panel Close Button
-    - [ ] Panel Bar
-    - [ ] DeleteButton-screen
+      - [ ] ProgressBar
 - [ ] Login을 없애는 게 좋을까?
 - [ ] Calendar Header의 텍스트에 fadeOut, fadeIn animation을 적용하면 좋을듯?
 - [ ] Todo를 아직 시간대별로 정리하는 로직은 못 짬.. 리듀서가 더러워짐

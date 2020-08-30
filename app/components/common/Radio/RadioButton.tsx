@@ -2,6 +2,7 @@ import React from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import { RadioButtonProps } from './types';
 import styles from './styles';
+import useReduxState from '../../../hooks/common/useReduxState';
 
 const typeProperty = (label: string, selected: boolean) => {
   const type: { [key: string]: any } = {
@@ -15,9 +16,17 @@ const typeProperty = (label: string, selected: boolean) => {
 };
 
 function RadioButton({ label, selected, onPress }: RadioButtonProps) {
+  const {
+    main: { darkMode },
+  } = useReduxState();
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={[styles.circle, typeProperty(label, selected)]}>
+      <View
+        style={[
+          styles.circle,
+          typeProperty(label, selected),
+          darkMode && { borderWidth: 0 },
+        ]}>
         <Text
           style={[
             styles.touchableOpacityLabel,

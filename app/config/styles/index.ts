@@ -4,6 +4,7 @@ const DARK_MODE_BACKGROUND_COLOR = '#1a1d21';
 const DARK_MODE_DRAWER_BACKGROUND_COLOR = '#333333';
 const DARK_MODE_PLACEHOLDER_TEXT_COLOR = '#545454';
 const CLOUD_COLOR = '#dcdde1';
+const LIGHT_LIGHT_LIGHT_GRAY_COLOR = '#e2e2e2';
 const LIGHT_LIGHT_GRAY_COLOR = '#ecf0f1';
 const LIGHT_GRAY_COLOR = '#b2bec3';
 const DARK_GRAY_COLOR = '#636e72';
@@ -23,17 +24,21 @@ const SHADOW_COLOR = '#000';
 //! common
 //? DeleteButton
 export const deleteButtonDefaultBackgroundColor = LIGHT_RED_COLOR;
-export const deleteButtonScreenBackgroundColor = BACKGROUND_COLOR;
-export const deleteButtonBorderColor = CLOUD_COLOR;
 
 //? FloatingPanel
 export const floatingPanelDefaultBackgroundColor = BACKGROUND_COLOR;
 export const floatingPanelDarkModeBackgroundColor = DARK_MODE_BACKGROUND_COLOR;
+export const floatingPanelCloseDefaultBackgroundColor = LIGHT_LIGHT_LIGHT_GRAY_COLOR;
+export const floatingPanelCloseDarkModeBackgroundColor = LIGHT_DARK_GRAY_COLOR;
+export const floatingPanelBarDefaultBackgroundColor = LIGHT_LIGHT_LIGHT_GRAY_COLOR;
+export const floatingPanelBarDarkModeBackgroundColor = LIGHT_DARK_GRAY_COLOR;
+export const customCloseEnabledTextColor = '#007AFF';
 
 export const fakeSafeAreaViewDarkModeBackgroundColor = LIGHT_DARK_GRAY_COLOR;
 
 //? FloatingPanelWrapper
 export const inputSectionTitleBorderColor = LIGHT_GRAY_COLOR;
+export const inputSectionDarkModeTitleBorderColor = LIGHT_DARK_GRAY_COLOR;
 export const inputSectionDarkModeTitleTextColor = MIDDLE_DARK_GRAY_COLOR;
 
 //? Input
@@ -71,6 +76,9 @@ export const todoCreateButtonShadowColor = SHADOW_COLOR;
 
 export const todoCreateButtonDarkModeBackgroundColor = LIGHT_DARK_GRAY_COLOR;
 
+//? InputLayout
+export const inputLayoutDarkModeTitleTextColor = MIDDLE_DARK_GRAY_COLOR;
+
 //! grid
 //? ProgressCard
 export const progressCardBorderColor = BACKGROUND_COLOR;
@@ -105,8 +113,10 @@ export const todoContainerDarkModeBackgroundColor = LIGHT_DARK_GRAY_COLOR;
 //? ContinuousAchievement
 export const continuousAchievementContainerBorderColor = CLOUD_COLOR;
 export const continuousAchievementWarnColor = LIGHT_RED_COLOR;
-export const currentContinuousAchievementIconColor = 'red';
+export const currentContinuousAchievementIconColor = LIGHT_RED_COLOR;
 export const maxContinuousAchievementIconColor = YELLOW_COLOR;
+
+export const continuousAchievementContainerDarkModeBorderColor = LIGHT_DARK_GRAY_COLOR;
 
 //? InfoBox
 export const infoBoxContainerBorderColor = CLOUD_COLOR;
@@ -114,8 +124,12 @@ export const infoBoxDefaultBackgroundColor = DARK_BLUE_COLOR;
 export const infoBoxShadowColor = SHADOW_COLOR;
 export const infoBoxTextColor = BACKGROUND_COLOR;
 
+export const infoBoxContainerDarkModeBorderColor = LIGHT_DARK_GRAY_COLOR;
+export const dateBoxContainerDarkModeBackgroundColor = DARK_GRAY_COLOR;
+
 //? ProgressInfo
 export const progressInfoContainerBorderColor = CLOUD_COLOR;
+export const progressInfoContainerDarkModeBorderColor = LIGHT_DARK_GRAY_COLOR;
 
 //! setting
 //? SettingItem
@@ -126,9 +140,12 @@ export const switchTrueTrackColor = LIGHT_GREEN_COLOR;
 //? DateSetter
 export const dateSetterContainerBorderColor = CLOUD_COLOR;
 
+export const dateSetterDarkModeColor = LIGHT_DARK_GRAY_COLOR;
+
 //! todo
 //? TodoInfo
 export const todoDateColor = DARK_GRAY_COLOR;
+export const todoDarkModeTitleTextColor = BACKGROUND_COLOR;
 
 //* screens
 export const safeAreaViewDefaultBackgroundColor = BACKGROUND_COLOR;

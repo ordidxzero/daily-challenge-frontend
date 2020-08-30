@@ -1,14 +1,25 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { BarProps } from './types';
+import {
+  floatingPanelBarDarkModeBackgroundColor,
+  floatingPanelBarDefaultBackgroundColor,
+} from '../../../config/styles';
+import useReduxState from '../../../hooks/common/useReduxState';
 
-export const Bar = ({ barStyle }: BarProps) => {
+const Bar = ({ barStyle }: BarProps) => {
+  const {
+    main: { darkMode },
+  } = useReduxState();
+  const dark = darkModeStyle(darkMode);
   return (
     <View style={BarStyles.barContainer}>
-      <View style={[BarStyles.bar, barStyle]} />
+      <View style={[BarStyles.bar, dark.bar, barStyle]} />
     </View>
   );
 };
+
+export default React.memo(Bar);
 
 const BarStyles = StyleSheet.create({
   barContainer: {
@@ -22,6 +33,14 @@ const BarStyles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor: '#e2e2e2',
   },
 });
+
+const darkModeStyle = (darkMode: boolean) =>
+  StyleSheet.create({
+    bar: {
+      backgroundColor: darkMode
+        ? floatingPanelBarDarkModeBackgroundColor
+        : floatingPanelBarDefaultBackgroundColor,
+    },
+  });

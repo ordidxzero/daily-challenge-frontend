@@ -16,7 +16,7 @@ function DeleteButton({
       onPress={onPress}>
       <Text
         style={{
-          color: type === 'screen' ? '#e84118' : '#f5f6fa',
+          color: '#f5f6fa',
           fontWeight: '700',
         }}>
         삭제하기

@@ -5,8 +5,6 @@ export type PanelProps = {
   onClose: () => any;
   onRightPress?: () => any;
   onLeftPress?: () => any;
-  renderRightButton?: () => JSX.Element;
-  renderLeftButton?: () => JSX.Element;
   showRightButton?: boolean;
   showLeftButton?: boolean;
   fullWidth?: boolean;
@@ -64,7 +62,7 @@ export type BarProps = {
 
 export type CloseProps = {
   onPress: () => void;
-  renderButton?: () => JSX.Element;
+  renderButton?: (props: any) => JSX.Element;
   rootStyle?: any;
   iconStyle?: any;
 };

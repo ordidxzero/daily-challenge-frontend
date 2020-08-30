@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, Text, Dimensions } from 'react-native';
+import { View, Text } from 'react-native';
 import ProgressBar from '../../common/ProgressBar';
-import { progressInfoContainerBorderColor } from '../../../config/styles';
-
-const { width } = Dimensions.get('window');
+import { styles, darkModeStyle } from './styles';
+import useReduxState from '../../../hooks/common/useReduxState';
 
 function ProgressInfo({
   progressRate,
@@ -12,15 +11,12 @@ function ProgressInfo({
   progressRate: number;
   completionRate: number;
 }) {
+  const {
+    main: { darkMode },
+  } = useReduxState();
+  const dark = darkModeStyle(darkMode);
   return (
-    <View
-      style={{
-        width: width - 50,
-        borderBottomColor: progressInfoContainerBorderColor,
-        borderBottomWidth: 1,
-        marginTop: 10,
-        marginBottom: 20,
-      }}>
+    <View style={[styles.progressInfoContainer, dark.progressInfoContainer]}>
       <View style={{ marginBottom: 20 }}>
         <Text>전체 진행률</Text>
         <ProgressBar rate={progressRate} />

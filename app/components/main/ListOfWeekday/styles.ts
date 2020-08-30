@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     height: 35,
     borderRadius: 17.5,
     borderWidth: 1,
+    backgroundColor: 'white',
     borderColor: selectDayButtonBorderColor,
     justifyContent: 'center',
     alignItems: 'center',

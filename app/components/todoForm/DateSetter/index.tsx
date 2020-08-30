@@ -1,33 +1,25 @@
 import React from 'react';
-import { View, Dimensions } from 'react-native';
+import { View } from 'react-native';
 import DateSetInput from './DateSetInput';
-import { dateSetterContainerBorderColor } from '../../../config/styles';
-
-const { width } = Dimensions.get('window');
+import { styles, darkModeStyle } from './styles';
+import useReduxState from '../../../hooks/common/useReduxState';
 
 function DateSetter({ type }: { type: 'create' | 'edit' }) {
+  const {
+    main: { darkMode },
+  } = useReduxState();
+  const dark = darkModeStyle(darkMode);
   return (
-    <View
-      style={{
-        width: width - 50,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        borderBottomWidth: 1,
-        borderBottomColor: dateSetterContainerBorderColor,
-        paddingBottom: 18,
-        marginBottom: 15,
-      }}>
+    <View style={[styles.dateSetterContainer, dark.dateSetterContainer]}>
       <DateSetInput
         type="startDate"
         title={type === 'create' ? '시작 날짜' : '수정 적용 날짜'}
       />
       <View
-        style={{
-          height: 60,
-          backgroundColor: dateSetterContainerBorderColor,
-          width: 1,
-        }}></View>
+        style={[
+          styles.dateSetterVerticalLine,
+          dark.dateSetterVerticalLine,
+        ]}></View>
       <DateSetInput type="endDate" title="마지막 날짜" />
     </View>
   );

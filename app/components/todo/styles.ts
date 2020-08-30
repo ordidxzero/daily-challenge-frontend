@@ -1,11 +1,16 @@
 import { StyleSheet } from 'react-native';
-import { todoDateColor } from '../../config/styles';
+import { todoDateColor, todoDarkModeTitleTextColor } from '../../config/styles';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   todoTextStyle: {
     fontSize: 15,
     color: todoDateColor,
   },
 });
 
-export default styles;
+export const darkModeStyle = (darkMode: boolean) =>
+  StyleSheet.create({
+    titleText: {
+      color: darkMode ? todoDarkModeTitleTextColor : undefined,
+    },
+  });

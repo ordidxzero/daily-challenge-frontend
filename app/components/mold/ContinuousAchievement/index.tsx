@@ -1,15 +1,9 @@
 import React from 'react';
 import AchievementLayout from './AchievementLayout';
-import { View, Text, Dimensions } from 'react-native';
+import { View, Text } from 'react-native';
 import { SimpleLineIcons } from '@expo/vector-icons';
-import {
-  continuousAchievementContainerBorderColor,
-  currentContinuousAchievementIconColor,
-  continuousAchievementWarnColor,
-  maxContinuousAchievementIconColor,
-} from '../../../config/styles';
-
-const { width } = Dimensions.get('window');
+import { styles, darkModeStyle } from './styles';
+import useReduxState from '../../../hooks/common/useReduxState';
 
 function ContinuousAchievement({
   currentContinuousAchievement,
@@ -18,63 +12,40 @@ function ContinuousAchievement({
   maxContinuousAchievement: number;
   currentContinuousAchievement: number;
 }) {
+  const {
+    main: { darkMode },
+  } = useReduxState();
+  const dark = darkModeStyle(darkMode);
   return (
     <View
-      style={{
-        position: 'relative',
-        width: width - 50,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        borderBottomWidth: 1,
-        borderTopWidth: 1,
-        borderBottomColor: continuousAchievementContainerBorderColor,
-        borderTopColor: continuousAchievementContainerBorderColor,
-        paddingVertical: 20,
-        marginVertical: 15,
-      }}>
+      style={[
+        styles.continuousAchievementContainer,
+        dark.continuousAchievementContainer,
+      ]}>
       <AchievementLayout data={currentContinuousAchievement}>
-        <SimpleLineIcons
-          name="fire"
-          size={24}
-          color={currentContinuousAchievementIconColor}
-          style={{ marginRight: 5 }}
-        />
-        <Text style={{ fontSize: 17 }}>현재 연속 달성</Text>
+        <SimpleLineIcons name="fire" size={24} style={styles.fireIcon} />
+        <Text
+          style={[
+            styles.continuousAchievementTitleText,
+            dark.continuousAchievementTitleText,
+          ]}>
+          현재 연속 달성
+        </Text>
       </AchievementLayout>
       <View
-        style={{
-          position: 'absolute',
-          bottom: 1,
-          left: 0,
-          width: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Text
-          style={{
-            fontSize: 12,
-            color: continuousAchievementWarnColor,
-            alignItems: 'center',
-          }}>
-          <Text style={{ fontSize: 20 }}>※</Text>{' '}
-          <Text>오늘을 기준으로 집계됩니다.</Text>
-        </Text>
-      </View>
-      <View
-        style={{
-          height: 60,
-          backgroundColor: continuousAchievementContainerBorderColor,
-          width: 1,
-        }}></View>
+        style={[
+          styles.continuousAchievementVerticalLine,
+          dark.continuousAchievementVerticalLine,
+        ]}></View>
       <AchievementLayout data={maxContinuousAchievement}>
-        <SimpleLineIcons
-          name="badge"
-          size={24}
-          color={maxContinuousAchievementIconColor}
-          style={{ marginRight: 5 }}
-        />
-        <Text style={{ fontSize: 17 }}>최고 연속 달성</Text>
+        <SimpleLineIcons name="badge" size={24} style={styles.badgeIcon} />
+        <Text
+          style={[
+            styles.continuousAchievementTitleText,
+            dark.continuousAchievementTitleText,
+          ]}>
+          최고 연속 달성
+        </Text>
       </AchievementLayout>
     </View>
   );

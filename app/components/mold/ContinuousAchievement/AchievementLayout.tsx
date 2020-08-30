@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import useReduxState from '../../../hooks/common/useReduxState';
 
 function AchievementLayout({
   data,
@@ -8,6 +9,9 @@ function AchievementLayout({
   data: number;
   children: React.ReactNode;
 }) {
+  const {
+    main: { darkMode },
+  } = useReduxState();
   return (
     <View style={{ alignItems: 'center' }}>
       <View
@@ -18,7 +22,9 @@ function AchievementLayout({
         }}>
         {children}
       </View>
-      <Text style={{ fontSize: 30 }}>{data}</Text>
+      <Text style={[{ fontSize: 30 }, darkMode && { color: 'white' }]}>
+        {data}
+      </Text>
     </View>
   );
 }

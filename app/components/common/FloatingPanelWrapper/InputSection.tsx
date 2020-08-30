@@ -11,7 +11,11 @@ function InputSection({ title, children }: InputSectionProps) {
   const dark = darkModeStyle(darkMode);
   return (
     <View>
-      <View style={styles.inputSectionTitleContainer}>
+      <View
+        style={[
+          styles.inputSectionTitleContainer,
+          dark.inputSectionTitleContainer,
+        ]}>
         <Text style={[styles.inputSectionTitle, dark.inputSectionTitleText]}>
           {title}
         </Text>

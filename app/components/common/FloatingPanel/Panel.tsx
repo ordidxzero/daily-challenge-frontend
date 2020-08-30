@@ -11,8 +11,9 @@ import {
 } from 'react-native';
 import { PanelProps, PanelState } from './types';
 
-import { Bar } from './Bar';
+import Bar from './Bar';
 import Close from './Close';
+import CustomClose from './CustomClose';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
   floatingPanelDarkModeBackgroundColor,
@@ -34,8 +35,6 @@ const Panel = ({
   onClose,
   onRightPress,
   onLeftPress,
-  renderRightButton,
-  renderLeftButton,
   fullWidth = true,
   closeRootStyle = {},
   closeIconStyle = {},
@@ -232,7 +231,6 @@ const Panel = ({
             rootStyle={{ left: 12 }}
             iconStyle={closeIconStyle}
             onPress={onLeftPress ? onLeftPress : onClose}
-            renderButton={renderLeftButton}
           />
         )}
         {!noBar && <Bar barStyle={barStyle} />}
@@ -241,7 +239,7 @@ const Panel = ({
             rootStyle={closeRootStyle}
             iconStyle={closeIconStyle}
             onPress={onRightPress ? onRightPress : onClose}
-            renderButton={renderRightButton}
+            renderButton={CustomClose}
           />
         )}
         <KeyboardAwareScrollView

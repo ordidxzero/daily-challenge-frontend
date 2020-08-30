@@ -2,12 +2,26 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { CloseProps } from './types';
 import useInput from '../../../hooks/common/useInput';
+import {
+  floatingPanelCloseDarkModeBackgroundColor,
+  floatingPanelCloseDefaultBackgroundColor,
+} from '../../../config/styles';
+import useReduxState from '../../../hooks/common/useReduxState';
 
-const Close = ({ onPress, rootStyle, iconStyle, renderButton }: CloseProps) => {
+const Close = ({
+  onPress,
+  rootStyle,
+  iconStyle,
+  renderButton: CustomClose,
+}: CloseProps) => {
   const {
     hardenForm: { todo },
   } = useInput();
+  const {
+    main: { darkMode },
+  } = useReduxState();
   const { startDate, title } = todo;
+  const dark = darkModeStyle(darkMode);
   return (
     <TouchableOpacity
       activeOpacity={0.5}
@@ -15,11 +29,12 @@ const Close = ({ onPress, rootStyle, iconStyle, renderButton }: CloseProps) => {
       disabled={startDate === '' || title === ''}
       style={[
         CloseStyles.defaultButton,
-        !renderButton && CloseStyles.closeButton,
+        !CustomClose && dark.closeButton,
+        !CustomClose && CloseStyles.closeButton,
         rootStyle,
       ]}>
-      {renderButton ? (
-        renderButton()
+      {CustomClose ? (
+        <CustomClose disabled={startDate === '' || title === ''} />
       ) : (
         <>
           <View
@@ -58,7 +73,6 @@ const CloseStyles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 15,
-    backgroundColor: '#e2e2e2',
   },
   iconLine: {
     position: 'absolute',
@@ -68,3 +82,12 @@ const CloseStyles = StyleSheet.create({
     backgroundColor: 'white',
   },
 });
+
+const darkModeStyle = (darkMode: boolean) =>
+  StyleSheet.create({
+    closeButton: {
+      backgroundColor: darkMode
+        ? floatingPanelCloseDarkModeBackgroundColor
+        : floatingPanelCloseDefaultBackgroundColor,
+    },
+  });
