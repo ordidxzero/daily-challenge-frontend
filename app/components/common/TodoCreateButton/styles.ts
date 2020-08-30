@@ -3,15 +3,15 @@ import { ifIphoneX, getBottomSpace } from 'react-native-iphone-x-helper';
 import {
   todoCreateButtonDefaultBackgroundColor,
   todoCreateButtonShadowColor,
+  todoCreateButtonDarkModeBackgroundColor,
 } from '../../../config/styles';
 
 const WIDTH = 70;
 const HEIGHT = 35;
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   buttonContainer: {
     position: 'absolute',
-    backgroundColor: todoCreateButtonDefaultBackgroundColor,
     justifyContent: 'center',
     alignItems: 'center',
     bottom: 20,
@@ -30,6 +30,17 @@ const styles = StyleSheet.create({
     shadowRadius: 2.22,
     elevation: 3,
   },
+  buttonText: { fontSize: 12 },
 });
 
-export default styles;
+export const darkModeStyle = (darkMode: boolean) =>
+  StyleSheet.create({
+    buttonContainer: {
+      backgroundColor: darkMode
+        ? todoCreateButtonDarkModeBackgroundColor
+        : todoCreateButtonDefaultBackgroundColor,
+    },
+    buttonText: {
+      color: darkMode ? 'white' : 'black',
+    },
+  });

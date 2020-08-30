@@ -1,5 +1,13 @@
 import React, { useRef } from 'react';
-import { StyleSheet, Animated, Dimensions, View, Platform } from 'react-native';
+import {
+  StyleSheet,
+  Animated,
+  Dimensions,
+  View,
+  Platform,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { ifIphoneX, getBottomSpace } from 'react-native-iphone-x-helper';
 import { FloatingPanelProps, PanelPropsUsingUser } from './types';
@@ -8,6 +16,7 @@ import useReduxState from '../../../hooks/common/useReduxState';
 import {
   floatingPanelDarkModeBackgroundColor,
   floatingPanelDefaultBackgroundColor,
+  fakeSafeAreaViewDarkModeBackgroundColor,
 } from '../../../config/styles';
 
 const { width, height } = Dimensions.get('window');
@@ -26,22 +35,40 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     overflow: 'hidden',
     width,
-    paddingTop:
-      Platform.OS === 'android'
-        ? getStatusBarHeight(true)
-        : getStatusBarHeight(),
     ...ifIphoneX({ paddingBottom: getBottomSpace() }, {}),
   },
 });
 
 const darkModeStyle = (darkMode: boolean) =>
   StyleSheet.create({
+    fakeSafeAreaView: {
+      backgroundColor: darkMode
+        ? fakeSafeAreaViewDarkModeBackgroundColor
+        : floatingPanelDefaultBackgroundColor,
+    },
     animatedView: {
       backgroundColor: darkMode
         ? floatingPanelDarkModeBackgroundColor
         : floatingPanelDefaultBackgroundColor,
     },
   });
+
+function FakeSafeAreaView({ style = {} }: { style?: StyleProp<ViewStyle> }) {
+  return (
+    <View
+      style={[
+        {
+          width,
+          height:
+            Platform.OS === 'android'
+              ? getStatusBarHeight(true)
+              : getStatusBarHeight(),
+        },
+        style,
+      ]}
+    />
+  );
+}
 
 export default function FloatingPanel({
   containerStyle,
@@ -83,6 +110,7 @@ export default function FloatingPanel({
             ],
           },
         ]}>
+        <FakeSafeAreaView style={dark.fakeSafeAreaView} />
         {children}
       </Animated.View>
       <Panel {...panelProps} pan={animation.current} panelHeight={PANEL_HEIGHT}>

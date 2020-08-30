@@ -24,11 +24,6 @@ export const styles = StyleSheet.create({
     fontWeight: '300',
   },
 });
-
-export const calendarDarkModeTheme = (darkMode: boolean) => ({
-  calendarBackground: darkMode ? '#1a1d21' : undefined,
-});
-
 export const darkModeStyle = (darkMode: boolean) =>
   StyleSheet.create({
     headerText: {

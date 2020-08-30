@@ -20,11 +20,16 @@ function CustomSafeAreaView({
   } = useReduxState();
   const dark = darkModeStyle(darkMode);
   return (
-    <SafeAreaView
-      style={[styles.safeAreaViewContainer, dark.safeAreaViewContainer]}>
-      {showScreenHeader && <Header type={headerType} title={headerTitle} />}
-      {children}
-    </SafeAreaView>
+    <>
+      {showScreenHeader && (
+        <SafeAreaView style={[{ flex: 0 }, dark.safeAreaViewStatusBar]} />
+      )}
+      <SafeAreaView
+        style={[styles.safeAreaViewContainer, dark.safeAreaViewContainer]}>
+        {showScreenHeader && <Header type={headerType} title={headerTitle} />}
+        {children}
+      </SafeAreaView>
+    </>
   );
 }
 

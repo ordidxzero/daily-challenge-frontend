@@ -1,7 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { inputSectionTitleBorderColor } from '../../../config/styles';
+import {
+  inputSectionTitleBorderColor,
+  inputSectionDarkModeTitleTextColor,
+} from '../../../config/styles';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   inputSectionTitleContainer: {
     paddingBottom: 10,
     borderBottomWidth: 1,
@@ -14,4 +17,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default styles;
+export const darkModeStyle = (darkMode: boolean) =>
+  StyleSheet.create({
+    inputSectionTitleText: {
+      color: darkMode ? inputSectionDarkModeTitleTextColor : undefined,
+    },
+  });

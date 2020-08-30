@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 import {
   screenHeaderDefaultBackgroundColor,
   screenHeaderBottomBorderColor,
-  screenHeaderDarkModeBackgroundColor,
+  screenHeaderDarkModColor,
 } from '../../../config/styles';
 
 const { width } = Dimensions.get('window');
@@ -16,7 +16,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderBottomColor: screenHeaderBottomBorderColor,
     alignItems: 'center',
     zIndex: 100000,
   },
@@ -36,8 +35,11 @@ export const darkModeStyle = (darkMode: boolean) =>
       color: darkMode ? 'white' : 'black',
     },
     container: {
+      borderBottomColor: darkMode
+        ? screenHeaderDarkModColor
+        : screenHeaderBottomBorderColor,
       backgroundColor: darkMode
-        ? screenHeaderDarkModeBackgroundColor
+        ? screenHeaderDarkModColor
         : screenHeaderDefaultBackgroundColor,
     },
     titleText: {

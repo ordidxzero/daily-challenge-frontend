@@ -3,10 +3,8 @@ import {
   todoTimezoneColor,
   checkerDoneColor,
   checkerUndoneColor,
-  todoContainerBorderColor,
   todoContainerDefaultBackgroundColor,
   todoContainerShadowColor,
-  todoContainerDarkModeBorderColor,
   todoContainerDarkModeBackgroundColor,
 } from '../../../config/styles';
 
@@ -30,7 +28,6 @@ export const todoStyle = StyleSheet.create({
     paddingHorizontal: 20,
     marginBottom: 20,
     borderRadius: 5,
-    borderWidth: 1,
     shadowColor: todoContainerShadowColor,
     shadowOffset: {
       width: 5,
@@ -58,9 +55,6 @@ export const darkModeStyle = (darkMode: boolean) =>
       color: darkMode ? 'white' : 'black',
     },
     todoContainer: {
-      borderColor: darkMode
-        ? todoContainerDarkModeBorderColor
-        : todoContainerBorderColor,
       backgroundColor: darkMode
         ? todoContainerDarkModeBackgroundColor
         : todoContainerDefaultBackgroundColor,

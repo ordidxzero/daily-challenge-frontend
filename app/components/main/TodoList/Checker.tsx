@@ -19,7 +19,11 @@ function Checker({ done, dateString, id }: CheckerProps) {
           checkerStyle.checkerDefaultStyle,
           done ? checkerStyle.done : checkerStyle.undone,
         ]}>
-        <Text style={done ? checkerStyle.doneText : checkerStyle.undoneText}>
+        <Text
+          style={[
+            done ? checkerStyle.doneText : checkerStyle.undoneText,
+            { fontWeight: '700' },
+          ]}>
           {done ? '✓' : '✕'}
         </Text>
       </View>

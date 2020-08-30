@@ -1,13 +1,20 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { InputSectionProps } from './types';
-import styles from './styles';
+import { styles, darkModeStyle } from './styles';
+import useReduxState from '../../../hooks/common/useReduxState';
 
 function InputSection({ title, children }: InputSectionProps) {
+  const {
+    main: { darkMode },
+  } = useReduxState();
+  const dark = darkModeStyle(darkMode);
   return (
     <View>
       <View style={styles.inputSectionTitleContainer}>
-        <Text style={styles.inputSectionTitle}>{title}</Text>
+        <Text style={[styles.inputSectionTitle, dark.inputSectionTitleText]}>
+          {title}
+        </Text>
       </View>
       {children}
     </View>

@@ -1,12 +1,19 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import styles from './styles';
+import { styles, darkModeStyle } from './styles';
+import useReduxState from '../../../hooks/common/useReduxState';
 
 function TodoCreateButton({ onPress }: { onPress: any }) {
+  const {
+    main: { darkMode },
+  } = useReduxState();
+  const dark = darkModeStyle(darkMode);
   return (
-    <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
+    <TouchableOpacity
+      style={[styles.buttonContainer, dark.buttonContainer]}
+      onPress={onPress}>
       <View>
-        <Text style={{ fontSize: 12 }}>추가하기</Text>
+        <Text style={[styles.buttonText, dark.buttonText]}>추가하기</Text>
       </View>
     </TouchableOpacity>
   );

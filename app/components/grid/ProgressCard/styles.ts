@@ -1,9 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import {
-  progressCardBorderColor,
   progressCardDefaultBackgroundColor,
   progressCardShadowColor,
-  progressCardDarkModeBorderColor,
   progressCardDarkModeBackgroundColor,
 } from '../../../config/styles';
 
@@ -15,10 +13,7 @@ export const progressCardStyle = StyleSheet.create({
     height: 60,
     paddingHorizontal: 20,
     paddingVertical: 5,
-    borderWidth: 1,
     borderRadius: 5,
-    borderColor: progressCardBorderColor,
-    backgroundColor: progressCardDefaultBackgroundColor,
     marginBottom: 20,
     shadowColor: progressCardShadowColor,
     shadowOffset: {
@@ -35,9 +30,6 @@ export const progressCardStyle = StyleSheet.create({
 export const darkModeStyle = (darkMode: boolean) =>
   StyleSheet.create({
     container: {
-      borderColor: darkMode
-        ? progressCardDarkModeBorderColor
-        : progressCardBorderColor,
       backgroundColor: darkMode
         ? progressCardDarkModeBackgroundColor
         : progressCardDefaultBackgroundColor,
