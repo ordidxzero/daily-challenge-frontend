@@ -11,7 +11,7 @@ function useSignIn() {
   // useNavigation Typing 지원 안되는거 해결해야됨.
   const navigation = useNavigation();
   const { setToken } = useLoginToken();
-  const [signIn] = useLazyQuery(SIGN_IN, {
+  const [signInQuery, { loading }] = useLazyQuery(SIGN_IN, {
     onCompleted: ({ signIn: { token, error } }) => {
       if (error) {
         console.log(error);
@@ -22,7 +22,7 @@ function useSignIn() {
       return navigation.navigate('Main');
     },
   });
-  return signIn;
+  return { signInQuery, loading };
 }
 
 export default useSignIn;

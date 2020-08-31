@@ -21,7 +21,6 @@ export const styles = StyleSheet.create({
   },
   inputTitle: {
     marginBottom: 10,
-    letterSpacing: 1,
     fontWeight: '400',
     fontSize: 13,
   },

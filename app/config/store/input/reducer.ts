@@ -7,6 +7,8 @@ const initialState: InputState = {
   auth: {
     username: '',
     password: '',
+    startDayTime: '',
+    endDayTime: '',
   },
   todo: {
     startDate: dayjs().format('YYYY-MM-DD'),

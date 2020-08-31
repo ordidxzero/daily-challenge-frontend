@@ -1,9 +1,9 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import {
   progressBarRateColor,
-  progressBarDefaultBackgroundColor,
-  progressBarDarkModeBackgroundColor,
   progressBarRateDarkModeColor,
+  progressBarContainerDarkModeBackgroundColor,
+  progressBarContainerDefaultBackgroundColor,
 } from '../../../config/styles';
 
 const { width } = Dimensions.get('window');
@@ -11,39 +11,46 @@ const { width } = Dimensions.get('window');
 export const progressBarStyle = (data: number) =>
   StyleSheet.create({
     container: {
+      width: width - 50,
+      height: 50,
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'space-between',
+      justifyContent: 'flex-start',
+      overflow: 'hidden',
+      borderRadius: 5,
+      marginBottom: 30,
     },
     bar: {
       position: 'relative',
-      width: width * 0.65,
-      height: 5,
-      borderRadius: 3,
+      width: '100%',
+      height: 14,
+      borderRadius: 7,
       marginRight: 5,
       overflow: 'hidden',
+      zIndex: 10,
+      backgroundColor: 'white',
     },
     barRate: {
-      width: width * 0.65 * data,
-      height: 5,
-      borderRadius: 3,
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+      width: (((width - 50) * 4) / 5) * data,
+      height: 14,
+      borderRadius: 7,
       marginRight: 5,
+      zIndex: 15,
     },
   });
 
 export const darkModeStyle = (darkMode: boolean) =>
   StyleSheet.create({
-    bar: {
+    container: {
       backgroundColor: darkMode
-        ? progressBarDarkModeBackgroundColor
-        : progressBarDefaultBackgroundColor,
+        ? progressBarContainerDarkModeBackgroundColor
+        : progressBarContainerDefaultBackgroundColor,
     },
     barRate: {
       backgroundColor: darkMode
         ? progressBarRateDarkModeColor
         : progressBarRateColor,
-    },
-    rate: {
-      color: darkMode ? 'white' : 'black',
     },
   });

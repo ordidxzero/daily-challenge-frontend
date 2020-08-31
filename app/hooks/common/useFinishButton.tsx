@@ -13,8 +13,8 @@ function useEditButton(type: 'edit' | 'create', navigation: any) {
     hardenForm: { todo },
   } = useInput();
   const { startDate, title } = todo;
-  const createTodoMold = useTodoMoldAdder();
-  const editTodoMold = useEditTodoMold();
+  const { createTodoMold } = useTodoMoldAdder();
+  const { editTodoMold } = useEditTodoMold();
   const buttonTitle = type === 'create' ? '생성' : detail ? '완료' : 'Error';
   const disabled =
     type === 'edit' && !detail ? false : startDate === '' || title === '';

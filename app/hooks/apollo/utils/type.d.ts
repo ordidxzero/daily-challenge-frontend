@@ -1,19 +1,6 @@
-import { TodoDataType, MoldDataType } from '../../../@types';
-
 export type GetTodosInput = {
   dateString: string;
   position: number[];
-};
-
-export type GetTodosData = {
-  getTodos: {
-    ok: boolean;
-    error?: string;
-    data?: {
-      dateString: string;
-      todos: TodoDataType[];
-    };
-  };
 };
 
 export type MoldInput = {
@@ -50,10 +37,6 @@ export type CreateTodoMoldData = {
 
 export type GetTodoMoldsInput = {
   dateString: string;
-};
-
-export type GetTodoMoldsData = {
-  getTodoMolds: { ok: boolean; error?: string; data?: MoldDataType[] };
 };
 
 export type EditTodoMoldInput = MoldInput & {

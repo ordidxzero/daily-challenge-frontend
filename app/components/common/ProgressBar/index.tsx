@@ -5,7 +5,7 @@ import { View, Text } from 'react-native';
 import { progressBarStyle, darkModeStyle } from './styles';
 import useReduxState from '../../../hooks/common/useReduxState';
 
-function ProgressBar({ rate }: { rate: number }) {
+function ProgressBar({ title, rate }: { rate: number; title?: string }) {
   const {
     main: { darkMode },
   } = useReduxState();
@@ -13,11 +13,32 @@ function ProgressBar({ rate }: { rate: number }) {
   const styles = progressBarStyle(rate);
   const dark = darkModeStyle(darkMode);
   return (
-    <View style={styles.container}>
-      <View style={[styles.bar, dark.bar]}>
-        <View style={[styles.barRate, dark.barRate]}></View>
+    <View style={[styles.container, dark.container]}>
+      <View
+        style={{
+          width: '20%',
+          height: '100%',
+          backgroundColor: '#2c3e50',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text style={{ color: 'white', fontSize: 12, marginBottom: 5 }}>
+          {title}
+        </Text>
+        <Text style={{ fontSize: 11, color: 'white' }}>{percent}%</Text>
       </View>
-      <Text style={[{ fontSize: 11 }, dark.rate]}>{percent}%</Text>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+          paddingHorizontal: 15,
+        }}>
+        <View style={[styles.bar]}>
+          <View style={[styles.barRate, dark.barRate]} />
+        </View>
+      </View>
     </View>
   );
 }

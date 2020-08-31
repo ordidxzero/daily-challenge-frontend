@@ -4,9 +4,14 @@ import { deleteButtonDefaultBackgroundColor } from '../../../config/styles';
 const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-  default: {
+  defaultContentStyle: {
     width: width * 0.75 + 14,
-    height: 35,
+    height: 40,
+  },
+  screenContentStyle: {
+    width: width * 0.95,
+  },
+  default: {
     marginTop: 35,
     borderRadius: 7,
     justifyContent: 'center',
@@ -14,8 +19,6 @@ const styles = StyleSheet.create({
     backgroundColor: deleteButtonDefaultBackgroundColor,
   },
   screen: {
-    width: width * 0.95,
-    height: 40,
     marginTop: 0,
   },
 });

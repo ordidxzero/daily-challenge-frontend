@@ -4,16 +4,16 @@ import { EDIT_TODO } from './utils/graphql';
 import useInput from '../common/useInput';
 import {
   editTodo as editTodoAction,
-  startLoading,
   failureGetData,
-  finishLoading,
 } from '../../config/store/main';
 import { UDTData, UDInput } from './utils/type';
 
 function useEditTodo(id: string) {
   const dispatch = useDispatch();
   const { softenForm } = useInput();
-  const [editTodoMutation] = useMutation<UDTData, UDInput>(EDIT_TODO);
+  const [editTodoMutation, { loading }] = useMutation<UDTData, UDInput>(
+    EDIT_TODO,
+  );
   const {
     startDate,
     title,
@@ -33,18 +33,15 @@ function useEditTodo(id: string) {
     endTime,
   };
 
-  const editTodo = () => {
-    dispatch(startLoading('editTodo'));
-    return editTodoMutation({
+  const editTodo = async () =>
+    editTodoMutation({
       variables: data,
     })
       .then(() => {
         dispatch(editTodoAction(data));
       })
-      .catch(error => dispatch(failureGetData({ type: 'editTodo', error })))
-      .finally(() => dispatch(finishLoading('editTodo')));
-  };
-  return editTodo;
+      .catch(error => dispatch(failureGetData({ type: 'editTodo', error })));
+  return { editTodo, loading };
 }
 
 export default useEditTodo;

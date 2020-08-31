@@ -1,6 +1,6 @@
 // Modules
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 // Hooks
 import useMoldData from '../hooks/apollo/useMoldData';
 // Components
@@ -10,13 +10,19 @@ import { styles } from './styles';
 import CustomSafeAreaView from './CustomSafeAreaView';
 
 function GridScreen() {
-  const { data } = useMoldData();
+  const { data, loading } = useMoldData();
   return (
     <CustomSafeAreaView headerTitle="Grid">
       <ScrollView
         bounces={false}
         contentContainerStyle={styles.gridContentStyleProp}>
-        {data && data.map(item => <ProgressCard key={item.id} data={item} />)}
+        {loading ? (
+          <View>
+            <Text>Skeleton</Text>
+          </View>
+        ) : (
+          data.map(item => <ProgressCard key={item.id} data={item} />)
+        )}
       </ScrollView>
     </CustomSafeAreaView>
   );

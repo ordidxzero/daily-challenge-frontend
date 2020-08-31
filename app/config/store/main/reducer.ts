@@ -31,12 +31,6 @@ const initialState: MainState = {
     around: false,
     before: false,
     after: false,
-    createMold: false,
-    deleteTodo: false,
-    deleteTodoMold: false,
-    editTodo: false,
-    editTodoMold: false,
-    toggleTodo: false,
   },
 };
 

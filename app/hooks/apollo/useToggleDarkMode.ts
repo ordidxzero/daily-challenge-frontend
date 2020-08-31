@@ -4,8 +4,6 @@ import { TOGGLE_DARK_MODE, GET_DARK_MODE } from './utils/graphql';
 import {
   toggleDarkMode as toggleDarkModeAction,
   failureGetData,
-  finishLoading,
-  startLoading,
 } from '../../config/store/main';
 import {
   ToggleDarkModeInput,
@@ -20,7 +18,7 @@ function useToggleDarkMode() {
     main: { darkMode },
   } = useReduxState();
   const getDarkModeQuery = useImperativeQuery<GetDarkModeData>(GET_DARK_MODE);
-  const [toggleDarkModeMutation] = useMutation<
+  const [toggleDarkModeMutation, { loading }] = useMutation<
     ToggleDarkModeData,
     ToggleDarkModeInput
   >(TOGGLE_DARK_MODE);
@@ -29,17 +27,14 @@ function useToggleDarkMode() {
   const setDarkMode = (darkMode: boolean) =>
     dispatch(toggleDarkModeAction(darkMode));
 
-  const toggleDarkMode = () => {
-    dispatch(startLoading('toggleDarkMode'));
-    return toggleDarkModeMutation({
+  const toggleDarkMode = async () =>
+    toggleDarkModeMutation({
       variables: { darkMode: !darkMode },
     })
       .then(() => setDarkMode(!darkMode))
       .catch(error =>
         dispatch(failureGetData({ type: 'toggleDarkMode', error })),
-      )
-      .finally(() => dispatch(finishLoading('toggleDarkMode')));
-  };
+      );
 
   const getDarkMode = async () => {
     const darkMode = await getDarkModeQuery();
@@ -50,7 +45,7 @@ function useToggleDarkMode() {
     }
   };
 
-  return { toggleDarkMode, darkMode, getDarkMode };
+  return { toggleDarkMode, darkMode, getDarkMode, loading };
 }
 
 export default useToggleDarkMode;

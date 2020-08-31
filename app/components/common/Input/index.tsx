@@ -29,9 +29,9 @@ function Input({
         styles.inputContainer,
         dark.inputContainer,
         containerStyle,
-        required && value === '' && dark.requiredInputContainer,
+        required && !value && dark.requiredInputContainer,
       ]}
-      showMessage={required && value === ''}
+      showMessage={required && !value}
       titleStyle={[styles.inputTitle, dark.inputTitle]}
       title={title}
       onTitlePress={onTitlePress}>

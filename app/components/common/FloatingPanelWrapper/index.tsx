@@ -10,7 +10,7 @@ function FloatingPanelWrapper({
   detail,
   children,
 }: FloatingPanelWrapperProps) {
-  const editTodo = useEditTodo(detail);
+  const { editTodo } = useEditTodo(detail);
   const { setIsPanelActive, isPanelActive } = useTogglePanel();
   const onClose = () => setIsPanelActive(false);
   const onRightPress = async () => editTodo().then(onClose);

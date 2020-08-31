@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import { GET_TODO_MOLDS } from './utils/graphql';
 import useImperativeQueryThunk from '../common/useImperativeQueryThunk';
 import useReduxState from '../common/useReduxState';
-import { GetTodoMoldsData, GetTodoMoldsInput } from './utils/type';
+import { GetTodoMoldsInput } from './utils/type';
 
 function useMoldData() {
   const {
@@ -13,10 +13,7 @@ function useMoldData() {
     },
   } = useReduxState();
 
-  const getTodoMolds = useImperativeQueryThunk<
-    GetTodoMoldsData,
-    GetTodoMoldsInput
-  >({
+  const getTodoMolds = useImperativeQueryThunk<GetTodoMoldsInput>({
     query: GET_TODO_MOLDS,
     options: {
       variables: { dateString: '' },

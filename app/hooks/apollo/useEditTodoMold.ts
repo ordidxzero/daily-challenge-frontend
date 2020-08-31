@@ -5,15 +5,13 @@ import useInput from '../common/useInput';
 import {
   editTodoMold as editTodoMoldAction,
   addData,
-  startLoading,
   failureGetData,
-  finishLoading,
 } from '../../config/store/main';
 import { generateData } from './useTodoMoldAdder/utils';
 import { EditTodoMoldData, EditTodoMoldInput } from './utils/type';
 
 function useEditTodoMold() {
-  const [editTodoMoldMutation] = useMutation<
+  const [editTodoMoldMutation, { loading }] = useMutation<
     EditTodoMoldData,
     EditTodoMoldInput
   >(EDIT_TODO_MOLD);
@@ -23,9 +21,8 @@ function useEditTodoMold() {
     todo: { startDate, amount, ...inputData },
   } = softenForm;
 
-  const editTodoMold = (id: string) => {
-    dispatch(startLoading('editTodoMold'));
-    return editTodoMoldMutation({
+  const editTodoMold = async (id: string) =>
+    editTodoMoldMutation({
       variables: {
         id,
         ...inputData,
@@ -61,10 +58,10 @@ function useEditTodoMold() {
         }
         throw Error('Data does not returned..');
       })
-      .catch(error => dispatch(failureGetData({ type: 'editTodoMold', error })))
-      .finally(() => dispatch(finishLoading('editTodoMold')));
-  };
-  return editTodoMold;
+      .catch(error =>
+        dispatch(failureGetData({ type: 'editTodoMold', error })),
+      );
+  return { editTodoMold, loading };
 }
 
 export default useEditTodoMold;

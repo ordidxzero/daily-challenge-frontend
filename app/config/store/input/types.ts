@@ -4,6 +4,8 @@ import { ActionType } from 'typesafe-actions';
 export type AuthInputState = {
   username: string;
   password: string;
+  startDayTime: string;
+  endDayTime: string;
 };
 
 export type TodoInputState = {

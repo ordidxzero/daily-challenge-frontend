@@ -4,27 +4,27 @@ import { useMutation } from '@apollo/client';
 import { DELETE_TODO } from './utils/graphql';
 import {
   deleteTodo as deleteTodoAction,
-  startLoading,
   failureGetData,
-  finishLoading,
   DeleteTodoData,
 } from '../../config/store/main';
 import { UDInput, UDTData } from './utils/type';
 
 function useDeleteTodo() {
-  const [deleteTodoMutation] = useMutation<UDTData, UDInput>(DELETE_TODO);
+  const [deleteTodoMutation, { loading }] = useMutation<UDTData, UDInput>(
+    DELETE_TODO,
+  );
   const dispatch = useDispatch();
   const deleteTodo = useCallback(
-    ({ id, dateString }: DeleteTodoData) => {
-      dispatch(startLoading('deleteTodo'));
+    async ({ id, dateString }: DeleteTodoData) => {
       return deleteTodoMutation({ variables: { id } })
         .then(() => dispatch(deleteTodoAction({ id, dateString })))
-        .catch(error => dispatch(failureGetData({ type: 'deleteTodo', error })))
-        .finally(() => dispatch(finishLoading('deleteTodo')));
+        .catch(error =>
+          dispatch(failureGetData({ type: 'deleteTodo', error })),
+        );
     },
     [dispatch],
   );
-  return deleteTodo;
+  return { deleteTodo, loading };
 }
 
 export default useDeleteTodo;

@@ -1,27 +1,33 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Button } from 'react-native-paper';
 import styles from './styles';
 
 function DeleteButton({
   type,
   onPress,
+  loading = false,
 }: {
   onPress: any;
   type: 'panel' | 'screen';
+  loading?: boolean;
 }) {
   return (
-    <TouchableOpacity
-      style={[styles.default, type === 'screen' && styles.screen]}
-      activeOpacity={0.5}
+    <Button
+      mode="contained"
+      disabled={loading}
+      labelStyle={{ color: 'white' }}
+      contentStyle={[
+        styles.defaultContentStyle,
+        type === 'screen' && styles.screenContentStyle,
+      ]}
+      style={[
+        styles.default,
+        type === 'screen' && styles.screen,
+        loading && { opacity: 0.5 },
+      ]}
       onPress={onPress}>
-      <Text
-        style={{
-          color: '#f5f6fa',
-          fontWeight: '700',
-        }}>
-        삭제하기
-      </Text>
-    </TouchableOpacity>
+      삭제하기
+    </Button>
   );
 }
 

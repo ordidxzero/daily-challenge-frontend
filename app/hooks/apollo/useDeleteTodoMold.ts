@@ -3,29 +3,23 @@ import { useMutation } from '@apollo/client';
 import { DELETE_TODO_MOLD } from './utils/graphql';
 import {
   deleteTodoMold as deleteTodoMoldAction,
-  startLoading,
   failureGetData,
-  finishLoading,
 } from '../../config/store/main';
 import { UDTData, UDInput } from './utils/type';
 
 function useDeleteTodoMold() {
-  const [deleteTodoMoldMutation] = useMutation<UDTData, UDInput>(
+  const [deleteTodoMoldMutation, { loading }] = useMutation<UDTData, UDInput>(
     DELETE_TODO_MOLD,
   );
   const dispatch = useDispatch();
-  const deleteTodoMold = (id: string) => {
-    dispatch(startLoading('deleteTodoMold'));
+  const deleteTodoMold = async (id: string) => {
     return deleteTodoMoldMutation({ variables: { id } })
-      .then(() => {
-        dispatch(deleteTodoMoldAction(id));
-      })
+      .then(() => dispatch(deleteTodoMoldAction(id)))
       .catch(error =>
         dispatch(failureGetData({ type: 'deleteTodoMold', error })),
-      )
-      .finally(() => dispatch(finishLoading('deleteTodoMold')));
+      );
   };
-  return deleteTodoMold;
+  return { deleteTodoMold, loading };
 }
 
 export default useDeleteTodoMold;

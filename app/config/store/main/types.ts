@@ -29,18 +29,25 @@ export type ToggledTodoData = DeleteTodoData & {
   done: boolean;
 };
 
-export type RequestState = {
-  around?: boolean | string;
-  before?: boolean | string;
-  after?: boolean | string;
-  mold?: boolean | string;
-  createMold?: boolean | string;
-  deleteTodo?: boolean | string;
-  deleteTodoMold?: boolean | string;
-  editTodo?: boolean | string;
-  editTodoMold?: boolean | string;
-  toggleTodo?: boolean | string;
-  toggleDarkMode?: boolean | string;
+export type ErrorState = {
+  around?: string;
+  before?: string;
+  after?: string;
+  mold?: string;
+  createMold?: string;
+  deleteTodo?: string;
+  deleteTodoMold?: string;
+  editTodo?: string;
+  editTodoMold?: string;
+  toggleTodo?: string;
+  toggleDarkMode?: string;
+};
+
+export type LoadingState = {
+  around: boolean;
+  before: boolean;
+  after: boolean;
+  mold: boolean;
 };
 
 export type MainState = {
@@ -50,11 +57,11 @@ export type MainState = {
   isPanelActive: boolean;
   agendas: AgendaDataType[];
   molds: MoldDataType[];
-  error: RequestState;
-  loading: RequestState;
+  error: ErrorState;
+  loading: LoadingState;
 };
 
-export type RequestType = keyof RequestState;
+export type RequestType = keyof ErrorState;
 
 export type SuccessType = {
   type: RequestType;

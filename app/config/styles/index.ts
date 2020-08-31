@@ -52,11 +52,11 @@ export const inputDarkModeTextColor = MIDDLE_DARK_GRAY_COLOR;
 export const inputPlaceholderTextColor = DARK_MODE_PLACEHOLDER_TEXT_COLOR;
 
 //? ProgressBar
-export const progressBarDefaultBackgroundColor = LIGHT_LIGHT_GRAY_COLOR;
 export const progressBarRateColor = LIGHT_LIGHT_BLUE_COLOR;
-
-export const progressBarDarkModeBackgroundColor = DARK_GRAY_COLOR;
 export const progressBarRateDarkModeColor = LIGHT_BLUE_COLOR;
+
+export const progressBarContainerDefaultBackgroundColor = '#dfe6e9';
+export const progressBarContainerDarkModeBackgroundColor = '#b2bec3';
 
 //? Radio
 export const rectRadioButtonDefaultBackgroundColor = BACKGROUND_COLOR;

@@ -1,8 +1,18 @@
 import { gql } from '@apollo/client';
 
 export const CREATE_ACCOUNT = gql`
-  mutation CreateAccount($username: String!, $password: String!) {
-    createAccount(username: $username, password: $password) {
+  mutation CreateAccount(
+    $username: String!
+    $password: String!
+    $startDayTime: String!
+    $endDayTime: String!
+  ) {
+    createAccount(
+      username: $username
+      password: $password
+      startDayTime: $startDayTime
+      endDayTime: $endDayTime
+    ) {
       ok
       error
     }

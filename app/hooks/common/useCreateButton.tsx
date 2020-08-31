@@ -8,7 +8,7 @@ function useCreateButton(navigation: any) {
     hardenForm: { todo },
   } = useInput();
   const { startDate, title } = todo;
-  const createTodoMold = useTodoMoldAdder();
+  const { createTodoMold } = useTodoMoldAdder();
   const onPress = () => createTodoMold().then(() => navigation.goBack());
   const headerRight = () => (
     <Button

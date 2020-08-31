@@ -47,8 +47,7 @@ Line 179 : Add `showsVerticalScrollIndicator={false}`
   - [x] 다만, 수정하고 나서 리덕스에 적용된건 수정적용날짜임
 - [x] Dark mode 구현 할 것
   - [x] Calendar에는 바로바로 적용 안됨.. 최적화 때문에 그런듯?
-  - [ ] Dark Mode 적용해야하는 곳
-    - [ ] (보류) ScreenHeader의 disabled Button color
+  - [x] Dark Mode 적용해야하는 곳
     - [x] InputLayout Title
     - [x] TodoScreen
     - [x] RadioButton
@@ -57,17 +56,41 @@ Line 179 : Add `showsVerticalScrollIndicator={false}`
     - [x] Panel Bar
     - [x] Panel Right Button
     - [x] DeleteButton-screen
-    - [ ] MoldScreen
-      - [ ] ProgressBar
-- [ ] Login을 없애는 게 좋을까?
-- [ ] Calendar Header의 텍스트에 fadeOut, fadeIn animation을 적용하면 좋을듯?
+    - [x] MoldScreen
+      - [x] ProgressBar
+    - [ ] Sign In / Sign Up 버튼 컬러 바꿀 것
+- [ ] (보류) Calendar Header의 텍스트에 fadeOut, fadeIn animation을 적용하면 좋을듯?
+- [ ] (보류) Login을 없애는 게 좋을까?
+  - [ ] 정보 입력 -> 백엔드에서 데이터 생성과 동시에 토큰 발급 -> 어차피 요청은 토큰으로 할 것 -> 토큰의 소스는 데이터의 cuid값 -> backup용 아이디 및 패스워드를 발급 가능
+- [ ] Skeleton UI가 필요한 곳에 loading 값 얻어오기
+  - [x] (Skeleton UI X) SignUpScreen
+  - [x] (Skeleton UI X) SignInScreen
+  - [x] (Skeleton UI X) TodoScreen - Delete
+  - [x] (Skeleton UI X) TodoFormScreen - Delete
+  - [x] GridScreen
+  - [x] MoldScreen
+  - [x] TodoScreen
+  - [ ] (Skeleton UI X) TodoFormScreen - Create / Edit
+  - [ ] (Skeleton UI X) TodoScreen - Edit
+  - [ ] MainScreen
 - [ ] Todo를 아직 시간대별로 정리하는 로직은 못 짬.. 리듀서가 더러워짐
-- [ ] StartDate가 EndDate보다 after인 경우 toast message 표시할 것
+- [ ] Error 처리를 해야됨
+  - [ ] SignUpScreen에서 username이 이미 존재하는 경우
+  - [ ] SignInScreen에서 username이 존재하지 않거나, password가 틀린 경우
+- [ ] StartDate가 EndDate보다 after인 경우 toast message 표시할 것 (`react-native-simple-toast`)
 - [ ] `react-native-skeleton-content-nonexpo` 적용할 것
 - [ ] `react-native-date-picker` 적용할 것
 - [ ] `react-native-iap` or `react-native-payment` 적용할 것
 - [ ] `react-native-admob` 적용할 것
 - [ ] 위젯 기능 추가할 것
+- [ ] iPhone 11 Pro Max 외 기기에서 테스트 해볼 것
+  - [ ] iOS
+    - [ ] iPhone 8 / iPhone 8 Plus
+      - [ ] SignInScreen에서 Keyboard 때문에 SIGN UP 버튼이 일부 가려져서 답답한 느낌이 듦.
+      - [ ] DeleteButton-screen이 잘림.
+      - [ ] 폰이 좀 더 작으면 Panel에 있는 DeleteButton도 안 보일 듯
+      - [ ] Panel Height가 좀 부족한 느낌이 듦. (좀 더 올라왔으면 함)
+  - [ ] Android
 
 ### 다음 버전에 적용할 것
 

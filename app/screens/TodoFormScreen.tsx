@@ -49,7 +49,7 @@ function TodoFormScreen({
   const { hardenForm, onChangeText } = useInput();
   const { todo } = hardenForm;
   const fixedStartdate = useMemo(() => todo.startDate, []);
-  const deleteTodoMold = useDeleteTodoMold();
+  const { deleteTodoMold, loading: deleteLoading } = useDeleteTodoMold();
   const onDeleteButtonPress = () =>
     detail && deleteTodoMold(detail).then(() => navigation.navigate('Grid'));
   useEffect(() => {
@@ -194,7 +194,11 @@ function TodoFormScreen({
         </Animated.View>
       </KeyboardAwareScrollView>
       {type === 'edit' && (
-        <DeleteButton type="screen" onPress={onDeleteButtonPress} />
+        <DeleteButton
+          type="screen"
+          loading={deleteLoading}
+          onPress={onDeleteButtonPress}
+        />
       )}
     </CustomSafeAreaView>
   );

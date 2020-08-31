@@ -32,7 +32,6 @@ function TodoList() {
     () => ({ viewAreaCoveragePercentThreshold: 50, minimumViewTime: 300 }),
     [],
   );
-
   return (
     <FlatList
       ref={flatList}

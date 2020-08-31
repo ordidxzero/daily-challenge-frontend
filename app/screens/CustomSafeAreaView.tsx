@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, StyleProp, ViewStyle } from 'react-native';
 import { styles, darkModeStyle } from './styles';
 import Header from '../components/common/ScreenHeader';
 import useReduxState from '../hooks/common/useReduxState';
@@ -9,11 +9,13 @@ function CustomSafeAreaView({
   showScreenHeader = true,
   headerTitle,
   headerType,
+  style = {},
 }: {
   children: React.ReactNode;
   headerType?: 'todo' | 'mold' | 'create' | 'edit';
   showScreenHeader?: boolean;
   headerTitle?: string;
+  style?: StyleProp<ViewStyle>;
 }) {
   const {
     main: { darkMode },
@@ -25,7 +27,11 @@ function CustomSafeAreaView({
         <SafeAreaView style={[{ flex: 0 }, dark.safeAreaViewStatusBar]} />
       )}
       <SafeAreaView
-        style={[styles.safeAreaViewContainer, dark.safeAreaViewContainer]}>
+        style={[
+          styles.safeAreaViewContainer,
+          style,
+          dark.safeAreaViewContainer,
+        ]}>
         {showScreenHeader && <Header type={headerType} title={headerTitle} />}
         {children}
       </SafeAreaView>

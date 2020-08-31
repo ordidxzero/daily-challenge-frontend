@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import ProgressBar from '../../common/ProgressBar';
 import { styles, darkModeStyle } from './styles';
 import useReduxState from '../../../hooks/common/useReduxState';
@@ -17,14 +17,8 @@ function ProgressInfo({
   const dark = darkModeStyle(darkMode);
   return (
     <View style={[styles.progressInfoContainer, dark.progressInfoContainer]}>
-      <View style={{ marginBottom: 20 }}>
-        <Text>전체 진행률</Text>
-        <ProgressBar rate={progressRate} />
-      </View>
-      <View style={{ marginBottom: 30 }}>
-        <Text>현재 달성률</Text>
-        <ProgressBar rate={completionRate} />
-      </View>
+      <ProgressBar title="전체 진행률" rate={progressRate} />
+      <ProgressBar title="현재 달성률" rate={completionRate} />
     </View>
   );
 }
