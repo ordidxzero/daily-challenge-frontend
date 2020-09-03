@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { isIphoneX } from 'react-native-iphone-x-helper';
 import FloatingPanel, { PanelProps } from '../FloatingPanel';
 import useTogglePanel from '../../../hooks/floatingPanel/useTogglePanel';
 import { FloatingPanelWrapperProps } from './types';
@@ -28,7 +29,7 @@ function FloatingPanelWrapper({
     <FloatingPanel
       {...panelProps}
       onRightPress={onRightPress}
-      panelOutsideHeight={55}
+      panelOutsideHeight={isIphoneX() ? 55 : 40}
       containerStyle={containerStyle}
       isActive={isPanelActive}
       panelContent={<TodoPanelContent detail={detail} />}>

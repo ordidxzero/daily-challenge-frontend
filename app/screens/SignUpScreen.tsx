@@ -21,7 +21,7 @@ function SignUpScreen({ navigation }: CustomStackScreenProp<'SignUp'>) {
     <CustomSafeAreaView
       showScreenHeader={false}
       style={{ justifyContent: 'center' }}>
-      <KeyboardAvoidingView>
+      <KeyboardAvoidingView behavior="padding">
         <Input
           title="Username"
           placeholder="ID"

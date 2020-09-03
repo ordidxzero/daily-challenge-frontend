@@ -1,5 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { deleteButtonDefaultBackgroundColor } from '../../../config/styles';
+import { ifIphoneX, getBottomSpace } from 'react-native-iphone-x-helper';
 
 const { width } = Dimensions.get('window');
 
@@ -19,6 +20,9 @@ const styles = StyleSheet.create({
     backgroundColor: deleteButtonDefaultBackgroundColor,
   },
   screen: {
+    position: 'absolute',
+    bottom: 10,
+    ...ifIphoneX({ bottom: getBottomSpace() + 5 }, {}),
     marginTop: 0,
   },
 });

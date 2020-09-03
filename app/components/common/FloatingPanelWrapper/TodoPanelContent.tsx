@@ -9,7 +9,7 @@ import useTogglePanel from '../../../hooks/floatingPanel/useTogglePanel';
 
 function TodoPanelContent({ detail }: { detail: string }) {
   const navigation = useNavigation();
-  const deleteTodo = useDeleteTodo();
+  const { deleteTodo } = useDeleteTodo();
   const { setIsPanelActive } = useTogglePanel();
   const { hardenForm, onChangeText } = useInput();
   const { todo } = hardenForm;
