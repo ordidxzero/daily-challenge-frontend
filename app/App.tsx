@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Image, StatusBar, Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import { Asset } from 'expo-asset';
+import * as SplashScreen from 'expo-splash-screen';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import useLoginToken from './hooks/common/useLoginToken';
 import DrawerNavigation from './navigations/DrawerNavigation';
@@ -34,26 +34,37 @@ export default function App() {
     const fonts = cacheFonts([SimpleLineIcons.font]);
     const token = checkLogin();
     await Promise.all([...images, ...fonts, token]);
+    setIsReady(true);
+    await SplashScreen.hideAsync();
   };
-  const onFinish = () => setIsReady(true);
-  return isReady ? (
-    <>
-      <NavigationContainer>
-        <DrawerNavigation />
-      </NavigationContainer>
-      <StatusBar
-        barStyle={
-          Platform.OS === 'android' || isPanelActive || darkMode
-            ? 'light-content'
-            : 'dark-content'
-        }
-      />
-    </>
-  ) : (
-    <AppLoading
-      startAsync={loadAssets}
-      onFinish={onFinish}
-      onError={console.error}
-    />
+
+  const initSplashScreen = async () => {
+    try {
+      await SplashScreen.hideAsync();
+    } catch (error) {
+      console.warn(error);
+    }
+    await loadAssets();
+  };
+
+  useEffect(() => {
+    initSplashScreen();
+  }, []);
+
+  return (
+    isReady && (
+      <>
+        <NavigationContainer>
+          <DrawerNavigation />
+        </NavigationContainer>
+        <StatusBar
+          barStyle={
+            Platform.OS === 'android' || isPanelActive || darkMode
+              ? 'light-content'
+              : 'dark-content'
+          }
+        />
+      </>
+    )
   );
 }
