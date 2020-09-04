@@ -22,11 +22,11 @@ function useTodoData(
   isScroll: boolean,
   flatList: React.RefObject<FlatList<any>>,
 ) {
-  const getAroundTodos = useGetTodos('around');
-  const getBeforeTodos = useGetTodos('before');
-  const getAfterTodos = useGetTodos('after');
+  const [getAroundTodos, around] = useGetTodos('around');
+  const [getBeforeTodos, before] = useGetTodos('before');
+  const [getAfterTodos, after] = useGetTodos('after');
   const {
-    main: { selectedDay, agendas, loading },
+    main: { selectedDay, agendas },
   } = useReduxState();
   const onRightEndReached = useCallback(() => {
     if (isScroll) {
@@ -64,7 +64,7 @@ function useTodoData(
     onRightEndReached,
     onLeftEndReached,
     agendas,
-    loading,
+    loading: { before, around, after },
   };
 }
 

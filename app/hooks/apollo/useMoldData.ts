@@ -7,13 +7,10 @@ import { GetTodoMoldsInput } from './utils/type';
 
 function useMoldData() {
   const {
-    main: {
-      molds,
-      loading: { mold },
-    },
+    main: { molds },
   } = useReduxState();
 
-  const getTodoMolds = useImperativeQueryThunk<GetTodoMoldsInput>({
+  const [getTodoMolds, loading] = useImperativeQueryThunk<GetTodoMoldsInput>({
     query: GET_TODO_MOLDS,
     options: {
       variables: { dateString: '' },
@@ -25,7 +22,7 @@ function useMoldData() {
     () => getTodoMolds({ dateString: dayjs().format('YYYY-MM-DD') }),
     [],
   );
-  return { data: molds, loading: mold };
+  return { data: molds, loading };
 }
 
 export default useMoldData;

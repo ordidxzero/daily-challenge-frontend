@@ -5,12 +5,8 @@ import {
 } from '@apollo/client';
 import { useDispatch } from 'react-redux';
 import useImperativeQuery from './useImperativeQuery';
-import {
-  startLoading,
-  successGetData,
-  failureGetData,
-  finishLoading,
-} from '../../config/store/main';
+import { successGetData, failureGetData } from '../../config/store/main';
+import { useState } from 'react';
 
 function useImperativeQueryThunk<TVariables = OperationVariables>({
   query,
@@ -20,17 +16,18 @@ function useImperativeQueryThunk<TVariables = OperationVariables>({
   query: DocumentNode;
   options: QueryHookOptions<any, TVariables>;
   type: 'around' | 'before' | 'after' | 'mold';
-}) {
+}): [(queryVariables: TVariables) => void, boolean] {
   const keys = {
     around: 'getTodos',
     before: 'getTodos',
     after: 'getTodos',
     mold: 'getTodoMolds',
   };
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const refetch = useImperativeQuery(query, options);
   const imperativelyCallQueryThunk = (queryVariables: TVariables) => {
-    dispatch(startLoading(type));
+    setLoading(true);
     refetch(queryVariables)
       .then(
         ({
@@ -46,10 +43,10 @@ function useImperativeQueryThunk<TVariables = OperationVariables>({
         },
       )
       .catch(error => dispatch(failureGetData({ type, error })))
-      .finally(() => dispatch(finishLoading(type)));
+      .finally(() => setLoading(false));
   };
 
-  return imperativelyCallQueryThunk;
+  return [imperativelyCallQueryThunk, loading];
 }
 
 export default useImperativeQueryThunk;
